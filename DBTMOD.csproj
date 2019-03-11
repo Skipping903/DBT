@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="DBTMod.cs" />
     <Compile Include="Players\DBTModPlayer.cs" />
+    <Compile Include="Players\Transformations\DBTModPlayer.Transformations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -66,7 +67,20 @@
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Buffs\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Items\" />
+    <Folder Include="Network\" />
+    <Folder Include="Races\" />
+    <Folder Include="Skills\" />
+    <Folder Include="Sounds\" />
+    <Folder Include="Tiles\" />
+    <Folder Include="Traits\" />
     <Folder Include="Transformations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Players\Transformations\DBTModPlayer.Transformations.Visuals.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
