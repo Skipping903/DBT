@@ -1,0 +1,6 @@
+author = Webmilio, Blockaroz, Mak0-Z, Dawn
+version = 0.1
+displayName = Dragon Ball Terraria
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, .git\*, *.db
+includePDB = true
+languageVersion = 6
