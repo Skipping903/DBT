@@ -7,8 +7,8 @@
     <ProjectGuid>{8298EAB6-0586-4BDA-9483-83624B66B13A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBTMod</RootNamespace>
-    <AssemblyName>DBTMod</AssemblyName>
+    <RootNamespace>DBTRMod</RootNamespace>
+    <AssemblyName>DBTRMod</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,11 +33,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DBTMod.cs" />
+    <Compile Include="Buffs\DBTRModBuff.cs" />
+    <Compile Include="DBTRMod.cs" />
     <Compile Include="IHasUnlocalizedName.cs" />
+    <Compile Include="Players\DBTModPlayer.Hooks.cs" />
+    <Compile Include="Players\IPlayerSavable.cs" />
+    <Compile Include="Managers\Manager.cs" />
     <Compile Include="Players\DBTModPlayer.cs" />
+    <Compile Include="Players\Mastery\DBTModPlayer.Masteries.cs" />
+    <Compile Include="Players\Mastery\DBTModPlayer.Masteries.Saving.cs" />
+    <Compile Include="Players\ModHotKeys\DBTModPlayer.ModHotKeys.cs" />
+    <Compile Include="Players\Saving\DBTModPlayer.Saving.cs" />
     <Compile Include="Players\Transformations\DBTModPlayer.Transformations.cs" />
-    <Compile Include="Transformations\Transformation.cs" />
+    <Compile Include="Transformations\PlayerTransformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJ1\SSJ1Transformation.cs" />
+    <Compile Include="Transformations\TransformationBuff.cs" />
+    <Compile Include="Transformations\TransformationDefinition.cs" />
+    <Compile Include="Transformations\TransformationDefinitionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -69,8 +81,8 @@
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Buffs\" />
     <Folder Include="Extensions\" />
+    <Folder Include="HairStyles\" />
     <Folder Include="Helpers\" />
     <Folder Include="Items\" />
     <Folder Include="Network\" />
@@ -79,6 +91,7 @@
     <Folder Include="Sounds\" />
     <Folder Include="Tiles\" />
     <Folder Include="Traits\" />
+    <Folder Include="UserInterfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Players\Transformations\DBTModPlayer.Transformations.Visuals.cs" />

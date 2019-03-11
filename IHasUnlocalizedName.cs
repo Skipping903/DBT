@@ -1,4 +1,4 @@
-﻿namespace DBTMod
+﻿namespace DBTRMod
 {
     public interface IHasUnlocalizedName
     {
