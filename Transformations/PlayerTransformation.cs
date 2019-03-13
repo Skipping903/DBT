@@ -5,7 +5,7 @@ namespace DBTR.Transformations
 {
     public class PlayerTransformation : IPlayerSavable
     {
-        internal const string MASTERY_PREFIX = DBTRPlayer.DBTMOD_PREFIX + "Mastery_";
+        internal const string MASTERY_PREFIX = "Mastery_";
 
         public PlayerTransformation(TransformationDefinition definition, float currentMastery = 0f)
         {

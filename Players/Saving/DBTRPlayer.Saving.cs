@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DBTR.Transformations;
 using Terraria.ModLoader.IO;
 
 namespace DBTR.Players
@@ -10,6 +9,8 @@ namespace DBTR.Players
         {
             TagCompound tag = new TagCompound();
 
+            tag.Add(nameof(PlayerInitialized), PlayerInitialized);
+
             SaveMastery(tag);
 
             return tag;
@@ -17,6 +18,8 @@ namespace DBTR.Players
 
         public override void Load(TagCompound tag)
         {
+            PlayerInitialized = tag.GetBool(nameof(PlayerInitialized));
+
             foreach (KeyValuePair<string, object> kvp in tag)
             {
                 LoadMasteryEntry(kvp);

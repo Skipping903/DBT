@@ -6,8 +6,6 @@ namespace DBTR.Players
 {
     public sealed partial class DBTRPlayer : ModPlayer
     {
-        internal const string DBTMOD_PREFIX = "DBTMOD_";
-
         public void ModifyKi(float kiAmount)
         {
             // TODO Add mastery for being in a form, if need be.
@@ -27,7 +25,7 @@ namespace DBTR.Players
 
         #region Max Ki
 
-        public int BaseMaxKi => 1000;
+        public int BaseMaxKi { get; private set; }
 
         public float MaxKiMultiplier { get; private set; } = 1;
 
@@ -36,5 +34,7 @@ namespace DBTR.Players
         #endregion
 
         #endregion
+
+        public bool PlayerInitialized { get; private set; }
     }
 }

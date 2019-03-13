@@ -13,8 +13,15 @@ namespace DBTR.Players
         {
             Aura = null;
             ActiveTransformations.Clear();
-        }
 
+            if (!PlayerInitialized)
+            {
+                Ki = 1000;
+                BaseMaxKi = 1000;
+            }
+
+            PlayerInitialized = true;
+        }
 
         public override void PreUpdate()
         {
