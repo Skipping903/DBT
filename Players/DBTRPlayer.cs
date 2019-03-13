@@ -2,9 +2,9 @@
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 
-namespace DBTRMod.Players
+namespace DBTR.Players
 {
-    public sealed partial class DBTModPlayer : ModPlayer
+    public sealed partial class DBTRPlayer : ModPlayer
     {
         internal const string DBTMOD_PREFIX = "DBTMOD_";
 
@@ -27,15 +27,14 @@ namespace DBTRMod.Players
 
         #region Max Ki
 
-        public int BaseMaxKi { get; private set; }
+        public int BaseMaxKi => 1000;
 
-        public float MaxKiMultiplier { get; private set; }
+        public float MaxKiMultiplier { get; private set; } = 1;
 
         public int MaxKi => (int)Math.Round(BaseMaxKi * MaxKiMultiplier);
 
         #endregion
 
         #endregion
-
     }
 }

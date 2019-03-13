@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using DBTRMod.Transformations;
+using DBTR.Transformations;
 using Terraria.ModLoader.IO;
 
-namespace DBTRMod.Players
+namespace DBTR.Players
 {
-    public sealed partial class DBTModPlayer
+    public sealed partial class DBTRPlayer
     {
         public override TagCompound Save()
         {

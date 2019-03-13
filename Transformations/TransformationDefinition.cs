@@ -1,15 +1,18 @@
 ﻿using System;
-using DBTRMod.Players;
+using DBTR.Players;
 
-namespace DBTRMod.Transformations
+namespace DBTR.Transformations
 {
     public abstract class TransformationDefinition : IHasUnlocalizedName
     {
         internal const int TRANSFORMATION_LONG_DURATION = 6666666;
 
         protected TransformationDefinition(string unlocalizedName, string displayName, Type buffType,
-            float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain, bool masterable = true, float maxMastery = 1f,
-            int duration = TRANSFORMATION_LONG_DURATION)
+            float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain,
+            TransformationAppearance appearance,
+            bool masterable = true, float maxMastery = 1f, 
+            int duration = TRANSFORMATION_LONG_DURATION,
+            params TransformationDefinition[] parents)
         {
             UnlocalizedName = unlocalizedName;
             DisplayName = displayName;
@@ -23,6 +26,8 @@ namespace DBTRMod.Transformations
             UnmasteredKiDrain = unmasteredKiDrain;
             MasteredKiDrain = masteredKiDrain;
 
+            Appearance = appearance;
+
             Mastereable = masterable;
             MaxMastery = maxMastery;
 
@@ -35,31 +40,31 @@ namespace DBTRMod.Transformations
 
         public virtual void OnPlayerTransformed(PlayerTransformation transformation) { }
 
-        public virtual void OnPlayerMasteryGain(DBTModPlayer player, float gain, float currentMastery) { }
+        public virtual void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery) { }
 
-        public virtual void OnPlayerDied(DBTModPlayer player, double damage, bool pvp) { }
+        public virtual void OnPlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp) { }
 
         #endregion
 
         #region Multipliers
 
-        public virtual float GetDamageMultiplier(DBTModPlayer player) => BaseDamageMultiplier;
+        public virtual float GetDamageMultiplier(DBTRPlayer dbtrPlayer) => BaseDamageMultiplier;
 
-        public virtual float GetSpeedMultiplier(DBTModPlayer player) => BaseSpeedMultiplier;
+        public virtual float GetSpeedMultiplier(DBTRPlayer dbtrPlayer) => BaseSpeedMultiplier;
 
         #endregion
 
         #region Additive
 
-        public virtual int GetDefenseAdditive(DBTModPlayer player) => BaseDefenseAdditive;
+        public virtual int GetDefenseAdditive(DBTRPlayer dbtrPlayer) => BaseDefenseAdditive;
 
         #endregion
 
         #region Ki Drain
 
-        public float GetUnmasteredKiDrain(DBTModPlayer player) => UnmasteredKiDrain;
+        public float GetUnmasteredKiDrain(DBTRPlayer dbtrPlayer) => UnmasteredKiDrain;
 
-        public float GetMasteredKiDrain(DBTModPlayer player) => MasteredKiDrain;
+        public float GetMasteredKiDrain(DBTRPlayer dbtrPlayer) => MasteredKiDrain;
 
         #endregion
 
@@ -106,6 +111,8 @@ namespace DBTRMod.Transformations
         #endregion
 
         #endregion
+
+        public virtual TransformationAppearance Appearance { get; }
 
         public int Duration { get; }
 

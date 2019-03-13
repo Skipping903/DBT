@@ -7,8 +7,8 @@
     <ProjectGuid>{8298EAB6-0586-4BDA-9483-83624B66B13A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBTRMod</RootNamespace>
-    <AssemblyName>DBTRMod</AssemblyName>
+    <RootNamespace>DBTR</RootNamespace>
+    <AssemblyName>DBTR</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,23 +33,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Buffs\DBTRModBuff.cs" />
+    <Compile Include="Auras\AuraAnimationInformation.cs" />
+    <Compile Include="Auras\AuraAppearance.cs" />
+    <Compile Include="Auras\AuraDrawPlayer.cs" />
+    <Compile Include="Auras\LightingAppearance.cs" />
+    <Compile Include="Buffs\DBTRBuff.cs" />
     <Compile Include="DBTRMod.cs" />
+    <Compile Include="Extensions\SpriteBatchExtensions.cs" />
+    <Compile Include="HairStyles\HairStyle.cs" />
+    <Compile Include="HairStyles\HairStyleManager.cs" />
     <Compile Include="IHasUnlocalizedName.cs" />
-    <Compile Include="Players\DBTModPlayer.Hooks.cs" />
+    <Compile Include="Players\Auras\DBTRPlayer.Auras.cs" />
+    <Compile Include="Players\DBTRPlayer.Hooks.cs" />
+    <Compile Include="Players\DBTRPlayer.Visuals.cs" />
     <Compile Include="Players\IPlayerSavable.cs" />
     <Compile Include="Managers\Manager.cs" />
-    <Compile Include="Players\DBTModPlayer.cs" />
-    <Compile Include="Players\Mastery\DBTModPlayer.Masteries.cs" />
-    <Compile Include="Players\Mastery\DBTModPlayer.Masteries.Saving.cs" />
-    <Compile Include="Players\ModHotKeys\DBTModPlayer.ModHotKeys.cs" />
-    <Compile Include="Players\Saving\DBTModPlayer.Saving.cs" />
-    <Compile Include="Players\Transformations\DBTModPlayer.Transformations.cs" />
+    <Compile Include="Players\DBTRPlayer.cs" />
+    <Compile Include="Players\Mastery\DBTRPlayer.Masteries.cs" />
+    <Compile Include="Players\Mastery\DBTRPlayer.Masteries.Saving.cs" />
+    <Compile Include="Players\ModHotKeys\DBTRPlayer.ModHotKeys.cs" />
+    <Compile Include="Players\Saving\DBTRPlayer.Saving.cs" />
+    <Compile Include="Players\Transformations\DBTRPlayer.Transformations.cs" />
     <Compile Include="Transformations\PlayerTransformation.cs" />
     <Compile Include="Transformations\SSJs\SSJ1\SSJ1Transformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJG\SSJGTransformation.cs" />
+    <Compile Include="Transformations\TransformationAppearance.cs" />
     <Compile Include="Transformations\TransformationBuff.cs" />
     <Compile Include="Transformations\TransformationDefinition.cs" />
     <Compile Include="Transformations\TransformationDefinitionManager.cs" />
+    <Compile Include="UserInterfaces\KiBar\KiBar.cs" />
+    <Compile Include="UserInterfaces\EnergyResourceBar.cs" />
+    <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -81,8 +95,6 @@
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="HairStyles\" />
     <Folder Include="Helpers\" />
     <Folder Include="Items\" />
     <Folder Include="Network\" />
@@ -91,10 +103,9 @@
     <Folder Include="Sounds\" />
     <Folder Include="Tiles\" />
     <Folder Include="Traits\" />
-    <Folder Include="UserInterfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Players\Transformations\DBTModPlayer.Transformations.Visuals.cs" />
+    <Compile Include="Players\Transformations\DBTRPlayer.Transformations.Visuals.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

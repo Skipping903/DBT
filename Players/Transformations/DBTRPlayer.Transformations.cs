@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using DBTRMod.Transformations;
+using DBTR.Transformations;
 
-namespace DBTRMod.Players
+namespace DBTR.Players
 {
-    public sealed partial class DBTModPlayer
+    public sealed partial class DBTRPlayer
     {
         public void ListenForTransformations()
         {
@@ -77,6 +77,14 @@ namespace DBTRMod.Players
                     return true;
 
             return false;
+        }
+
+
+        public PlayerTransformation GetFirstTransformation()
+        {
+            if (ActiveTransformations.Count == 0) return null;
+
+            return ActiveTransformations[0];
         }
 
 

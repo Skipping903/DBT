@@ -1,8 +1,8 @@
-﻿using DBTRMod.Transformations;
+﻿using DBTR.Transformations;
 
-namespace DBTRMod.Players
+namespace DBTR.Players
 {
-    public sealed partial class DBTModPlayer
+    public sealed partial class DBTRPlayer
     {
         public void GainMastery(float gain)
         {

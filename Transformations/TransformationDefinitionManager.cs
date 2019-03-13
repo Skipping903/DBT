@@ -1,7 +1,8 @@
-﻿using DBTRMod.Managers;
-using DBTRMod.Transformations.SSJs.SSJ1;
+﻿using DBTR.Managers;
+using DBTR.Transformations.SSJs.SSJ1;
+using DBTR.Transformations.SSJs.SSJG;
 
-namespace DBTRMod.Transformations
+namespace DBTR.Transformations
 {
     public sealed class TransformationDefinitionManager : Manager<TransformationDefinition>
     {
@@ -9,12 +10,19 @@ namespace DBTRMod.Transformations
 
         internal override void DefaultInitialize()
         {
-            SSJ1Definition = new SSJ1Transformation();
+            SSJ1 = Add(new SSJ1Transformation()) as SSJ1Transformation;
+
+            SSJG = Add(new SSJGTransformation()) as SSJGTransformation;
 
             base.DefaultInitialize();
         }
 
-        public SSJ1Transformation SSJ1Definition { get; private set; }
+
+        public SSJ1Transformation SSJ1 { get; private set; }
+
+
+        public SSJGTransformation SSJG { get; private set; }
+
 
         public static TransformationDefinitionManager Instance
         {

@@ -1,11 +1,17 @@
+using System.Collections.Generic;
+using DBTR.UserInterfaces.KiBar;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.UI;
 
-namespace DBTRMod
+namespace DBTR
 {
 	public sealed class DBTRMod : Mod
 	{
 	    internal ModHotKey characterMenuKey, energyChargeKey, transformDownKey, speedToggleKey, transformUpKey;
+
+	    internal static KiBar kiBar;
+	    internal static UserInterface kiBarInterface;
 
         public DBTRMod()
 		{
@@ -32,19 +38,43 @@ namespace DBTRMod
 	            transformUpKey = RegisterHotKey("Transform Up", "X");
 
                 #endregion
-            }
+
+	            #region Ki Bar
+
+	            kiBar = new KiBar();
+                kiBar.Activate();
+
+                kiBarInterface = new UserInterface();
+                kiBarInterface.SetState(kiBar);
+
+	            kiBar.Visible = true;
+
+	            #endregion
+	        }
 	    }
 
 	    public override void Unload()
 	    {
 	        if (!Main.dedServ)
 	        {
+	            #region Ki Bar
 
+	            kiBar.Visible = false;
+
+	            #endregion
 	        }
 
-	        Instance = null;
+            Instance = null;
 	    }
 
-	    internal static DBTRMod Instance { get; private set; }
+        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        {
+            int resourcesLayerIndex = layers.FindIndex(l => l.Name.Contains("Resource Bars"));
+
+            if (resourcesLayerIndex != -1)
+                layers.Insert(resourcesLayerIndex, new KiBarLayer());
+        }
+
+        internal static DBTRMod Instance { get; private set; }
     }
 }

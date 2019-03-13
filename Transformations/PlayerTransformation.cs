@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using DBTRMod.Players;
+using DBTR.Players;
 
-namespace DBTRMod.Transformations
+namespace DBTR.Transformations
 {
     public class PlayerTransformation : IPlayerSavable
     {
-        internal const string MASTERY_PREFIX = DBTModPlayer.DBTMOD_PREFIX + "Mastery_";
+        internal const string MASTERY_PREFIX = DBTRPlayer.DBTMOD_PREFIX + "Mastery_";
 
         public PlayerTransformation(TransformationDefinition definition, float currentMastery = 0f)
         {
@@ -15,7 +15,7 @@ namespace DBTRMod.Transformations
 
         #region Player Hooks
 
-        public void OnPlayerMasteryGain(DBTModPlayer player, float gain)
+        public void OnPlayerMasteryGain(DBTRPlayer player, float gain)
         {
             CurrentMastery += gain;
             Definition.OnPlayerMasteryGain(player, gain, CurrentMastery);

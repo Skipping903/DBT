@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DBTRMod.Players
+namespace DBTR.Players
 {
     public interface IPlayerSavable
     {

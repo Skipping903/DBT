@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DBTRMod.Managers
+namespace DBTR.Managers
 {
     public abstract class Manager<T> where T : IHasUnlocalizedName
     {
