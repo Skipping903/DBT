@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using DBTR.Network;
 using DBTR.UserInterfaces.KiBar;
 using Terraria;
 using Terraria.ModLoader;
@@ -25,6 +27,8 @@ namespace DBTR
 		    Instance = this;
 		}
 
+        #region Load/Unloading
+
 	    public override void Load()
 	    {
 	        if (!Main.dedServ)
@@ -33,19 +37,19 @@ namespace DBTR
 
 	            characterMenuKey = RegisterHotKey("Character Menu", "K");
 	            energyChargeKey = RegisterHotKey("Energy Charge", "C");
-                speedToggleKey = RegisterHotKey("Speed Toggle", "Z");
+	            speedToggleKey = RegisterHotKey("Speed Toggle", "Z");
 	            transformDownKey = RegisterHotKey("Transform Down", "V");
 	            transformUpKey = RegisterHotKey("Transform Up", "X");
 
-                #endregion
+	            #endregion
 
 	            #region Ki Bar
 
 	            kiBar = new KiBar();
-                kiBar.Activate();
+	            kiBar.Activate();
 
-                kiBarInterface = new UserInterface();
-                kiBarInterface.SetState(kiBar);
+	            kiBarInterface = new UserInterface();
+	            kiBarInterface.SetState(kiBar);
 
 	            kiBar.Visible = true;
 
@@ -64,16 +68,24 @@ namespace DBTR
 	            #endregion
 	        }
 
-            Instance = null;
+	        Instance = null;
 	    }
 
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        #endregion
+
+	    public override void HandlePacket(BinaryReader reader, int whoAmI)
+	    {
+	        NetworkPacketManager.Instance.HandlePacket(reader, whoAmI);
+	    }
+
+	    public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             int resourcesLayerIndex = layers.FindIndex(l => l.Name.Contains("Resource Bars"));
 
             if (resourcesLayerIndex != -1)
                 layers.Insert(resourcesLayerIndex, new KiBarLayer());
         }
+
 
         internal static DBTRMod Instance { get; private set; }
     }

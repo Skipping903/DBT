@@ -8,14 +8,19 @@ namespace DBTR.Players
     {
         public void SaveMastery(TagCompound tag)
         {
-            for (int i = 0; i < AcquiredTransformations.Count; i++)
-                tag.Add(AcquiredTransformations[i].ToSavableFormat());
+            foreach (PlayerTransformation playerTransformation in AcquiredTransformations.Values)
+                tag.Add(playerTransformation.ToSavableFormat());
         }
 
         public void LoadMasteryEntry(KeyValuePair<string, object> kvp)
         {
             if (kvp.Key.StartsWith(PlayerTransformation.MASTERY_PREFIX))
-                AcquiredTransformations.Add(new PlayerTransformation(TransformationDefinitionManager.Instance[kvp.Key.Substring(PlayerTransformation.MASTERY_PREFIX.Length)], float.Parse(kvp.Value.ToString())));
+            {
+                TransformationDefinition transformation = TransformationDefinitionManager.Instance[kvp.Key.Substring(PlayerTransformation.MASTERY_PREFIX.Length)];
+
+                if (AcquiredTransformations.ContainsKey(transformation)) return;
+                AcquiredTransformations.Add(transformation, new PlayerTransformation(transformation, float.Parse(kvp.Value.ToString())));
+            }
         }
     }
 }

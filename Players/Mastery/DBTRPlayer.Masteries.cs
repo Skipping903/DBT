@@ -10,6 +10,12 @@ namespace DBTR.Players
                 GainMastery(ActiveTransformations[i], gain);
         }
 
-        public void GainMastery(PlayerTransformation definition, float gain) => definition.OnPlayerMasteryGain(this, gain);
+        public void GainMastery(TransformationDefinition definition, float gain)
+        {
+            PlayerTransformation playerTransformation = AcquiredTransformations[definition];
+            playerTransformation.CurrentMastery += gain;
+
+            definition.OnPlayerMasteryGain(this, gain, playerTransformation.CurrentMastery);
+        }
     }
 }

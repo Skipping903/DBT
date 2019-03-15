@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using DBTR.Players;
 using DBTR.Transformations;
 using Microsoft.Xna.Framework;
@@ -85,7 +84,11 @@ namespace DBTR.Auras
 
         public static string GetTexturePathFromTransformation(TransformationDefinition transformation) => GetTexturePathFromTransformation(transformation.GetType());
 
-        public static string GetTexturePathFromTransformation(Type type) => type.Namespace.Substring((type.Assembly.GetName().Name + '.').Length).Replace('.', '/') + '/' + type.Name + "Aura";
+        public static string GetTexturePathFromTransformation(Type type)
+        {
+            string[] segments = type.Namespace.Split('.');
+            return string.Join("/", segments, 1, segments.Length - 1) + '/' + type.Name + "Aura";
+        }
 
         #endregion
 

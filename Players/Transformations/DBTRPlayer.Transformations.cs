@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using DBTR.Network;
 using DBTR.Transformations;
+using Terraria;
+using Terraria.ID;
 
 namespace DBTR.Players
 {
@@ -12,38 +15,46 @@ namespace DBTR.Players
         }
 
 
-        public void ForAllActiveTransformations(Action<PlayerTransformation> action)
+        public void ForAllActiveTransformations(Action<TransformationDefinition> action)
         {
             for (int i = 0; i < ActiveTransformations.Count; i++)
                 action(ActiveTransformations[i]);
         }
 
 
-        public void Transform(TransformationDefinition definition)
+        public void AcquireAndTransform(TransformationDefinition definition)
         {
+            if (!AcquiredTransformations.ContainsKey(definition))
+                AcquiredTransformations.Add(definition, new PlayerTransformation(definition));
+
             for (int i = 0; i < ActiveTransformations.Count; i++)
-                if (ActiveTransformations[i].Definition == definition)
+                if (ActiveTransformations[i] == definition)
                     return;
 
-            ActiveTransformations.Add(new PlayerTransformation(definition));
+            ActiveTransformations.Add(definition);
             player.AddBuff(mod.GetBuff(definition.BuffType.Name).Type, definition.Duration);
+
+            if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
+                NetworkPacketManager.Instance.PlayerTransformedPacket.SendPacketToServer(player.whoAmI, (byte) player.whoAmI, definition.UnlocalizedName);
         }
 
 
+        public void Untransform(TransformationBuff transformation) => Untransform(transformation.Definition);
+
         public void Untransform(PlayerTransformation transformation)
         {
-            if (!ActiveTransformations.Contains(transformation)) return;
+            if (!ActiveTransformations.Contains(transformation.Definition)) return;
 
-            ActiveTransformations.Remove(transformation);
+            Untransform(transformation.Definition);
         }
 
         public void Untransform(TransformationDefinition definition)
         {
             for (int i = ActiveTransformations.Count - 1; i >= 0; i--)
             {
-                PlayerTransformation transformation = ActiveTransformations[i];
+                TransformationDefinition transformation = ActiveTransformations[i];
 
-                if (transformation.Definition == definition)
+                if (transformation == definition)
                 {
                     ActiveTransformations.Remove(transformation);
                     player.ClearBuff(mod.GetBuff(definition.BuffType.Name).Type);
@@ -54,8 +65,8 @@ namespace DBTR.Players
 
         public void ClearTransformations()
         {
-            for (int i = 0; i < ActiveTransformations.Count; i++)
-                ActiveTransformations.Clear();
+            for (int i = ActiveTransformations.Count - 1; i >= 0 ; i++)
+                Untransform(ActiveTransformations[i]);
         }
 
 
@@ -64,16 +75,33 @@ namespace DBTR.Players
         public bool IsTransformed(TransformationDefinition definition)
         {
             for (int i = 0; i < ActiveTransformations.Count; i++)
-                if (ActiveTransformations[i].Definition == definition)
+                if (ActiveTransformations.Contains(definition))
                     return true;
 
             return false;
         }
 
+        public bool IsTransformed(TransformationBuff buff)
+        {
+            if (ActiveTransformations.Count == 0) return false;
+
+            for (int i = 0; i < ActiveTransformations.Count; i++)
+            {
+                Type buffType = buff.GetType();
+                bool isBuff = ActiveTransformations[i].BuffType.IsAssignableFrom(buffType);
+
+                if (isBuff)
+                    return true;
+            }
+
+            return false;
+        }
+
+
         public bool HasAcquiredTransformation(TransformationDefinition definition)
         {
             for (int i = 0; i < AcquiredTransformations.Count; i++)
-                if (AcquiredTransformations[i].Definition == definition)
+                if (AcquiredTransformations.ContainsKey(definition))
                     return true;
 
             return false;
@@ -84,12 +112,12 @@ namespace DBTR.Players
         {
             if (ActiveTransformations.Count == 0) return null;
 
-            return ActiveTransformations[0];
+            return AcquiredTransformations[ActiveTransformations[0]];
         }
 
 
-        public List<PlayerTransformation> AcquiredTransformations { get; } = new List<PlayerTransformation>();
+        public Dictionary<TransformationDefinition, PlayerTransformation> AcquiredTransformations { get; } = new Dictionary<TransformationDefinition, PlayerTransformation>();
 
-        public List<PlayerTransformation> ActiveTransformations { get; } = new List<PlayerTransformation>();
+        public List<TransformationDefinition> ActiveTransformations { get; } = new List<TransformationDefinition>();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using DBTR.Auras;
+﻿using DBTR.Auras;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DBTR.Transformations.SSJs.SSJ1

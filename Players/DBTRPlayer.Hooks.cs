@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using DBTR.Transformations;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBTR.Players
 {
     public sealed partial class DBTRPlayer
     {
+        private const float CHARGING_MOVE_SPEED_MULTIPLIER = 0.5f;
+
         public override void Initialize()
         {
             Aura = null;
@@ -23,22 +24,37 @@ namespace DBTR.Players
             PlayerInitialized = true;
         }
 
+        #region Pre Update
+
         public override void PreUpdate()
         {
             Ki = MaxKi;
-
-            if (DBTRMod.Instance.transformUpKey.JustPressed)
-                Transform(TransformationDefinitionManager.Instance.SSJG);
-
-            if (DBTRMod.Instance.transformDownKey.JustPressed)
-                Untransform(TransformationDefinitionManager.Instance.SSJG);
         }
+
+        #endregion
+
+
+        #region Post Update
 
         public override void PostUpdate()
         {
-            PostUpdateHandleAura();
+            if (Main.netMode != NetmodeID.Server)
+            {
+                PostUpdateHandleAura();
+            }
         }
 
+        public override void PostUpdateRunSpeeds()
+        {
+            if (IsCharging)
+            {
+                player.moveSpeed *= CHARGING_MOVE_SPEED_MULTIPLIER;
+                player.maxRunSpeed *= CHARGING_MOVE_SPEED_MULTIPLIER;
+                player.runAcceleration *= CHARGING_MOVE_SPEED_MULTIPLIER;
+            }
+        }
+
+        #endregion
 
         public override void ModifyDrawLayers(List<PlayerLayer> layers)
         {
@@ -48,16 +64,11 @@ namespace DBTR.Players
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
-            ForAllActiveTransformations(p => p.Definition.OnPlayerDied(this, damage, pvp));
-
+            ForAllActiveTransformations(p => p.OnPlayerDied(this, damage, pvp));
             ClearTransformations();
-        }
 
-        public override void ProcessTriggers(TriggersSet triggersSet)
-        {
-            IsCharging = DBTRMod.Instance.energyChargeKey.Current;
-
-            // TODO Add network synchronization for charging.
+            if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
+                IsCharging = false;
         }
     }
 }

@@ -32,6 +32,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugServer|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugServer\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Auras\AuraAnimationInformation.cs" />
     <Compile Include="Auras\AuraAppearance.cs" />
@@ -43,10 +52,14 @@
     <Compile Include="HairStyles\HairStyle.cs" />
     <Compile Include="HairStyles\HairStyleManager.cs" />
     <Compile Include="IHasUnlocalizedName.cs" />
+    <Compile Include="Network\NetworkPacket.cs" />
+    <Compile Include="Network\NetworkPacketManager.cs" />
+    <Compile Include="Network\PlayerChargingPacket.cs" />
+    <Compile Include="Network\Transformations\PlayerTransformedPacket.cs" />
     <Compile Include="Players\Auras\DBTRPlayer.Auras.cs" />
     <Compile Include="Players\DBTRPlayer.Hooks.cs" />
     <Compile Include="Players\DBTRPlayer.Visuals.cs" />
-    <Compile Include="Players\IPlayerSavable.cs" />
+    <Compile Include="Players\Saving\IPlayerSavable.cs" />
     <Compile Include="Managers\Manager.cs" />
     <Compile Include="Players\DBTRPlayer.cs" />
     <Compile Include="Players\Mastery\DBTRPlayer.Masteries.cs" />
@@ -89,6 +102,7 @@
     <Reference Include="Terraria">
       <HintPath>lib\Terraria.exe</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
@@ -97,7 +111,6 @@
   <ItemGroup>
     <Folder Include="Helpers\" />
     <Folder Include="Items\" />
-    <Folder Include="Network\" />
     <Folder Include="Races\" />
     <Folder Include="Skills\" />
     <Folder Include="Sounds\" />
@@ -110,6 +123,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
+"D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
+exit 0
+)
+if "$(ConfigurationName)"=="DebugServer" (
 "D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
 exit 0
 )</PostBuildEvent>

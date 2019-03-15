@@ -1,6 +1,4 @@
-﻿using DBTR.Auras;
-
-namespace DBTR.Players
+﻿namespace DBTR.Players
 {
     public sealed partial class DBTRPlayer
     {

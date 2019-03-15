@@ -1,8 +1,5 @@
-﻿using System;
-using DBTR.Auras;
+﻿using DBTR.Auras;
 using DBTR.HairStyles;
-using DBTR.Players;
-using Microsoft.Xna.Framework;
 
 namespace DBTR.Transformations
 {

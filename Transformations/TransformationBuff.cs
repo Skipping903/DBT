@@ -2,9 +2,7 @@
 using System.Text;
 using DBTR.Buffs;
 using DBTR.Players;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;
 
 namespace DBTR.Transformations
 {
@@ -26,13 +24,18 @@ namespace DBTR.Transformations
             Main.buffNoTimeDisplay[Type] = Definition.Duration == TransformationDefinition.TRANSFORMATION_LONG_DURATION;
             Main.buffNoSave[Type] = true;
             Main.debuff[Type] = true;
-            Main.persistentBuff[Type] = false;
         }
 
         public override void Update(Player player, ref int buffIndex)
         {
             DBTRPlayer dbtrPlayer = player.GetModPlayer<DBTRPlayer>();
             if (dbtrPlayer == null) return;
+
+            if (!dbtrPlayer.IsTransformed(this))
+            {
+                player.ClearBuff(Type);
+                return;
+            }
 
             float 
                 damageMultiplier = Definition.GetDamageMultiplier(dbtrPlayer),

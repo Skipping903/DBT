@@ -1,5 +1,4 @@
-﻿using System;
-using DBTR.Players;
+﻿using DBTR.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
