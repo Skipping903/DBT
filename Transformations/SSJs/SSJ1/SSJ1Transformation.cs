@@ -1,4 +1,5 @@
 ﻿using DBTR.Auras;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DBTR.Transformations.SSJs.SSJ1
@@ -25,7 +26,7 @@ namespace DBTR.Transformations.SSJs.SSJ1
         public SSJ1Appearance() : base(
             new AuraAppearance(new AuraAnimationInformation(typeof(SSJ1Transformation), 4, 3, BlendState.Additive, 1f, true),
                 new LightingAppearance(new float[] { 1.25f, 1.25f, 0f })), 
-            /*new HairAppearance()*/ null)
+            new HairAppearance(Color.White))
         {
         }
     }

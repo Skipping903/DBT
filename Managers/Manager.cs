@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DBTR.Managers
 {
@@ -6,6 +8,13 @@ namespace DBTR.Managers
     {
         protected readonly List<T> byIndex = new List<T>();
         protected readonly Dictionary<string, T> byNames = new Dictionary<string, T>();
+
+
+        internal virtual void DefaultInitialize()
+        {
+            Initialized = true;
+        }
+
 
         public virtual T Add(T item)
         {
@@ -25,14 +34,10 @@ namespace DBTR.Managers
             return true;
         }
 
+
         public virtual bool Contains(T item) => byIndex.Contains(item);
 
         public virtual bool Contains(string unlocalizedName) => byNames.ContainsKey(unlocalizedName);
-
-        internal virtual void DefaultInitialize()
-        {
-            Initialized = true;
-        }
 
         public int GetIndex(T item) => byIndex.IndexOf(item);
         public int GetIndex(string unlocalizedName) => GetIndex(byNames[unlocalizedName]);
@@ -43,12 +48,22 @@ namespace DBTR.Managers
             byNames.Clear();
         }
 
+        public IEnumerator<KeyValuePair<string, T>> GetEnumerator() => byNames.GetEnumerator();
+
+
         public T this[int index] => byIndex[index];
 
-        public T this[string name] => byNames[name];
+        public T this[string key] => byNames[key];
+
 
         public int Count => byIndex.Count;
 
         public bool Initialized { get; private set; }
+
+        public ICollection<string> Keys => byNames.Keys;
+
+        public ICollection<T> Values => byNames.Values;
+
+        public bool IsReadOnly => true; // Behaves like a Read-Only dictionary when it comes to the interface.
     }
 }

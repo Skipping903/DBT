@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DBTR.HairStyles;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -17,6 +18,8 @@ namespace DBTR.Players
 
             if (!PlayerInitialized)
             {
+                ChosenHairStyle = HairStyleManager.Instance.NoChoice;
+
                 Ki = 1000;
                 BaseMaxKi = 1000;
             }
@@ -38,9 +41,12 @@ namespace DBTR.Players
 
         public override void PostUpdate()
         {
+            FirstTransformation = GetFirstTransformation();
+
             if (Main.netMode != NetmodeID.Server)
             {
                 PostUpdateHandleAura();
+                PostHandleHair();
             }
         }
 
@@ -59,6 +65,7 @@ namespace DBTR.Players
         public override void ModifyDrawLayers(List<PlayerLayer> layers)
         {
             HandleAuraDrawLayers(layers);
+            HandleHairDrawLayers(layers);
         }
 
 

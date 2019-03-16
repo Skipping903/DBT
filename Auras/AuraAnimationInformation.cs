@@ -1,4 +1,5 @@
 ﻿using System;
+using DBTR.Extensions;
 using DBTR.Players;
 using DBTR.Transformations;
 using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@ namespace DBTR.Auras
         public static readonly AuraAppearance chargeAura = new ChargeAura();
 
         // TODO Add multi-transformation support.
-        public static readonly PlayerLayer auraLayer = new AuraDrawPlayer(0);
+        public static readonly PlayerLayer auraLayer = new AuraPlayerLayer(0);
 
         public AuraAnimationInformation(string texture, int framesCount, int framesTimer, BlendState blendState, float baseScale, bool isFormAura, int priority = 0, int ticksPerFrameTimerTick = 1)
         {
@@ -32,7 +33,7 @@ namespace DBTR.Auras
         }
 
         public AuraAnimationInformation(Type type, int framesCount, int framesTimer, BlendState blendState, float baseScale, bool isFormAura, int priority = 0, int ticksPerFrameTimerTick = 1) : 
-            this(GetTexturePathFromTransformation(type), framesCount, framesTimer, blendState, baseScale, isFormAura, priority, ticksPerFrameTimerTick)
+            this(GetAuraTextureFromType(type), framesCount, framesTimer, blendState, baseScale, isFormAura, priority, ticksPerFrameTimerTick)
         {
         }
 
@@ -81,14 +82,7 @@ namespace DBTR.Auras
 
         public virtual Texture2D GetTexture(DBTRPlayer dbtrPlayer) => dbtrPlayer.mod.GetTexture(TexturePath);
 
-
-        public static string GetTexturePathFromTransformation(TransformationDefinition transformation) => GetTexturePathFromTransformation(transformation.GetType());
-
-        public static string GetTexturePathFromTransformation(Type type)
-        {
-            string[] segments = type.Namespace.Split('.');
-            return string.Join("/", segments, 1, segments.Length - 1) + '/' + type.Name + "Aura";
-        }
+        protected static string GetAuraTextureFromType(Type type) => type.GetTexturePathFromType() + "Aura";
 
         #endregion
 

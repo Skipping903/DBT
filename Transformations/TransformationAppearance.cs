@@ -1,5 +1,6 @@
 ﻿using DBTR.Auras;
 using DBTR.HairStyles;
+using Microsoft.Xna.Framework;
 
 namespace DBTR.Transformations
 {
@@ -18,11 +19,11 @@ namespace DBTR.Transformations
 
     public class HairAppearance
     {
-        public HairAppearance(HairStyle style)
+        public HairAppearance(Color? color)
         {
-            Style = style;
+            Color = color;
         }
 
-        public HairStyle Style { get; }
+        public Color? Color { get; }
     }
 }

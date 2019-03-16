@@ -1,13 +1,17 @@
-﻿using DBTR.Players;
+﻿using DBTR.Extensions;
+using DBTR.Players;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBTR.Auras
 {
-    public sealed class AuraDrawPlayer : PlayerLayer
+    public sealed class AuraPlayerLayer : PlayerLayer
     {
-        public AuraDrawPlayer(int index) : base(DBTRMod.Instance.GetType().Name + index, "AuraLayer0", null, DrawLayer)
+        public AuraPlayerLayer(int index) : base(DBTRMod.Instance.Name, "AuraLayer" + index, null, DrawLayer)
         {
         }
 
@@ -15,13 +19,25 @@ namespace DBTR.Auras
         {
             if (Main.netMode == NetmodeID.Server) return;
 
-            Player player = drawInfo.drawPlayer;
-            DBTRPlayer dbtrPlayer = player.GetModPlayer<DBTRPlayer>();
+            DBTRPlayer dbtrPlayer = drawInfo.drawPlayer.GetModPlayer<DBTRPlayer>();
 
             AuraAppearance aura = dbtrPlayer.GetAura();
             if (aura == null) return;
 
-            dbtrPlayer.DrawAura(aura);
+            int auraHeight = aura.Information.GetHeight(dbtrPlayer);
+
+            Texture2D auraTexture = aura.Information.GetTexture(dbtrPlayer);
+            Rectangle auraRectangle = new Rectangle(0, auraHeight * dbtrPlayer.AuraFrameIndex, auraTexture.Width, auraHeight);
+
+            float scale = aura.Information.GetAuraScale(dbtrPlayer);
+            Tuple<float, Vector2> rotationAndPosition = aura.Information.GetRotationAndPosition(dbtrPlayer);
+
+            aura.Information.BlendState.SetSpriteBatchForPlayerLayerCustomDraw(dbtrPlayer.GetPlayerSamplerState());
+
+            Main.spriteBatch.Draw(auraTexture, rotationAndPosition.Item2 - Main.screenPosition, auraRectangle, Color.White, rotationAndPosition.Item1,
+                new Vector2(aura.Information.GetWidth(dbtrPlayer), aura.Information.GetHeight(dbtrPlayer)) * 0.5f, scale, SpriteEffects.None, 0f);
+
+            dbtrPlayer.GetPlayerSamplerState().ResetSpriteBatchForPlayerDrawLayers();
         }
     }
 }

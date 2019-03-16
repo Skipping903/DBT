@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using DBTR.HairStyles;
 using DBTR.Network;
 using DBTR.UserInterfaces.KiBar;
 using Terraria;
@@ -53,7 +54,9 @@ namespace DBTR
 
 	            kiBar.Visible = true;
 
-	            #endregion
+                #endregion
+
+                var x = HairStyleManager.Instance.Kale;
 	        }
 	    }
 

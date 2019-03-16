@@ -13,10 +13,10 @@ namespace DBTR.Players
             if (player.whoAmI == Main.myPlayer)
             {
                 if (DBTRMod.Instance.transformUpKey.JustPressed)
-                    AcquireAndTransform(TransformationDefinitionManager.Instance.SSJG);
+                    AcquireAndTransform(TransformationDefinitionManager.Instance.SSJ1);
 
                 if (DBTRMod.Instance.transformDownKey.JustPressed)
-                    Untransform(TransformationDefinitionManager.Instance.SSJG);
+                    Untransform(TransformationDefinitionManager.Instance.SSJ1);
             }
         }
     }

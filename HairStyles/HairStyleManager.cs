@@ -1,4 +1,7 @@
-﻿using DBTR.Managers;
+﻿using DBTR.HairStyles.Goku;
+using DBTR.HairStyles.Kale;
+using DBTR.HairStyles.NoChoice;
+using DBTR.Managers;
 
 namespace DBTR.HairStyles
 {
@@ -8,8 +11,18 @@ namespace DBTR.HairStyles
 
         internal override void DefaultInitialize()
         {
-            
+            NoChoice = Add(new NoChoiceHairStyle()) as NoChoiceHairStyle;
+
+            Goku = Add(new GokuHairStyle()) as GokuHairStyle;
+            Kale = Add(new KaleHairStyle()) as KaleHairStyle;
         }
+
+        public NoChoiceHairStyle NoChoice { get; private set; }
+
+        public GokuHairStyle Goku { get; private set; }
+
+        public KaleHairStyle Kale { get; private set; }
+
 
         public static HairStyleManager Instance
         {

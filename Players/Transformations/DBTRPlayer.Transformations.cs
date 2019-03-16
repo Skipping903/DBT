@@ -65,7 +65,7 @@ namespace DBTR.Players
 
         public void ClearTransformations()
         {
-            for (int i = ActiveTransformations.Count - 1; i >= 0 ; i++)
+            for (int i = ActiveTransformations.Count - 1; i > 0 ; i--)
                 Untransform(ActiveTransformations[i]);
         }
 
@@ -119,5 +119,8 @@ namespace DBTR.Players
         public Dictionary<TransformationDefinition, PlayerTransformation> AcquiredTransformations { get; } = new Dictionary<TransformationDefinition, PlayerTransformation>();
 
         public List<TransformationDefinition> ActiveTransformations { get; } = new List<TransformationDefinition>();
+
+
+        public PlayerTransformation FirstTransformation { get; private set; }
     }
 }

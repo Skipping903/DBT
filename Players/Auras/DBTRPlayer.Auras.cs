@@ -14,7 +14,6 @@ namespace DBTR.Players
     {
         internal void PostUpdateHandleAura()
         {
-            PlayerTransformation transformation = GetFirstTransformation();
             AuraAppearance aura = GetAura();
 
             if (Aura != aura)
@@ -54,25 +53,7 @@ namespace DBTR.Players
             return null;
         }
 
-        public void DrawAura(AuraAppearance aura)
-        {
-            int auraHeight = aura.Information.GetHeight(this);
-
-            Texture2D auraTexture = aura.Information.GetTexture(this);
-            Rectangle auraRectangle = new Rectangle(0, auraHeight * AuraFrameIndex, auraTexture.Width, auraHeight);
-
-            float scale = aura.Information.GetAuraScale(this);
-            Tuple<float, Vector2> rotationAndPosition = aura.Information.GetRotationAndPosition(this);
-
-            aura.Information.BlendState.SetSpriteBatchForPlayerLayerCustomDraw(GetPlayerSamplerState());
-
-            Main.spriteBatch.Draw(auraTexture, rotationAndPosition.Item2 - Main.screenPosition, auraRectangle, Color.White, rotationAndPosition.Item1,
-                new Vector2(aura.Information.GetWidth(this), aura.Information.GetHeight(this)) * 0.5f, scale, SpriteEffects.None, 0f);
-
-            GetPlayerSamplerState().ResetSpriteBatchForPlayerDrawLayers();
-        }
-
-        public void HandleAuraDrawLayers(List<PlayerLayer> layers)
+        internal void HandleAuraDrawLayers(List<PlayerLayer> layers)
         {
             AuraAnimationInformation.auraLayer.visible = true;
             layers.Insert(layers.FindIndex(l => l.Name == "MiscEffectsBack"), AuraAnimationInformation.auraLayer);

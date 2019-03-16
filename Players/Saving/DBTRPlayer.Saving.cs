@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria.ModLoader.IO;
 
 namespace DBTR.Players
@@ -7,6 +8,8 @@ namespace DBTR.Players
     {
         public override TagCompound Save()
         {
+            ClearTransformations();
+
             TagCompound tag = new TagCompound();
 
             tag.Add(nameof(PlayerInitialized), PlayerInitialized);

@@ -68,23 +68,26 @@ namespace DBTR.Transformations
             tip = BuildDefaultTooltip(Main.LocalPlayer.GetModPlayer<DBTRPlayer>());
         }
 
+
+        #region Tooltips
+
         public string BuildDefaultTooltip() =>
             BuildTooltip(Definition.BaseDamageMultiplier, Definition.BaseSpeedMultiplier, Definition.BaseDefenseAdditive, Definition.UnmasteredKiDrain, Definition.MasteredKiDrain);
 
-        public string BuildDefaultTooltip(DBTRPlayer player) => 
+        public string BuildDefaultTooltip(DBTRPlayer player) =>
             BuildTooltip(Definition.GetDamageMultiplier(player), Definition.GetSpeedMultiplier(player), Definition.GetDefenseAdditive(player), Definition.GetUnmasteredKiDrain(player), Definition.GetMasteredKiDrain(player));
 
         private string BuildTooltip(float damageMultiplier, float speedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain)
         {
             StringBuilder sb = new StringBuilder();
 
-            float roundedDamageMultiplier = (float) Math.Round(damageMultiplier, 2);
-            float roundedSpeedMultiplier = (float) Math.Round(speedMultiplier, 2);
+            float roundedDamageMultiplier = (float)Math.Round(damageMultiplier, 2);
+            float roundedSpeedMultiplier = (float)Math.Round(speedMultiplier, 2);
 
             BuildDamageAndSpeedInline(sb, roundedDamageMultiplier, roundedSpeedMultiplier);
 
-            int roundedUnmasteredKiDrain = (int) Math.Round(unmasteredKiDrain);
-            int roundedMasteredKiDrain = (int) Math.Round(masteredKiDrain);
+            int roundedUnmasteredKiDrain = (int)Math.Round(unmasteredKiDrain);
+            int roundedMasteredKiDrain = (int)Math.Round(masteredKiDrain);
 
             BuildKiDrainInline(sb, roundedUnmasteredKiDrain, roundedMasteredKiDrain);
 
@@ -130,6 +133,8 @@ namespace DBTR.Transformations
                     builder.AppendLine();
             }
         }
+
+        #endregion
 
 
         public string UnlocalizedName => Definition.UnlocalizedName;
