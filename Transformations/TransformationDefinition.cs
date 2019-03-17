@@ -1,5 +1,7 @@
 ﻿using System;
 using DBTR.Players;
+using Terraria;
+using Terraria.ModLoader.IO;
 
 namespace DBTR.Transformations
 {
@@ -45,6 +47,14 @@ namespace DBTR.Transformations
 
         public virtual void OnPlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp) { }
 
+        public virtual void OnPlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc) { }
+
+        public virtual void OnPlayerLoading(DBTRPlayer dbtrPlayer, TagCompound tag) { }
+
+        public virtual void OnPlayerSaving(DBTRPlayer dbtrPlayer, TagCompound tag) { }
+
+        public virtual void OnPlayerAcquiredTransformation(DBTRPlayer dbtrPlayer) { }
+
         #endregion
 
         #region Access
@@ -59,6 +69,10 @@ namespace DBTR.Transformations
         }
 
         public bool CanUnlock(DBTRPlayer dbtrPlayer) => HasParents(dbtrPlayer);
+
+        /// <summary>Called in special cases when the mod needs to know wether or not, regardless of the player, this transformation should work.</summary>
+        /// <returns></returns>
+        public virtual bool CheckPrePlayerConditions() => true;
 
         #endregion
 

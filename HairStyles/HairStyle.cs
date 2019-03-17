@@ -52,6 +52,9 @@ namespace DBTR.HairStyles
         }
 
 
+        public virtual bool CanAccess() => true;
+
+
         public Texture2D this[TransformationDefinition transformation] => this[transformation.UnlocalizedName];
 
         public Texture2D this[string key]

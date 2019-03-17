@@ -30,5 +30,7 @@ namespace DBTR.Transformations
         public TransformationDefinition Definition { get; }
 
         public float CurrentMastery { get; set; }
+
+        public Dictionary<string, object> ExtraInformation { get; } = new Dictionary<string, object>();
     }
 }

@@ -24,6 +24,12 @@ namespace DBTR.Players
         }
         
 
+        public void OnKilledNPC(NPC npc)
+        {
+            ForAllActiveTransformations(t => t.OnPlayerKilledNPC(this, npc));
+        }
+
+
         #region Ki
 
         public float KiMultiplier { get; set; }

@@ -17,6 +17,8 @@ namespace DBTR.Players
             SaveMastery(tag);
             SaveKi(tag);
 
+            ForAllAcquiredTransformations(t => t.Definition.OnPlayerSaving(this, tag));
+
             return tag;
         }
 
@@ -26,6 +28,8 @@ namespace DBTR.Players
 
             LoadMastery(tag);
             LoadKi(tag);
+
+            ForAllAcquiredTransformations(t => t.Definition.OnPlayerLoading(this, tag));
         }
     }
 }

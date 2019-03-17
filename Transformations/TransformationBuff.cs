@@ -71,10 +71,10 @@ namespace DBTR.Transformations
 
         #region Tooltips
 
-        public string BuildDefaultTooltip() =>
+        public virtual string BuildDefaultTooltip() =>
             BuildTooltip(Definition.BaseDamageMultiplier, Definition.BaseSpeedMultiplier, Definition.BaseDefenseAdditive, Definition.UnmasteredKiDrain, Definition.MasteredKiDrain);
 
-        public string BuildDefaultTooltip(DBTRPlayer player) =>
+        public virtual string BuildDefaultTooltip(DBTRPlayer player) =>
             BuildTooltip(Definition.GetDamageMultiplier(player), Definition.GetSpeedMultiplier(player), Definition.GetDefenseAdditive(player), Definition.GetUnmasteredKiDrain(player), Definition.GetMasteredKiDrain(player));
 
         private string BuildTooltip(float damageMultiplier, float speedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain)

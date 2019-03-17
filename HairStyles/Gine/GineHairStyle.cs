@@ -2,7 +2,7 @@
 {
     public sealed class GineHairStyle : HairStyle
     {
-        public GineHairStyle() : base(yOffset: 4)
+        public GineHairStyle() : base(xOffset: -4, yOffset: 2)
         {
         }
     }

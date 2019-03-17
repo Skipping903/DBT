@@ -34,6 +34,12 @@ namespace DBTR.Managers
             return true;
         }
 
+        public void ForAllItems(Action<T> action)
+        {
+            for (int i = 0; i < byIndex.Count; i++)
+                action(byIndex[i]);
+        }
+
 
         public virtual bool Contains(T item) => byIndex.Contains(item);
 

@@ -1,6 +1,10 @@
-﻿using DBTR.HairStyles.Goku;
+﻿using DBTR.HairStyles.Gine;
+using DBTR.HairStyles.Gogeta;
+using DBTR.HairStyles.Goku;
 using DBTR.HairStyles.Kale;
 using DBTR.HairStyles.NoChoice;
+using DBTR.HairStyles.Vegeta;
+using DBTR.HairStyles.Webmilio;
 using DBTR.Managers;
 
 namespace DBTR.HairStyles
@@ -13,15 +17,22 @@ namespace DBTR.HairStyles
         {
             NoChoice = Add(new NoChoiceHairStyle()) as NoChoiceHairStyle;
 
+            Gine = Add(new GineHairStyle()) as GineHairStyle;
+            Gogeta = Add(new GogetaHairStyle()) as GogetaHairStyle;
             Goku = Add(new GokuHairStyle()) as GokuHairStyle;
             Kale = Add(new KaleHairStyle()) as KaleHairStyle;
+            Vegeta = Add(new VegetaHairStyle()) as VegetaHairStyle;
+            Webmilio = Add(new WebmilioHairStyle()) as WebmilioHairStyle;
         }
 
         public NoChoiceHairStyle NoChoice { get; private set; }
 
+        public GineHairStyle Gine { get; private set; }
+        public GogetaHairStyle Gogeta { get; private set; }
         public GokuHairStyle Goku { get; private set; }
-
         public KaleHairStyle Kale { get; private set; }
+        public VegetaHairStyle Vegeta { get; private set; }
+        public WebmilioHairStyle Webmilio { get; private set; }
 
 
         public static HairStyleManager Instance

@@ -6,6 +6,10 @@ using DBTR.Transformations.SSJs.SSJ2;
 using DBTR.Transformations.SSJs.SSJ3;
 using DBTR.Transformations.SSJs.SSJ4s.SSJ4;
 using DBTR.Transformations.SSJGs.SSJG;
+using DBTR.Transformations.SSJGs.SSJBs.SSJB;
+using DBTR.Transformations.SSJGs.SSJBs.SSJBE;
+using DBTR.Transformations.SSJGs.SSJR;
+using DBTR.Transformations.Developers.Webmilio;
 
 namespace DBTR.Transformations
 {
@@ -24,7 +28,12 @@ namespace DBTR.Transformations
 
             SSJ4 = Add(new SSJ4Transformation(SSJ3)) as SSJ4Transformation;
 
-            SSJG = Add(new SSJGTransformation()) as SSJGTransformation;
+            SSJG = Add(new SSJGTransformation(SSJ3)) as SSJGTransformation;
+            SSJB = Add(new SSJBTransformation(SSJG)) as SSJBTransformation;
+            SSJR = Add(new SSJRTransformation(SSJG)) as SSJRTransformation;
+            SSJBE = Add(new SSJBETransformation(SSJB)) as SSJBETransformation;
+
+            SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
 
             base.DefaultInitialize();
         }
@@ -40,7 +49,11 @@ namespace DBTR.Transformations
         public SSJ4Transformation SSJ4 { get; private set; }
 
         public SSJGTransformation SSJG { get; private set; }
+        public SSJBTransformation SSJB { get; private set; }
+        public SSJRTransformation SSJR { get; private set; }
+        public SSJBETransformation SSJBE { get; private set; }
 
+        public SoulStealerTransformation SoulStealer { get; private set; }
 
         public static TransformationDefinitionManager Instance
         {

@@ -3,6 +3,7 @@ using System.IO;
 using DBTR.HairStyles;
 using DBTR.Network;
 using DBTR.UserInterfaces.KiBar;
+using DBTR.Utilities;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -56,7 +57,7 @@ namespace DBTR
 
                 #endregion
 
-                var x = HairStyleManager.Instance.Kale;
+                SteamHelper.Initialize();
 	        }
 	    }
 

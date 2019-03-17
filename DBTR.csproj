@@ -60,12 +60,15 @@
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="HairStyles\Gine\GineHairStyle.cs" />
+    <Compile Include="HairStyles\Gogeta\GogetaHairStyle.cs" />
     <Compile Include="HairStyles\Goku\GokuHairStyle.cs" />
     <Compile Include="HairStyles\HairPlayerLayer.cs" />
     <Compile Include="HairStyles\HairStyle.cs" />
     <Compile Include="HairStyles\HairStyleManager.cs" />
     <Compile Include="HairStyles\Kale\KaleHairStyle.cs" />
     <Compile Include="HairStyles\NoChoice\NoChoiceHairStyle.cs" />
+    <Compile Include="HairStyles\Vegeta\VegetaHairStyle.cs" />
+    <Compile Include="HairStyles\Webmilio\WebmilioHairStyle.cs" />
     <Compile Include="IHasUnlocalizedName.cs" />
     <Compile Include="Items\Debug\DebugItem.cs" />
     <Compile Include="Items\Debug\HairSetter.cs" />
@@ -74,6 +77,7 @@
     <Compile Include="Network\NetworkPacketManager.cs" />
     <Compile Include="Network\PlayerChargingPacket.cs" />
     <Compile Include="Network\Transformations\PlayerTransformedPacket.cs" />
+    <Compile Include="NPCs\DBTRGlobalNPC.cs" />
     <Compile Include="Players\Auras\DBTRPlayer.Auras.cs" />
     <Compile Include="Players\DBTRPlayer.Hooks.cs" />
     <Compile Include="Players\DBTRPlayer.Visuals.cs" />
@@ -87,7 +91,11 @@
     <Compile Include="Players\ModHotKeys\DBTRPlayer.ModHotKeys.cs" />
     <Compile Include="Players\Saving\DBTRPlayer.Saving.cs" />
     <Compile Include="Players\Transformations\DBTRPlayer.Transformations.cs" />
+    <Compile Include="Transformations\Developers\Webmilio\SoulStealerTransformation.cs" />
     <Compile Include="Transformations\PlayerTransformation.cs" />
+    <Compile Include="Transformations\SSJGs\SSJBs\SSJBE\SSJBETransformation.cs" />
+    <Compile Include="Transformations\SSJGs\SSJBs\SSJB\SSJBTransformation.cs" />
+    <Compile Include="Transformations\SSJGs\SSJR\SSJRTransformation.cs" />
     <Compile Include="Transformations\SSJs\SSJ1s\ASSJ1\ASSJ1Transformation.cs" />
     <Compile Include="Transformations\SSJs\SSJ1s\SSJ1\SSJ1Transformation.cs" />
     <Compile Include="Transformations\SSJGs\SSJG\SSJGTransformation.cs" />
@@ -102,6 +110,7 @@
     <Compile Include="UserInterfaces\KiBar\KiBar.cs" />
     <Compile Include="UserInterfaces\EnergyResourceBar.cs" />
     <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
+    <Compile Include="Utilities\SteamHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -140,6 +149,10 @@
     <Folder Include="Sounds\" />
     <Folder Include="Tiles\" />
     <Folder Include="Traits\" />
+    <Folder Include="Transformations\Developers\Blockaroz\" />
+    <Folder Include="Transformations\Developers\DawnishDays\" />
+    <Folder Include="Transformations\Developers\Mak0Z\" />
+    <Folder Include="Transformations\Developers\NuovaPrime\" />
     <Folder Include="Transformations\Kaiokens\Kaioken\" />
     <Folder Include="Transformations\Kaiokens\SSJBKK\" />
     <Folder Include="Transformations\Kaiokens\SSJRKK\" />
@@ -148,9 +161,6 @@
     <Folder Include="Transformations\LSSJs\LSSJ\" />
     <Folder Include="Transformations\LSSJs\SSJCType\" />
     <Folder Include="Transformations\Mystic\" />
-    <Folder Include="Transformations\SSJGs\SSJBs\SSJBE\" />
-    <Folder Include="Transformations\SSJGs\SSJBs\SSJB\" />
-    <Folder Include="Transformations\SSJGs\SSJR\" />
     <Folder Include="Transformations\SSJs\SSJ4s\SSJ4FP\" />
     <Folder Include="Transformations\UIs\UIOmen\" />
     <Folder Include="Transformations\UIs\UI\" />

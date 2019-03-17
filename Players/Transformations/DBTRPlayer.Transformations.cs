@@ -21,10 +21,19 @@ namespace DBTR.Players
                 action(ActiveTransformations[i]);
         }
 
+        public void ForAllAcquiredTransformations(Action<PlayerTransformation> action)
+        {
+            foreach (PlayerTransformation playerTransformation in AcquiredTransformations.Values)
+                action(playerTransformation);
+        }
+
+
         public void Acquire(TransformationDefinition definition)
         {
-            if (!AcquiredTransformations.ContainsKey(definition))
-                AcquiredTransformations.Add(definition, new PlayerTransformation(definition));
+            if (AcquiredTransformations.ContainsKey(definition)) return;
+
+            AcquiredTransformations.Add(definition, new PlayerTransformation(definition));
+            definition.OnPlayerAcquiredTransformation(this);
         }
 
         public void AcquireAndTransform(TransformationDefinition definition)
