@@ -16,7 +16,7 @@ namespace DBTR.Players
                     AcquireAndTransform(TransformationDefinitionManager.Instance.SSJ1);
 
                 if (DBTRMod.Instance.transformDownKey.JustPressed)
-                    Untransform(TransformationDefinitionManager.Instance.SSJ1);
+                    ClearTransformations();
             }
         }
     }

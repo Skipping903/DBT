@@ -38,7 +38,7 @@ namespace DBTR.Players
 
         public float BaseMaxKi { get; private set; }
 
-        public float MaxKiMultiplier { get; private set; }
+        public float MaxKiMultiplier { get; private set; } = 1;
 
         public int MaxKi => (int)Math.Round(BaseMaxKi * MaxKiMultiplier);
 

@@ -12,6 +12,12 @@ namespace DBTR.Players
                 tag.Add(playerTransformation.ToSavableFormat());
         }
 
+        public void LoadMastery(TagCompound tag)
+        {
+            foreach (KeyValuePair<string, object> kvp in tag)
+                LoadMasteryEntry(kvp);
+        }
+
         public void LoadMasteryEntry(KeyValuePair<string, object> kvp)
         {
             if (kvp.Key.StartsWith(PlayerTransformation.MASTERY_PREFIX))

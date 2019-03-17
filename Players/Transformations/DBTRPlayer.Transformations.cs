@@ -21,11 +21,15 @@ namespace DBTR.Players
                 action(ActiveTransformations[i]);
         }
 
-
-        public void AcquireAndTransform(TransformationDefinition definition)
+        public void Acquire(TransformationDefinition definition)
         {
             if (!AcquiredTransformations.ContainsKey(definition))
                 AcquiredTransformations.Add(definition, new PlayerTransformation(definition));
+        }
+
+        public void AcquireAndTransform(TransformationDefinition definition)
+        {
+            Acquire(definition);
 
             for (int i = 0; i < ActiveTransformations.Count; i++)
                 if (ActiveTransformations[i] == definition)
@@ -65,7 +69,7 @@ namespace DBTR.Players
 
         public void ClearTransformations()
         {
-            for (int i = ActiveTransformations.Count - 1; i > 0 ; i--)
+            for (int i = ActiveTransformations.Count - 1; i >= 0 ; i--)
                 Untransform(ActiveTransformations[i]);
         }
 

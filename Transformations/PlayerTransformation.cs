@@ -13,6 +13,7 @@ namespace DBTR.Transformations
             CurrentMastery = currentMastery;
         }
 
+
         #region Player Hooks
 
         public void OnPlayerMasteryGain(DBTRPlayer player, float gain)
@@ -22,6 +23,7 @@ namespace DBTR.Transformations
         }
 
         #endregion
+
 
         public KeyValuePair<string, object> ToSavableFormat() => new KeyValuePair<string, object>(MASTERY_PREFIX + Definition.UnlocalizedName, CurrentMastery);
 

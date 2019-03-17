@@ -20,7 +20,7 @@ namespace DBTR.Players
             {
                 ChosenHairStyle = HairStyleManager.Instance.NoChoice;
 
-                Ki = 1000;
+                Ki = 0;
                 BaseMaxKi = 1000;
             }
 

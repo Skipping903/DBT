@@ -15,6 +15,7 @@ namespace DBTR.Players
             tag.Add(nameof(PlayerInitialized), PlayerInitialized);
 
             SaveMastery(tag);
+            SaveKi(tag);
 
             return tag;
         }
@@ -23,10 +24,8 @@ namespace DBTR.Players
         {
             PlayerInitialized = tag.GetBool(nameof(PlayerInitialized));
 
-            foreach (KeyValuePair<string, object> kvp in tag)
-            {
-                LoadMasteryEntry(kvp);
-            }
+            LoadMastery(tag);
+            LoadKi(tag);
         }
     }
 }

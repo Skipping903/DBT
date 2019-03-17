@@ -10,7 +10,7 @@ namespace DBTR.Transformations
         protected TransformationDefinition(string unlocalizedName, string displayName, Type buffType,
             float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain,
             TransformationAppearance appearance,
-            bool masterable = true, float maxMastery = 1f, 
+            bool masterable = true, float maxMastery = 1f,
             int duration = TRANSFORMATION_LONG_DURATION,
             params TransformationDefinition[] parents)
         {
@@ -29,10 +29,11 @@ namespace DBTR.Transformations
             Appearance = appearance;
 
             Mastereable = masterable;
-            MaxMastery = maxMastery;
+            BaseMaxMastery = maxMastery;
 
             Duration = duration;
         }
+
 
         #region Methods
 
@@ -43,6 +44,21 @@ namespace DBTR.Transformations
         public virtual void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery) { }
 
         public virtual void OnPlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp) { }
+
+        #endregion
+
+        #region Access
+
+        public bool HasParents(DBTRPlayer dbtrPlayer)
+        {
+            for (int i = 0; i < dbtrPlayer.AcquiredTransformations.Count; i++)
+                if (!dbtrPlayer.AcquiredTransformations.ContainsKey(this))
+                    return false;
+
+            return true;
+        }
+
+        public bool CanUnlock(DBTRPlayer dbtrPlayer) => HasParents(dbtrPlayer);
 
         #endregion
 
@@ -68,7 +84,22 @@ namespace DBTR.Transformations
 
         #endregion
 
+        #region Mastery
+
+        public float GetCurrentMastery(DBTRPlayer dbtrPlayer)
+        {
+            if (dbtrPlayer.HasAcquiredTransformation(this))
+                return dbtrPlayer.AcquiredTransformations[this].CurrentMastery;
+
+            return 0f;
+        }
+
+        public virtual float GetMaxMastery(DBTRPlayer dbtrPlayer) => BaseMaxMastery;
+
         #endregion
+
+        #endregion
+
 
         #region Properties
 
@@ -106,7 +137,7 @@ namespace DBTR.Transformations
 
         public virtual bool Mastereable { get; }
 
-        public virtual float MaxMastery { get; }
+        public float BaseMaxMastery { get; }
 
         #endregion
 

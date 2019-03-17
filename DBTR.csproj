@@ -59,6 +59,7 @@
     <Compile Include="DBTRMod.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="HairStyles\Gine\GineHairStyle.cs" />
     <Compile Include="HairStyles\Goku\GokuHairStyle.cs" />
     <Compile Include="HairStyles\HairPlayerLayer.cs" />
     <Compile Include="HairStyles\HairStyle.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="IHasUnlocalizedName.cs" />
     <Compile Include="Items\Debug\DebugItem.cs" />
     <Compile Include="Items\Debug\HairSetter.cs" />
+    <Compile Include="Items\Debug\TransformationSetter.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
     <Compile Include="Network\PlayerChargingPacket.cs" />
@@ -76,7 +78,7 @@
     <Compile Include="Players\DBTRPlayer.Hooks.cs" />
     <Compile Include="Players\DBTRPlayer.Visuals.cs" />
     <Compile Include="Players\Hair\DBTRPlayer.Hair.cs" />
-    <Compile Include="Players\Ki\DBTRPlayer.Ki.cs" />
+    <Compile Include="Players\Ki\DBTRPlayer.Ki.Saving.cs" />
     <Compile Include="Players\Saving\IPlayerSavable.cs" />
     <Compile Include="Managers\Manager.cs" />
     <Compile Include="Players\DBTRPlayer.cs" />
@@ -86,8 +88,13 @@
     <Compile Include="Players\Saving\DBTRPlayer.Saving.cs" />
     <Compile Include="Players\Transformations\DBTRPlayer.Transformations.cs" />
     <Compile Include="Transformations\PlayerTransformation.cs" />
-    <Compile Include="Transformations\SSJs\SSJ1\SSJ1Transformation.cs" />
-    <Compile Include="Transformations\SSJs\SSJG\SSJGTransformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJ1s\ASSJ1\ASSJ1Transformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJ1s\SSJ1\SSJ1Transformation.cs" />
+    <Compile Include="Transformations\SSJGs\SSJG\SSJGTransformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJ1s\USSJ1\USSJ1Transformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJ2\SSJ2Transformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJ3\SSJ3Transformation.cs" />
+    <Compile Include="Transformations\SSJs\SSJ4s\SSJ4\SSJ4Transformation.cs" />
     <Compile Include="Transformations\TransformationAppearance.cs" />
     <Compile Include="Transformations\TransformationBuff.cs" />
     <Compile Include="Transformations\TransformationDefinition.cs" />
@@ -127,13 +134,26 @@
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HairStyles\Gine\" />
     <Folder Include="Helpers\" />
     <Folder Include="Races\" />
     <Folder Include="Skills\" />
     <Folder Include="Sounds\" />
     <Folder Include="Tiles\" />
     <Folder Include="Traits\" />
+    <Folder Include="Transformations\Kaiokens\Kaioken\" />
+    <Folder Include="Transformations\Kaiokens\SSJBKK\" />
+    <Folder Include="Transformations\Kaiokens\SSJRKK\" />
+    <Folder Include="Transformations\Kaiokens\SuperKaioken\" />
+    <Folder Include="Transformations\LSSJs\LSSJW\" />
+    <Folder Include="Transformations\LSSJs\LSSJ\" />
+    <Folder Include="Transformations\LSSJs\SSJCType\" />
+    <Folder Include="Transformations\Mystic\" />
+    <Folder Include="Transformations\SSJGs\SSJBs\SSJBE\" />
+    <Folder Include="Transformations\SSJGs\SSJBs\SSJB\" />
+    <Folder Include="Transformations\SSJGs\SSJR\" />
+    <Folder Include="Transformations\SSJs\SSJ4s\SSJ4FP\" />
+    <Folder Include="Transformations\UIs\UIOmen\" />
+    <Folder Include="Transformations\UIs\UI\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Players\Transformations\DBTRPlayer.Transformations.Visuals.cs" />

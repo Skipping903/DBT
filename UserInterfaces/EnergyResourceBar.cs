@@ -16,7 +16,7 @@ namespace DBTR.UserInterfaces
         private UIText _label;
         private Rectangle _dragRectangle;
 
-        private int _frameTimer, _frameTimer2;
+        private int _frameTimer;
 
         private static readonly List<float> _cleanAverageEnergy = new List<float>();
 

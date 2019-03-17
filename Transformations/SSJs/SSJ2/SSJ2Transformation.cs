@@ -1,0 +1,33 @@
+﻿using DBTR.Auras;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace DBTR.Transformations.SSJs.SSJ2
+{
+    public sealed class SSJ2Transformation : TransformationDefinition
+    {
+        public SSJ2Transformation(params TransformationDefinition[] parents) : base(
+            "SSJ2", "Super Saiyan 2", typeof(SSJ2TransformationBuff),
+            2.25f, 2.25f, 8, 120f, 60f,
+            new SSJ2Appearance(), parents: parents)
+        {
+        }
+    }
+
+    public sealed class SSJ2TransformationBuff : TransformationBuff
+    {
+        public SSJ2TransformationBuff() : base(TransformationDefinitionManager.Instance.SSJ2)
+        {
+        }
+    }
+
+    public sealed class SSJ2Appearance : TransformationAppearance
+    {
+        public SSJ2Appearance() : base(
+            new AuraAppearance(new AuraAnimationInformation(typeof(SSJ2Transformation), 4, 3, BlendState.Additive, 1f, true),
+                new LightingAppearance(new float[] { 1.32f, 1.32f, 0f })),
+            new HairAppearance(Color.White))
+        {
+        }
+    }
+}
