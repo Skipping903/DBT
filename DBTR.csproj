@@ -66,13 +66,14 @@
     <Compile Include="HairStyles\HairStyle.cs" />
     <Compile Include="HairStyles\HairStyleManager.cs" />
     <Compile Include="HairStyles\Kale\KaleHairStyle.cs" />
+    <Compile Include="HairStyles\Nappa\NappaHairStyle.cs" />
     <Compile Include="HairStyles\NoChoice\NoChoiceHairStyle.cs" />
     <Compile Include="HairStyles\Vegeta\VegetaHairStyle.cs" />
     <Compile Include="HairStyles\Webmilio\WebmilioHairStyle.cs" />
     <Compile Include="IHasUnlocalizedName.cs" />
-    <Compile Include="Items\Debug\DebugItem.cs" />
-    <Compile Include="Items\Debug\HairSetter.cs" />
-    <Compile Include="Items\Debug\TransformationSetter.cs" />
+    <Compile Include="Items\Developer\DebugItem.cs" />
+    <Compile Include="Items\Developer\HairSetter.cs" />
+    <Compile Include="Items\Developer\TransformationSetter.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
     <Compile Include="Network\PlayerChargingPacket.cs" />
@@ -107,6 +108,8 @@
     <Compile Include="Transformations\TransformationBuff.cs" />
     <Compile Include="Transformations\TransformationDefinition.cs" />
     <Compile Include="Transformations\TransformationDefinitionManager.cs" />
+    <Compile Include="UserInterfaces\Buttons\UIHoverImageButton.cs" />
+    <Compile Include="UserInterfaces\DBTRMenu.cs" />
     <Compile Include="UserInterfaces\KiBar\KiBar.cs" />
     <Compile Include="UserInterfaces\EnergyResourceBar.cs" />
     <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
@@ -143,6 +146,7 @@
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dynamicity\" />
     <Folder Include="Helpers\" />
     <Folder Include="Races\" />
     <Folder Include="Skills\" />
@@ -164,6 +168,7 @@
     <Folder Include="Transformations\SSJs\SSJ4s\SSJ4FP\" />
     <Folder Include="Transformations\UIs\UIOmen\" />
     <Folder Include="Transformations\UIs\UI\" />
+    <Folder Include="UserInterfaces\CharacterMenu\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Players\Transformations\DBTRPlayer.Transformations.Visuals.cs" />
