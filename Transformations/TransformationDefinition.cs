@@ -1,11 +1,12 @@
 ﻿using System;
+using DBTR.Dynamicity;
 using DBTR.Players;
 using Terraria;
 using Terraria.ModLoader.IO;
 
 namespace DBTR.Transformations
 {
-    public abstract class TransformationDefinition : IHasUnlocalizedName
+    public abstract class TransformationDefinition : IHasUnlocalizedName, IHasParents<TransformationDefinition>
     {
         internal const int TRANSFORMATION_LONG_DURATION = 6666666;
 
@@ -13,8 +14,8 @@ namespace DBTR.Transformations
             float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain,
             TransformationAppearance appearance,
             bool masterable = true, float maxMastery = 1f,
-            int duration = TRANSFORMATION_LONG_DURATION,
-            params TransformationDefinition[] parents)
+            int duration = TRANSFORMATION_LONG_DURATION, bool displaysInMenu = true,
+            bool anyParents = false, params TransformationDefinition[] parents)
         {
             UnlocalizedName = unlocalizedName;
             DisplayName = displayName;
@@ -34,6 +35,11 @@ namespace DBTR.Transformations
             BaseMaxMastery = maxMastery;
 
             Duration = duration;
+
+            DisplayInMenu = displaysInMenu;
+
+            AnyParents = anyParents;
+            Parents = parents;
         }
 
 
@@ -59,20 +65,30 @@ namespace DBTR.Transformations
 
         #region Access
 
+        /// <summary>Called in special cases when the mod needs to know wether or not, regardless of the player, this transformation should work.</summary>
+        /// <returns></returns>
+        public virtual bool CheckPrePlayerConditions() => true;
+
         public bool HasParents(DBTRPlayer dbtrPlayer)
         {
-            for (int i = 0; i < dbtrPlayer.AcquiredTransformations.Count; i++)
-                if (!dbtrPlayer.AcquiredTransformations.ContainsKey(this))
+            for (int i = 0; i < Parents.Length; i++)
+            {
+                if (AnyParents && dbtrPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
+                    return true;
+
+                if (!AnyParents && !dbtrPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
                     return false;
+            }
 
             return true;
         }
 
         public bool CanUnlock(DBTRPlayer dbtrPlayer) => HasParents(dbtrPlayer);
 
-        /// <summary>Called in special cases when the mod needs to know wether or not, regardless of the player, this transformation should work.</summary>
+        /// <summary>Checks wether or not the transformation is part of the character menu. If not overriden, uses the same value as <see cref="CheckPrePlayerConditions"/>.</summary>
+        /// <param name="dbtrPlayer"></param>
         /// <returns></returns>
-        public virtual bool CheckPrePlayerConditions() => true;
+        public bool DoesDisplayInCharacterMenu(DBTRPlayer dbtrPlayer) => CheckPrePlayerConditions() && DisplayInMenu;
 
         #endregion
 
@@ -159,7 +175,15 @@ namespace DBTR.Transformations
 
         public virtual TransformationAppearance Appearance { get; }
 
+
         public int Duration { get; }
+
+        public bool DisplayInMenu { get; }
+
+
+        public bool AnyParents { get; }
+
+        public TransformationDefinition[] Parents { get; }
 
         #endregion
     }

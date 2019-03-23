@@ -62,6 +62,7 @@ namespace DBTR.Players
 
         #endregion
 
+
         public override void ModifyDrawLayers(List<PlayerLayer> layers)
         {
             HandleAuraDrawLayers(layers);

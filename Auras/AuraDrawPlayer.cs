@@ -32,12 +32,13 @@ namespace DBTR.Auras
             float scale = aura.Information.GetAuraScale(dbtrPlayer);
             Tuple<float, Vector2> rotationAndPosition = aura.Information.GetRotationAndPosition(dbtrPlayer);
 
-            aura.Information.BlendState.SetSpriteBatchForPlayerLayerCustomDraw(dbtrPlayer.GetPlayerSamplerState());
+            SamplerState samplerState = dbtrPlayer.GetPlayerSamplerState();
+            aura.Information.BlendState.SetSpriteBatchForPlayerLayerCustomDraw(samplerState);
 
             Main.spriteBatch.Draw(auraTexture, rotationAndPosition.Item2 - Main.screenPosition, auraRectangle, Color.White, rotationAndPosition.Item1,
                 new Vector2(aura.Information.GetWidth(dbtrPlayer), aura.Information.GetHeight(dbtrPlayer)) * 0.5f, scale, SpriteEffects.None, 0f);
 
-            dbtrPlayer.GetPlayerSamplerState().ResetSpriteBatchForPlayerDrawLayers();
+            samplerState.ResetSpriteBatchForPlayerDrawLayers();
         }
     }
 }

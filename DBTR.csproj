@@ -57,6 +57,9 @@
     <Compile Include="Auras\LightingAppearance.cs" />
     <Compile Include="Buffs\DBTRBuff.cs" />
     <Compile Include="DBTRMod.cs" />
+    <Compile Include="Dynamicity\IHasParents.cs" />
+    <Compile Include="Dynamicity\Node.cs" />
+    <Compile Include="Dynamicity\Tree.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="HairStyles\Gine\GineHairStyle.cs" />
@@ -109,10 +112,13 @@
     <Compile Include="Transformations\TransformationDefinition.cs" />
     <Compile Include="Transformations\TransformationDefinitionManager.cs" />
     <Compile Include="UserInterfaces\Buttons\UIHoverImageButton.cs" />
+    <Compile Include="UserInterfaces\CharacterMenus\CharacterMenu.cs" />
+    <Compile Include="UserInterfaces\CharacterMenus\CharacterMenuLayer.cs" />
     <Compile Include="UserInterfaces\DBTRMenu.cs" />
     <Compile Include="UserInterfaces\KiBar\KiBar.cs" />
     <Compile Include="UserInterfaces\EnergyResourceBar.cs" />
     <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
+    <Compile Include="UserInterfaces\UIImagePair.cs" />
     <Compile Include="Utilities\SteamHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,7 +152,6 @@
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dynamicity\" />
     <Folder Include="Helpers\" />
     <Folder Include="Races\" />
     <Folder Include="Skills\" />
@@ -168,7 +173,6 @@
     <Folder Include="Transformations\SSJs\SSJ4s\SSJ4FP\" />
     <Folder Include="Transformations\UIs\UIOmen\" />
     <Folder Include="Transformations\UIs\UI\" />
-    <Folder Include="UserInterfaces\CharacterMenu\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Players\Transformations\DBTRPlayer.Transformations.Visuals.cs" />
@@ -176,6 +180,12 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
+"D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
+xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\enabled.json" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\enabled.json" /z /v /y
+xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\$(TargetName).tmod" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\" /z /v /y
+exit 0
+)
+if "$(ConfigurationName)"=="Release" (
 "D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
 exit 0
 )

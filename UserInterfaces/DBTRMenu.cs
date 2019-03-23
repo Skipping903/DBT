@@ -1,4 +1,7 @@
-﻿using DBTR.UserInterfaces.Buttons;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DBTR.UserInterfaces.Buttons;
+using DBTR.UserInterfaces.CharacterMenus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -10,11 +13,7 @@ namespace DBTR.UserInterfaces
     // Credit to X3n0ph0b3 / MerceriusXeno.
     public class DBTRMenu : UIState
     {
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
-
+        protected UIText titleText;
 
         protected void InitializeButton(ref UIImageButton button, Texture2D texture, MouseEvent onClick, float offsetX, float offsetY, UIElement parent = null)
         {
@@ -51,9 +50,9 @@ namespace DBTR.UserInterfaces
             text.TextColor = color;
 
             if (parent == null)
-                BackPanel.Append(parent);
+                BackPanel.Append(text);
             else
-                parent.Append(parent);
+                parent.Append(text);
         }
 
 
@@ -69,7 +68,6 @@ namespace DBTR.UserInterfaces
             else
                 parent.Append(element);
         }
-
 
         protected void DragStart(UIMouseEvent evt, UIElement element)
         {
@@ -107,10 +105,12 @@ namespace DBTR.UserInterfaces
         }
 
 
-        public UIPanel BackPanel { get; private set; }
+        public UIPanel BackPanel { get; protected set; }
+        public Texture2D BackPanelTexture { get; protected set; }
+        public UIImage BackPanelImage { get; protected set; }
 
-        public Vector2 Offset { get; private set; }
+        public Vector2 Offset { get; protected set; }
 
-        public bool Dragging { get; private set; }
+        public bool Dragging { get; protected set; }
     }
 }
