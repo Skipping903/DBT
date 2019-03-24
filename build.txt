@@ -1,5 +1,5 @@
 author = Webmilio, Blockaroz, Mak0-Z, Dawn
-version = 0.1
+version = 1.0
 displayName = Dragon Ball Terraria Remastered
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, .git\*, *.db
 includePDB = true

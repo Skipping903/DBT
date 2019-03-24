@@ -1,4 +1,5 @@
-﻿using DBTR.Managers;
+﻿using DBTR.Dynamicity;
+using DBTR.Managers;
 using DBTR.Transformations.SSJs.SSJ1s.SSJ1;
 using DBTR.Transformations.SSJs.SSJ1s.ASSJ1;
 using DBTR.Transformations.SSJs.SSJ1s.USSJ1;
@@ -35,6 +36,8 @@ namespace DBTR.Transformations
 
             SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
 
+            Tree = new Tree<TransformationDefinition>(byIndex);
+
             base.DefaultInitialize();
         }
 
@@ -54,6 +57,8 @@ namespace DBTR.Transformations
         public SSJBETransformation SSJBE { get; private set; }
 
         public SoulStealerTransformation SoulStealer { get; private set; }
+
+        public Tree<TransformationDefinition> Tree { get; private set; }
 
         public static TransformationDefinitionManager Instance
         {

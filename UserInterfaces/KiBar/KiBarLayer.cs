@@ -11,10 +11,10 @@ namespace DBTR.UserInterfaces.KiBar
 
         protected override bool DrawSelf()
         {
-            if (DBTRMod.kiBar.Visible)
+            if (DBTRMod.Instance.kiBar.Visible)
             {
-                DBTRMod.kiBarInterface.Update(Main._drawInterfaceGameTime);
-                DBTRMod.kiBar.Draw(Main.spriteBatch);
+                DBTRMod.Instance.kiBarInterface.Update(Main._drawInterfaceGameTime);
+                DBTRMod.Instance.kiBar.Draw(Main.spriteBatch);
             }
 
             return true;

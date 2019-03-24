@@ -133,7 +133,8 @@ namespace DBTR.Players
 
         public List<TransformationDefinition> ActiveTransformations { get; } = new List<TransformationDefinition>();
 
-
         public PlayerTransformation FirstTransformation { get; private set; }
+
+        public TransformationDefinition SelectedTransformation { get; set; }
     }
 }

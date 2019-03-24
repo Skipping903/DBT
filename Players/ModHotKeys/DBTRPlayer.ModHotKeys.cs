@@ -17,6 +17,9 @@ namespace DBTR.Players
 
                 if (DBTRMod.Instance.transformDownKey.JustPressed)
                     ClearTransformations();
+
+                if (DBTRMod.Instance.characterMenuKey.JustPressed)
+                    DBTRMod.Instance.characterMenu.Visible = !DBTRMod.Instance.characterMenu.Visible;
             }
         }
     }

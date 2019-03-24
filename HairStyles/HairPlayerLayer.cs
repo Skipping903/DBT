@@ -28,9 +28,12 @@ namespace DBTR.HairStyles
             Color alpha = drawInfo.drawPlayer.GetImmuneAlpha(Lighting.GetColor((int)(drawInfo.position.X + drawInfo.drawPlayer.width * 0.5) / 16, (int)((drawInfo.position.Y + drawInfo.drawPlayer.height * 0.25) / 16.0), dbtrPlayer.player.hairColor), drawInfo.shadow);
 
             Vector2 bobbingOffset = Vector2.Zero;
+            int bodyFrame = player.bodyFrame.Y / player.bodyFrame.Height;
 
             if (dbtrPlayer.ChosenHairStyle.AutoBobbing)
-                bobbingOffset = Main.OffsetsPlayerHeadgear[player.bodyFrame.Y / player.bodyFrame.Height];
+                bobbingOffset = Main.OffsetsPlayerHeadgear[bodyFrame];
+
+            int height = dbtrPlayer.CurrentHair.Height / 14;
 
             DrawData data = new DrawData(
                 dbtrPlayer.CurrentHair,
@@ -44,7 +47,8 @@ namespace DBTR.HairStyles
                     (int)(drawInfo.position.Y - Main.screenPosition.Y + player.height - player.bodyFrame.Height)) 
                     + player.headPosition + drawInfo.headOrigin + dbtrPlayer.ChosenHairStyle.Offset + bobbingOffset,
 
-                new Rectangle(0, 0, dbtrPlayer.CurrentHair.Width, dbtrPlayer.CurrentHair.Height / 14),
+                // TODO Add hair animation.
+                new Rectangle(0, 0, dbtrPlayer.CurrentHair.Width, height),
                 alpha,
                 player.headRotation,
                 drawInfo.headOrigin,
