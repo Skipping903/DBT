@@ -1,5 +1,6 @@
 ﻿using DBTR.HairStyles;
 using System.Collections.Generic;
+using DBTR.Transformations;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
@@ -72,10 +73,13 @@ namespace DBTR.Players
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
-            ForAllActiveTransformations(p => p.OnPlayerDied(this, damage, pvp));
+            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerDied(this, damage, pvp, damageSource));
+
+            ForAllActiveTransformations(p => p.OnActivePlayerDied(this, damage, pvp, damageSource));
             ClearTransformations();
 
-            if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
+            // TODO Check if this is required.
+            //if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
                 IsCharging = false;
         }
     }

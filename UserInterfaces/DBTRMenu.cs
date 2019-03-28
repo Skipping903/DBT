@@ -15,32 +15,58 @@ namespace DBTR.UserInterfaces
     {
         protected UIText titleText;
 
-        protected void InitializeButton(ref UIImageButton button, Texture2D texture, MouseEvent onClick, float offsetX, float offsetY, UIElement parent = null)
+        public DBTRMenu()
         {
-            button = new UIImageButton(texture);
+            this.OnMouseDown += (evt, element) => MouseDown(evt);
+            this.OnMouseUp += (evt, element) => MouseUp(evt);
+        }
+
+        public override void MouseDown(UIMouseEvent evt)
+        {
+            Offset = new Vector2(evt.MousePosition.X - BackPanel.Left.Pixels, evt.MousePosition.Y - BackPanel.Top.Pixels);
+            Dragging = true;
+        }
+
+        public override void MouseUp(UIMouseEvent evt)
+        {
+            Vector2 end = evt.MousePosition;
+            Dragging = false;
+
+            BackPanel.Left.Set(end.X - Offset.X, 0f);
+            BackPanel.Top.Set(end.Y - Offset.Y, 0f);
+
+            Recalculate();
+        }
+
+        protected UIImageButton InitializeButton(Texture2D texture, MouseEvent onClick, float offsetX, float offsetY, UIElement parent = null)
+        {
+            UIImageButton button = new UIImageButton(texture);
             button.OnClick += onClick;
 
             InitializeUIElement<UIImageButton>(ref button, texture, offsetX, offsetY, parent);
+            return button;
         }
 
-        protected void InitializeHoverTextButton(ref UIHoverImageButton button, Texture2D texture, string hoverText, MouseEvent onClick, float offsetX, float offsetY, UIElement parent = null)
+        protected UIHoverImageButton InitializeHoverTextButton(Texture2D texture, string hoverText, MouseEvent onClick, float offsetX, float offsetY, UIElement parent = null)
         {
-            button = new UIHoverImageButton(texture, hoverText);
+            UIHoverImageButton button = new UIHoverImageButton(texture, hoverText);
             button.OnClick += onClick;
 
             InitializeUIElement<UIHoverImageButton>(ref button, texture, offsetX, offsetY, parent);
+            return button;
         }
 
-        protected void InitializeImage(ref UIImage image, Texture2D texture, float offsetX, float offsetY, UIElement parent = null)
+        protected UIImage InitializeImage(Texture2D texture, float offsetX, float offsetY, UIElement parent = null)
         {
-            image = new UIImage(texture);
+            UIImage image = new UIImage(texture);
 
             InitializeUIElement<UIImage>(ref image, texture, offsetX, offsetY, parent);
+            return image;
         }
 
-        protected void InitializeText(ref UIText text, string shownText, float offsetX, float offsetY, float scale = 1, Color color = default(Color), UIElement parent = null)
+        protected UIText InitializeText(string shownText, float offsetX, float offsetY, float scale = 1, Color color = default(Color), UIElement parent = null)
         {
-            text = new UIText(shownText, scale);
+            UIText text = new UIText(shownText, scale);
 
             text.Width.Set(16f, 0f);
             text.Height.Set(16f, 0f);
@@ -53,6 +79,8 @@ namespace DBTR.UserInterfaces
                 BackPanel.Append(text);
             else
                 parent.Append(text);
+
+            return text;
         }
 
 
@@ -69,31 +97,19 @@ namespace DBTR.UserInterfaces
                 parent.Append(element);
         }
 
-        protected void DragStart(UIMouseEvent evt, UIElement element)
-        {
-            Offset = new Vector2(evt.MousePosition.X - BackPanel.Left.Pixels, evt.MousePosition.Y - BackPanel.Top.Pixels);
-            Dragging = true;
-        }
-
-        protected void DragEnd(UIMouseEvent evt, UIElement element)
-        {
-            Vector2 end = evt.MousePosition;
-            Dragging = false;
-
-            BackPanel.Left.Set(end.X - Offset.X, 0f);
-            BackPanel.Top.Set(end.Y - Offset.Y, 0f);
-
-            Recalculate();
-        }
-
 
         protected override void DrawSelf(SpriteBatch spriteBatch)
         {
             base.DrawSelf(spriteBatch);
+
+            //Main.spriteBatch.Draw(Main.magicPixel, GetInnerDimensions().ToRectangle(), Color.Red * 0.6f);
+
             Vector2 mousePosition = new Vector2((float)Main.mouseX, (float)Main.mouseY);
 
             if (BackPanel.ContainsPoint(mousePosition))
+            {
                 Main.LocalPlayer.mouseInterface = true;
+            }
 
             if (Dragging)
             {
@@ -101,6 +117,17 @@ namespace DBTR.UserInterfaces
                 BackPanel.Top.Set(mousePosition.Y - Offset.Y, 0f);
 
                 Recalculate();
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime); // don't remove.
+
+            // Checking ContainsPoint and then setting mouseInterface to true is very common. This causes clicks on this UIElement to not cause the player to use current items. 
+            if (BackPanel.ContainsPoint(Main.MouseScreen))
+            {
+                Main.LocalPlayer.mouseInterface = true;
             }
         }
 

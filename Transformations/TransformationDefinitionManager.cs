@@ -35,7 +35,6 @@ namespace DBTR.Transformations
             SSJBE = Add(new SSJBETransformation(SSJB)) as SSJBETransformation;
 
             SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
-
             Tree = new Tree<TransformationDefinition>(byIndex);
 
             base.DefaultInitialize();

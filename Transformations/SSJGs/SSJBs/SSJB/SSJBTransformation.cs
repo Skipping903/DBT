@@ -9,7 +9,7 @@ namespace DBTR.Transformations.SSJGs.SSJBs.SSJB
         public SSJBTransformation(params TransformationDefinition[] parents) : base(
             "SSJB", "Super Saiyan Blue", typeof(SSJBTransformationBuff),
             4.5f, 4.5f, 32, 300f, 150f,
-            new SSJBAppearance())
+            new SSJBAppearance(), parents: parents)
         {
         }
     }

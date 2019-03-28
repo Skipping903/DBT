@@ -21,18 +21,18 @@ namespace DBTR.UserInterfaces.CharacterMenus
             PADDING_Y = PADDING_X,
             SMALL_SPACE = 4;
 
-        private readonly Dictionary<TransformationDefinition, Tuple<Point, UIImagePair>> _transformationImagePairs = new Dictionary<TransformationDefinition, Tuple<Point, UIImagePair>>();
-
+        private readonly Dictionary<TransformationDefinition, UIImagePair> _transformationImagePairs = new Dictionary<TransformationDefinition, UIImagePair>();
         private readonly Texture2D _unknownImageTexture, _unknownGrayImageTexture, _lockedImageTexture;
+        private const string CHARACTER_MENU_PATH = "UserInterfaces/CharacterMenus";
 
-        public CharacterMenu(Mod authorMod)
+        public CharacterMenu(Mod authorMod) : base()
         {
             this.AuthorMod = authorMod;
-            BackPanelTexture = authorMod.GetTexture("UserInterfaces/CharacterMenus/BackPanel");
+            BackPanelTexture = authorMod.GetTexture(CHARACTER_MENU_PATH + "/BackPanel");
 
-            _unknownImageTexture = authorMod.GetTexture("UserInterfaces/CharacterMenus/UnknownImage");
-            _unknownGrayImageTexture = authorMod.GetTexture("UserInterfaces/CharacterMenus/UnknownImageGray");
-            _lockedImageTexture = authorMod.GetTexture("UserInterfaces/CharacterMenus/LockedImage");
+            _unknownImageTexture = authorMod.GetTexture(CHARACTER_MENU_PATH + "/UnknownImage");
+            _unknownGrayImageTexture = authorMod.GetTexture(CHARACTER_MENU_PATH + "/UnknownImageGray");
+            _lockedImageTexture = authorMod.GetTexture(CHARACTER_MENU_PATH + "/LockedImage");
         }
 
         public override void OnInitialize()
@@ -46,8 +46,7 @@ namespace DBTR.UserInterfaces.CharacterMenus
             BackPanel.Top.Set(Main.screenHeight / 2f - BackPanel.Height.Pixels / 2f, 0f);
 
             BackPanel.BackgroundColor = new Color(0, 0, 0, 0);
-            BackPanel.OnMouseDown += new MouseEvent(DragStart);
-            BackPanel.OnMouseUp += new MouseEvent(DragEnd);
+            
 
             Append(BackPanel);
 
@@ -61,58 +60,55 @@ namespace DBTR.UserInterfaces.CharacterMenus
 
             BackPanel.Append(BackPanelImage);
 
-            int
-                rowXOffset = PADDING_X,
-                rowYOffset = PADDING_Y;
+            titleText = InitializeText("Character Menu", BackPanelTexture.Bounds.X, -32, 1, Color.White);
+                
 
-            InitializeText(ref titleText, "Character Menu", BackPanelTexture.Bounds.X, -32, 1, Color.White);
+            int yOffset = PADDING_Y;
 
-            foreach (KeyValuePair<TransformationDefinition, Node<TransformationDefinition>> root in TransformationDefinitionManager.Instance.Tree.RootedNodes)
+            foreach (KeyValuePair<TransformationDefinition, Node<TransformationDefinition>> kvp in TransformationDefinitionManager.Instance.Tree.RootedNodes)
             {
-                // Skip if the transformation is not displayed or does not meet the conditions.
-                if (!root.Key.DisplayInMenu || !root.Key.CheckPrePlayerConditions()) continue;
+                if (!CheckIfDraw(kvp.Key)) continue;
 
-                RecursiveDrawTransformation(root.Value, ref rowXOffset, ref rowYOffset);
+                Texture2D texture = kvp.Key.BuffType.GetTexture();
+                RecursiveInitializeTransformation(kvp.Value, ref yOffset);
 
-                rowYOffset += SMALL_SPACE * 2;
-                rowXOffset = PADDING_X;
+                yOffset += texture.Height + SMALL_SPACE * 4;
             }
 
-            /*foreach (KeyValuePair<TransformationDefinition, Node<TransformationDefinition>> kvp in TransformationDefinitionManager.Instance.Tree.Nodes)
-            {
-                if (kvp.Value.Parents.Length > 0) continue; // We only want to draw the first column as the root transformations.
-                if (!kvp.Key.DisplayInMenu || !kvp.Key.CheckPrePlayerConditions()) continue; // Skip this transformation if its not supposed to be drawn.
-
-                StandardDrawTransformation(kvp.Value, ref rowXOffset, ref rowYOffset);
-                RecursiveDrawTransformations(kvp.Value, ref rowXOffset, ref rowYOffset);
-
-                rowXOffset = PADDING_X; // Reset back to the initial padding upon finishing one root.
-            }*/
+            base.OnInitialize();
         }
 
-        private void RecursiveDrawTransformation(Node<TransformationDefinition> node, ref int xOffset, ref int yOffset)
+        private void RecursiveInitializeTransformation(Node<TransformationDefinition> node, ref int yOffset)
         {
-            // Skip if the transformation is not displayed or does not meet the conditions.
-            if (!node.Current.DisplayInMenu && !node.Current.CheckPrePlayerConditions()) return;
+            TransformationDefinition transformation = node.Current;
+            Texture2D texture = transformation.BuffType.GetTexture();
 
-            int stepXOffset = xOffset;
+            if (!CheckIfDraw(transformation)) return; // Needs edge-case check.
+            int xOffset = PADDING_X;
 
-            Texture2D iconTexture = node.Current.BuffType.GetTexture();
+            if (node.Parents.Length > 0 && _transformationImagePairs.ContainsKey(node.Parents[0].Current))
+            {
+                Node<TransformationDefinition> previousNode = node.Parents[0];
+                UIImagePair previousPair = _transformationImagePairs[previousNode.Current];
 
-            DrawTransformation(node, iconTexture, ref xOffset, ref yOffset);
-            xOffset += iconTexture.Width + SMALL_SPACE;
+                xOffset = _transformationImagePairs[previousNode.Current].position.X + (int) previousPair.button.Width.Pixels + SMALL_SPACE * 2;
+            }
+
+            DrawTransformation(transformation, texture, xOffset, yOffset);
 
             for (int i = 0; i < node.Children.Count; i++)
             {
-                RecursiveDrawTransformation(node.Children[i], ref xOffset, ref yOffset);
+                Node<TransformationDefinition> child = node.Children[i];
+                RecursiveInitializeTransformation(child, ref yOffset);
 
-                yOffset += iconTexture.Height + SMALL_SPACE * 2;
+                if (node.Children.Count > 1 && CheckIfDraw(child) && node.Children[node.Children.Count - 1] != child)
+                {
+                    yOffset += texture.Height + SMALL_SPACE * 2;
+                }
             }
-
-            xOffset = stepXOffset;
         }
 
-        private void DrawTransformation(Node<TransformationDefinition> node, Texture2D icon, ref int xOffset, ref int yOffset)
+        private void DrawTransformation(TransformationDefinition transformation, Texture2D icon, int left, int top)
         {
             UIImageButton transformationButton = null;
             UIImage
@@ -120,19 +116,22 @@ namespace DBTR.UserInterfaces.CharacterMenus
                 unknownGrayImage = null,
                 lockedImage = null;
 
-            InitializeButton(ref transformationButton, icon, new MouseEvent((evt, element) => TrySelectingTransformation(node.Current, evt, element)), xOffset, yOffset);
+            transformationButton = InitializeButton(icon, new MouseEvent((evt, element) => TrySelectingTransformation(transformation, evt, element)), left, top, BackPanelImage);
 
-            InitializeImage(ref unknownImage, _unknownImageTexture, 0, 0, transformationButton);
+            unknownImage = InitializeImage(_unknownImageTexture, 0, 0, transformationButton);
             unknownImage.ImageScale = 0f;
 
-            InitializeImage(ref unknownGrayImage, _unknownGrayImageTexture, 0, 0, unknownImage);
+            unknownGrayImage = InitializeImage(_unknownGrayImageTexture, 0, 0, unknownImage);
             unknownGrayImage.ImageScale = 0f;
 
-            InitializeImage(ref lockedImage, _lockedImageTexture, 0, 0, unknownGrayImage);
+            lockedImage = InitializeImage(_lockedImageTexture, 0, 0, unknownGrayImage);
             lockedImage.ImageScale = 0f;
 
-            _transformationImagePairs.Add(node.Current, new Tuple<Point, UIImagePair>(new Point(xOffset, yOffset), new UIImagePair(transformationButton, unknownImage, unknownGrayImage, lockedImage)));
+            _transformationImagePairs.Add(transformation, new UIImagePair(new Point(left, top), transformationButton, unknownImage, unknownGrayImage, lockedImage));
         }
+
+        private static bool CheckIfDraw(Node<TransformationDefinition> node) => node.Current.DisplayInMenu && node.Current.CheckPrePlayerConditions();
+        private static bool CheckIfDraw(TransformationDefinition transformation) => transformation.DisplayInMenu && transformation.CheckPrePlayerConditions();
 
         public override void Update(GameTime gameTime)
         {
@@ -140,21 +139,21 @@ namespace DBTR.UserInterfaces.CharacterMenus
 
             DBTRPlayer player = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
 
-            foreach (KeyValuePair<TransformationDefinition, Tuple<Point, UIImagePair>> kvp in _transformationImagePairs)
+            foreach (KeyValuePair<TransformationDefinition, UIImagePair> kvp in _transformationImagePairs)
             {
                 bool unlockable = kvp.Key.CanUnlock(player);
                 bool visible = kvp.Key.DoesDisplayInCharacterMenu(player);
 
                 if (!visible)
                 {
-                    kvp.Value.Item2.button.Width = StyleDimension.Empty;
-                    kvp.Value.Item2.button.Height = StyleDimension.Empty;
-                    kvp.Value.Item2.button.SetVisibility(0f, 0f);
+                    kvp.Value.button.Width = StyleDimension.Empty;
+                    kvp.Value.button.Height = StyleDimension.Empty;
+                    kvp.Value.button.SetVisibility(0f, 0f);
                 }
 
-                kvp.Value.Item2.unknownImage.ImageScale = visible && unlockable ? 0f : 1f;
-                kvp.Value.Item2.unknownImageGray.ImageScale = visible && unlockable && player.HasAcquiredTransformation(kvp.Key) ? 0f : 1f;
-                kvp.Value.Item2.lockedImage.ImageScale = visible && unlockable ? 0f : 1f;
+                kvp.Value.unknownImage.ImageScale = visible && unlockable ? 0f : 1f;
+                kvp.Value.unknownImageGray.ImageScale = visible && unlockable && player.HasAcquiredTransformation(kvp.Key) ? 0f : 1f;
+                kvp.Value.lockedImage.ImageScale = visible && unlockable ? 0f : 1f;
             }
 
             // Disabled as it crashes with SpriteBatch.
@@ -162,55 +161,6 @@ namespace DBTR.UserInterfaces.CharacterMenus
                 if (_polyLinesToDraw[i].Length > 1)
                     Main.spriteBatch.DrawPolyLine(_polyLinesToDraw[i], Color.White);*/
         }
-
-        /*private void RecursiveDrawTransformations(Node<TransformationDefinition> node, ref int rowXOffset, ref int rowYOffset)
-        {
-            int stepXOffset = rowXOffset;
-
-            for (int i = 0; i < node.Children.Count; i++)
-            {
-                Node<TransformationDefinition> child = node.Children[i];
-
-                // We don't want to add the same transformation twice to the interface
-                // TODO Fix so the same transformation isn't called twice.
-                if (_transformationImagePairs.ContainsKey(child.Current)) continue; 
-
-                if (!child.Current.DisplayInMenu || !child.Current.CheckPrePlayerConditions()) continue; // Skip this transformation if its not supposed to be drawn.
-
-                StandardDrawTransformation(child, ref rowXOffset, ref rowYOffset);
-                RecursiveDrawTransformations(node, ref rowXOffset, ref rowYOffset);
-
-                if (i + 1 < node.Children.Count)
-                    rowYOffset += child.Current.BuffType.GetTexture().Height + SMALL_SPACE * 2;
-            }
-
-            rowXOffset = stepXOffset;
-        }
-
-        private void StandardDrawTransformation(Node<TransformationDefinition> node, ref int rowXOffset, ref int rowYOffset)
-        {
-            UIImageButton transformationButton = null;
-            UIImage
-                unknownImage = null,
-                unknownGrayImage = null,
-                lockedImage = null;
-
-            Texture2D transformationIcon = node.Current.BuffType.GetTexture();
-
-            InitializeButton(ref transformationButton, transformationIcon, new MouseEvent((evt, element) => TrySelectingTransformation(node.Current, evt, element)), rowXOffset, rowYOffset);
-
-            InitializeImage(ref unknownImage, _unknownImageTexture, 0, 0, transformationButton);
-            unknownImage.ImageScale = 0f;
-
-            InitializeImage(ref unknownGrayImage, _unknownGrayImageTexture, 0, 0, unknownImage);
-            unknownGrayImage.ImageScale = 0f;
-
-            InitializeImage(ref lockedImage, _lockedImageTexture, 0, 0, unknownGrayImage);
-            lockedImage.ImageScale = 0f;
-
-            _transformationImagePairs.Add(node.Current, new Tuple<Point, UIImagePair>(new Point(rowXOffset, rowYOffset), new UIImagePair(transformationButton, unknownImage, unknownGrayImage, lockedImage)));
-            rowXOffset += transformationIcon.Width + SMALL_SPACE;
-        }*/
 
         private static void TrySelectingTransformation(TransformationDefinition def, UIMouseEvent evt, UIElement listeningElement)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using DBTR.Network;
+using DBTR.Transformations;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,7 +27,8 @@ namespace DBTR.Players
 
         public void OnKilledNPC(NPC npc)
         {
-            ForAllActiveTransformations(t => t.OnPlayerKilledNPC(this, npc));
+            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerKilledNPC(this, npc));
+            ForAllActiveTransformations(t => t.OnActivePlayerKilledNPC(this, npc));
         }
 
 

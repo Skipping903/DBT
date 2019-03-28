@@ -11,25 +11,6 @@ namespace DBTR.Dynamicity
         public Tree(List<T> items)
         {
             Items = items;
-            /*Dictionary<T, int> childrenCount = new Dictionary<T, int>();
-
-            for (int i = 0; i < items.Count; i++)
-                foreach (T parent in items[i].Parents)
-                {
-                    if (!childrenCount.ContainsKey(parent))
-                        childrenCount.Add(parent, 0);
-
-                    childrenCount[parent]++;
-                }
-
-            Dictionary<T, Node<T>> generatedNodes = new Dictionary<T, Node<T>>();
-
-            foreach (KeyValuePair<T, int> kvp in childrenCount)
-            {
-                if (kvp.Value > 0) continue;
-
-                
-            }*/
 
             foreach (T item in Items)
             {

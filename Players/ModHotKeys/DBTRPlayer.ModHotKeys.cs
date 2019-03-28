@@ -12,8 +12,8 @@ namespace DBTR.Players
 
             if (player.whoAmI == Main.myPlayer)
             {
-                if (DBTRMod.Instance.transformUpKey.JustPressed)
-                    AcquireAndTransform(TransformationDefinitionManager.Instance.SSJ1);
+                if (DBTRMod.Instance.transformUpKey.JustPressed && SelectedTransformation != null)
+                    Transform(SelectedTransformation);
 
                 if (DBTRMod.Instance.transformDownKey.JustPressed)
                     ClearTransformations();

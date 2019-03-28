@@ -2,6 +2,7 @@
 using DBTR.Dynamicity;
 using DBTR.Players;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 
 namespace DBTR.Transformations
@@ -45,15 +46,19 @@ namespace DBTR.Transformations
 
         #region Methods
 
-        #region Player Hooks
+        #region Player Hooks Active
 
         public virtual void OnPlayerTransformed(PlayerTransformation transformation) { }
 
         public virtual void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery) { }
 
-        public virtual void OnPlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp) { }
+        public virtual void OnActivePlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
 
-        public virtual void OnPlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc) { }
+        public virtual void OnActivePlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc) { }
+
+        #endregion
+
+        #region Player Hooks Acquired
 
         public virtual void OnPlayerLoading(DBTRPlayer dbtrPlayer, TagCompound tag) { }
 
@@ -62,6 +67,15 @@ namespace DBTR.Transformations
         public virtual void OnPlayerAcquiredTransformation(DBTRPlayer dbtrPlayer) { }
 
         #endregion
+
+        #region Player Hooks PreAcquired
+
+        public virtual void OnPreAcquirePlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc) { }
+
+        public virtual void OnPreAcquirePlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
+
+        #endregion
+
 
         #region Access
 
@@ -88,7 +102,7 @@ namespace DBTR.Transformations
         /// <summary>Checks wether or not the transformation is part of the character menu. If not overriden, uses the same value as <see cref="CheckPrePlayerConditions"/>.</summary>
         /// <param name="dbtrPlayer"></param>
         /// <returns></returns>
-        public bool DoesDisplayInCharacterMenu(DBTRPlayer dbtrPlayer) => CheckPrePlayerConditions() && DisplayInMenu;
+        public bool DoesDisplayInCharacterMenu(DBTRPlayer dbtrPlayer) => DisplayInMenu && CheckPrePlayerConditions();
 
         #endregion
 

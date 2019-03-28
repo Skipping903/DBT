@@ -28,6 +28,12 @@ namespace DBTR.Players
         }
 
 
+        public void AcquireAndTransform(TransformationDefinition definition)
+        {
+            Acquire(definition);
+            Transform(definition);
+        }
+
         public void Acquire(TransformationDefinition definition)
         {
             if (AcquiredTransformations.ContainsKey(definition)) return;
@@ -36,10 +42,8 @@ namespace DBTR.Players
             definition.OnPlayerAcquiredTransformation(this);
         }
 
-        public void AcquireAndTransform(TransformationDefinition definition)
+        public void Transform(TransformationDefinition definition)
         {
-            Acquire(definition);
-
             for (int i = 0; i < ActiveTransformations.Count; i++)
                 if (ActiveTransformations[i] == definition)
                     return;
@@ -48,7 +52,7 @@ namespace DBTR.Players
             player.AddBuff(mod.GetBuff(definition.BuffType.Name).Type, definition.Duration);
 
             if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
-                NetworkPacketManager.Instance.PlayerTransformedPacket.SendPacketToServer(player.whoAmI, (byte) player.whoAmI, definition.UnlocalizedName);
+                NetworkPacketManager.Instance.PlayerTransformedPacket.SendPacketToServer(player.whoAmI, (byte)player.whoAmI, definition.UnlocalizedName);
         }
 
 

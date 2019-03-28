@@ -7,10 +7,10 @@ namespace DBTR.Transformations.SSJs.SSJ1s.SSJ1
 {
     public sealed class SSJ1Transformation : TransformationDefinition
     {
-        public SSJ1Transformation() : base(
+        public SSJ1Transformation(params TransformationDefinition[] parents) : base(
             "SSJ1", "Super Saiyan", typeof(SSJ1TransformationBuff),
             1.5f, 1.5f, 2, 60f, 30f,
-            new SSJ1Appearance())
+            new SSJ1Appearance(), parents: parents)
         {
         }
 

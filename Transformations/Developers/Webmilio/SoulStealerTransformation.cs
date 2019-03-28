@@ -81,7 +81,7 @@ namespace DBTR.Transformations.Developers.Webmilio
         }
 
 
-        public override void OnPlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc)
+        public override void OnActivePlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc)
         {
             Dictionary<string, int> dimishingReturnsDictionary = GetDiminishingReturnsDictionary(dbtrPlayer);
             string npcType = npc.TypeName.Replace(" ", "");

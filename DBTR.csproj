@@ -74,8 +74,9 @@
     <Compile Include="HairStyles\Vegeta\VegetaHairStyle.cs" />
     <Compile Include="HairStyles\Webmilio\WebmilioHairStyle.cs" />
     <Compile Include="IHasUnlocalizedName.cs" />
-    <Compile Include="Items\Developer\DebugItem.cs" />
+    <Compile Include="Items\Developer\DeveloperItem.cs" />
     <Compile Include="Items\Developer\HairSetter.cs" />
+    <Compile Include="Items\Developer\TransformationClearer.cs" />
     <Compile Include="Items\Developer\TransformationSetter.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
@@ -95,6 +96,8 @@
     <Compile Include="Players\ModHotKeys\DBTRPlayer.ModHotKeys.cs" />
     <Compile Include="Players\Saving\DBTRPlayer.Saving.cs" />
     <Compile Include="Players\Transformations\DBTRPlayer.Transformations.cs" />
+    <Compile Include="Traits\Trait.cs" />
+    <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Transformations\Developers\Webmilio\SoulStealerTransformation.cs" />
     <Compile Include="Transformations\PlayerTransformation.cs" />
     <Compile Include="Transformations\SSJGs\SSJBs\SSJBE\SSJBETransformation.cs" />
@@ -157,7 +160,6 @@
     <Folder Include="Skills\" />
     <Folder Include="Sounds\" />
     <Folder Include="Tiles\" />
-    <Folder Include="Traits\" />
     <Folder Include="Transformations\Developers\Blockaroz\" />
     <Folder Include="Transformations\Developers\DawnishDays\" />
     <Folder Include="Transformations\Developers\Mak0Z\" />
@@ -181,8 +183,6 @@
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
 "D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
-xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\enabled.json" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\enabled.json" /z /v /y
-xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\$(TargetName).tmod" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\" /z /v /y
 exit 0
 )
 if "$(ConfigurationName)"=="Release" (
@@ -196,6 +196,11 @@ exit 0
 if "$(ConfigurationName)"=="LaptopDebug" (
 "D:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
 exit 0
+)
+
+if "PostBackup" == "x" (
+//xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\enabled.json" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\enabled.json" /z /v /y
+//xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\$(TargetName).tmod" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\" /z /v /y
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>
