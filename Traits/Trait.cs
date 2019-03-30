@@ -1,4 +1,4 @@
-﻿namespace DBTR.Traits
+﻿namespace DBTMod.Traits
 {
     public abstract class Trait : IHasUnlocalizedName
     {

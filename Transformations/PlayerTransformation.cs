@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DBTR.Players;
+using DBTMod.Players;
 
-namespace DBTR.Transformations
+namespace DBTMod.Transformations
 {
     public class PlayerTransformation : IPlayerSavable
     {

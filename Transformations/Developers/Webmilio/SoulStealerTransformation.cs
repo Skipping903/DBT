@@ -1,14 +1,14 @@
-﻿using DBTR.Auras;
-using DBTR.Players;
-using DBTR.Utilities;
+﻿using System;
+using System.Collections.Generic;
+using DBTMod.Auras;
+using DBTMod.Players;
+using DBTMod.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader.IO;
 
-namespace DBTR.Transformations.Developers.Webmilio
+namespace DBTMod.Transformations.Developers.Webmilio
 {
     public sealed class SoulStealerTransformation : TransformationDefinition
     {

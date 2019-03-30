@@ -1,4 +1,4 @@
-﻿namespace DBTR.Dynamicity
+﻿namespace DBTMod.Dynamicity
 {
     public interface IHasParents<T>
     {

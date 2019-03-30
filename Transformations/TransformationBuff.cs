@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
-using DBTR.Buffs;
-using DBTR.Players;
+using DBTMod.Buffs;
+using DBTMod.Players;
 using Terraria;
 
-namespace DBTR.Transformations
+namespace DBTMod.Transformations
 {
     public abstract class TransformationBuff : DBTRBuff, IHasUnlocalizedName
     {

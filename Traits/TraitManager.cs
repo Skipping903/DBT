@@ -1,6 +1,6 @@
-﻿using DBTR.Managers;
+﻿using DBTMod.Managers;
 
-namespace DBTR.Traits
+namespace DBTMod.Traits
 {
     public sealed class TraitManager : Manager<Trait>
     {

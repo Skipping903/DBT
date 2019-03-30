@@ -1,14 +1,14 @@
-﻿using DBTR.HairStyles.Gine;
-using DBTR.HairStyles.Gogeta;
-using DBTR.HairStyles.Goku;
-using DBTR.HairStyles.Kale;
-using DBTR.HairStyles.Nappa;
-using DBTR.HairStyles.NoChoice;
-using DBTR.HairStyles.Vegeta;
-using DBTR.HairStyles.Webmilio;
-using DBTR.Managers;
+﻿using DBTMod.HairStyles.Gine;
+using DBTMod.HairStyles.Gogeta;
+using DBTMod.HairStyles.Goku;
+using DBTMod.HairStyles.Kale;
+using DBTMod.HairStyles.Nappa;
+using DBTMod.HairStyles.NoChoice;
+using DBTMod.HairStyles.Vegeta;
+using DBTMod.HairStyles.Webmilio;
+using DBTMod.Managers;
 
-namespace DBTR.HairStyles
+namespace DBTMod.HairStyles
 {
     public sealed class HairStyleManager : Manager<HairStyle>
     {

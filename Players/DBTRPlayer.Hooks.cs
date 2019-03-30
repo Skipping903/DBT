@@ -1,12 +1,12 @@
-﻿using DBTR.HairStyles;
-using System.Collections.Generic;
-using DBTR.Transformations;
+﻿using System.Collections.Generic;
+using DBTMod.HairStyles;
+using DBTMod.Transformations;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.Players
+namespace DBTMod.Players
 {
     public sealed partial class DBTRPlayer
     {

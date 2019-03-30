@@ -1,4 +1,4 @@
-﻿namespace DBTR.HairStyles.NoChoice
+﻿namespace DBTMod.HairStyles.NoChoice
 {
     public sealed class NoChoiceHairStyle : HairStyle
     {

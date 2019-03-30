@@ -1,10 +1,11 @@
-﻿using DBTR.HairStyles;
+﻿using System.Collections.Generic;
+using DBTMod.HairStyles;
+using DBTMod.Transformations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Terraria.ModLoader;
 
-namespace DBTR.Players
+namespace DBTMod.Players.Hair
 {
     public sealed partial class DBTRPlayer
     {
@@ -29,8 +30,8 @@ namespace DBTR.Players
 
             if (FirstTransformation == null && CurrentHair != ChosenHairStyle.Base)
                 CurrentHair = ChosenHairStyle.Base;
-            else if (FirstTransformation != null && CurrentHair != ChosenHairStyle[FirstTransformation.Definition])
-                CurrentHair = ChosenHairStyle[FirstTransformation.Definition];
+            else if (FirstTransformation != null && CurrentHair != ChosenHairStyle[(TransformationDefinition) FirstTransformation.Definition])
+                CurrentHair = ChosenHairStyle[(TransformationDefinition) FirstTransformation.Definition];
         }
 
         internal void HandleHairDrawLayers(List<PlayerLayer> layers)

@@ -1,42 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DBTR.UserInterfaces.Buttons;
-using DBTR.UserInterfaces.CharacterMenus;
+﻿using DBTMod.UserInterfaces.Buttons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
-namespace DBTR.UserInterfaces
+namespace DBTMod.UserInterfaces
 {
     // Credit to X3n0ph0b3 / MerceriusXeno.
     public class DBTRMenu : UIState
     {
         protected UIText titleText;
-
-        public DBTRMenu()
-        {
-            this.OnMouseDown += (evt, element) => MouseDown(evt);
-            this.OnMouseUp += (evt, element) => MouseUp(evt);
-        }
-
-        public override void MouseDown(UIMouseEvent evt)
-        {
-            Offset = new Vector2(evt.MousePosition.X - BackPanel.Left.Pixels, evt.MousePosition.Y - BackPanel.Top.Pixels);
-            Dragging = true;
-        }
-
-        public override void MouseUp(UIMouseEvent evt)
-        {
-            Vector2 end = evt.MousePosition;
-            Dragging = false;
-
-            BackPanel.Left.Set(end.X - Offset.X, 0f);
-            BackPanel.Top.Set(end.Y - Offset.Y, 0f);
-
-            Recalculate();
-        }
 
         protected UIImageButton InitializeButton(Texture2D texture, MouseEvent onClick, float offsetX, float offsetY, UIElement parent = null)
         {

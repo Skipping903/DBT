@@ -1,9 +1,9 @@
-﻿using DBTR.Players;
+﻿using DBTMod.Players;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 
-namespace DBTR.UserInterfaces.Buttons
+namespace DBTMod.UserInterfaces.Buttons
 {
     // Credits to ExampleMod (BlushieMagic).
     public class UIHoverImageButton : UIImageButton

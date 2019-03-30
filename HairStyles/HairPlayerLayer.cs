@@ -1,18 +1,17 @@
-﻿using DBTR.Players;
-using DBTR.Transformations;
+﻿using DBTMod.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.HairStyles
+namespace DBTMod.HairStyles
 {
     public sealed class HairPlayerLayer : PlayerLayer
     {
         public static readonly HairPlayerLayer hairLayer = new HairPlayerLayer();
 
-        public HairPlayerLayer() : base(DBTRMod.Instance.Name, "HairLayer", null, DrawLayer)
+        public HairPlayerLayer() : base(DBTMod.Instance.Name, "HairLayer", null, DrawLayer)
         {
         }
 

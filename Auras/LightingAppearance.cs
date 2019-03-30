@@ -1,6 +1,6 @@
-﻿using DBTR.Players;
+﻿using DBTMod.Players;
 
-namespace DBTR.Auras
+namespace DBTMod.Auras
 {
     public class LightingAppearance
     {

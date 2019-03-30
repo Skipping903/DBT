@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
-namespace DBTR.Players
+namespace DBTMod.Players
 {
     public sealed partial class DBTRPlayer
     {

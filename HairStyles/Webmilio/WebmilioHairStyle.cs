@@ -1,6 +1,6 @@
-﻿using DBTR.Utilities;
+﻿using DBTMod.Utilities;
 
-namespace DBTR.HairStyles.Webmilio
+namespace DBTMod.HairStyles.Webmilio
 {
     public sealed class WebmilioHairStyle : HairStyle
     {

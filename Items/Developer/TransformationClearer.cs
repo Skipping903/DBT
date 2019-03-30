@@ -1,8 +1,7 @@
-﻿using DBTR.Players;
-using DBTR.Transformations;
+﻿using DBTMod.Players;
 using Terraria;
 
-namespace DBTR.Items.Developer
+namespace DBTMod.Items.Developer
 {
     public class TransformationClearer : DeveloperItem
     {

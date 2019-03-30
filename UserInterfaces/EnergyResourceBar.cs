@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DBTR.Players;
+using DBTMod.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
-namespace DBTR.UserInterfaces
+namespace DBTMod.UserInterfaces
 {
     // TODO Make this use classes/structs.
     public class EnergyResourceBar : UIElement
@@ -71,7 +71,7 @@ namespace DBTR.UserInterfaces
             Vector2 textureOffset = Vector2.Zero;
 
             // TODO !!IMPORTANT!! CHANGE THIS TO USE OBJECTS 100%.
-            Texture = DBTRMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBarFrame");
+            Texture = DBTMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBarFrame");
 
             frameHeight = Texture.Height / 4;
             textureOffset = new Vector2(16, 8);
@@ -81,7 +81,7 @@ namespace DBTR.UserInterfaces
             Rectangle sourceRectangle = new Rectangle(0, frameHeight * frame, Texture.Width, frameHeight);
             spriteBatch.Draw(Texture, Position, sourceRectangle, Color.White);
 
-            Texture2D barSegmentTexture = DBTRMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBar");
+            Texture2D barSegmentTexture = DBTMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBar");
 
             int segmentsCount = (int) Math.Ceiling(Segments * quotient);
 

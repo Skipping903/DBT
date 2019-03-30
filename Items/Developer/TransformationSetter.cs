@@ -1,8 +1,8 @@
-﻿using DBTR.Players;
-using DBTR.Transformations;
+﻿using DBTMod.Players;
+using DBTMod.Transformations;
 using Terraria;
 
-namespace DBTR.Items.Developer
+namespace DBTMod.Items.Developer
 {
     public sealed class TransformationSetter : DeveloperItem
     {

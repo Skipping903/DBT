@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using DBTR.Auras;
-using DBTR.Extensions;
-using DBTR.Transformations;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using System.Collections.Generic;
+using DBTMod.Auras;
+using DBTMod.Transformations;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace DBTR.Players
+namespace DBTMod.Players
 {
     public sealed partial class DBTRPlayer
     {

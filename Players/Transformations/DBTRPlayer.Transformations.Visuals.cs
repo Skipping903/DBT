@@ -1,4 +1,4 @@
-﻿namespace DBTR.Players
+﻿namespace DBTMod.Players
 {
     public sealed partial class DBTRPlayer
     {

@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using System.IO;
-using DBTR.HairStyles;
-using DBTR.Network;
-using DBTR.UserInterfaces.CharacterMenus;
-using DBTR.UserInterfaces.KiBar;
-using DBTR.Utilities;
+using DBTMod.Network;
+using DBTMod.UserInterfaces.CharacterMenus;
+using DBTMod.UserInterfaces.KiBar;
+using DBTMod.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace DBTR
+namespace DBTMod
 {
-	public sealed class DBTRMod : Mod
+	public sealed class DBTMod : Mod
 	{
 	    internal ModHotKey characterMenuKey, energyChargeKey, transformDownKey, speedToggleKey, transformUpKey;
 
@@ -22,7 +21,7 @@ namespace DBTR
 	    internal CharacterMenu characterMenu;
 	    internal UserInterface characterMenuInterface;
 
-        public DBTRMod()
+        public DBTMod()
 		{
             Properties = new ModProperties()
             {
@@ -103,14 +102,14 @@ namespace DBTR
 	            resourcesLayerIndex = layers.FindIndex(l => l.Name.Contains("Resource Bars")),
 	            characterMenuIndex = layers.FindIndex(l => l.Name.Contains("Hotbar"));
 
-            if (resourcesLayerIndex != -1)
-                layers.Insert(resourcesLayerIndex, new KiBarLayer());
+            //if (resourcesLayerIndex != -1)
+            //    layers.Insert(resourcesLayerIndex, new KiBarLayer());
 
             if (characterMenuIndex != -1)
                 layers.Insert(characterMenuIndex, new CharacterMenuLayer(characterMenu, characterMenuInterface));
         }
 
 
-        internal static DBTRMod Instance { get; private set; }
+        internal static DBTMod Instance { get; private set; }
     }
 }

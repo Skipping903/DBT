@@ -1,6 +1,6 @@
-﻿using DBTR.Transformations;
+﻿using DBTMod.Transformations;
 
-namespace DBTR.Players
+namespace DBTMod.Players
 {
     public sealed partial class DBTRPlayer
     {

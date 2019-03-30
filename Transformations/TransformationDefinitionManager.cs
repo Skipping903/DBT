@@ -1,18 +1,18 @@
-﻿using DBTR.Dynamicity;
-using DBTR.Managers;
-using DBTR.Transformations.SSJs.SSJ1s.SSJ1;
-using DBTR.Transformations.SSJs.SSJ1s.ASSJ1;
-using DBTR.Transformations.SSJs.SSJ1s.USSJ1;
-using DBTR.Transformations.SSJs.SSJ2;
-using DBTR.Transformations.SSJs.SSJ3;
-using DBTR.Transformations.SSJs.SSJ4s.SSJ4;
-using DBTR.Transformations.SSJGs.SSJG;
-using DBTR.Transformations.SSJGs.SSJBs.SSJB;
-using DBTR.Transformations.SSJGs.SSJBs.SSJBE;
-using DBTR.Transformations.SSJGs.SSJR;
-using DBTR.Transformations.Developers.Webmilio;
+﻿using DBTMod.Dynamicity;
+using DBTMod.Managers;
+using DBTMod.Transformations.Developers.Webmilio;
+using DBTMod.Transformations.SSJGs.SSJBs.SSJB;
+using DBTMod.Transformations.SSJGs.SSJBs.SSJBE;
+using DBTMod.Transformations.SSJGs.SSJG;
+using DBTMod.Transformations.SSJGs.SSJR;
+using DBTMod.Transformations.SSJs.SSJ1s.ASSJ1;
+using DBTMod.Transformations.SSJs.SSJ1s.SSJ1;
+using DBTMod.Transformations.SSJs.SSJ1s.USSJ1;
+using DBTMod.Transformations.SSJs.SSJ2;
+using DBTMod.Transformations.SSJs.SSJ3;
+using DBTMod.Transformations.SSJs.SSJ4s.SSJ4;
 
-namespace DBTR.Transformations
+namespace DBTMod.Transformations
 {
     public sealed class TransformationDefinitionManager : Manager<TransformationDefinition>
     {

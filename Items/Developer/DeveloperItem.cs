@@ -1,8 +1,7 @@
-﻿using Terraria;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.Items.Developer
+namespace DBTMod.Items.Developer
 {
     public abstract class DeveloperItem : ModItem
     {

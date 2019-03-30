@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 
-namespace DBTR.Extensions
+namespace DBTMod.Extensions
 {
     public static class TypeExtensions
     {

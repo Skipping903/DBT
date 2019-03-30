@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using DBTR.Dynamicity;
-using DBTR.Extensions;
-using DBTR.Players;
-using DBTR.Transformations;
+using DBTMod.Dynamicity;
+using DBTMod.Extensions;
+using DBTMod.Players;
+using DBTMod.Transformations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace DBTR.UserInterfaces.CharacterMenus
+namespace DBTMod.UserInterfaces.CharacterMenus
 {
     public sealed class CharacterMenu : DBTRMenu
     {
@@ -25,7 +24,7 @@ namespace DBTR.UserInterfaces.CharacterMenus
         private readonly Texture2D _unknownImageTexture, _unknownGrayImageTexture, _lockedImageTexture;
         private const string CHARACTER_MENU_PATH = "UserInterfaces/CharacterMenus";
 
-        public CharacterMenu(Mod authorMod) : base()
+        public CharacterMenu(Mod authorMod)
         {
             this.AuthorMod = authorMod;
             BackPanelTexture = authorMod.GetTexture(CHARACTER_MENU_PATH + "/BackPanel");
@@ -46,7 +45,9 @@ namespace DBTR.UserInterfaces.CharacterMenus
             BackPanel.Top.Set(Main.screenHeight / 2f - BackPanel.Height.Pixels / 2f, 0f);
 
             BackPanel.BackgroundColor = new Color(0, 0, 0, 0);
-            
+
+            BackPanel.OnMouseUp += DragEnd;
+            BackPanel.OnMouseDown += DragStart;
 
             Append(BackPanel);
 
@@ -76,6 +77,22 @@ namespace DBTR.UserInterfaces.CharacterMenus
             }
 
             base.OnInitialize();
+        }
+
+        public void DragStart(UIMouseEvent evt, UIElement listeningElement)
+        {
+            Offset = new Vector2(evt.MousePosition.X - BackPanel.Left.Pixels, evt.MousePosition.Y - BackPanel.Top.Pixels);
+            Dragging = true;
+        }
+
+        public void DragEnd(UIMouseEvent evt, UIElement listeningElement)
+        {
+            Dragging = false;
+
+            BackPanel.Left.Set(evt.MousePosition.X - Offset.X, 0f);
+            BackPanel.Top.Set(evt.MousePosition.Y - Offset.Y, 0f);
+
+            Recalculate();
         }
 
         private void RecursiveInitializeTransformation(Node<TransformationDefinition> node, ref int yOffset)

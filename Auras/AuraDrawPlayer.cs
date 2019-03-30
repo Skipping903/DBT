@@ -1,17 +1,17 @@
-﻿using DBTR.Extensions;
-using DBTR.Players;
+﻿using System;
+using DBTMod.Extensions;
+using DBTMod.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.Auras
+namespace DBTMod.Auras
 {
     public sealed class AuraPlayerLayer : PlayerLayer
     {
-        public AuraPlayerLayer(int index) : base(DBTRMod.Instance.Name, "AuraLayer" + index, null, DrawLayer)
+        public AuraPlayerLayer(int index) : base(DBTMod.Instance.Name, "AuraLayer" + index, null, DrawLayer)
         {
         }
 

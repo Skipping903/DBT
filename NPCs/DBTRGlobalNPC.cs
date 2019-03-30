@@ -1,9 +1,8 @@
-﻿using DBTR.Players;
+﻿using DBTMod.Players;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.NPCs
+namespace DBTMod.NPCs
 {
     public sealed class DBTRGlobalNPC : GlobalNPC
     {

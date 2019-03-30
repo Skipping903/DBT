@@ -2,7 +2,7 @@
 using System.Reflection;
 using Terraria.ModLoader;
 
-namespace DBTR.Utilities
+namespace DBTMod.Utilities
 {
     public static class SteamHelper
     {

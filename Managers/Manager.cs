@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
-namespace DBTR.Managers
+namespace DBTMod.Managers
 {
     public abstract class Manager<T> where T : IHasUnlocalizedName
     {

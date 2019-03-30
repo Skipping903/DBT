@@ -1,8 +1,8 @@
-﻿using DBTR.HairStyles;
-using DBTR.Players;
+﻿using DBTMod.HairStyles;
+using DBTMod.Players;
 using Terraria;
 
-namespace DBTR.Items.Developer
+namespace DBTMod.Items.Developer
 {
     public sealed class HairSetter : DeveloperItem
     {

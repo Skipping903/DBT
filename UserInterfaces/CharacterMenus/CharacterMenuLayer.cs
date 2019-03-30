@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.UI;
 
-namespace DBTR.UserInterfaces.CharacterMenus
+namespace DBTMod.UserInterfaces.CharacterMenus
 {
     public sealed class CharacterMenuLayer : GameInterfaceLayer
     {

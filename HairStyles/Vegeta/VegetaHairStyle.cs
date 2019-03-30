@@ -1,4 +1,4 @@
-﻿namespace DBTR.HairStyles.Vegeta
+﻿namespace DBTMod.HairStyles.Vegeta
 {
     public sealed class VegetaHairStyle : HairStyle
     {

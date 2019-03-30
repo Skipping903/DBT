@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
-namespace DBTR.Dynamicity
+namespace DBTMod.Dynamicity
 {
     public class Tree<T> where T : IHasParents<T>
     {

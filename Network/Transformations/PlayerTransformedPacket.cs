@@ -1,11 +1,11 @@
 ﻿using System.IO;
-using DBTR.Players;
-using DBTR.Transformations;
+using DBTMod.Players;
+using DBTMod.Transformations;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.Network.Transformations
+namespace DBTMod.Network.Transformations
 {
     public sealed class PlayerTransformedPacket : NetworkPacket
     {
