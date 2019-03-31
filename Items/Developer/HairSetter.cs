@@ -14,15 +14,15 @@ namespace DBTMod.Items.Developer
 
         public override bool UseItem(Player player)
         {
-            DBTRPlayer dbtrPlayer = player.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
-            HairStyle currentHairStyle = dbtrPlayer.ChosenHairStyle;
+            HairStyle currentHairStyle = dbtPlayer.ChosenHairStyle;
             int nextIndex = HairStyleManager.Instance.GetIndex(currentHairStyle) + 1;
 
             if (nextIndex >= HairStyleManager.Instance.Count)
                 nextIndex = 0;
 
-            dbtrPlayer.ChosenHairStyle = HairStyleManager.Instance[nextIndex];
+            dbtPlayer.ChosenHairStyle = HairStyleManager.Instance[nextIndex];
 
             return true;
         }

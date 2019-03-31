@@ -13,7 +13,7 @@ using Terraria.UI;
 
 namespace DBTMod.UserInterfaces.CharacterMenus
 {
-    public sealed class CharacterMenu : DBTRMenu
+    public sealed class DBTMenu : UserInterfaces.DBTMenu
     {
         public const int
             PADDING_X = 20,
@@ -24,7 +24,7 @@ namespace DBTMod.UserInterfaces.CharacterMenus
         private readonly Texture2D _unknownImageTexture, _unknownGrayImageTexture, _lockedImageTexture;
         private const string CHARACTER_MENU_PATH = "UserInterfaces/CharacterMenus";
 
-        public CharacterMenu(Mod authorMod)
+        public DBTMenu(Mod authorMod)
         {
             this.AuthorMod = authorMod;
             BackPanelTexture = authorMod.GetTexture(CHARACTER_MENU_PATH + "/BackPanel");
@@ -45,9 +45,6 @@ namespace DBTMod.UserInterfaces.CharacterMenus
             BackPanel.Top.Set(Main.screenHeight / 2f - BackPanel.Height.Pixels / 2f, 0f);
 
             BackPanel.BackgroundColor = new Color(0, 0, 0, 0);
-
-            BackPanel.OnMouseUp += DragEnd;
-            BackPanel.OnMouseDown += DragStart;
 
             Append(BackPanel);
 
@@ -77,22 +74,6 @@ namespace DBTMod.UserInterfaces.CharacterMenus
             }
 
             base.OnInitialize();
-        }
-
-        public void DragStart(UIMouseEvent evt, UIElement listeningElement)
-        {
-            Offset = new Vector2(evt.MousePosition.X - BackPanel.Left.Pixels, evt.MousePosition.Y - BackPanel.Top.Pixels);
-            Dragging = true;
-        }
-
-        public void DragEnd(UIMouseEvent evt, UIElement listeningElement)
-        {
-            Dragging = false;
-
-            BackPanel.Left.Set(evt.MousePosition.X - Offset.X, 0f);
-            BackPanel.Top.Set(evt.MousePosition.Y - Offset.Y, 0f);
-
-            Recalculate();
         }
 
         private void RecursiveInitializeTransformation(Node<TransformationDefinition> node, ref int yOffset)
@@ -154,7 +135,7 @@ namespace DBTMod.UserInterfaces.CharacterMenus
         {
             base.Update(gameTime);
 
-            DBTRPlayer player = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
+            DBTPlayer player = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
 
             foreach (KeyValuePair<TransformationDefinition, UIImagePair> kvp in _transformationImagePairs)
             {
@@ -181,20 +162,20 @@ namespace DBTMod.UserInterfaces.CharacterMenus
 
         private static void TrySelectingTransformation(TransformationDefinition def, UIMouseEvent evt, UIElement listeningElement)
         {
-            DBTRPlayer dbtrPlayer = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
 
-            if (dbtrPlayer.HasAcquiredTransformation(def) && def.DoesDisplayInCharacterMenu(dbtrPlayer))
+            if (dbtPlayer.HasAcquiredTransformation(def) && def.DoesDisplayInCharacterMenu(dbtPlayer))
             {
                 // TODO Add sounds.
                 //SoundHelper.PlayVanillaSound(SoundID.MenuTick);
 
-                if (dbtrPlayer.SelectedTransformation == def)
+                if (dbtPlayer.SelectedTransformation != def)
                 {
-                    dbtrPlayer.SelectedTransformation = def;
-                    Main.NewText($"Selected {def.DisplayName}, Mastery: {Math.Round(def.GetMaxMastery(dbtrPlayer) * def.GetCurrentMastery(dbtrPlayer), 2)}%");
+                    dbtPlayer.SelectedTransformation = def;
+                    Main.NewText($"Selected {def.DisplayName}, Mastery: {Math.Round(def.GetMaxMastery(dbtPlayer) * def.GetCurrentMastery(dbtPlayer), 2)}%");
                 }
                 else
-                    Main.NewText($"{def.DisplayInMenu} Mastery: {Math.Round(100f * def.GetCurrentMastery(dbtrPlayer), 2)}%");
+                    Main.NewText($"{def.DisplayName} Mastery: {Math.Round(100f * def.GetCurrentMastery(dbtPlayer), 2)}%");
             }
             /*else if (def.SelectionRequirementsFailed.Invoke(player, def))
             {

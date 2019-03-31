@@ -50,29 +50,29 @@ namespace DBTMod.Transformations
 
         public virtual void OnPlayerTransformed(PlayerTransformation transformation) { }
 
-        public virtual void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery) { }
+        public virtual void OnPlayerMasteryGain(DBTPlayer dbtPlayer, float gain, float currentMastery) { }
 
-        public virtual void OnActivePlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
+        public virtual void OnActivePlayerDied(DBTPlayer dbtPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
 
-        public virtual void OnActivePlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc) { }
+        public virtual void OnActivePlayerKilledNPC(DBTPlayer dbtPlayer, NPC npc) { }
 
         #endregion
 
         #region Player Hooks Acquired
 
-        public virtual void OnPlayerLoading(DBTRPlayer dbtrPlayer, TagCompound tag) { }
+        public virtual void OnPlayerLoading(DBTPlayer dbtPlayer, TagCompound tag) { }
 
-        public virtual void OnPlayerSaving(DBTRPlayer dbtrPlayer, TagCompound tag) { }
+        public virtual void OnPlayerSaving(DBTPlayer dbtPlayer, TagCompound tag) { }
 
-        public virtual void OnPlayerAcquiredTransformation(DBTRPlayer dbtrPlayer) { }
+        public virtual void OnPlayerAcquiredTransformation(DBTPlayer dbtPlayer) { }
 
         #endregion
 
         #region Player Hooks PreAcquired
 
-        public virtual void OnPreAcquirePlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc) { }
+        public virtual void OnPreAcquirePlayerKilledNPC(DBTPlayer dbtPlayer, NPC npc) { }
 
-        public virtual void OnPreAcquirePlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
+        public virtual void OnPreAcquirePlayerDied(DBTPlayer dbtPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
 
         #endregion
 
@@ -83,62 +83,62 @@ namespace DBTMod.Transformations
         /// <returns></returns>
         public virtual bool CheckPrePlayerConditions() => true;
 
-        public bool HasParents(DBTRPlayer dbtrPlayer)
+        public bool HasParents(DBTPlayer dbtPlayer)
         {
             for (int i = 0; i < Parents.Length; i++)
             {
-                if (AnyParents && dbtrPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
+                if (AnyParents && dbtPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
                     return true;
 
-                if (!AnyParents && !dbtrPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
+                if (!AnyParents && !dbtPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
                     return false;
             }
 
             return true;
         }
 
-        public bool CanUnlock(DBTRPlayer dbtrPlayer) => HasParents(dbtrPlayer);
+        public bool CanUnlock(DBTPlayer dbtPlayer) => HasParents(dbtPlayer);
 
         /// <summary>Checks wether or not the transformation is part of the character menu. If not overriden, uses the same value as <see cref="CheckPrePlayerConditions"/>.</summary>
-        /// <param name="dbtrPlayer"></param>
+        /// <param name="dbtPlayer"></param>
         /// <returns></returns>
-        public bool DoesDisplayInCharacterMenu(DBTRPlayer dbtrPlayer) => DisplayInMenu && CheckPrePlayerConditions();
+        public bool DoesDisplayInCharacterMenu(DBTPlayer dbtPlayer) => DisplayInMenu && CheckPrePlayerConditions();
 
         #endregion
 
         #region Multipliers
 
-        public virtual float GetDamageMultiplier(DBTRPlayer dbtrPlayer) => BaseDamageMultiplier;
+        public virtual float GetDamageMultiplier(DBTPlayer dbtPlayer) => BaseDamageMultiplier;
 
-        public virtual float GetSpeedMultiplier(DBTRPlayer dbtrPlayer) => BaseSpeedMultiplier;
+        public virtual float GetSpeedMultiplier(DBTPlayer dbtPlayer) => BaseSpeedMultiplier;
 
         #endregion
 
         #region Additive
 
-        public virtual int GetDefenseAdditive(DBTRPlayer dbtrPlayer) => BaseDefenseAdditive;
+        public virtual int GetDefenseAdditive(DBTPlayer dbtPlayer) => BaseDefenseAdditive;
 
         #endregion
 
         #region Ki Drain
 
-        public float GetUnmasteredKiDrain(DBTRPlayer dbtrPlayer) => UnmasteredKiDrain;
+        public float GetUnmasteredKiDrain(DBTPlayer dbtPlayer) => UnmasteredKiDrain;
 
-        public float GetMasteredKiDrain(DBTRPlayer dbtrPlayer) => MasteredKiDrain;
+        public float GetMasteredKiDrain(DBTPlayer dbtPlayer) => MasteredKiDrain;
 
         #endregion
 
         #region Mastery
 
-        public float GetCurrentMastery(DBTRPlayer dbtrPlayer)
+        public float GetCurrentMastery(DBTPlayer dbtPlayer)
         {
-            if (dbtrPlayer.HasAcquiredTransformation(this))
-                return dbtrPlayer.AcquiredTransformations[this].CurrentMastery;
+            if (dbtPlayer.HasAcquiredTransformation(this))
+                return dbtPlayer.AcquiredTransformations[this].CurrentMastery;
 
             return 0f;
         }
 
-        public virtual float GetMaxMastery(DBTRPlayer dbtrPlayer) => BaseMaxMastery;
+        public virtual float GetMaxMastery(DBTPlayer dbtPlayer) => BaseMaxMastery;
 
         #endregion
 

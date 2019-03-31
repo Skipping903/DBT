@@ -1,5 +1,4 @@
-﻿using System;
-using DBTMod.Network;
+﻿using DBTMod.Network;
 using DBTMod.Transformations;
 using Terraria;
 using Terraria.ID;
@@ -7,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace DBTMod.Players
 {
-    public sealed partial class DBTRPlayer : ModPlayer
+    public sealed partial class DBTPlayer : ModPlayer
     {
         private bool _isCharging;
 
@@ -30,30 +29,6 @@ namespace DBTMod.Players
             TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerKilledNPC(this, npc));
             ForAllActiveTransformations(t => t.OnActivePlayerKilledNPC(this, npc));
         }
-
-
-        #region Ki
-
-        public float KiMultiplier { get; set; }
-
-        #region Current Ki
-
-        public float Ki { get; private set; }
-
-        #endregion
-
-        #region Max Ki
-
-        public float BaseMaxKi { get; private set; }
-
-        public float MaxKiMultiplier { get; private set; } = 1;
-
-        public int MaxKi => (int)Math.Round(BaseMaxKi * MaxKiMultiplier);
-
-        #endregion
-
-        #endregion
-
 
         public bool IsCharging
         {

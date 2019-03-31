@@ -14,22 +14,22 @@ namespace DBTMod.Transformations.SSJs.SSJ1s.SSJ1
         {
         }
 
-        public override float GetMaxMastery(DBTRPlayer dbtrPlayer)
+        public override float GetMaxMastery(DBTPlayer dbtPlayer)
         {
-            if (!dbtrPlayer.AcquiredTransformations.ContainsKey(TransformationDefinitionManager.Instance.SSJG) ||
-                dbtrPlayer.AcquiredTransformations[TransformationDefinitionManager.Instance.SSJG].CurrentMastery < 1f)
+            if (!dbtPlayer.AcquiredTransformations.ContainsKey(TransformationDefinitionManager.Instance.SSJG) ||
+                dbtPlayer.AcquiredTransformations[TransformationDefinitionManager.Instance.SSJG].CurrentMastery < 1f)
                 return BaseMaxMastery;
 
             return 2f;
         }
 
-        public override void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery)
+        public override void OnPlayerMasteryGain(DBTPlayer dbtPlayer, float gain, float currentMastery)
         {
-            if (currentMastery >= 0.5f && !dbtrPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.ASSJ1))
-                dbtrPlayer.Acquire(TransformationDefinitionManager.Instance.ASSJ1);
+            if (currentMastery >= 0.5f && !dbtPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.ASSJ1))
+                dbtPlayer.Acquire(TransformationDefinitionManager.Instance.ASSJ1);
 
-            if (currentMastery >= 0.75f && !dbtrPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.USSJ1))
-                dbtrPlayer.Acquire(TransformationDefinitionManager.Instance.USSJ1);
+            if (currentMastery >= 0.75f && !dbtPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.USSJ1))
+                dbtPlayer.Acquire(TransformationDefinitionManager.Instance.USSJ1);
         }
     }
 

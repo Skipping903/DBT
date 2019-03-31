@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 
-namespace DBTMod.Players.Hair
+namespace DBTMod.Players
 {
-    public sealed partial class DBTRPlayer
+    public sealed partial class DBTPlayer
     {
         private Color? _originalHairColor = null;
 

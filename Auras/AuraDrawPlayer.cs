@@ -19,24 +19,24 @@ namespace DBTMod.Auras
         {
             if (Main.netMode == NetmodeID.Server) return;
 
-            DBTRPlayer dbtrPlayer = drawInfo.drawPlayer.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = drawInfo.drawPlayer.GetModPlayer<DBTPlayer>();
 
-            AuraAppearance aura = dbtrPlayer.GetAura();
+            AuraAppearance aura = dbtPlayer.GetAura();
             if (aura == null) return;
 
-            int auraHeight = aura.Information.GetHeight(dbtrPlayer);
+            int auraHeight = aura.Information.GetHeight(dbtPlayer);
 
-            Texture2D auraTexture = aura.Information.GetTexture(dbtrPlayer);
-            Rectangle auraRectangle = new Rectangle(0, auraHeight * dbtrPlayer.AuraFrameIndex, auraTexture.Width, auraHeight);
+            Texture2D auraTexture = aura.Information.GetTexture(dbtPlayer);
+            Rectangle auraRectangle = new Rectangle(0, auraHeight * dbtPlayer.AuraFrameIndex, auraTexture.Width, auraHeight);
 
-            float scale = aura.Information.GetAuraScale(dbtrPlayer);
-            Tuple<float, Vector2> rotationAndPosition = aura.Information.GetRotationAndPosition(dbtrPlayer);
+            float scale = aura.Information.GetAuraScale(dbtPlayer);
+            Tuple<float, Vector2> rotationAndPosition = aura.Information.GetRotationAndPosition(dbtPlayer);
 
-            SamplerState samplerState = dbtrPlayer.GetPlayerSamplerState();
+            SamplerState samplerState = dbtPlayer.GetPlayerSamplerState();
             aura.Information.BlendState.SetSpriteBatchForPlayerLayerCustomDraw(samplerState);
 
             Main.spriteBatch.Draw(auraTexture, rotationAndPosition.Item2 - Main.screenPosition, auraRectangle, Color.White, rotationAndPosition.Item1,
-                new Vector2(aura.Information.GetWidth(dbtrPlayer), aura.Information.GetHeight(dbtrPlayer)) * 0.5f, scale, SpriteEffects.None, 0f);
+                new Vector2(aura.Information.GetWidth(dbtPlayer), aura.Information.GetHeight(dbtPlayer)) * 0.5f, scale, SpriteEffects.None, 0f);
 
             samplerState.ResetSpriteBatchForPlayerDrawLayers();
         }

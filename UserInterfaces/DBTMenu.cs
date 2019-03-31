@@ -8,7 +8,7 @@ using Terraria.UI;
 namespace DBTMod.UserInterfaces
 {
     // Credit to X3n0ph0b3 / MerceriusXeno.
-    public class DBTRMenu : UIState
+    public class DBTMenu : UIState
     {
         protected UIText titleText;
 
@@ -70,6 +70,39 @@ namespace DBTMod.UserInterfaces
             else
                 parent.Append(element);
         }
+
+
+        #region Mouse Events
+
+        public override void MouseDown(UIMouseEvent evt)
+        {
+            base.MouseDown(evt);
+            DragStart(evt);
+        }
+
+        public override void MouseUp(UIMouseEvent evt)
+        {
+            base.MouseUp(evt);
+            DragEnd(evt);
+        }
+
+        public void DragStart(UIMouseEvent evt)
+        {
+            Offset = new Vector2(evt.MousePosition.X - BackPanel.Left.Pixels, evt.MousePosition.Y - BackPanel.Top.Pixels);
+            Dragging = true;
+        }
+
+        public void DragEnd(UIMouseEvent evt)
+        {
+            Dragging = false;
+
+            BackPanel.Left.Set(evt.MousePosition.X - Offset.X, 0f);
+            BackPanel.Top.Set(evt.MousePosition.Y - Offset.Y, 0f);
+
+            Recalculate();
+        }
+
+        #endregion
 
 
         protected override void DrawSelf(SpriteBatch spriteBatch)

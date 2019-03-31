@@ -8,13 +8,13 @@ namespace DBTMod.NPCs
     {
         public override void NPCLoot(NPC npc)
         {
-            DBTRPlayer dbtrPlayer = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
 
-            if (dbtrPlayer == null)
+            if (dbtPlayer == null)
                 return;
 
             if (npc.lastInteraction == Main.LocalPlayer.whoAmI)
-                dbtrPlayer.OnKilledNPC(npc);
+                dbtPlayer.OnKilledNPC(npc);
         }
     }
 }

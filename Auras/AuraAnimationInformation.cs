@@ -39,36 +39,36 @@ namespace DBTMod.Auras
 
         #region Public Methods
 
-        public virtual float GetAuraScale(DBTRPlayer dbtrPlayer) => BaseScale;
+        public virtual float GetAuraScale(DBTPlayer dbtPlayer) => BaseScale;
 
-        public virtual int GetAuraOffsetY(DBTRPlayer dbtrPlayer)
+        public virtual int GetAuraOffsetY(DBTPlayer dbtPlayer)
         {
-            int frameHeight = GetHeight(dbtrPlayer);
-            float scale = GetAuraScale(dbtrPlayer);
+            int frameHeight = GetHeight(dbtPlayer);
+            float scale = GetAuraScale(dbtPlayer);
 
-            return (int)-(frameHeight / 2f * scale - dbtrPlayer.player.height * 0.775f);
+            return (int)-(frameHeight / 2f * scale - dbtPlayer.player.height * 0.775f);
         }
 
 
-        public int GetHeight(DBTRPlayer dbtrPlayer) => GetTexture(dbtrPlayer).Height / FramesCount;
-        public int GetWidth(DBTRPlayer dbtrPlayer) => GetTexture(dbtrPlayer).Width;
+        public int GetHeight(DBTPlayer dbtPlayer) => GetTexture(dbtPlayer).Height / FramesCount;
+        public int GetWidth(DBTPlayer dbtPlayer) => GetTexture(dbtPlayer).Width;
 
 
-        public Tuple<float, Vector2> GetRotationAndPosition(DBTRPlayer dbtrPlayer)
+        public Tuple<float, Vector2> GetRotationAndPosition(DBTPlayer dbtPlayer)
         {
-            bool playerMostlyStationary = Math.Abs(dbtrPlayer.player.velocity.X) <= 6f && Math.Abs(dbtrPlayer.player.velocity.Y) <= 6f;
+            bool playerMostlyStationary = Math.Abs(dbtPlayer.player.velocity.X) <= 6f && Math.Abs(dbtPlayer.player.velocity.Y) <= 6f;
 
             float rotation = 0f;
             Vector2 position = Vector2.Zero;
 
-            float scale = GetAuraScale(dbtrPlayer);
-            int auraOffsetY = GetAuraOffsetY(dbtrPlayer);
+            float scale = GetAuraScale(dbtPlayer);
+            int auraOffsetY = GetAuraOffsetY(dbtPlayer);
 
             // TODO Add code for flight aura animation.
 
             //if (playerMostlyStationary)
             //{
-                position = dbtrPlayer.player.Center + new Vector2(-0.75f, auraOffsetY);
+                position = dbtPlayer.player.Center + new Vector2(-0.75f, auraOffsetY);
                 rotation = 0f;
             //}
 
@@ -76,10 +76,10 @@ namespace DBTMod.Auras
         }
 
         // TODO Try to add caching.
-        public Vector2 GetCenter(DBTRPlayer dbtrPlayer) => GetRotationAndPosition(dbtrPlayer).Item2 + new Vector2(GetWidth(dbtrPlayer), GetHeight(dbtrPlayer)) * 0.5f;
+        public Vector2 GetCenter(DBTPlayer dbtPlayer) => GetRotationAndPosition(dbtPlayer).Item2 + new Vector2(GetWidth(dbtPlayer), GetHeight(dbtPlayer)) * 0.5f;
 
 
-        public virtual Texture2D GetTexture(DBTRPlayer dbtrPlayer) => dbtrPlayer.mod.GetTexture(TexturePath);
+        public virtual Texture2D GetTexture(DBTPlayer dbtPlayer) => dbtPlayer.mod.GetTexture(TexturePath);
 
         protected static string GetAuraTextureFromType(Type type) => type.GetTexturePathFromType() + "Aura";
 
@@ -114,6 +114,6 @@ namespace DBTMod.Auras
         {
         }
 
-        public override int GetTicksPerFrameTimerTick(DBTRPlayer dbtrPlayer) => Information.TicksPerFrameTimerTick;
+        public override int GetTicksPerFrameTimerTick(DBTPlayer dbtPlayer) => Information.TicksPerFrameTimerTick;
     }
 }

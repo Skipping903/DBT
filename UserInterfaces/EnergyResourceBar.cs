@@ -50,8 +50,8 @@ namespace DBTMod.UserInterfaces
         {
             base.DrawSelf(spriteBatch);
 
-            DBTRPlayer dbtrPlayer = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
-            float quotient = Utils.Clamp((float) Math.Floor(_cleanAverageEnergy.Sum() / 15f) / dbtrPlayer.MaxKi, 0, 1);
+            DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
+            float quotient = Utils.Clamp((float) Math.Floor(_cleanAverageEnergy.Sum() / 15f) / dbtPlayer.MaxKi, 0, 1);
 
             Rectangle hitBox = GetInnerDimensions().ToRectangle();
             hitBox.X += _dragRectangle.X;
@@ -109,15 +109,15 @@ namespace DBTMod.UserInterfaces
         // TODO Rewrite this to use objects.
         public override void Update(GameTime gameTime)
         {
-            DBTRPlayer dbtrPlayer = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
 
-            _cleanAverageEnergy.Add(dbtrPlayer.Ki);
+            _cleanAverageEnergy.Add(dbtPlayer.Ki);
 
             if (_cleanAverageEnergy.Count > 15)
                 _cleanAverageEnergy.RemoveRange(0, _cleanAverageEnergy.Count - 15);
 
             int averageKi = (int) Math.Floor(_cleanAverageEnergy.Sum() / 15f);
-            _label.SetText("Ki: " + averageKi + " / " + dbtrPlayer.MaxKi);
+            _label.SetText("Ki: " + averageKi + " / " + dbtPlayer.MaxKi);
 
             base.Update(gameTime);
         }

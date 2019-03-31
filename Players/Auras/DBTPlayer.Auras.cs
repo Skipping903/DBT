@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 
 namespace DBTMod.Players
 {
-    public sealed partial class DBTRPlayer
+    public sealed partial class DBTPlayer
     {
         internal void PostUpdateHandleAura()
         {

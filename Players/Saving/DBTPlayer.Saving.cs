@@ -2,7 +2,7 @@
 
 namespace DBTMod.Players
 {
-    public sealed partial class DBTRPlayer
+    public sealed partial class DBTPlayer
     {
         public override TagCompound Save()
         {

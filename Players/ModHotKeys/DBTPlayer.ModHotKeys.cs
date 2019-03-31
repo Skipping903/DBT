@@ -3,7 +3,7 @@ using Terraria.GameInput;
 
 namespace DBTMod.Players
 {
-    public sealed partial class DBTRPlayer
+    public sealed partial class DBTPlayer
     {
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
@@ -18,7 +18,7 @@ namespace DBTMod.Players
                     ClearTransformations();
 
                 if (DBTMod.Instance.characterMenuKey.JustPressed)
-                    DBTMod.Instance.characterMenu.Visible = !DBTMod.Instance.characterMenu.Visible;
+                    DBTMod.Instance.dbtMenu.Visible = !DBTMod.Instance.dbtMenu.Visible;
             }
         }
     }

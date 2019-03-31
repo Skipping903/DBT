@@ -13,10 +13,10 @@ namespace DBTMod.Items.Developer
 
         public override bool UseItem(Player player)
         {
-            DBTRPlayer dbtrPlayer = player.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
             
-            dbtrPlayer.ClearTransformations();
-            dbtrPlayer.AcquiredTransformations.Clear();
+            dbtPlayer.ClearTransformations();
+            dbtPlayer.AcquiredTransformations.Clear();
 
             return true;
         }

@@ -16,7 +16,7 @@ namespace DBTMod.Transformations
 
         #region Player Hooks
 
-        public void OnPlayerMasteryGain(DBTRPlayer player, float gain)
+        public void OnPlayerMasteryGain(DBTPlayer player, float gain)
         {
             CurrentMastery += gain;
             Definition.OnPlayerMasteryGain(player, gain, CurrentMastery);

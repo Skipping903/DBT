@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace DBTMod.Players
 {
-    public sealed partial class DBTRPlayer
+    public sealed partial class DBTPlayer
     {
         private const float CHARGING_MOVE_SPEED_MULTIPLIER = 0.5f;
 
@@ -28,11 +28,18 @@ namespace DBTMod.Players
             PlayerInitialized = true;
         }
 
+
+        public override void ResetEffects()
+        {
+            ResetEffectsKi();
+        }
+
+
         #region Pre Update
 
         public override void PreUpdate()
         {
-            Ki = MaxKi;
+            
         }
 
         #endregion

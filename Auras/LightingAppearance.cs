@@ -9,9 +9,9 @@ namespace DBTMod.Auras
             BaseRGBLightingRadiuses = baseRGBLightingRadiuses;
         }
 
-        public virtual float[] GetRGBLightingRadiuses(DBTRPlayer dbtrPlayer)
+        public virtual float[] GetRGBLightingRadiuses(DBTPlayer dbtPlayer)
         {
-            if (!dbtrPlayer.IsCharging)
+            if (!dbtPlayer.IsCharging)
                 return BaseRGBLightingRadiuses;
 
             return new float[]

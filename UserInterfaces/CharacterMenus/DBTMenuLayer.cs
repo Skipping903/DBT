@@ -3,9 +3,9 @@ using Terraria.UI;
 
 namespace DBTMod.UserInterfaces.CharacterMenus
 {
-    public sealed class CharacterMenuLayer : GameInterfaceLayer
+    public sealed class DBTMenuLayer : GameInterfaceLayer
     {
-        public CharacterMenuLayer(CharacterMenu menu, UserInterface interf) : base(typeof(CharacterMenu).FullName, InterfaceScaleType.UI)
+        public DBTMenuLayer(DBTMenu menu, UserInterface interf) : base(menu.GetType().FullName, InterfaceScaleType.UI)
         {
             Menu = menu;
             Interface = interf;
@@ -19,7 +19,7 @@ namespace DBTMod.UserInterfaces.CharacterMenus
             return true;
         }
 
-        public CharacterMenu Menu { get; }
+        public DBTMenu Menu { get; }
 
         public UserInterface Interface { get; }
     }

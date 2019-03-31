@@ -18,7 +18,7 @@ namespace DBTMod
 	    internal KiBar kiBar;
 	    internal UserInterface kiBarInterface;
 
-	    internal CharacterMenu characterMenu;
+	    internal DBTMenu dbtMenu;
 	    internal UserInterface characterMenuInterface;
 
         public DBTMod()
@@ -63,10 +63,10 @@ namespace DBTMod
 
                 #endregion
 
-                characterMenu = new CharacterMenu(this);
-                characterMenu.Activate();
+                dbtMenu = new DBTMenu(this);
+                dbtMenu.Activate();
                 characterMenuInterface = new UserInterface();
-                characterMenuInterface.SetState(characterMenu);
+                characterMenuInterface.SetState(dbtMenu);
 	        }
 	    }
 
@@ -76,7 +76,7 @@ namespace DBTMod
 	        {
 	            kiBar.Visible = false;
 
-	            characterMenu.Visible = false;
+	            dbtMenu.Visible = false;
 	        }
 
 	        Instance = null;
@@ -86,8 +86,8 @@ namespace DBTMod
 
 	    public override void UpdateUI(GameTime gameTime)
 	    {
-	        if (characterMenuInterface != null && characterMenu.Visible)
-                characterMenu.Update(gameTime);
+	        if (characterMenuInterface != null && dbtMenu.Visible)
+                characterMenuInterface.Update(gameTime);
 	    }
 
 
@@ -102,11 +102,11 @@ namespace DBTMod
 	            resourcesLayerIndex = layers.FindIndex(l => l.Name.Contains("Resource Bars")),
 	            characterMenuIndex = layers.FindIndex(l => l.Name.Contains("Hotbar"));
 
-            //if (resourcesLayerIndex != -1)
-            //    layers.Insert(resourcesLayerIndex, new KiBarLayer());
+            if (resourcesLayerIndex != -1)
+                layers.Insert(resourcesLayerIndex, new KiBarLayer());
 
             if (characterMenuIndex != -1)
-                layers.Insert(characterMenuIndex, new CharacterMenuLayer(characterMenu, characterMenuInterface));
+                layers.Insert(characterMenuIndex, new DBTMenuLayer(dbtMenu, characterMenuInterface));
         }
 
 

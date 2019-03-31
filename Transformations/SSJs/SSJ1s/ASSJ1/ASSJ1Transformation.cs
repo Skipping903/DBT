@@ -13,9 +13,9 @@ namespace DBTMod.Transformations.SSJs.SSJ1s.ASSJ1
         {
         }
 
-        public override void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery)
+        public override void OnPlayerMasteryGain(DBTPlayer dbtPlayer, float gain, float currentMastery)
         {
-            dbtrPlayer.GainMastery(TransformationDefinitionManager.Instance.SSJ1, gain);
+            dbtPlayer.GainMastery(TransformationDefinitionManager.Instance.SSJ1, gain);
         }
     }
 

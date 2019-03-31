@@ -19,17 +19,17 @@ namespace DBTMod.UserInterfaces.Buttons
 
             if (IsMouseHovering)
             {
-                DBTRPlayer dbtrPlayer = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
+                DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
 
-                if (dbtrPlayer == null)
+                if (dbtPlayer == null)
                     Main.hoverItemName = HoverText;
                 else
-                    Main.hoverItemName = GetHoverText(dbtrPlayer);
+                    Main.hoverItemName = GetHoverText(dbtPlayer);
             }
         }
 
 
-        public virtual string GetHoverText(DBTRPlayer dbtrPlayer) => HoverText;
+        public virtual string GetHoverText(DBTPlayer dbtPlayer) => HoverText;
 
 
         public string HoverText { get; }

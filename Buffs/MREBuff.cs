@@ -2,7 +2,8 @@
 
 namespace DBTMod.Buffs
 {
-    public abstract class DBTRBuff : ModBuff
+    public sealed class MREBuff : ModBuff
     {
+        
     }
 }

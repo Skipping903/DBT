@@ -4,7 +4,7 @@ using Terraria.ModLoader.IO;
 
 namespace DBTMod.Players
 {
-    public sealed partial class DBTRPlayer
+    public sealed partial class DBTPlayer
     {
         public void SaveMastery(TagCompound tag)
         {

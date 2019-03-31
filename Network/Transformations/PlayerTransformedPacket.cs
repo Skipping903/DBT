@@ -17,8 +17,8 @@ namespace DBTMod.Network.Transformations
             if (Main.netMode == NetmodeID.Server)
                 SendPacketToAllClients(fromWho, whichPlayer, transformationName);
 
-            DBTRPlayer dbtrPlayer = Main.player[whichPlayer].GetModPlayer<DBTRPlayer>();
-            dbtrPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance[transformationName]);
+            DBTPlayer dbtPlayer = Main.player[whichPlayer].GetModPlayer<DBTPlayer>();
+            dbtPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance[transformationName]);
 
             return true;
         }
