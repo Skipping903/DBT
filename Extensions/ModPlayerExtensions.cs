@@ -22,7 +22,7 @@ namespace DBT.Extensions
                     slots[i - 3] = modPlayer.player.armor[i];
             }
 
-            return GetItemInSlots<T>(modPlayer, slots, includeVanity);
+            return GetItemInSlots<T>(modPlayer, slots);
         }
 
         public static List<T> GetItemInSlots<T>(this ModPlayer modPlayer, Item[] slots) where T : class
