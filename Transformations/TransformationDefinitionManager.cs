@@ -1,18 +1,18 @@
-﻿using DBTMod.Dynamicity;
-using DBTMod.Managers;
-using DBTMod.Transformations.Developers.Webmilio;
-using DBTMod.Transformations.SSJGs.SSJBs.SSJB;
-using DBTMod.Transformations.SSJGs.SSJBs.SSJBE;
-using DBTMod.Transformations.SSJGs.SSJG;
-using DBTMod.Transformations.SSJGs.SSJR;
-using DBTMod.Transformations.SSJs.SSJ1s.ASSJ1;
-using DBTMod.Transformations.SSJs.SSJ1s.SSJ1;
-using DBTMod.Transformations.SSJs.SSJ1s.USSJ1;
-using DBTMod.Transformations.SSJs.SSJ2;
-using DBTMod.Transformations.SSJs.SSJ3;
-using DBTMod.Transformations.SSJs.SSJ4s.SSJ4;
+﻿using DBT.Dynamicity;
+using DBT.Managers;
+using DBT.Transformations.Developers.Webmilio;
+using DBT.Transformations.SSJGs.SSJBs.SSJB;
+using DBT.Transformations.SSJGs.SSJBs.SSJBE;
+using DBT.Transformations.SSJGs.SSJG;
+using DBT.Transformations.SSJGs.SSJR;
+using DBT.Transformations.SSJs.SSJ1s.ASSJ1;
+using DBT.Transformations.SSJs.SSJ1s.SSJ1;
+using DBT.Transformations.SSJs.SSJ1s.USSJ1;
+using DBT.Transformations.SSJs.SSJ2;
+using DBT.Transformations.SSJs.SSJ3;
+using DBT.Transformations.SSJs.SSJ4s.SSJ4;
 
-namespace DBTMod.Transformations
+namespace DBT.Transformations
 {
     public sealed class TransformationDefinitionManager : Manager<TransformationDefinition>
     {
@@ -34,7 +34,7 @@ namespace DBTMod.Transformations
             SSJR = Add(new SSJRTransformation(SSJG)) as SSJRTransformation;
             SSJBE = Add(new SSJBETransformation(SSJB)) as SSJBETransformation;
 
-            SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
+            //SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
             Tree = new Tree<TransformationDefinition>(byIndex);
 
             base.DefaultInitialize();

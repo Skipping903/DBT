@@ -1,9 +1,8 @@
-﻿using DBTMod.Players;
+﻿using DBT.Players;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 
-namespace DBTMod.Items.Accessories.Necklaces
+namespace DBT.Items.Accessories.Necklaces
 {
     public sealed class AncientLegendNecklace : Necklace
     {

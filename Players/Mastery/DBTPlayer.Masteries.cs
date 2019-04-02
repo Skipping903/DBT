@@ -1,6 +1,6 @@
-﻿using DBTMod.Transformations;
+﻿using DBT.Transformations;
 
-namespace DBTMod.Players
+namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {

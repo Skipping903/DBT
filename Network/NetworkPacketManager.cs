@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using DBTMod.Network.Transformations;
+using DBT.Network.Transformations;
 
-namespace DBTMod.Network
+namespace DBT.Network
 {
     public sealed class NetworkPacketManager
     {

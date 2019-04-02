@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DBTMod.Players
+namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {

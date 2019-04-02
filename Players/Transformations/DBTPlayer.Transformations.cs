@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using DBTMod.Network;
-using DBTMod.Transformations;
+using DBT.Network;
+using DBT.Transformations;
 using Terraria;
 using Terraria.ID;
 
-namespace DBTMod.Players
+namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {

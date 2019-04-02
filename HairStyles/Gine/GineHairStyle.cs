@@ -1,4 +1,4 @@
-﻿namespace DBTMod.HairStyles.Gine
+﻿namespace DBT.HairStyles.Gine
 {
     public sealed class GineHairStyle : HairStyle
     {

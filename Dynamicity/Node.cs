@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DBTMod.Dynamicity
+namespace DBT.Dynamicity
 {
     public sealed class Node<T> where T : IHasParents<T>
     {

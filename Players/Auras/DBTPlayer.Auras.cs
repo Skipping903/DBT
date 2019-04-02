@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using DBTMod.Auras;
-using DBTMod.Transformations;
+using DBT.Auras;
+using DBT.Transformations;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace DBTMod.Players
+namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {

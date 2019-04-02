@@ -1,6 +1,6 @@
 ﻿using Terraria.ModLoader;
 
-namespace DBTMod.Buffs
+namespace DBT.Buffs
 {
     public abstract class DBTBuff : ModBuff
     {

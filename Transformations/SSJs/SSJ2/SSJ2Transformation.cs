@@ -1,8 +1,8 @@
-﻿using DBTMod.Auras;
+﻿using DBT.Auras;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DBTMod.Transformations.SSJs.SSJ2
+namespace DBT.Transformations.SSJs.SSJ2
 {
     public sealed class SSJ2Transformation : TransformationDefinition
     {

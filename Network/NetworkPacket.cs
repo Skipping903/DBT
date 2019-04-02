@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Terraria.ModLoader;
 
-namespace DBTMod.Network
+namespace DBT.Network
 {
     public abstract class NetworkPacket
     {

@@ -1,14 +1,18 @@
 ﻿using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTMod.Items.Developer
+namespace DBT.Items.Developer
 {
     public abstract class DeveloperItem : ModItem
     {
+        protected DeveloperItem(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
+        
         public override void SetDefaults()
         {
-            item.width = 40;
-            item.height = 40;
             item.consumable = false;
             item.maxStack = 1;
             item.UseSound = SoundID.Item3;
@@ -20,5 +24,9 @@ namespace DBTMod.Items.Developer
             item.expert = true;
             item.potion = false;
         }
+
+        public int Width { get; }
+
+        public int Height { get; }
     }
 }

@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.IO;
-using DBTMod.Network;
-using DBTMod.UserInterfaces.CharacterMenus;
-using DBTMod.UserInterfaces.KiBar;
-using DBTMod.Utilities;
+using DBT.Network;
+using DBT.UserInterfaces.CharacterMenus;
+using DBT.UserInterfaces.KiBar;
+using DBT.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace DBTMod
+namespace DBT
 {
 	public sealed class DBTMod : Mod
 	{

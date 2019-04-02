@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using DBTMod.HairStyles;
-using DBTMod.Transformations;
+using DBT.HairStyles;
+using DBT.Transformations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 
-namespace DBTMod.Players
+namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {

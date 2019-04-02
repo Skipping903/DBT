@@ -1,11 +1,15 @@
-﻿using DBTMod.Players;
-using DBTMod.Transformations;
+﻿using DBT.Players;
+using DBT.Transformations;
 using Terraria;
 
-namespace DBTMod.Items.Developer
+namespace DBT.Items.Developer
 {
     public sealed class TransformationSetter : DeveloperItem
     {
+        public TransformationSetter() : base(40, 40)
+        {
+        }
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Transformation Setter");

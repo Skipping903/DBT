@@ -1,10 +1,14 @@
-﻿using DBTMod.Players;
+﻿using DBT.Players;
 using Terraria;
 
-namespace DBTMod.Items.Developer
+namespace DBT.Items.Developer
 {
     public class TransformationClearer : DeveloperItem
     {
+        public TransformationClearer() : base(40, 40)
+        {
+        }
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Transformation Clearer");

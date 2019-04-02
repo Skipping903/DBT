@@ -1,11 +1,11 @@
-﻿using DBTMod.UserInterfaces.Buttons;
+﻿using DBT.UserInterfaces.Buttons;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
-namespace DBTMod.UserInterfaces
+namespace DBT.UserInterfaces
 {
     // Credit to X3n0ph0b3 / MerceriusXeno.
     public class DBTMenu : UIState

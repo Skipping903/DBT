@@ -1,6 +1,6 @@
-﻿using DBTMod.Players;
+﻿using DBT.Players;
 
-namespace DBTMod.Auras
+namespace DBT.Auras
 {
     public class AuraAppearance
     {

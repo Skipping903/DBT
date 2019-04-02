@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria.GameContent.UI.Elements;
 
-namespace DBTMod.UserInterfaces
+namespace DBT.UserInterfaces
 {
     public struct UIImagePair
     {

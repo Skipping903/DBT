@@ -1,8 +1,7 @@
-﻿using DBTMod.Tiles;
+﻿using DBT.Tiles;
 using Terraria.ID;
-using Terraria.ModLoader;
 
-namespace DBTMod.Items.Tiles
+namespace DBT.Items.Tiles
 {
     public sealed class ZTableItem : DBTItem
     {

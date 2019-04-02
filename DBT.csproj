@@ -7,8 +7,8 @@
     <ProjectGuid>{8298EAB6-0586-4BDA-9483-83624B66B13A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DBTMod</RootNamespace>
-    <AssemblyName>DBTMod</AssemblyName>
+    <RootNamespace>DBT</RootNamespace>
+    <AssemblyName>DBT</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -62,6 +62,7 @@
     <Compile Include="Dynamicity\IHasParents.cs" />
     <Compile Include="Dynamicity\Node.cs" />
     <Compile Include="Dynamicity\Tree.cs" />
+    <Compile Include="Extensions\ModPlayerExtensions.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="HairStyles\Gine\GineHairStyle.cs" />
@@ -76,6 +77,15 @@
     <Compile Include="HairStyles\Vegeta\VegetaHairStyle.cs" />
     <Compile Include="HairStyles\Webmilio\WebmilioHairStyle.cs" />
     <Compile Include="IHasUnlocalizedName.cs" />
+    <Compile Include="Items\Accessories\Infusers\AmberInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\AmethystInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\DiamondInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\EmeraldInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\Infuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\DragonCrystalInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\RubyInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\SapphireInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\TopazInfuser.cs" />
     <Compile Include="Items\Accessories\Necklaces\AncientLegendNecklace.cs" />
     <Compile Include="Items\Accessories\Necklaces\GemNecklaces\AmberGemNecklace.cs" />
     <Compile Include="Items\Accessories\Necklaces\GemNecklaces\AmethystGemNecklace.cs" />
@@ -91,6 +101,7 @@
     <Compile Include="Items\DBTItem.cs" />
     <Compile Include="Items\Developer\DeveloperItem.cs" />
     <Compile Include="Items\Developer\HairSetter.cs" />
+    <Compile Include="Items\Developer\InfuserChecker.cs" />
     <Compile Include="Items\Developer\TransformationClearer.cs" />
     <Compile Include="Items\Developer\TransformationSetter.cs" />
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
@@ -115,6 +126,8 @@
     <Compile Include="Players\ModHotKeys\DBTPlayer.ModHotKeys.cs" />
     <Compile Include="Players\Saving\DBTPlayer.Saving.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.cs" />
+    <Compile Include="Projectiles\DBTKiProjectile.cs" />
+    <Compile Include="Projectiles\DBTProjectile.cs" />
     <Compile Include="Tiles\ZTableTile.cs" />
     <Compile Include="Traits\Trait.cs" />
     <Compile Include="Traits\TraitManager.cs" />

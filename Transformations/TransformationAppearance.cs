@@ -1,7 +1,7 @@
-﻿using DBTMod.Auras;
+﻿using DBT.Auras;
 using Microsoft.Xna.Framework;
 
-namespace DBTMod.Transformations
+namespace DBT.Transformations
 {
     public abstract class TransformationAppearance
     {

@@ -1,4 +1,4 @@
-﻿namespace DBTMod.Items.Accessories.Necklaces
+﻿namespace DBT.Items.Accessories.Necklaces
 {
     public abstract class Necklace : DBTItem
     {

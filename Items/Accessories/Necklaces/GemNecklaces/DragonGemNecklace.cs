@@ -1,10 +1,10 @@
-﻿using DBTMod.Players;
-using DBTMod.Tiles;
+﻿using DBT.Players;
+using DBT.Tiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTMod.Items.Accessories.Necklaces.GemNecklaces
+namespace DBT.Items.Accessories.Necklaces.GemNecklaces
 {
     public sealed class DragonGemNecklace : DBTItem
     {

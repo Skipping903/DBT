@@ -1,6 +1,6 @@
 ﻿using Terraria.ID;
 
-namespace DBTMod.Items.Materials.Metals
+namespace DBT.Items.Materials.Metals
 {
     public class ScrapMetal : DBTItem
     {

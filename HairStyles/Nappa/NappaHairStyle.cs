@@ -1,4 +1,4 @@
-﻿namespace DBTMod.HairStyles.Nappa
+﻿namespace DBT.HairStyles.Nappa
 {
     public sealed class NappaHairStyle : HairStyle
     {

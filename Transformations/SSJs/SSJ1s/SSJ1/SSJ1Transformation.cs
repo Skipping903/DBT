@@ -1,9 +1,9 @@
-﻿using DBTMod.Auras;
-using DBTMod.Players;
+﻿using DBT.Auras;
+using DBT.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DBTMod.Transformations.SSJs.SSJ1s.SSJ1
+namespace DBT.Transformations.SSJs.SSJ1s.SSJ1
 {
     public sealed class SSJ1Transformation : TransformationDefinition
     {

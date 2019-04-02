@@ -1,6 +1,6 @@
-﻿using DBTMod.Managers;
+﻿using DBT.Managers;
 
-namespace DBTMod.Traits
+namespace DBT.Traits
 {
     public sealed class TraitManager : Manager<Trait>
     {

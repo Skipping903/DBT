@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DBTMod.Players;
+using DBT.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
-namespace DBTMod.UserInterfaces
+namespace DBT.UserInterfaces
 {
     // TODO Make this use classes/structs.
     public class EnergyResourceBar : UIElement

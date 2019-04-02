@@ -1,4 +1,4 @@
-﻿namespace DBTMod
+﻿namespace DBT
 {
     public interface IHasUnlocalizedName
     {

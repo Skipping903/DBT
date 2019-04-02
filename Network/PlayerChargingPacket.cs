@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using DBTMod.Players;
+using DBT.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTMod.Network
+namespace DBT.Network
 {
     public sealed class PlayerChargingPacket : NetworkPacket
     {

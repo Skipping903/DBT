@@ -1,4 +1,4 @@
-﻿namespace DBTMod.Items.Materials.Metals
+﻿namespace DBT.Items.Materials.Metals
 {
     public sealed class RefinedMetal : DBTItem
     {

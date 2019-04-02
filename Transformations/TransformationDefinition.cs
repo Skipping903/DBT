@@ -1,11 +1,11 @@
 ﻿using System;
-using DBTMod.Dynamicity;
-using DBTMod.Players;
+using DBT.Dynamicity;
+using DBT.Players;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 
-namespace DBTMod.Transformations
+namespace DBT.Transformations
 {
     public abstract class TransformationDefinition : IHasUnlocalizedName, IHasParents<TransformationDefinition>
     {

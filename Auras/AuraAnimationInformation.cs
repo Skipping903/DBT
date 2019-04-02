@@ -1,11 +1,11 @@
 ﻿using System;
-using DBTMod.Extensions;
-using DBTMod.Players;
+using DBT.Extensions;
+using DBT.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.ModLoader;
 
-namespace DBTMod.Auras
+namespace DBT.Auras
 {
     public class AuraAnimationInformation
     {

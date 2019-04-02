@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using DBTMod.Transformations;
+using DBT.Transformations;
 using Terraria.ModLoader.IO;
 
-namespace DBTMod.Players
+namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {

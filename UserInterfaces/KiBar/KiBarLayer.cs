@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.UI;
 
-namespace DBTMod.UserInterfaces.KiBar
+namespace DBT.UserInterfaces.KiBar
 {
     public sealed class KiBarLayer : GameInterfaceLayer
     {

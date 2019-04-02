@@ -1,4 +1,4 @@
-﻿using DBTMod.Items.Tiles;
+﻿using DBT.Items.Tiles;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
@@ -6,7 +6,7 @@ using Terraria.Enums;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
-namespace DBTMod.Tiles
+namespace DBT.Tiles
 {
     public sealed class ZTableTile : ModTile
     {

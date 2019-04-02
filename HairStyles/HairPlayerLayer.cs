@@ -1,11 +1,11 @@
-﻿using DBTMod.Players;
+﻿using DBT.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTMod.HairStyles
+namespace DBT.HairStyles
 {
     public sealed class HairPlayerLayer : PlayerLayer
     {

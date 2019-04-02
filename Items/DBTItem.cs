@@ -1,6 +1,6 @@
 ﻿using Terraria.ModLoader;
 
-namespace DBTMod.Items
+namespace DBT.Items
 {
     public abstract class DBTItem : ModItem
     {

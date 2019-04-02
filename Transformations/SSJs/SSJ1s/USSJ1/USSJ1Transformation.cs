@@ -1,7 +1,7 @@
-﻿using DBTMod.Players;
-using DBTMod.Transformations.SSJs.SSJ1s.SSJ1;
+﻿using DBT.Players;
+using DBT.Transformations.SSJs.SSJ1s.SSJ1;
 
-namespace DBTMod.Transformations.SSJs.SSJ1s.USSJ1
+namespace DBT.Transformations.SSJs.SSJ1s.USSJ1
 {
     public sealed class USSJ1Transformation : TransformationDefinition
     {

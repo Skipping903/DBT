@@ -1,4 +1,4 @@
-﻿namespace DBTMod.HairStyles.Goku
+﻿namespace DBT.HairStyles.Goku
 {
     public sealed class GokuHairStyle : HairStyle
     {

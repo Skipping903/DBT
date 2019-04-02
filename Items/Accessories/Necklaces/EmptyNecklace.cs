@@ -1,7 +1,6 @@
 ﻿using Terraria.ID;
-using Terraria.ModLoader;
 
-namespace DBTMod.Items.Accessories.Necklaces
+namespace DBT.Items.Accessories.Necklaces
 {
     public sealed class EmptyNecklace : Necklace
     {

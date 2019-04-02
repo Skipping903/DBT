@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DBTMod.Dynamicity;
-using DBTMod.Extensions;
-using DBTMod.Players;
-using DBTMod.Transformations;
+using DBT.Dynamicity;
+using DBT.Extensions;
+using DBT.Players;
+using DBT.Transformations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -11,7 +11,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace DBTMod.UserInterfaces.CharacterMenus
+namespace DBT.UserInterfaces.CharacterMenus
 {
     public sealed class DBTMenu : UserInterfaces.DBTMenu
     {

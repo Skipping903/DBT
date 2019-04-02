@@ -1,11 +1,15 @@
-﻿using DBTMod.HairStyles;
-using DBTMod.Players;
+﻿using DBT.HairStyles;
+using DBT.Players;
 using Terraria;
 
-namespace DBTMod.Items.Developer
+namespace DBT.Items.Developer
 {
     public sealed class HairSetter : DeveloperItem
     {
+        public HairSetter() : base(40, 40)
+        {
+        }
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Hair Setter");
