@@ -1,11 +1,15 @@
-﻿using DBTR.Players;
-using DBTR.Transformations;
+﻿using DBT.Players;
+using DBT.Transformations;
 using Terraria;
 
-namespace DBTR.Items.Developer
+namespace DBT.Items.Developer
 {
     public sealed class TransformationSetter : DeveloperItem
     {
+        public TransformationSetter() : base(40, 40)
+        {
+        }
+
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Transformation Setter");
@@ -14,23 +18,23 @@ namespace DBTR.Items.Developer
 
         public override bool UseItem(Player player)
         {
-            DBTRPlayer dbtrPlayer = player.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
-            if (dbtrPlayer.FirstTransformation == null)
+            if (dbtPlayer.FirstTransformation == null)
             {
-                dbtrPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance.SSJ1);
+                dbtPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance.SSJ1);
                 return true;
             }
 
-            TransformationDefinition currentTransformation = dbtrPlayer.FirstTransformation.Definition;
+            TransformationDefinition currentTransformation = dbtPlayer.FirstTransformation.Definition;
 
-            dbtrPlayer.ClearTransformations();
+            dbtPlayer.ClearTransformations();
             int nextIndex = TransformationDefinitionManager.Instance.GetIndex(currentTransformation) + 1;
 
             if (nextIndex >= TransformationDefinitionManager.Instance.Count)
                 nextIndex = 0;
 
-            dbtrPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance[nextIndex]);
+            dbtPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance[nextIndex]);
 
             return true;
         }

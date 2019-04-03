@@ -1,8 +1,7 @@
-﻿using DBTR.Auras;
-using DBTR.HairStyles;
+﻿using DBT.Auras;
 using Microsoft.Xna.Framework;
 
-namespace DBTR.Transformations
+namespace DBT.Transformations
 {
     public abstract class TransformationAppearance
     {

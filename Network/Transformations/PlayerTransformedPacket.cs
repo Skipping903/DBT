@@ -1,11 +1,11 @@
 ﻿using System.IO;
-using DBTR.Players;
-using DBTR.Transformations;
+using DBT.Players;
+using DBT.Transformations;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.Network.Transformations
+namespace DBT.Network.Transformations
 {
     public sealed class PlayerTransformedPacket : NetworkPacket
     {
@@ -17,8 +17,8 @@ namespace DBTR.Network.Transformations
             if (Main.netMode == NetmodeID.Server)
                 SendPacketToAllClients(fromWho, whichPlayer, transformationName);
 
-            DBTRPlayer dbtrPlayer = Main.player[whichPlayer].GetModPlayer<DBTRPlayer>();
-            dbtrPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance[transformationName]);
+            DBTPlayer dbtPlayer = Main.player[whichPlayer].GetModPlayer<DBTPlayer>();
+            dbtPlayer.AcquireAndTransform(TransformationDefinitionManager.Instance[transformationName]);
 
             return true;
         }

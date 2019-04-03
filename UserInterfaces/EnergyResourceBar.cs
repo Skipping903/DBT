@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DBTR.Players;
+using DBT.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
-namespace DBTR.UserInterfaces
+namespace DBT.UserInterfaces
 {
     // TODO Make this use classes/structs.
     public class EnergyResourceBar : UIElement
@@ -50,8 +50,8 @@ namespace DBTR.UserInterfaces
         {
             base.DrawSelf(spriteBatch);
 
-            DBTRPlayer dbtrPlayer = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
-            float quotient = Utils.Clamp((float) Math.Floor(_cleanAverageEnergy.Sum() / 15f) / dbtrPlayer.MaxKi, 0, 1);
+            DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
+            float quotient = Utils.Clamp((float) Math.Floor(_cleanAverageEnergy.Sum() / 15f) / dbtPlayer.MaxKi, 0, 1);
 
             Rectangle hitBox = GetInnerDimensions().ToRectangle();
             hitBox.X += _dragRectangle.X;
@@ -71,7 +71,7 @@ namespace DBTR.UserInterfaces
             Vector2 textureOffset = Vector2.Zero;
 
             // TODO !!IMPORTANT!! CHANGE THIS TO USE OBJECTS 100%.
-            Texture = DBTRMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBarFrame");
+            Texture = DBTMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBarFrame");
 
             frameHeight = Texture.Height / 4;
             textureOffset = new Vector2(16, 8);
@@ -81,7 +81,7 @@ namespace DBTR.UserInterfaces
             Rectangle sourceRectangle = new Rectangle(0, frameHeight * frame, Texture.Width, frameHeight);
             spriteBatch.Draw(Texture, Position, sourceRectangle, Color.White);
 
-            Texture2D barSegmentTexture = DBTRMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBar");
+            Texture2D barSegmentTexture = DBTMod.Instance.GetTexture("UserInterfaces/KiBar/DefaultKiBar");
 
             int segmentsCount = (int) Math.Ceiling(Segments * quotient);
 
@@ -109,15 +109,15 @@ namespace DBTR.UserInterfaces
         // TODO Rewrite this to use objects.
         public override void Update(GameTime gameTime)
         {
-            DBTRPlayer dbtrPlayer = Main.LocalPlayer.GetModPlayer<DBTRPlayer>();
+            DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
 
-            _cleanAverageEnergy.Add(dbtrPlayer.Ki);
+            _cleanAverageEnergy.Add(dbtPlayer.Ki);
 
             if (_cleanAverageEnergy.Count > 15)
                 _cleanAverageEnergy.RemoveRange(0, _cleanAverageEnergy.Count - 15);
 
             int averageKi = (int) Math.Floor(_cleanAverageEnergy.Sum() / 15f);
-            _label.SetText("Ki: " + averageKi + " / " + dbtrPlayer.MaxKi);
+            _label.SetText("Ki: " + averageKi + " / " + dbtPlayer.MaxKi);
 
             base.Update(gameTime);
         }

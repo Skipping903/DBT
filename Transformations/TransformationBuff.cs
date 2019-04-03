@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Text;
-using DBTR.Buffs;
-using DBTR.Players;
+using DBT.Buffs;
+using DBT.Players;
 using Terraria;
 
-namespace DBTR.Transformations
+namespace DBT.Transformations
 {
-    public abstract class TransformationBuff : DBTRBuff, IHasUnlocalizedName
+    public abstract class TransformationBuff : DBTBuff, IHasUnlocalizedName
     {
         protected TransformationBuff(TransformationDefinition definition)
         {
@@ -28,30 +28,30 @@ namespace DBTR.Transformations
 
         public override void Update(Player player, ref int buffIndex)
         {
-            DBTRPlayer dbtrPlayer = player.GetModPlayer<DBTRPlayer>();
-            if (dbtrPlayer == null) return;
+            DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
+            if (dbtPlayer == null) return;
 
-            if (!dbtrPlayer.IsTransformed(this))
+            if (!dbtPlayer.IsTransformed(this))
             {
                 player.ClearBuff(Type);
                 return;
             }
 
             float 
-                damageMultiplier = Definition.GetDamageMultiplier(dbtrPlayer),
+                damageMultiplier = Definition.GetDamageMultiplier(dbtPlayer),
                 halvedDamageMultiplier = damageMultiplier / 2;
 
             player.meleeDamage *= damageMultiplier;
-            dbtrPlayer.KiMultiplier = damageMultiplier;
+            dbtPlayer.KiDamage = damageMultiplier;
 
             player.rangedDamage *= halvedDamageMultiplier;
             player.thrownDamage *= halvedDamageMultiplier;
             player.magicDamage *= halvedDamageMultiplier;
             player.minionDamage *= halvedDamageMultiplier;
 
-            player.statDefense += Definition.GetDefenseAdditive(dbtrPlayer);
+            player.statDefense += Definition.GetDefenseAdditive(dbtPlayer);
 
-            float speedMultiplier = Definition.GetSpeedMultiplier(dbtrPlayer);
+            float speedMultiplier = Definition.GetSpeedMultiplier(dbtPlayer);
 
             player.moveSpeed *= speedMultiplier;
             player.maxRunSpeed *= speedMultiplier;
@@ -65,7 +65,7 @@ namespace DBTR.Transformations
 
         public override void ModifyBuffTip(ref string tip, ref int rare)
         {
-            tip = BuildDefaultTooltip(Main.LocalPlayer.GetModPlayer<DBTRPlayer>());
+            tip = BuildDefaultTooltip(Main.LocalPlayer.GetModPlayer<DBTPlayer>());
         }
 
 
@@ -74,7 +74,7 @@ namespace DBTR.Transformations
         public virtual string BuildDefaultTooltip() =>
             BuildTooltip(Definition.BaseDamageMultiplier, Definition.BaseSpeedMultiplier, Definition.BaseDefenseAdditive, Definition.UnmasteredKiDrain, Definition.MasteredKiDrain);
 
-        public virtual string BuildDefaultTooltip(DBTRPlayer player) =>
+        public virtual string BuildDefaultTooltip(DBTPlayer player) =>
             BuildTooltip(Definition.GetDamageMultiplier(player), Definition.GetSpeedMultiplier(player), Definition.GetDefenseAdditive(player), Definition.GetUnmasteredKiDrain(player), Definition.GetMasteredKiDrain(player));
 
         private string BuildTooltip(float damageMultiplier, float speedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain)

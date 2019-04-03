@@ -1,35 +1,35 @@
-﻿using DBTR.Auras;
-using DBTR.Players;
+﻿using DBT.Auras;
+using DBT.Players;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DBTR.Transformations.SSJs.SSJ1s.SSJ1
+namespace DBT.Transformations.SSJs.SSJ1s.SSJ1
 {
     public sealed class SSJ1Transformation : TransformationDefinition
     {
-        public SSJ1Transformation() : base(
+        public SSJ1Transformation(params TransformationDefinition[] parents) : base(
             "SSJ1", "Super Saiyan", typeof(SSJ1TransformationBuff),
             1.5f, 1.5f, 2, 60f, 30f,
-            new SSJ1Appearance())
+            new SSJ1Appearance(), parents: parents)
         {
         }
 
-        public override float GetMaxMastery(DBTRPlayer dbtrPlayer)
+        public override float GetMaxMastery(DBTPlayer dbtPlayer)
         {
-            if (!dbtrPlayer.AcquiredTransformations.ContainsKey(TransformationDefinitionManager.Instance.SSJG) ||
-                dbtrPlayer.AcquiredTransformations[TransformationDefinitionManager.Instance.SSJG].CurrentMastery < 1f)
+            if (!dbtPlayer.AcquiredTransformations.ContainsKey(TransformationDefinitionManager.Instance.SSJG) ||
+                dbtPlayer.AcquiredTransformations[TransformationDefinitionManager.Instance.SSJG].CurrentMastery < 1f)
                 return BaseMaxMastery;
 
             return 2f;
         }
 
-        public override void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery)
+        public override void OnPlayerMasteryGain(DBTPlayer dbtPlayer, float gain, float currentMastery)
         {
-            if (currentMastery >= 0.5f && !dbtrPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.ASSJ1))
-                dbtrPlayer.Acquire(TransformationDefinitionManager.Instance.ASSJ1);
+            if (currentMastery >= 0.5f && !dbtPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.ASSJ1))
+                dbtPlayer.Acquire(TransformationDefinitionManager.Instance.ASSJ1);
 
-            if (currentMastery >= 0.75f && !dbtrPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.USSJ1))
-                dbtrPlayer.Acquire(TransformationDefinitionManager.Instance.USSJ1);
+            if (currentMastery >= 0.75f && !dbtPlayer.HasAcquiredTransformation(TransformationDefinitionManager.Instance.USSJ1))
+                dbtPlayer.Acquire(TransformationDefinitionManager.Instance.USSJ1);
         }
     }
 

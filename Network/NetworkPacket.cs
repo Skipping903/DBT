@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Terraria.ModLoader;
 
-namespace DBTR.Network
+namespace DBT.Network
 {
     public abstract class NetworkPacket
     {
@@ -20,7 +20,7 @@ namespace DBTR.Network
 
         protected ModPacket MakePacket()
         {
-            ModPacket packet = DBTRMod.Instance.GetPacket();
+            ModPacket packet = DBTMod.Instance.GetPacket();
             packet.Write(PacketType);
 
             return packet;

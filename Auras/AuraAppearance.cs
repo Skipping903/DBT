@@ -1,6 +1,6 @@
-﻿using DBTR.Players;
+﻿using DBT.Players;
 
-namespace DBTR.Auras
+namespace DBT.Auras
 {
     public class AuraAppearance
     {
@@ -11,9 +11,9 @@ namespace DBTR.Auras
         }
 
 
-        public virtual int GetTicksPerFrameTimerTick(DBTRPlayer dbtrPlayer)
+        public virtual int GetTicksPerFrameTimerTick(DBTPlayer dbtPlayer)
         {
-            if (dbtrPlayer.IsCharging)
+            if (dbtPlayer.IsCharging)
                 return Information.TicksPerFrameTimerTick * 2;
 
             return Information.TicksPerFrameTimerTick;

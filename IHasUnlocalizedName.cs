@@ -1,4 +1,4 @@
-﻿namespace DBTR
+﻿namespace DBT
 {
     public interface IHasUnlocalizedName
     {

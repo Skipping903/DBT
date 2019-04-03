@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.UI;
 
-namespace DBTR.UserInterfaces.KiBar
+namespace DBT.UserInterfaces.KiBar
 {
     public sealed class KiBarLayer : GameInterfaceLayer
     {
@@ -11,10 +11,10 @@ namespace DBTR.UserInterfaces.KiBar
 
         protected override bool DrawSelf()
         {
-            if (DBTRMod.kiBar.Visible)
+            if (DBTMod.Instance.kiBar.Visible)
             {
-                DBTRMod.kiBarInterface.Update(Main._drawInterfaceGameTime);
-                DBTRMod.kiBar.Draw(Main.spriteBatch);
+                DBTMod.Instance.kiBarInterface.Update(Main._drawInterfaceGameTime);
+                DBTMod.Instance.kiBar.Draw(Main.spriteBatch);
             }
 
             return true;

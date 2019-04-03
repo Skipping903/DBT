@@ -1,10 +1,10 @@
 ﻿using System.IO;
-using DBTR.Players;
+using DBT.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBTR.Network
+namespace DBT.Network
 {
     public sealed class PlayerChargingPacket : NetworkPacket
     {
@@ -16,8 +16,8 @@ namespace DBTR.Network
             if (Main.netMode == NetmodeID.Server)
                 SendPacketToAllClients(fromWho, whichPlayer, charging);
 
-            DBTRPlayer dbtrPlayer = Main.player[whichPlayer].GetModPlayer<DBTRPlayer>();
-            dbtrPlayer.IsCharging = charging;
+            DBTPlayer dbtPlayer = Main.player[whichPlayer].GetModPlayer<DBTPlayer>();
+            dbtPlayer.IsCharging = charging;
 
             return true;
         }

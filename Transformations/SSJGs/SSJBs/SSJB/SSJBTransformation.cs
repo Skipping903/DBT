@@ -1,15 +1,15 @@
-﻿using DBTR.Auras;
+﻿using DBT.Auras;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DBTR.Transformations.SSJGs.SSJBs.SSJB
+namespace DBT.Transformations.SSJGs.SSJBs.SSJB
 {
     public sealed class SSJBTransformation : TransformationDefinition
     {
         public SSJBTransformation(params TransformationDefinition[] parents) : base(
             "SSJB", "Super Saiyan Blue", typeof(SSJBTransformationBuff),
             4.5f, 4.5f, 32, 300f, 150f,
-            new SSJBAppearance())
+            new SSJBAppearance(), parents: parents)
         {
         }
     }

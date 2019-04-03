@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.UI;
 
-namespace DBTR.UserInterfaces.KiBar
+namespace DBT.UserInterfaces.KiBar
 {
     // Inspired by the original DBT Ki Bar.
     // TODO Make this save with player.

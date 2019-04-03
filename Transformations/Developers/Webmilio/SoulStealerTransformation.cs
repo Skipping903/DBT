@@ -1,14 +1,14 @@
-﻿using DBTR.Auras;
-using DBTR.Players;
-using DBTR.Utilities;
+﻿using System;
+using System.Collections.Generic;
+using DBT.Auras;
+using DBT.Players;
+using DBT.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader.IO;
 
-namespace DBTR.Transformations.Developers.Webmilio
+namespace DBT.Transformations.Developers.Webmilio
 {
     public sealed class SoulStealerTransformation : TransformationDefinition
     {
@@ -26,40 +26,41 @@ namespace DBTR.Transformations.Developers.Webmilio
 
         #region Loading/Saving
 
-        public override void OnPlayerLoading(DBTRPlayer dbtrPlayer, TagCompound tag)
+        public override void OnPlayerLoading(DBTPlayer dbtPlayer, TagCompound tag)
         {
             if (!CheckPrePlayerConditions())
             {
-                if (dbtrPlayer.HasAcquiredTransformation(this))
-                    dbtrPlayer.AcquiredTransformations.Remove(this);
+                if (dbtPlayer.HasAcquiredTransformation(this))
+                    dbtPlayer.AcquiredTransformations.Remove(this);
 
                 return;
             }
 
-            if (!dbtrPlayer.HasAcquiredTransformation(this))
-                dbtrPlayer.Acquire(this);
+            if (!dbtPlayer.HasAcquiredTransformation(this))
+                dbtPlayer.Acquire(this);
 
-            PlayerTransformation playerTransformation = dbtrPlayer.AcquiredTransformations[this];
+            PlayerTransformation playerTransformation = dbtPlayer.AcquiredTransformations[this];
 
             if (playerTransformation != null)
             {
                 DefaultSetup(playerTransformation);
+                Dictionary<string, int> mobCount = GetDiminishingReturnsDictionary(dbtPlayer);
 
                 foreach (KeyValuePair<string, object> kvp in tag)
                 {
                     if (!kvp.Key.StartsWith(DIMINISHINGRETURNS_MOBCOUNT_PREFIX)) continue;
-
-                    ((Dictionary<string, int>)playerTransformation.ExtraInformation[DIMINISHINGRETURNS_MOBCOUNT_PREFIX]).Add(kvp.Key.Substring(DIMINISHINGRETURNS_MOBCOUNT_PREFIX.Length), int.Parse(kvp.Value.ToString()));
+                    
+                    mobCount.Add(kvp.Key.Substring(DIMINISHINGRETURNS_MOBCOUNT_PREFIX.Length), int.Parse(kvp.Value.ToString()));
                 }
 
-                SetSoulPower(dbtrPlayer, tag.GetFloat(SOULPOWER_TAG));
+                SetSoulPower(dbtPlayer, tag.GetFloat(SOULPOWER_TAG));
             }
         }
 
-        public override void OnPlayerSaving(DBTRPlayer dbtrPlayer, TagCompound tag)
+        public override void OnPlayerSaving(DBTPlayer dbtPlayer, TagCompound tag)
         {
-            tag.Add(SOULPOWER_TAG, GetSoulPower(dbtrPlayer));
-            PlayerTransformation playerTransformation = dbtrPlayer.AcquiredTransformations[this];
+            tag.Add(SOULPOWER_TAG, GetSoulPower(dbtPlayer));
+            PlayerTransformation playerTransformation = dbtPlayer.AcquiredTransformations[this];
 
             Dictionary<string, int> mobCount = (Dictionary<string, int>)playerTransformation.ExtraInformation[DIMINISHINGRETURNS_MOBCOUNT_PREFIX];
 
@@ -69,7 +70,7 @@ namespace DBTR.Transformations.Developers.Webmilio
 
         #endregion
 
-        public override void OnPlayerAcquiredTransformation(DBTRPlayer dbtrPlayer) => DefaultSetup(dbtrPlayer.AcquiredTransformations[this]);
+        public override void OnPlayerAcquiredTransformation(DBTPlayer dbtPlayer) => DefaultSetup(dbtPlayer.AcquiredTransformations[this]);
 
         private void DefaultSetup(PlayerTransformation playerTransformation)
         {
@@ -81,44 +82,44 @@ namespace DBTR.Transformations.Developers.Webmilio
         }
 
 
-        public override void OnPlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc)
+        public override void OnActivePlayerKilledNPC(DBTPlayer dbtPlayer, NPC npc)
         {
-            Dictionary<string, int> dimishingReturnsDictionary = GetDiminishingReturnsDictionary(dbtrPlayer);
+            Dictionary<string, int> dimishingReturnsDictionary = GetDiminishingReturnsDictionary(dbtPlayer);
             string npcType = npc.TypeName.Replace(" ", "");
 
             if (!dimishingReturnsDictionary.ContainsKey(npcType))
                 dimishingReturnsDictionary.Add(npcType, 1);
 
             dimishingReturnsDictionary[npcType]++;
-            AddSoulPower(dbtrPlayer, npc);
+            AddSoulPower(dbtPlayer, npc);
         }
 
-        public override float GetDamageMultiplier(DBTRPlayer dbtrPlayer)
+        public override float GetDamageMultiplier(DBTPlayer dbtPlayer)
         {
-            return BaseDamageMultiplier + GetSoulPower(dbtrPlayer) / 1100;
+            return BaseDamageMultiplier + GetSoulPower(dbtPlayer) / 1100;
         }
 
-        public override float GetSpeedMultiplier(DBTRPlayer dbtrPlayer)
+        public override float GetSpeedMultiplier(DBTPlayer dbtPlayer)
         {
-            return BaseSpeedMultiplier + GetSoulPower(dbtrPlayer) / 1100;
+            return BaseSpeedMultiplier + GetSoulPower(dbtPlayer) / 1100;
         }
 
-        public override int GetDefenseAdditive(DBTRPlayer dbtrPlayer)
+        public override int GetDefenseAdditive(DBTPlayer dbtPlayer)
         {
-            return (int)Math.Round(GetSoulPower(dbtrPlayer) / 250f);
+            return (int)Math.Round(GetSoulPower(dbtPlayer) / 250f);
         }
 
 
         public override bool CheckPrePlayerConditions() => SteamHelper.SteamID64 == "76561198046878487";
 
 
-        public float GetSoulPower(DBTRPlayer player) => (float)player.AcquiredTransformations[this].ExtraInformation[SOULPOWER_TAG];
+        public float GetSoulPower(DBTPlayer dbtPlayer) => (float)dbtPlayer.AcquiredTransformations[this].ExtraInformation[SOULPOWER_TAG];
 
-        public void SetSoulPower(DBTRPlayer player, float multiplier) => player.AcquiredTransformations[this].ExtraInformation[SOULPOWER_TAG] = multiplier;
+        public void SetSoulPower(DBTPlayer dbtPlayer, float multiplier) => dbtPlayer.AcquiredTransformations[this].ExtraInformation[SOULPOWER_TAG] = multiplier;
 
-        public void AddSoulPower(DBTRPlayer player, NPC npc)
+        public void AddSoulPower(DBTPlayer dbtPlayer, NPC npc)
         {
-            float gain = (npc.lifeMax / (float)player.player.statLifeMax2) / GetMobKilledCount(player, npc.TypeName.Replace(" ", ""));
+            float gain = (npc.lifeMax / (float)dbtPlayer.player.statLifeMax2) / GetMobKilledCount(dbtPlayer, npc.TypeName.Replace(" ", ""));
 
             if (npc.boss && gain < 110)
                 gain = 110;
@@ -127,12 +128,12 @@ namespace DBTR.Transformations.Developers.Webmilio
             else if (npc.boss)
                 gain *= 2;
 
-            SetSoulPower(player, GetSoulPower(player) + gain);
+            SetSoulPower(dbtPlayer, GetSoulPower(dbtPlayer) + gain);
         }
 
-        private int GetMobKilledCount(DBTRPlayer dbtrPlayer, string npcTypeName) => GetDiminishingReturnsDictionary(dbtrPlayer)[npcTypeName];
+        private int GetMobKilledCount(DBTPlayer dbtPlayer, string npcTypeName) => GetDiminishingReturnsDictionary(dbtPlayer)[npcTypeName];
 
-        public Dictionary<string, int> GetDiminishingReturnsDictionary(DBTRPlayer dbtrPlayer) => (Dictionary<string, int>)dbtrPlayer.AcquiredTransformations[this].ExtraInformation[DIMINISHINGRETURNS_MOBCOUNT_PREFIX];
+        public Dictionary<string, int> GetDiminishingReturnsDictionary(DBTPlayer dbtPlayer) => (Dictionary<string, int>)dbtPlayer.AcquiredTransformations[this].ExtraInformation[DIMINISHINGRETURNS_MOBCOUNT_PREFIX];
     }
 
     public sealed class SoulStealerTransformationBuff : TransformationBuff
@@ -141,7 +142,7 @@ namespace DBTR.Transformations.Developers.Webmilio
         {
         }
 
-        public override string BuildDefaultTooltip(DBTRPlayer player)
+        public override string BuildDefaultTooltip(DBTPlayer player)
         {
             return base.BuildDefaultTooltip(player) + "\nSoul Power: " + ((SoulStealerTransformation)Definition).GetSoulPower(player);
         }

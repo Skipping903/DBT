@@ -1,12 +1,11 @@
-﻿using DBTR.Transformations;
+﻿using System;
+using System.Collections.Generic;
+using DBT.Transformations;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Terraria.ModLoader;
 
-namespace DBTR.HairStyles
+namespace DBT.HairStyles
 {
     public class HairStyle : IHasUnlocalizedName
     {

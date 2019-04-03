@@ -1,11 +1,13 @@
 ﻿using System;
-using DBTR.Players;
+using DBT.Dynamicity;
+using DBT.Players;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 
-namespace DBTR.Transformations
+namespace DBT.Transformations
 {
-    public abstract class TransformationDefinition : IHasUnlocalizedName
+    public abstract class TransformationDefinition : IHasUnlocalizedName, IHasParents<TransformationDefinition>
     {
         internal const int TRANSFORMATION_LONG_DURATION = 6666666;
 
@@ -13,8 +15,8 @@ namespace DBTR.Transformations
             float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain,
             TransformationAppearance appearance,
             bool masterable = true, float maxMastery = 1f,
-            int duration = TRANSFORMATION_LONG_DURATION,
-            params TransformationDefinition[] parents)
+            int duration = TRANSFORMATION_LONG_DURATION, bool displaysInMenu = true,
+            bool anyParents = false, params TransformationDefinition[] parents)
         {
             UnlocalizedName = unlocalizedName;
             DisplayName = displayName;
@@ -34,81 +36,109 @@ namespace DBTR.Transformations
             BaseMaxMastery = maxMastery;
 
             Duration = duration;
+
+            DisplayInMenu = displaysInMenu;
+
+            AnyParents = anyParents;
+            Parents = parents;
         }
 
 
         #region Methods
 
-        #region Player Hooks
+        #region Player Hooks Active
 
         public virtual void OnPlayerTransformed(PlayerTransformation transformation) { }
 
-        public virtual void OnPlayerMasteryGain(DBTRPlayer dbtrPlayer, float gain, float currentMastery) { }
+        public virtual void OnPlayerMasteryGain(DBTPlayer dbtPlayer, float gain, float currentMastery) { }
 
-        public virtual void OnPlayerDied(DBTRPlayer dbtrPlayer, double damage, bool pvp) { }
+        public virtual void OnActivePlayerDied(DBTPlayer dbtPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
 
-        public virtual void OnPlayerKilledNPC(DBTRPlayer dbtrPlayer, NPC npc) { }
-
-        public virtual void OnPlayerLoading(DBTRPlayer dbtrPlayer, TagCompound tag) { }
-
-        public virtual void OnPlayerSaving(DBTRPlayer dbtrPlayer, TagCompound tag) { }
-
-        public virtual void OnPlayerAcquiredTransformation(DBTRPlayer dbtrPlayer) { }
+        public virtual void OnActivePlayerKilledNPC(DBTPlayer dbtPlayer, NPC npc) { }
 
         #endregion
 
+        #region Player Hooks Acquired
+
+        public virtual void OnPlayerLoading(DBTPlayer dbtPlayer, TagCompound tag) { }
+
+        public virtual void OnPlayerSaving(DBTPlayer dbtPlayer, TagCompound tag) { }
+
+        public virtual void OnPlayerAcquiredTransformation(DBTPlayer dbtPlayer) { }
+
+        #endregion
+
+        #region Player Hooks PreAcquired
+
+        public virtual void OnPreAcquirePlayerKilledNPC(DBTPlayer dbtPlayer, NPC npc) { }
+
+        public virtual void OnPreAcquirePlayerDied(DBTPlayer dbtPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
+
+        #endregion
+
+
         #region Access
-
-        public bool HasParents(DBTRPlayer dbtrPlayer)
-        {
-            for (int i = 0; i < dbtrPlayer.AcquiredTransformations.Count; i++)
-                if (!dbtrPlayer.AcquiredTransformations.ContainsKey(this))
-                    return false;
-
-            return true;
-        }
-
-        public bool CanUnlock(DBTRPlayer dbtrPlayer) => HasParents(dbtrPlayer);
 
         /// <summary>Called in special cases when the mod needs to know wether or not, regardless of the player, this transformation should work.</summary>
         /// <returns></returns>
         public virtual bool CheckPrePlayerConditions() => true;
 
+        public bool HasParents(DBTPlayer dbtPlayer)
+        {
+            for (int i = 0; i < Parents.Length; i++)
+            {
+                if (AnyParents && dbtPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
+                    return true;
+
+                if (!AnyParents && !dbtPlayer.AcquiredTransformations.ContainsKey(Parents[i]))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public bool CanUnlock(DBTPlayer dbtPlayer) => HasParents(dbtPlayer);
+
+        /// <summary>Checks wether or not the transformation is part of the character menu. If not overriden, uses the same value as <see cref="CheckPrePlayerConditions"/>.</summary>
+        /// <param name="dbtPlayer"></param>
+        /// <returns></returns>
+        public bool DoesDisplayInCharacterMenu(DBTPlayer dbtPlayer) => DisplayInMenu && CheckPrePlayerConditions();
+
         #endregion
 
         #region Multipliers
 
-        public virtual float GetDamageMultiplier(DBTRPlayer dbtrPlayer) => BaseDamageMultiplier;
+        public virtual float GetDamageMultiplier(DBTPlayer dbtPlayer) => BaseDamageMultiplier;
 
-        public virtual float GetSpeedMultiplier(DBTRPlayer dbtrPlayer) => BaseSpeedMultiplier;
+        public virtual float GetSpeedMultiplier(DBTPlayer dbtPlayer) => BaseSpeedMultiplier;
 
         #endregion
 
         #region Additive
 
-        public virtual int GetDefenseAdditive(DBTRPlayer dbtrPlayer) => BaseDefenseAdditive;
+        public virtual int GetDefenseAdditive(DBTPlayer dbtPlayer) => BaseDefenseAdditive;
 
         #endregion
 
         #region Ki Drain
 
-        public float GetUnmasteredKiDrain(DBTRPlayer dbtrPlayer) => UnmasteredKiDrain;
+        public float GetUnmasteredKiDrain(DBTPlayer dbtPlayer) => UnmasteredKiDrain;
 
-        public float GetMasteredKiDrain(DBTRPlayer dbtrPlayer) => MasteredKiDrain;
+        public float GetMasteredKiDrain(DBTPlayer dbtPlayer) => MasteredKiDrain;
 
         #endregion
 
         #region Mastery
 
-        public float GetCurrentMastery(DBTRPlayer dbtrPlayer)
+        public float GetCurrentMastery(DBTPlayer dbtPlayer)
         {
-            if (dbtrPlayer.HasAcquiredTransformation(this))
-                return dbtrPlayer.AcquiredTransformations[this].CurrentMastery;
+            if (dbtPlayer.HasAcquiredTransformation(this))
+                return dbtPlayer.AcquiredTransformations[this].CurrentMastery;
 
             return 0f;
         }
 
-        public virtual float GetMaxMastery(DBTRPlayer dbtrPlayer) => BaseMaxMastery;
+        public virtual float GetMaxMastery(DBTPlayer dbtPlayer) => BaseMaxMastery;
 
         #endregion
 
@@ -159,7 +189,15 @@ namespace DBTR.Transformations
 
         public virtual TransformationAppearance Appearance { get; }
 
+
         public int Duration { get; }
+
+        public bool DisplayInMenu { get; }
+
+
+        public bool AnyParents { get; }
+
+        public TransformationDefinition[] Parents { get; }
 
         #endregion
     }

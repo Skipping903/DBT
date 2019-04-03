@@ -1,8 +1,8 @@
-﻿using DBTR.Auras;
+﻿using DBT.Auras;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DBTR.Transformations.SSJGs.SSJG
+namespace DBT.Transformations.SSJGs.SSJG
 {
     public sealed class SSJGTransformation : TransformationDefinition
     {

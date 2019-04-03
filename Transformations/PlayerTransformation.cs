@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DBTR.Players;
+using DBT.Players;
 
-namespace DBTR.Transformations
+namespace DBT.Transformations
 {
     public class PlayerTransformation : IPlayerSavable
     {
@@ -16,7 +16,7 @@ namespace DBTR.Transformations
 
         #region Player Hooks
 
-        public void OnPlayerMasteryGain(DBTRPlayer player, float gain)
+        public void OnPlayerMasteryGain(DBTPlayer player, float gain)
         {
             CurrentMastery += gain;
             Definition.OnPlayerMasteryGain(player, gain, CurrentMastery);

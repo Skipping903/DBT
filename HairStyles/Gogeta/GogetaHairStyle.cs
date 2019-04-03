@@ -1,4 +1,4 @@
-﻿namespace DBTR.HairStyles.Gogeta
+﻿namespace DBT.HairStyles.Gogeta
 {
     public sealed class GogetaHairStyle : HairStyle
     {

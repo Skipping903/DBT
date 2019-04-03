@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 
-namespace DBTR.Extensions
+namespace DBT.Extensions
 {
     public static class SpriteBatchExtensions
     {

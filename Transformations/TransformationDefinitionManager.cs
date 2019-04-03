@@ -1,17 +1,18 @@
-﻿using DBTR.Managers;
-using DBTR.Transformations.SSJs.SSJ1s.SSJ1;
-using DBTR.Transformations.SSJs.SSJ1s.ASSJ1;
-using DBTR.Transformations.SSJs.SSJ1s.USSJ1;
-using DBTR.Transformations.SSJs.SSJ2;
-using DBTR.Transformations.SSJs.SSJ3;
-using DBTR.Transformations.SSJs.SSJ4s.SSJ4;
-using DBTR.Transformations.SSJGs.SSJG;
-using DBTR.Transformations.SSJGs.SSJBs.SSJB;
-using DBTR.Transformations.SSJGs.SSJBs.SSJBE;
-using DBTR.Transformations.SSJGs.SSJR;
-using DBTR.Transformations.Developers.Webmilio;
+﻿using DBT.Dynamicity;
+using DBT.Managers;
+using DBT.Transformations.Developers.Webmilio;
+using DBT.Transformations.SSJGs.SSJBs.SSJB;
+using DBT.Transformations.SSJGs.SSJBs.SSJBE;
+using DBT.Transformations.SSJGs.SSJG;
+using DBT.Transformations.SSJGs.SSJR;
+using DBT.Transformations.SSJs.SSJ1s.ASSJ1;
+using DBT.Transformations.SSJs.SSJ1s.SSJ1;
+using DBT.Transformations.SSJs.SSJ1s.USSJ1;
+using DBT.Transformations.SSJs.SSJ2;
+using DBT.Transformations.SSJs.SSJ3;
+using DBT.Transformations.SSJs.SSJ4s.SSJ4;
 
-namespace DBTR.Transformations
+namespace DBT.Transformations
 {
     public sealed class TransformationDefinitionManager : Manager<TransformationDefinition>
     {
@@ -33,7 +34,8 @@ namespace DBTR.Transformations
             SSJR = Add(new SSJRTransformation(SSJG)) as SSJRTransformation;
             SSJBE = Add(new SSJBETransformation(SSJB)) as SSJBETransformation;
 
-            SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
+            //SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
+            Tree = new Tree<TransformationDefinition>(byIndex);
 
             base.DefaultInitialize();
         }
@@ -54,6 +56,8 @@ namespace DBTR.Transformations
         public SSJBETransformation SSJBE { get; private set; }
 
         public SoulStealerTransformation SoulStealer { get; private set; }
+
+        public Tree<TransformationDefinition> Tree { get; private set; }
 
         public static TransformationDefinitionManager Instance
         {
