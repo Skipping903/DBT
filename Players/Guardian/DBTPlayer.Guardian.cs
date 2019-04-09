@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DBT.Extensions;
+using System;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace DBT.Players
 {
@@ -10,30 +12,19 @@ namespace DBT.Players
             BaseHealingBonus = 0;
         }
 
-        public int BaseHealingBonus { get; set; } = 0;
+        public void BuffTeam<T>(int duration) where T : ModBuff => BuffTeam(typeof(T).GetModFromType().BuffType<T>(), duration);
 
-        public void TeamBuffAdd(int buffid = 0, string modbuffid = null, int duration = 0)
+        public void BuffTeam(int buffId, int duration)
         {
-            for (int playerIndex = 0; playerIndex < 255; playerIndex++)
+            for (int i = 0; i < Main.player.Length; i++)
             {
-                Player player = Main.player[playerIndex];
+                Player ply = Main.player[i];
 
-                if(player != null && !player.dead && player.active)
-                {
-                    bool isSameTeam = Main.player[Main.myPlayer].team == player.team && player.team != 0;
-                    if(isSameTeam)
-                    {
-                        if(buffid != 0)
-                        {
-                            player.AddBuff(buffid, duration);
-                        }
-                        else if(modbuffid != null)
-                        {
-                            player.AddBuff(mod.BuffType(modbuffid), duration);
-                        }
-                    }
-                }
+                if (ply != null && ply.team != 0 && !ply.dead && ply.active && Main.player[Main.myPlayer].team == ply.team)
+                    ply.AddBuff(buffId, duration);
             }
         }
+
+        public int BaseHealingBonus { get; set; } = 0;
     }
 }
