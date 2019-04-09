@@ -1,4 +1,5 @@
 ﻿using System;
+using DBT.Commons;
 using DBT.Dynamicity;
 using DBT.Players;
 using Terraria;
@@ -11,8 +12,9 @@ namespace DBT.Transformations
     {
         internal const int TRANSFORMATION_LONG_DURATION = 6666666;
 
+        // Still trying to figure out a way to reduce the parameter count.
         protected TransformationDefinition(string unlocalizedName, string displayName, Type buffType,
-            float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain,
+            float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, TransformationDrain drain,
             TransformationAppearance appearance,
             bool masterable = true, float maxMastery = 1f,
             int duration = TRANSFORMATION_LONG_DURATION, bool displaysInMenu = true,
@@ -27,13 +29,12 @@ namespace DBT.Transformations
             BaseSpeedMultiplier = baseSpeedMultiplier;
             BaseDefenseAdditive = baseDefenseAdditive;
 
-            UnmasteredKiDrain = unmasteredKiDrain;
-            MasteredKiDrain = masteredKiDrain;
-
             Appearance = appearance;
 
             Mastereable = masterable;
             BaseMaxMastery = maxMastery;
+
+            Drain = drain;
 
             Duration = duration;
 
@@ -122,9 +123,17 @@ namespace DBT.Transformations
 
         #region Ki Drain
 
-        public float GetUnmasteredKiDrain(DBTPlayer dbtPlayer) => UnmasteredKiDrain;
+        public float GetUnmasteredKiDrain(DBTPlayer dbtPlayer) => Drain.baseUnmasteredKiDrain;
 
-        public float GetMasteredKiDrain(DBTPlayer dbtPlayer) => MasteredKiDrain;
+        public float GetMasteredKiDrain(DBTPlayer dbtPlayer) => Drain.baseMasteredKiDrain;
+
+        #endregion
+
+        #region Health Drain
+
+        public float GetUnmasteredHealthDrain(DBTPlayer dbtPlayer) => Drain.baseUnmasteredHealthDrain;
+
+        public float GetMasteredHealthDrain(DBTPlayer dbtPlayer) => Drain.baseMasteredHealthDrain;
 
         #endregion
 
@@ -169,14 +178,6 @@ namespace DBT.Transformations
 
         #endregion
 
-        #region Ki Drain
-
-        public virtual float UnmasteredKiDrain { get; }
-
-        public virtual float MasteredKiDrain { get; }
-
-        #endregion
-
         #region Mastery
 
         public virtual bool Mastereable { get; }
@@ -184,6 +185,8 @@ namespace DBT.Transformations
         public float BaseMaxMastery { get; }
 
         #endregion
+
+        public TransformationDrain Drain { get; }
 
         #endregion
 

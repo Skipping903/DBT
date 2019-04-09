@@ -1,4 +1,4 @@
-﻿namespace DBT
+﻿namespace DBT.Commons
 {
     public interface IHasUnlocalizedName
     {

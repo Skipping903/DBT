@@ -6,14 +6,14 @@ namespace DBT.Players
     {
         internal void SaveKi(TagCompound tag)
         {
-            tag.Add(nameof(Players.DBTPlayer.Ki), Ki);
-            tag.Add(nameof(Players.DBTPlayer.BaseMaxKi), BaseMaxKi);
+            tag.Add(nameof(Ki), Ki);
+            tag.Add(nameof(BaseMaxKi), BaseMaxKi);
         }
 
         internal void LoadKi(TagCompound tag)
         {
-            Ki = tag.GetFloat(nameof(Players.DBTPlayer.Ki));
-            BaseMaxKi = tag.GetFloat(nameof(Players.DBTPlayer.BaseMaxKi));
+            Ki = tag.GetFloat(nameof(Ki));
+            BaseMaxKi = tag.GetFloat(nameof(BaseMaxKi));
         }
     }
 }

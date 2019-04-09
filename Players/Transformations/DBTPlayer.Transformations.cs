@@ -15,19 +15,6 @@ namespace DBT.Players
         }
 
 
-        public void ForAllActiveTransformations(Action<TransformationDefinition> action)
-        {
-            for (int i = 0; i < ActiveTransformations.Count; i++)
-                action(ActiveTransformations[i]);
-        }
-
-        public void ForAllAcquiredTransformations(Action<PlayerTransformation> action)
-        {
-            foreach (PlayerTransformation playerTransformation in AcquiredTransformations.Values)
-                action(playerTransformation);
-        }
-
-
         public void AcquireAndTransform(TransformationDefinition definition)
         {
             Acquire(definition);
@@ -55,6 +42,13 @@ namespace DBT.Players
                 NetworkPacketManager.Instance.PlayerTransformedPacket.SendPacketToServer(player.whoAmI, (byte)player.whoAmI, definition.UnlocalizedName);
         }
 
+        public void TryTransforming(List<TransformationDefinition> transformations)
+        {
+            // TODO Add transformation checks here.
+            for (int i = 0; i < transformations.Count; i++)
+                Transform(transformations[i]);
+        }
+
 
         public void Untransform(TransformationBuff transformation) => Untransform(transformation.Definition);
 
@@ -78,7 +72,6 @@ namespace DBT.Players
                 }
             }
         }
-
 
         public void ClearTransformations()
         {
@@ -114,7 +107,6 @@ namespace DBT.Players
             return false;
         }
 
-
         public bool HasAcquiredTransformation(TransformationDefinition definition)
         {
             for (int i = 0; i < AcquiredTransformations.Count; i++)
@@ -124,21 +116,55 @@ namespace DBT.Players
             return false;
         }
 
+        public bool HasMastered() => GetTransformation().HasPlayerMastered(this);
 
-        public PlayerTransformation GetFirstTransformation()
+        public bool HasMastered(TransformationDefinition transformation) => AcquiredTransformations[transformation].HasPlayerMastered(this);
+
+
+        public PlayerTransformation GetTransformation()
         {
             if (ActiveTransformations.Count == 0) return null;
 
             return AcquiredTransformations[ActiveTransformations[0]];
         }
 
+        public void ForAllActiveTransformations(Action<TransformationDefinition> action)
+        {
+            for (int i = 0; i < ActiveTransformations.Count; i++)
+                action(ActiveTransformations[i]);
+        }
 
-        public Dictionary<TransformationDefinition, PlayerTransformation> AcquiredTransformations { get; } = new Dictionary<TransformationDefinition, PlayerTransformation>();
+        public void ForAllAcquiredTransformations(Action<PlayerTransformation> action)
+        {
+            foreach (PlayerTransformation playerTransformation in AcquiredTransformations.Values)
+                action(playerTransformation);
+        }
 
-        public List<TransformationDefinition> ActiveTransformations { get; } = new List<TransformationDefinition>();
+
+        public bool TryCombiningTransformations(params TransformationDefinition[] transformations)
+        {
+            // TODO Add code for SSBKK and similar transformations.
+            return false;
+        }
+
+        public void SelectTransformation(TransformationDefinition transformation)
+        {
+            if (!TryCombiningTransformations(transformation))
+            {
+                SelectedTransformations.Clear();
+                SelectedTransformations.Add(transformation);
+            }
+            else 
+                SelectedTransformations.Add(transformation);
+        }
+
+
+        public Dictionary<TransformationDefinition, PlayerTransformation> AcquiredTransformations { get; internal set; }
+
+        public List<TransformationDefinition> ActiveTransformations { get; internal set; }
 
         public PlayerTransformation FirstTransformation { get; private set; }
 
-        public TransformationDefinition SelectedTransformation { get; set; }
+        public List<TransformationDefinition> SelectedTransformations { get; internal set; }
     }
 }

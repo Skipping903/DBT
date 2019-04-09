@@ -27,7 +27,7 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
         {
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
-            dbtPlayer.KiDamage += 0.07f;
+            dbtPlayer.KiDamageMultiplier += 0.07f;
             dbtPlayer.MaxKiModifier += 250;
 
             player.endurance += 0.07f;

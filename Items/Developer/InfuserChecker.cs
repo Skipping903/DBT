@@ -1,5 +1,4 @@
 ﻿using DBT.Extensions;
-using DBT.HairStyles;
 using DBT.Items.Accessories.Infusers;
 using DBT.Players;
 using Terraria;

@@ -57,6 +57,9 @@
     <Compile Include="Auras\LightingAppearance.cs" />
     <Compile Include="Buffs\DBTBuff.cs" />
     <Compile Include="Buffs\MREBuff.cs" />
+    <Compile Include="Commons\Items\IHasDefense.cs" />
+    <Compile Include="Commons\Items\IHasRarity.cs" />
+    <Compile Include="Commons\Items\IHasValue.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DBTMod.cs" />
     <Compile Include="Dynamicity\IHasParents.cs" />
@@ -76,8 +79,13 @@
     <Compile Include="HairStyles\NoChoice\NoChoiceHairStyle.cs" />
     <Compile Include="HairStyles\Vegeta\VegetaHairStyle.cs" />
     <Compile Include="HairStyles\Webmilio\WebmilioHairStyle.cs" />
-    <Compile Include="IHasUnlocalizedName.cs" />
-    <Compile Include="Items\Accessories\Infusers\AmberInfuser.cs" />
+    <Compile Include="Commons\IHasUnlocalizedName.cs" />
+    <Compile Include="Items\Accessories\AncientLegendWaistCape.cs" />
+    <Compile Include="Items\Accessories\ArmCannon.cs" />
+    <Compile Include="Items\Accessories\BaldurEssentia.cs" />
+    <Compile Include="Items\Accessories\BattleKit.cs" />
+    <Compile Include="Items\Accessories\Infusers\CursedFlameInfuser.cs" />
+    <Compile Include="Items\Accessories\Infusers\IchorInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\AmethystInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\DiamondInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\EmeraldInfuser.cs" />
@@ -98,6 +106,13 @@
     <Compile Include="Items\Accessories\Necklaces\GemNecklaces\SapphireGemNecklace.cs" />
     <Compile Include="Items\Accessories\Necklaces\GemNecklaces\TopazGemNecklace.cs" />
     <Compile Include="Items\Accessories\Necklaces\Necklace.cs" />
+    <Compile Include="Items\Accessories\Scouters\Scouter.cs" />
+    <Compile Include="Items\Accessories\Scouters\ScouterMK1.cs" />
+    <Compile Include="Items\Accessories\Scouters\ScouterMK2.cs" />
+    <Compile Include="Items\Accessories\Scouters\ScouterMK3.cs" />
+    <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
+    <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
+    <Compile Include="Items\Accessories\WornGloves.cs" />
     <Compile Include="Items\DBTItem.cs" />
     <Compile Include="Items\Developer\DeveloperItem.cs" />
     <Compile Include="Items\Developer\HairSetter.cs" />
@@ -126,12 +141,15 @@
     <Compile Include="Players\ModHotKeys\DBTPlayer.ModHotKeys.cs" />
     <Compile Include="Players\Saving\DBTPlayer.Saving.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.cs" />
+    <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
     <Compile Include="Tiles\ZTableTile.cs" />
     <Compile Include="Traits\Trait.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Transformations\Developers\Webmilio\SoulStealerTransformation.cs" />
+    <Compile Include="Transformations\LSSJs\LSSJ\LSSJTransformation.cs" />
+    <Compile Include="Transformations\LSSJs\SSJCType\SSJCTypeTransformation.cs" />
     <Compile Include="Transformations\PlayerTransformation.cs" />
     <Compile Include="Transformations\SSJGs\SSJBs\SSJBE\SSJBETransformation.cs" />
     <Compile Include="Transformations\SSJGs\SSJBs\SSJB\SSJBTransformation.cs" />
@@ -147,6 +165,7 @@
     <Compile Include="Transformations\TransformationBuff.cs" />
     <Compile Include="Transformations\TransformationDefinition.cs" />
     <Compile Include="Transformations\TransformationDefinitionManager.cs" />
+    <Compile Include="Transformations\TransformationDrain.cs" />
     <Compile Include="UserInterfaces\Buttons\UIHoverImageButton.cs" />
     <Compile Include="UserInterfaces\CharacterMenus\DBTMenu.cs" />
     <Compile Include="UserInterfaces\CharacterMenus\DBTMenuLayer.cs" />
@@ -188,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+    <Folder Include="Items\Materials\KiCrystals\" />
     <Folder Include="Races\" />
     <Folder Include="Skills\" />
     <Folder Include="Sounds\" />
@@ -196,12 +216,7 @@
     <Folder Include="Transformations\Developers\Mak0Z\" />
     <Folder Include="Transformations\Developers\NuovaPrime\" />
     <Folder Include="Transformations\Kaiokens\Kaioken\" />
-    <Folder Include="Transformations\Kaiokens\SSJBKK\" />
-    <Folder Include="Transformations\Kaiokens\SSJRKK\" />
-    <Folder Include="Transformations\Kaiokens\SuperKaioken\" />
     <Folder Include="Transformations\LSSJs\LSSJW\" />
-    <Folder Include="Transformations\LSSJs\LSSJ\" />
-    <Folder Include="Transformations\LSSJs\SSJCType\" />
     <Folder Include="Transformations\Mystic\" />
     <Folder Include="Transformations\SSJs\SSJ4s\SSJ4FP\" />
     <Folder Include="Transformations\UIs\UIOmen\" />

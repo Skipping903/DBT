@@ -1,10 +1,11 @@
-﻿using DBT.Items.Materials.Metals;
+﻿using DBT.Commons.Items;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories.Infusers
 {
-    public abstract class Infuser : DBTItem
+    [AutoloadEquip(EquipType.Neck)]
+    public abstract class Infuser : DBTItem, IHasValue, IHasRarity
     {
         private const int GEM_COUNT = 5;
 
@@ -12,6 +13,7 @@ namespace DBT.Items.Accessories.Infusers
         {
             Value = value;
             GemID = gemID;
+            Rarity = rarity;
         }
 
         public override void SetDefaults()

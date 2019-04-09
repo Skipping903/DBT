@@ -169,9 +169,9 @@ namespace DBT.UserInterfaces.CharacterMenus
                 // TODO Add sounds.
                 //SoundHelper.PlayVanillaSound(SoundID.MenuTick);
 
-                if (dbtPlayer.SelectedTransformation != def)
+                if (!dbtPlayer.SelectedTransformations.Contains(def))
                 {
-                    dbtPlayer.SelectedTransformation = def;
+                    dbtPlayer.SelectTransformation(def);
                     Main.NewText($"Selected {def.DisplayName}, Mastery: {Math.Round(def.GetMaxMastery(dbtPlayer) * def.GetCurrentMastery(dbtPlayer), 2)}%");
                 }
                 else

@@ -8,7 +8,8 @@ namespace DBT.Transformations.SSJGs.SSJR
     {
         public SSJRTransformation(params TransformationDefinition[] parents) : base(
             "SSJR", "Super Saiyan Rosé", typeof(SSJRTransformationBuff),
-            4.75f, 4.75f, 34, 310f, 155f,
+            4.75f, 4.75f, 34, 
+            new TransformationDrain(5, 2.5f), 
             new SSJRAppearance(), parents: parents)
         {
         }

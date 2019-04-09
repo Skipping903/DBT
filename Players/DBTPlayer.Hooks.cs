@@ -15,7 +15,7 @@ namespace DBT.Players
         public override void Initialize()
         {
             Aura = null;
-            ActiveTransformations.Clear();
+            InitializeTransformations();
 
             if (!PlayerInitialized)
             {
@@ -39,7 +39,7 @@ namespace DBT.Players
 
         public override void PreUpdate()
         {
-            
+            PreUpdateKi();
         }
 
         #endregion
@@ -49,7 +49,7 @@ namespace DBT.Players
 
         public override void PostUpdate()
         {
-            FirstTransformation = GetFirstTransformation();
+            FirstTransformation = GetTransformation();
 
             if (Main.netMode != NetmodeID.Server)
             {

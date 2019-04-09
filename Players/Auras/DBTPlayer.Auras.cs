@@ -42,7 +42,7 @@ namespace DBT.Players
                 return AuraAnimationInformation.chargeAura;
 
             // TODO Support multiple auras.
-            PlayerTransformation transformation = GetFirstTransformation();
+            PlayerTransformation transformation = GetTransformation();
             if (transformation != null)
                 return transformation.Definition.Appearance.Aura;
 

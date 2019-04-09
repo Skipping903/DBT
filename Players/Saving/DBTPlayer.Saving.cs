@@ -13,6 +13,7 @@ namespace DBT.Players
             tag.Add(nameof(PlayerInitialized), PlayerInitialized);
 
             SaveMastery(tag);
+            SaveTransformations(tag);
             SaveKi(tag);
 
             ForAllAcquiredTransformations(t => t.Definition.OnPlayerSaving(this, tag));
@@ -25,6 +26,7 @@ namespace DBT.Players
             PlayerInitialized = tag.GetBool(nameof(PlayerInitialized));
 
             LoadMastery(tag);
+            LoadTransformations(tag);
             LoadKi(tag);
 
             ForAllAcquiredTransformations(t => t.Definition.OnPlayerLoading(this, tag));
