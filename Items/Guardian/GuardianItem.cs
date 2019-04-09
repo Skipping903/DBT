@@ -24,6 +24,7 @@ namespace DBT.Items.Guardian
             indicate.text = "-- Guardian --";
             indicate.overrideColor = new Color(69, 255, 56);
             tooltips.Add(indicate);
+
             base.ModifyTooltips(tooltips);
         }
     }

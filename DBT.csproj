@@ -104,6 +104,8 @@
     <Compile Include="Items\Developer\InfuserChecker.cs" />
     <Compile Include="Items\Developer\TransformationClearer.cs" />
     <Compile Include="Items\Developer\TransformationSetter.cs" />
+    <Compile Include="Items\Guardian\Accessories\Chakras\ThroatChakra.cs" />
+    <Compile Include="Items\Guardian\GuardianItem.cs" />
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
     <Compile Include="Items\Materials\Metals\RefinedMetal.cs" />
     <Compile Include="Items\Materials\Metals\ScrapMetal.cs" />
@@ -116,6 +118,8 @@
     <Compile Include="Players\Auras\DBTPlayer.Auras.cs" />
     <Compile Include="Players\DBTPlayer.Hooks.cs" />
     <Compile Include="Players\DBTPlayer.Visuals.cs" />
+    <Compile Include="Players\Guardian\DBTPlayer.Guardian.cs" />
+    <Compile Include="Players\Guardian\DBTPlayer.Guardian.Saving.cs" />
     <Compile Include="Players\Hair\DBTPlayer.Hair.cs" />
     <Compile Include="Players\Ki\DBTPlayer.Ki.Saving.cs" />
     <Compile Include="Players\Saving\IPlayerSavable.cs" />
@@ -179,15 +183,25 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="Terraria">
-      <HintPath>lib\Terraria.exe</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
     <Content Include="description.txt" />
+    <Content Include="Items\Guardian\Accessories\Chakras\All7Chakra.png" />
+    <Content Include="Items\Guardian\Accessories\Chakras\CrownChakra.png" />
+    <Content Include="Items\Guardian\Accessories\Chakras\HeartChakra.png" />
+    <Content Include="Items\Guardian\Accessories\Chakras\RootChakra.png" />
+    <Content Include="Items\Guardian\Accessories\Chakras\SacralChakra.png" />
+    <Content Include="Items\Guardian\Accessories\Chakras\SolarPlexusChakra.png" />
+    <Content Include="Items\Guardian\Accessories\Chakras\ThirdEyeChakra.png" />
+    <Content Include="Items\Guardian\Accessories\Chakras\ThroatChakra.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+    <Folder Include="Items\Guardian\Support\" />
+    <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Races\" />
     <Folder Include="Skills\" />
     <Folder Include="Sounds\" />
