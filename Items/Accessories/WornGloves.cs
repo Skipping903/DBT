@@ -32,7 +32,8 @@ namespace DBT.Items.Accessories
 
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            // TODO Rework recipe.
+            /*ModRecipe recipe = new ModRecipe(mod);
 
             recipe.AddIngredient(mod, nameof(CalmKiCrystal), 15);
             recipe.AddIngredient(ItemID.Silk, 20);
@@ -40,7 +41,7 @@ namespace DBT.Items.Accessories
             recipe.AddTile(TileID.Loom);
             recipe.SetResult(this);
 
-            recipe.AddRecipe();
+            recipe.AddRecipe();*/
         }
     }
 }

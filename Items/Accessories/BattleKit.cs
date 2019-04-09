@@ -32,7 +32,7 @@ namespace DBT.Items.Accessories
 
             dbtPlayer.KiDamageMultiplier += 0.06f;
             dbtPlayer.KiChargeRate += 1f;
-            dbtPlayer.
+            dbtPlayer.KiSpeedAddition += 1;
         }
 
         public override void AddRecipes()
