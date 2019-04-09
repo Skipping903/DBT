@@ -25,7 +25,11 @@ namespace DBT.Transformations
         #endregion
 
 
+        public bool HasPlayerMastered(DBTPlayer dbtPlayer) => CurrentMastery >= Definition.GetMaxMastery(dbtPlayer);
+
+
         public KeyValuePair<string, object> ToSavableFormat() => new KeyValuePair<string, object>(MASTERY_PREFIX + Definition.UnlocalizedName, CurrentMastery);
+
 
         public TransformationDefinition Definition { get; }
 

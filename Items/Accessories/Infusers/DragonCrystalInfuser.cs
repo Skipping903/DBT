@@ -1,4 +1,5 @@
 ﻿using DBT.Items.Materials.Metals;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -19,6 +20,19 @@ namespace DBT.Items.Accessories.Infusers
             item.accessory = true;
         }
 
+        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        {
+            base.OnHitNPC(player, target, damage, knockBack, crit);
+
+            target.AddBuff(BuffID.ShadowFlame, 300);
+            target.AddBuff(BuffID.CursedInferno, 300);
+            target.AddBuff(BuffID.Confused, 180);
+            target.AddBuff(BuffID.Frostburn, 180);
+            target.AddBuff(BuffID.Ichor, 300);
+            target.AddBuff(BuffID.OnFire, 180);
+            target.AddBuff(BuffID.Frostburn, 180);
+        }
+
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
@@ -26,7 +40,7 @@ namespace DBT.Items.Accessories.Infusers
             // TODO Rework recipe.
             //recipe.AddIngredient(mod, nameof(PureKiCrystal), 25);
             recipe.AddIngredient(mod, nameof(ScrapMetal), 12);
-            recipe.AddIngredient(mod, nameof(AmberInfuser));
+            recipe.AddIngredient(mod, nameof(IchorInfuser));
             recipe.AddIngredient(mod, nameof(AmethystInfuser));
             recipe.AddIngredient(mod, nameof(DiamondInfuser));
             recipe.AddIngredient(mod, nameof(EmeraldInfuser));

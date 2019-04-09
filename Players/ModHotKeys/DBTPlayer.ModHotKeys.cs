@@ -11,8 +11,8 @@ namespace DBT.Players
 
             if (player.whoAmI == Main.myPlayer)
             {
-                if (DBTMod.Instance.transformUpKey.JustPressed && SelectedTransformation != null)
-                    Transform(SelectedTransformation);
+                if (DBTMod.Instance.transformUpKey.JustPressed && SelectedTransformations != null)
+                    TryTransforming(SelectedTransformations);
 
                 if (DBTMod.Instance.transformDownKey.JustPressed)
                     ClearTransformations();

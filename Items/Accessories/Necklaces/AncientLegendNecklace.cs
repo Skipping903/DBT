@@ -14,7 +14,7 @@ namespace DBT.Items.Accessories.Necklaces
         {
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
-            dbtPlayer.KiDamage *= 1.09f;
+            dbtPlayer.KiDamageMultiplier *= 1.09f;
             dbtPlayer.MaxKiModifier -= 500;
         }
 

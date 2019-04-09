@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using DBT.Buffs;
+using DBT.Commons;
 using DBT.Players;
 using Terraria;
 
@@ -31,10 +32,25 @@ namespace DBT.Transformations
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
             if (dbtPlayer == null) return;
 
-            if (!dbtPlayer.IsTransformed(this))
+            if (!dbtPlayer.IsTransformed(this) && dbtPlayer.player.HasBuff(Type))
             {
                 player.ClearBuff(Type);
                 return;
+            }
+
+            TransformationTimer++;
+            bool isFormMastered = dbtPlayer.HasMastered(Definition);
+            float kiDrain = -(isFormMastered ? Definition.GetUnmasteredKiDrain(dbtPlayer) : Definition.GetMasteredKiDrain(dbtPlayer));
+
+            if (kiDrain != 0f)
+            {
+                if (!isFormMastered)
+                    kiDrain *= KiDrainMultiplier;
+
+                dbtPlayer.ModifyKi(kiDrain);
+
+                if (TransformationTimer % Definition.Drain.transformationStepDelay == 0 && KiDrainMultiplier < Definition.Drain.maxTransformationDrainMultiplier)
+                    KiDrainMultiplier += Definition.Drain.multiplierPerStep;
             }
 
             float 
@@ -42,7 +58,7 @@ namespace DBT.Transformations
                 halvedDamageMultiplier = damageMultiplier / 2;
 
             player.meleeDamage *= damageMultiplier;
-            dbtPlayer.KiDamage = damageMultiplier;
+            dbtPlayer.KiDamageMultiplier = damageMultiplier;
 
             player.rangedDamage *= halvedDamageMultiplier;
             player.thrownDamage *= halvedDamageMultiplier;
@@ -72,65 +88,102 @@ namespace DBT.Transformations
         #region Tooltips
 
         public virtual string BuildDefaultTooltip() =>
-            BuildTooltip(Definition.BaseDamageMultiplier, Definition.BaseSpeedMultiplier, Definition.BaseDefenseAdditive, Definition.UnmasteredKiDrain, Definition.MasteredKiDrain);
+            BuildTooltip(Definition.BaseDamageMultiplier, Definition.BaseSpeedMultiplier, Definition.Drain.baseUnmasteredKiDrain, Definition.Drain.baseMasteredKiDrain, Definition.BaseDefenseAdditive, Definition.Drain.baseUnmasteredHealthDrain, Definition.Drain.baseMasteredHealthDrain);
 
         public virtual string BuildDefaultTooltip(DBTPlayer player) =>
-            BuildTooltip(Definition.GetDamageMultiplier(player), Definition.GetSpeedMultiplier(player), Definition.GetDefenseAdditive(player), Definition.GetUnmasteredKiDrain(player), Definition.GetMasteredKiDrain(player));
+            BuildTooltip(Definition.GetDamageMultiplier(player), Definition.GetSpeedMultiplier(player), Definition.GetUnmasteredKiDrain(player), Definition.GetMasteredKiDrain(player), Definition.GetDefenseAdditive(player), Definition.GetUnmasteredHealthDrain(player), Definition.GetMasteredHealthDrain(player));
 
-        private string BuildTooltip(float damageMultiplier, float speedMultiplier, int baseDefenseAdditive, float unmasteredKiDrain, float masteredKiDrain)
+        private string BuildTooltip(float damageMultiplier, float speedMultiplier, float unmasteredKiDrain, float masteredKiDrain, int baseDefenseAdditive, float unmasteredHealthDrain, float masteredHealthDrain)
         {
             StringBuilder sb = new StringBuilder();
 
             float roundedDamageMultiplier = (float)Math.Round(damageMultiplier, 2);
             float roundedSpeedMultiplier = (float)Math.Round(speedMultiplier, 2);
 
-            BuildDamageAndSpeedInline(sb, roundedDamageMultiplier, roundedSpeedMultiplier);
+            BuildDamageDefenseSpeedInline(sb, roundedDamageMultiplier, baseDefenseAdditive, roundedSpeedMultiplier);
 
-            int roundedUnmasteredKiDrain = (int)Math.Round(unmasteredKiDrain);
-            int roundedMasteredKiDrain = (int)Math.Round(masteredKiDrain);
+            int roundedUnmasteredKiDrain = (int)Math.Round(unmasteredKiDrain * 60);
+            int roundedMasteredKiDrain = (int)Math.Round(masteredKiDrain * 60);
+            int roundedUnmasteredHealthDrain = (int) Math.Round(unmasteredHealthDrain * 60);
+            int roundedMasteredHealthDrain = (int) Math.Round(masteredHealthDrain * 60);
 
-            BuildKiDrainInline(sb, roundedUnmasteredKiDrain, roundedMasteredKiDrain);
+            BuildKiHealthDrainInline(sb, roundedUnmasteredKiDrain, roundedMasteredKiDrain, roundedUnmasteredHealthDrain, roundedMasteredHealthDrain);
 
             return sb.ToString();
         }
 
-        private void BuildDamageAndSpeedInline(StringBuilder builder, float firstValue, float secondValue)
+        private void BuildDamageDefenseSpeedInline(StringBuilder builder, float damage, int defense, float speed)
         {
-            if (firstValue != 0)
-                builder.AppendFormat("{0}{1:F2}x {2}", firstValue > 0 ? '+' : '-', firstValue - 1, "Damage");
+            if (damage != 0)
+            {
+                builder.AppendFormat("{0}{1:F2}x {2}", damage > 0 ? '+' : '-', damage - 1, "Damage");
 
-            if (firstValue != 0 && secondValue != 0)
-                builder.Append(", ");
+                if (speed != 0)
+                    builder.Append(", ");
+            }
 
-            if (secondValue != 0)
-                builder.AppendFormat("{0}{1:F2}x {2}", secondValue > 0 ? '+' : '-', secondValue - 1, "Speed");
+            if (speed != 0)
+            {
+                builder.AppendFormat("{0}{1:F2}x {2}", speed > 0 ? '+' : '-', speed - 1, "Speed");
 
-            if (firstValue != 0 && secondValue != 0)
+                if (defense != 0)
+                    builder.Append(", ");
+            }
+
+            if (defense != 0)
+                builder.AppendFormat("{0}{1} {2}", defense > 0 ? '+' : '-', defense, "Defense");
+
+            if (damage != 0 || defense != 0 || speed != 0)
                 builder.AppendLine();
         }
 
-        private void BuildKiDrainInline(StringBuilder builder, int unmasteredKiDrain, int masteredKiDrain)
+        private void BuildKiHealthDrainInline(StringBuilder builder, int unmasteredKiDrain, int masteredKiDrain, int unmasteredHealthDrain, int masteredHealthDrain)
         {
             // "While Unmastered"
             // "While Mastered"
 
-            if (unmasteredKiDrain == 0 && masteredKiDrain == 0) return;
-
-            if (unmasteredKiDrain == masteredKiDrain)
-                builder.AppendFormat("{0} Ki/Second\n", unmasteredKiDrain);
-            else
+            if (unmasteredKiDrain != 0 || masteredKiDrain != 0)
             {
-                if (unmasteredKiDrain != 0)
-                    builder.AppendFormat("{0}{1} Ki/Second {2}", unmasteredKiDrain > 0 ? '-' : '+', unmasteredKiDrain, "While Unmastered");
+                if (unmasteredKiDrain == masteredKiDrain)
+                    builder.AppendFormat("{0} Ki/Second\n", unmasteredKiDrain);
+                else
+                {
+                    if (unmasteredKiDrain != 0)
+                    {
+                        builder.AppendFormat("{0}{1} Ki/Second {2}", unmasteredKiDrain > 0 ? '-' : '+', unmasteredKiDrain, "While Unmastered");
 
-                if (unmasteredKiDrain != 0 && masteredKiDrain != 0)
-                    builder.Append(", ");
+                        if (masteredKiDrain != 0)
+                            builder.Append(", ");
+                    }
 
-                if (masteredKiDrain > 0)
-                    builder.AppendFormat("{0}{1} Ki/Second {2}", masteredKiDrain > 0 ? '-' : '+', masteredKiDrain, "While Mastered");
+                    if (masteredKiDrain > 0)
+                        builder.AppendFormat("{0}{1} Ki/Second {2}", masteredKiDrain > 0 ? '-' : '+', masteredKiDrain, "While Mastered");
 
-                if (unmasteredKiDrain != 0 && masteredKiDrain != 0)
-                    builder.AppendLine();
+                    if (unmasteredKiDrain != 0 && masteredKiDrain != 0)
+                        builder.AppendLine();
+                }
+            }
+
+            if (unmasteredHealthDrain != 0 || masteredHealthDrain != 0)
+            {
+                if (unmasteredHealthDrain == masteredHealthDrain)
+                    builder.AppendFormat("{0} Health/Second\n", unmasteredKiDrain);
+                else
+                {
+                    if (unmasteredHealthDrain != 0)
+                    {
+                        builder.AppendFormat("{0}{1} Health/Second {2}", unmasteredHealthDrain > 0 ? '-' : '+', unmasteredHealthDrain, "While Unmastered");
+
+                        if (masteredHealthDrain != 0)
+                            builder.Append(", ");
+                    }
+
+                    if (masteredHealthDrain != 0)
+                        builder.AppendFormat("{0}{1} Health/Second {2}", masteredHealthDrain > 0 ? '-' : '+', masteredHealthDrain, "While Mastered");
+
+                    if (unmasteredHealthDrain != 0 && masteredHealthDrain != 0)
+                        builder.AppendLine();
+                }
             }
         }
 
@@ -140,5 +193,9 @@ namespace DBT.Transformations
         public string UnlocalizedName => Definition.UnlocalizedName;
 
         public TransformationDefinition Definition { get; }
+
+        
+        public int TransformationTimer { get; private set; }
+        public float KiDrainMultiplier { get; private set; } = 1;
     }
 }
