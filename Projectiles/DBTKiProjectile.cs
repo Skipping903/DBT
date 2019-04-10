@@ -16,7 +16,7 @@ namespace DBT.Projectiles
                 Owner = Main.player[projectile.owner].GetModPlayer<DBTPlayer>();
 
             if (infusers == null)
-                infusers = Owner.player.GetItemsInInventory<Infuser>().ToArray();
+                infusers = Owner.player.GetItemsInInventory<Infuser>(accessories: true).ToArray();
 
             return base.PreAI();
         }

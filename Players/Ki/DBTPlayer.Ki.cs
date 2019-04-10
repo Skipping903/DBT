@@ -46,7 +46,7 @@ namespace DBT.Players
             {
                 ModifyKi(KiChargeRate);
 
-                List<IUpdatesOnChargeTick> items = player.GetItemsInInventory<IUpdatesOnChargeTick>();
+                List<IUpdatesOnChargeTick> items = player.GetItemsInInventory<IUpdatesOnChargeTick>(accessories: true, armor: true);
                 ;
             }
         }
