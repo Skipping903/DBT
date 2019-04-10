@@ -1,8 +1,10 @@
-﻿using Terraria.ID;
+﻿using DBT.Commons;
+using DBT.Players;
+using Terraria.ID;
 
 namespace DBT.Items.Accessories
 {
-    public sealed class BaldurEssentia : DBTItem
+    public sealed class BaldurEssentia : DBTItem, IUpdatesOnChargeTick
     {
         // TODO Add effect on charge.
         public BaldurEssentia() : base("Baldur Essentia", "The essence of strong defense.\nCharging grants a protective barrier that grants drastically increased defense")
@@ -22,5 +24,9 @@ namespace DBT.Items.Accessories
         }
 
         // TODO Add functionality
+        public void OnPlayerChargingTick(DBTPlayer dbtPlayer)
+        {
+            
+        }
     }
 }

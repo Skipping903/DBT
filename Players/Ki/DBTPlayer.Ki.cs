@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using DBT.Commons;
+using DBT.Extensions;
 using DBT.Network;
 using Terraria;
 using Terraria.ID;
@@ -40,7 +43,12 @@ namespace DBT.Players
         internal void PreUpdateKi()
         {
             if (IsCharging)
-                Ki += KiChargeRate;
+            {
+                ModifyKi(KiChargeRate);
+
+                List<IUpdatesOnChargeTick> items = player.GetItemsInInventory<IUpdatesOnChargeTick>();
+                ;
+            }
         }
 
         public float KiDamageMultiplier { get; set; } = 1;

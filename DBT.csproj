@@ -60,11 +60,13 @@
     <Compile Include="Commons\Items\IHasDefense.cs" />
     <Compile Include="Commons\Items\IHasRarity.cs" />
     <Compile Include="Commons\Items\IHasValue.cs" />
+    <Compile Include="Commons\IUpdatesOnChargeTick.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DBTMod.cs" />
     <Compile Include="Dynamicity\IHasParents.cs" />
     <Compile Include="Dynamicity\Node.cs" />
     <Compile Include="Dynamicity\Tree.cs" />
+    <Compile Include="Extensions\ItemChecksExtensions.cs" />
     <Compile Include="Extensions\ModPlayerExtensions.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />

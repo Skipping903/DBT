@@ -21,7 +21,7 @@ namespace DBT.Items.Developer
         {
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
-            Main.NewText(dbtPlayer.GetItemsInArmor<Infuser>().Count);
+            Main.NewText(dbtPlayer.player.GetItemsInInventory<Infuser>().Count);
 
             return true;
         }

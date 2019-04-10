@@ -45,7 +45,7 @@ namespace DBT.Items.Accessories
             recipe.AddIngredient(mod, nameof(WornGloves));
             recipe.AddIngredient(mod, nameof(ArmCannon));
             
-            recipe.AddIngredient(mod, nameof(ZTableTile));
+            recipe.AddTile(mod, nameof(ZTableTile));
             recipe.SetResult(this);
 
             recipe.AddRecipe();
