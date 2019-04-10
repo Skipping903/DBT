@@ -32,6 +32,7 @@ namespace DBT.Players
         public override void ResetEffects()
         {
             ResetEffectsKi();
+            ResetEffectsGuardian();
         }
 
 

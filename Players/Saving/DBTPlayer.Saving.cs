@@ -15,6 +15,7 @@ namespace DBT.Players
             SaveMastery(tag);
             SaveTransformations(tag);
             SaveKi(tag);
+            SaveGuardian(tag);
 
             ForAllAcquiredTransformations(t => t.Definition.OnPlayerSaving(this, tag));
 
@@ -28,6 +29,7 @@ namespace DBT.Players
             LoadMastery(tag);
             LoadTransformations(tag);
             LoadKi(tag);
+            LoadGuardian(tag);
 
             ForAllAcquiredTransformations(t => t.Definition.OnPlayerLoading(this, tag));
         }
