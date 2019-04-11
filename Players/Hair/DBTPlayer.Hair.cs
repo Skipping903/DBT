@@ -11,7 +11,7 @@ namespace DBT.Players
     {
         private Color? _originalHairColor = null;
 
-        internal void PostHandleHair()
+        internal void PreUpdateMovementHandleHair()
         {
             if (_originalHairColor.HasValue && FirstTransformation == null)
             {

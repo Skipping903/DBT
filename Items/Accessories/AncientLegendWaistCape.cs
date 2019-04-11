@@ -8,7 +8,7 @@ namespace DBT.Items.Accessories
     [AutoloadEquip(EquipType.Waist)]
     public sealed class AncientLegendWaistCape : DBTItem
     {
-        public AncientLegendWaistCape() : base("Ancient Legend Waistcape", "A ancient garment made of a ki enhancing material.\n14% reduced ki usage\n6% increased ki damage\n-250 max ki")
+        public AncientLegendWaistCape() : base("Ancient Legend Waistcape", "A ancient garment made of a Ki enhancing material\n14% reduced Ki usage\n6% increased Ki damage\n-250 max Ki")
         {
         }
 

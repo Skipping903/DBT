@@ -4,6 +4,6 @@ namespace DBT.Commons
 {
     public interface IUpdatesOnChargeTick
     {
-        void OnPlayerChargingTick(DBTPlayer dbtPlayer);
+        bool OnPlayerPostUpdateChargingTick(DBTPlayer dbtPlayer, ref float defenseMultiplier);
     }
 }

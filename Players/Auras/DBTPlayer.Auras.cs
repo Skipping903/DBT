@@ -8,7 +8,7 @@ namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {
-        internal void PostUpdateHandleAura()
+        internal void PreUpdateMovementHandleAura()
         {
             AuraAppearance aura = GetAura();
 

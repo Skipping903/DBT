@@ -43,6 +43,16 @@ namespace DBT.Players
             PreUpdateKi();
         }
 
+        public override void PreUpdateMovement()
+        {
+            if (Main.netMode != NetmodeID.Server)
+            {
+                
+                PreUpdateMovementHandleAura();
+                PreUpdateMovementHandleHair();
+            }
+        }
+
         #endregion
 
 
@@ -52,11 +62,7 @@ namespace DBT.Players
         {
             FirstTransformation = GetTransformation();
 
-            if (Main.netMode != NetmodeID.Server)
-            {
-                PostUpdateHandleAura();
-                PostHandleHair();
-            }
+            PreUpdateMovementHandleKi();
         }
 
         public override void PostUpdateRunSpeeds()

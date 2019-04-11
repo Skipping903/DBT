@@ -7,7 +7,7 @@ namespace DBT.Items.Accessories.Scouters
 {
     public sealed class ScouterMK1 : Scouter
     {
-        public ScouterMK1() : base("Green Scouter", "A Piece of equipment used for scanning power levels.\nIncreased Ki Damage and Hunter effect.\n-Tier 1-", 80 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.Orange, 0.05f)
+        public ScouterMK1() : base("Green Scouter", "A Piece of equipment used for scanning power levels\nIncreased Ki Damage and Hunter effect", 80 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.Orange, 0.05f)
         {
         }
 

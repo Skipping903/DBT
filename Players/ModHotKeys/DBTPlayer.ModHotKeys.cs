@@ -1,5 +1,8 @@
-﻿using Terraria;
+﻿using DBT.Commons.Buffs;
+using DBT.Extensions;
+using Terraria;
 using Terraria.GameInput;
+using Terraria.ModLoader;
 
 namespace DBT.Players
 {
@@ -7,7 +10,30 @@ namespace DBT.Players
     {
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            IsCharging = DBTMod.Instance.energyChargeKey.Current;
+            if (DBTMod.Instance.energyChargeKey.Current)
+            {
+                bool canCharge = true;
+
+                for (int i = 0; i < player.buffType.Length; i++)
+                {
+                    ModBuff modBuff = BuffLoader.GetBuff(player.buffType[i]);
+                    if (modBuff == null) continue;
+
+                    ICanStopCharging icsc = modBuff as ICanStopCharging;
+                    if (icsc == null) continue;
+
+                    if (icsc.DoesStopCharging(this))
+                    {
+                        canCharge = false;
+                        break;
+                    }
+                }
+
+                IsCharging = canCharge;
+            }
+            else
+                IsCharging = false;
+            
 
             if (player.whoAmI == Main.myPlayer)
             {

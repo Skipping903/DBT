@@ -7,7 +7,7 @@ namespace DBT.Items.Accessories
 {
     public sealed class WornGloves : DBTItem
     {
-        public WornGloves() : base("Worn Gloves", "10% Increased ki cast speed\n6% Increased ki damage")
+        public WornGloves() : base("Worn Gloves", "10% Increased Ki cast speed\n6% Increased Ki damage")
         {
         }
 

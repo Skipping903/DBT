@@ -2,9 +2,9 @@
 
 namespace DBT.Traits
 {
-    public abstract class Trait : IHasUnlocalizedName
+    public abstract class TraitDefinition : IHasUnlocalizedName
     {
-        protected Trait(string unlocalizedName)
+        protected TraitDefinition(string unlocalizedName)
         {
             UnlocalizedName = unlocalizedName;
         }

@@ -40,14 +40,14 @@ namespace DBT.Transformations
 
             TransformationTimer++;
             bool isFormMastered = dbtPlayer.HasMastered(Definition);
-            float kiDrain = -(isFormMastered ? Definition.GetUnmasteredKiDrain(dbtPlayer) : Definition.GetMasteredKiDrain(dbtPlayer));
+            float KiDrain = -(isFormMastered ? Definition.GetUnmasteredKiDrain(dbtPlayer) : Definition.GetMasteredKiDrain(dbtPlayer));
 
-            if (kiDrain != 0f)
+            if (KiDrain != 0f)
             {
                 if (!isFormMastered)
-                    kiDrain *= KiDrainMultiplier;
+                    KiDrain *= KiDrainMultiplier;
 
-                dbtPlayer.ModifyKi(kiDrain);
+                dbtPlayer.ModifyKi(KiDrain);
 
                 if (TransformationTimer % Definition.Drain.transformationStepDelay == 0 && KiDrainMultiplier < Definition.Drain.maxTransformationDrainMultiplier)
                     KiDrainMultiplier += Definition.Drain.multiplierPerStep;

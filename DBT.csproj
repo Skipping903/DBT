@@ -56,7 +56,9 @@
     <Compile Include="Auras\AuraDrawPlayer.cs" />
     <Compile Include="Auras\LightingAppearance.cs" />
     <Compile Include="Buffs\DBTBuff.cs" />
+    <Compile Include="Buffs\KiDegenerationBuff.cs" />
     <Compile Include="Buffs\MREBuff.cs" />
+    <Compile Include="Commons\Buffs\ICanStopCharging.cs" />
     <Compile Include="Commons\Items\IHasDefense.cs" />
     <Compile Include="Commons\Items\IHasRarity.cs" />
     <Compile Include="Commons\Items\IHasValue.cs" />
@@ -66,7 +68,8 @@
     <Compile Include="Dynamicity\IHasParents.cs" />
     <Compile Include="Dynamicity\Node.cs" />
     <Compile Include="Dynamicity\Tree.cs" />
-    <Compile Include="Extensions\ItemChecksExtensions.cs" />
+    <Compile Include="Extensions\BuffCheckExtensions.cs" />
+    <Compile Include="Extensions\ItemCheckExtensions.cs" />
     <Compile Include="Extensions\ModPlayerExtensions.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
@@ -84,7 +87,10 @@
     <Compile Include="Commons\IHasUnlocalizedName.cs" />
     <Compile Include="Items\Accessories\AncientLegendWaistCape.cs" />
     <Compile Include="Items\Accessories\ArmCannon.cs" />
-    <Compile Include="Items\Accessories\BaldurEssentia.cs" />
+    <Compile Include="Items\Accessories\Baldurs\BaldurEssentia.cs" />
+    <Compile Include="Items\Accessories\Baldurs\BaldurItem.cs" />
+    <Compile Include="Items\Accessories\Baldurs\BuldariumSigmite.cs" />
+    <Compile Include="Items\Accessories\Baldurs\IIsBaldur.cs" />
     <Compile Include="Items\Accessories\BattleKit.cs" />
     <Compile Include="Items\Accessories\Infusers\CursedFlameInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\IchorInfuser.cs" />
@@ -119,10 +125,18 @@
     <Compile Include="Items\Developer\DeveloperItem.cs" />
     <Compile Include="Items\Developer\HairSetter.cs" />
     <Compile Include="Items\Developer\InfuserChecker.cs" />
+    <Compile Include="Items\Developer\KiAdder.cs" />
+    <Compile Include="Items\Developer\KiFiller.cs" />
+    <Compile Include="Items\Developer\KiRemover.cs" />
     <Compile Include="Items\Developer\TransformationClearer.cs" />
     <Compile Include="Items\Developer\TransformationSetter.cs" />
     <Compile Include="Items\Guardian\Accessories\Chakras\ThroatChakra.cs" />
     <Compile Include="Items\Guardian\GuardianItem.cs" />
+    <Compile Include="Items\KiStones\EmptyKiStone.cs" />
+    <Compile Include="Items\KiStones\KiStone.cs" />
+    <Compile Include="Items\KiStones\KiStoneDefinition.cs" />
+    <Compile Include="Items\KiStones\KiStoneDefinitionManager.cs" />
+    <Compile Include="Items\KiStones\KiStones.cs" />
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
     <Compile Include="Items\Materials\Metals\RefinedMetal.cs" />
     <Compile Include="Items\Materials\Metals\ScrapMetal.cs" />
@@ -151,7 +165,7 @@
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
     <Compile Include="Tiles\ZTableTile.cs" />
-    <Compile Include="Traits\Trait.cs" />
+    <Compile Include="Traits\TraitDefinition.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Transformations\Developers\Webmilio\SoulStealerTransformation.cs" />
     <Compile Include="Transformations\LSSJs\LSSJ\LSSJTransformation.cs" />
@@ -203,6 +217,7 @@
       <HintPath>lib\ReLogic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="Terraria">
       <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
     </Reference>
@@ -218,6 +233,13 @@
     <Content Include="Items\Guardian\Accessories\Chakras\SolarPlexusChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\ThirdEyeChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\ThroatChakra.png" />
+    <Content Include="Items\KiStones\EmptyKiStone.png" />
+    <Content Include="Items\KiStones\KiStoneT1.png" />
+    <Content Include="Items\KiStones\KiStoneT2.png" />
+    <Content Include="Items\KiStones\KiStoneT3.png" />
+    <Content Include="Items\KiStones\KiStoneT4.png" />
+    <Content Include="Items\KiStones\KiStoneT5.png" />
+    <Content Include="Items\KiStones\KiStoneT6.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />

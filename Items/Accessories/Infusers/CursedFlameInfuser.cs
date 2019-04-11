@@ -5,7 +5,7 @@ namespace DBT.Items.Accessories.Infusers
 {
     public sealed class CursedFlameInfuser : Infuser
     {
-        public CursedFlameInfuser() : base("Cursed Flame Ki Infuser", "Hitting enemies with ki attacks inflicts cursed inferno.", 0 * Constants.SILVER_VALUE_MULTIPLIER, ItemID.CursedFlame)
+        public CursedFlameInfuser() : base("Cursed Flame Ki Infuser", "Hitting enemies with Ki attacks inflicts cursed inferno", 0 * Constants.SILVER_VALUE_MULTIPLIER, ItemID.CursedFlame)
         {
         }
 

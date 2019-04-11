@@ -2,7 +2,7 @@
 
 namespace DBT.Traits
 {
-    public sealed class TraitManager : Manager<Trait>
+    public sealed class TraitManager : Manager<TraitDefinition>
     {
         private static TraitManager _instance;
 
@@ -13,11 +13,11 @@ namespace DBT.Traits
             base.DefaultInitialize();
         }
 
-        public Trait Prodigy { get; private set; }
+        public TraitDefinition Prodigy { get; private set; }
 
-        public Trait Peaceful { get; private set; }
+        public TraitDefinition Peaceful { get; private set; }
 
-        public Trait Legendary { get; private set; }
+        public TraitDefinition Legendary { get; private set; }
 
         public static TraitManager Instance
         {

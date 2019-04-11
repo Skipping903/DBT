@@ -5,7 +5,7 @@ namespace DBT.Items.Accessories.Infusers
 {
     public sealed class IchorInfuser : Infuser
     {
-        public IchorInfuser() : base("Ichor Ki Infuser", "Hitting enemies with ki attacks inflicts ichor.", 0 * Constants.SILVER_VALUE_MULTIPLIER, ItemID.Ichor)
+        public IchorInfuser() : base("Ichor Ki Infuser", "Hitting enemies with Ki attacks inflicts ichor", 0 * Constants.SILVER_VALUE_MULTIPLIER, ItemID.Ichor)
         {
         }
 

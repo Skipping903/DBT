@@ -13,17 +13,17 @@ namespace DBT.Players
         private bool _isCharging;
 
 
-        public float ModifyKi(float kiAmount)
+        public float ModifyKi(float KiAmount)
         {
             // TODO Add mastery for being in a form, if need be.
 
-            float projectedKi = Ki + kiAmount;
+            float projectedKi = Ki + KiAmount;
 
             if (projectedKi < 0)
                 projectedKi = 0;
             else if (projectedKi > MaxKi)
                 projectedKi = MaxKi;
-            
+
             Ki = projectedKi;
             return Ki;
         }
@@ -42,12 +42,22 @@ namespace DBT.Players
 
         internal void PreUpdateKi()
         {
+            
+        }
+
+        internal void PreUpdateMovementHandleKi()
+        {
             if (IsCharging)
             {
                 ModifyKi(KiChargeRate);
 
                 List<IUpdatesOnChargeTick> items = player.GetItemsInInventory<IUpdatesOnChargeTick>(accessories: true, armor: true);
-                ;
+                float defenseMultiplier = 1;
+
+                for (int i = 0; i < items.Count; i++)
+                    items[i].OnPlayerPostUpdateChargingTick(this, ref defenseMultiplier);
+
+                player.statDefense = (int)(defenseMultiplier * player.statDefense);
             }
         }
 
@@ -73,7 +83,7 @@ namespace DBT.Players
             }
         }
 
-        public float BaseMaxKi { get; private set; }
+        public float BaseMaxKi { get; set; }
 
         public float MaxKiMultiplier { get; set; } = 1;
 

@@ -15,8 +15,8 @@ namespace DBT
 	{
 	    internal ModHotKey characterMenuKey, energyChargeKey, transformDownKey, speedToggleKey, transformUpKey;
 
-	    internal KiBar kiBar;
-	    internal UserInterface kiBarInterface;
+	    internal KiBar KiBar;
+	    internal UserInterface KiBarInterface;
 
 	    internal DBTMenu dbtMenu;
 	    internal UserInterface characterMenuInterface;
@@ -53,13 +53,13 @@ namespace DBT
 
 	            #region Ki Bar
 
-	            kiBar = new KiBar();
-	            kiBar.Activate();
+	            KiBar = new KiBar();
+	            KiBar.Activate();
 
-	            kiBarInterface = new UserInterface();
-	            kiBarInterface.SetState(kiBar);
+	            KiBarInterface = new UserInterface();
+	            KiBarInterface.SetState(KiBar);
 
-	            kiBar.Visible = true;
+	            KiBar.Visible = true;
 
                 #endregion
 
@@ -74,7 +74,7 @@ namespace DBT
 	    {
 	        if (!Main.dedServ)
 	        {
-	            kiBar.Visible = false;
+	            KiBar.Visible = false;
 
 	            dbtMenu.Visible = false;
 	        }

@@ -4,7 +4,7 @@ using Terraria;
 
 namespace DBT.Extensions
 {
-    public static class ItemChecksExtensions
+    public static class ItemCheckExtensions
     {
         public const int 
             ARMOR_SLOTS_COUNT = 3,

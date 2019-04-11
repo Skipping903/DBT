@@ -6,7 +6,7 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
 {
     public sealed class SapphireGemNecklace : GemNecklace
     {
-        public SapphireGemNecklace() : base("Sapphire Necklace", "9% increased ki damage and +100 max ki.", 65 * Constants.SILVER_VALUE_MULTIPLIER, 0, ItemID.Sapphire)
+        public SapphireGemNecklace() : base("Sapphire Necklace", "9% increased Ki damage and +100 max Ki.", 65 * Constants.SILVER_VALUE_MULTIPLIER, 0, ItemID.Sapphire)
         {
         }
 
