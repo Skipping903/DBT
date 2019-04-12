@@ -1,4 +1,5 @@
 ﻿using DBT.Commons;
+using DBT.Players;
 
 namespace DBT.Traits
 {
@@ -8,6 +9,8 @@ namespace DBT.Traits
         {
             UnlocalizedName = unlocalizedName;
         }
+
+        public virtual void OnPlayerMasteryGained(DBTPlayer dbtPlayer, ref float gain, float currentMastery) { }
 
         public string UnlocalizedName { get; }
     }

@@ -161,6 +161,7 @@
     <Compile Include="Players\Mastery\DBTPlayer.Masteries.Saving.cs" />
     <Compile Include="Players\ModHotKeys\DBTPlayer.ModHotKeys.cs" />
     <Compile Include="Players\Saving\DBTPlayer.Saving.cs" />
+    <Compile Include="Players\Traits\DBTPlayer.Traits.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />

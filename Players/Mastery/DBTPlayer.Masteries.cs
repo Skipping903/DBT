@@ -18,12 +18,13 @@ namespace DBT.Players
             if (playerTransformation.CurrentMastery >= maxMastery)
                 return;
 
-            float projectedMastery = playerTransformation.CurrentMastery + gain;
+            if (playerTransformation.CurrentMastery + gain > maxMastery)
+                gain = maxMastery - playerTransformation.CurrentMastery;
 
-            if (projectedMastery > maxMastery)
-                projectedMastery = maxMastery - playerTransformation.CurrentMastery;
+            if (Trait != null)
+                Trait.OnPlayerMasteryGained(this, ref gain, playerTransformation.CurrentMastery);
 
-            playerTransformation.CurrentMastery += maxMastery;
+            playerTransformation.CurrentMastery += gain;
             definition.OnPlayerMasteryGain(this, gain, playerTransformation.CurrentMastery);
         }
     }
