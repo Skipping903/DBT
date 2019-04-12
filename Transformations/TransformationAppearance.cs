@@ -5,7 +5,7 @@ namespace DBT.Transformations
 {
     public abstract class TransformationAppearance
     {
-        protected TransformationAppearance(AuraAppearance aura, HairAppearance hair)
+        protected TransformationAppearance(AuraAppearance aura, HairAppearance hair, Color? generalColor)
         {
             Aura = aura;
             Hair = hair;
@@ -14,6 +14,8 @@ namespace DBT.Transformations
         public AuraAppearance Aura { get; }
 
         public HairAppearance Hair { get; }
+
+        public Color? GeneralColor { get; }
     }
 
     public class HairAppearance

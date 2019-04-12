@@ -1,4 +1,9 @@
-﻿using Terraria.ID;
+﻿using DBT.Items.KiStones;
+using DBT.Players;
+using DBT.Tiles;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories.Baldurs
 {
@@ -16,6 +21,28 @@ namespace DBT.Items.Accessories.Baldurs
             item.width = 18;
             item.height = 30;
             item.accessory = true;
+        }
+
+        public override void UpdateAccessory(Player player, bool hideVisual)
+        {
+            if (player.GetModPlayer<DBTPlayer>().IsCharging)
+                player.shinyStone = true;
+        }
+
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+
+            ModRecipe recipe = new ModRecipe(mod);
+
+            recipe.AddIngredient(mod, nameof(BaldurEssentia));
+            recipe.AddIngredient(mod, nameof(KiStoneT3));
+            recipe.AddIngredient(ItemID.ShinyStone);
+
+            recipe.AddTile(mod, nameof(ZTableTile));
+            recipe.SetResult(this);
+
+            recipe.AddRecipe();
         }
     }
 }

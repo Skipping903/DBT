@@ -27,7 +27,7 @@ namespace DBT.Transformations.SSJs.SSJ2
         public SSJ2Appearance() : base(
             new AuraAppearance(new AuraAnimationInformation(typeof(SSJ2Transformation), 4, 3, BlendState.Additive, 1f, true),
                 new LightingAppearance(new float[] { 1.32f, 1.32f, 0f })),
-            new HairAppearance(Color.White))
+            new HairAppearance(Color.White), Color.Yellow)
         {
         }
     }

@@ -21,6 +21,7 @@ namespace DBT.Items.KiStones
             item.height = 24;
             item.value = Value;
             item.rare = Rarity;
+            item.maxStack = 99;
         }
 
         public int Value { get; }

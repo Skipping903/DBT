@@ -9,6 +9,12 @@ namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {
+        internal void PostUpdateHandleTransformations()
+        {
+            PostUpdateHandleTransformationsVisuals();
+        }
+
+
         public void ListenForTransformations()
         {
             // TODO Add transformation management code.

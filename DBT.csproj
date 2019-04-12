@@ -121,6 +121,7 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="Items\DBTGlobalItem.cs" />
     <Compile Include="Items\DBTItem.cs" />
     <Compile Include="Items\Developer\DeveloperItem.cs" />
     <Compile Include="Items\Developer\HairSetter.cs" />
@@ -145,7 +146,7 @@
     <Compile Include="Network\NetworkPacketManager.cs" />
     <Compile Include="Network\PlayerChargingPacket.cs" />
     <Compile Include="Network\Transformations\PlayerTransformedPacket.cs" />
-    <Compile Include="NPCs\DBTRGlobalNPC.cs" />
+    <Compile Include="NPCs\DBTGlobalNPC.cs" />
     <Compile Include="Players\Auras\DBTPlayer.Auras.cs" />
     <Compile Include="Players\DBTPlayer.Hooks.cs" />
     <Compile Include="Players\DBTPlayer.Visuals.cs" />

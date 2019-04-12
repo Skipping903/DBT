@@ -58,11 +58,11 @@ namespace DBT.Items.KiStones
             return definition;
         }
 
-        public KiStoneDefinition KiStoneT1 { get; private set; }
-        public KiStoneDefinition KiStoneT2 { get; private set; }
-        public KiStoneDefinition KiStoneT3 { get; private set; }
-        public KiStoneDefinition KiStoneT4 { get; private set; }
-        public KiStoneDefinition KiStoneT5 { get; private set; }
+        public KiStoneDefinition KiStoneT1 { get; private set; } // Stable
+        public KiStoneDefinition KiStoneT2 { get; private set; } // Calm
+        public KiStoneDefinition KiStoneT3 { get; private set; } // Prideful
+        public KiStoneDefinition KiStoneT4 { get; private set; } // Angerful
+        public KiStoneDefinition KiStoneT5 { get; private set; } // Pure
         public KiStoneDefinition KiStoneT6 { get; private set; }
 
         public Tree<KiStoneDefinition> Tree { get; private set; }

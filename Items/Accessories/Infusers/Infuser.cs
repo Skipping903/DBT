@@ -1,4 +1,6 @@
 ﻿using DBT.Commons.Items;
+using DBT.Items.KiStones;
+using DBT.Items.Materials.Metals;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -27,18 +29,18 @@ namespace DBT.Items.Accessories.Infusers
             item.accessory = true;
         }
 
-        // TODO Change recipe to fit new recipe structure.
         public override void AddRecipes()
         {
-            /*ModRecipe recipe = new ModRecipe(mod);
+            ModRecipe recipe = new ModRecipe(mod);
 
-            recipe.AddIngredient(mod, nameof(AngerKiCrystal), 25);
+            recipe.AddIngredient(mod, nameof(KiStoneT4), 2);
             recipe.AddIngredient(mod, nameof(ScrapMetal), 12);
             recipe.AddIngredient(GemID, GEM_COUNT);
 
             recipe.AddTile(TileID.Anvils);
             recipe.SetResult(this);
-            recipe.AddRecipe();*/
+
+            recipe.AddRecipe();
         }
 
         public int Value { get; }

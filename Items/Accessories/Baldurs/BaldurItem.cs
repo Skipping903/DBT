@@ -17,7 +17,7 @@ namespace DBT.Items.Accessories.Baldurs
             DefenseMultiplier = defenseMultiplier;
         }
 
-        public bool OnPlayerPostUpdateChargingTick(DBTPlayer dbtPlayer, ref float defenseMultiplier)
+        public virtual bool OnPlayerPostUpdateChargingTick(DBTPlayer dbtPlayer, ref float defenseMultiplier)
         {
             defenseMultiplier += DefenseMultiplier;
             return true;

@@ -1,4 +1,5 @@
-﻿using Terraria.ModLoader.IO;
+﻿using DBT.Transformations;
+using Terraria.ModLoader.IO;
 
 namespace DBT.Players
 {
@@ -17,6 +18,7 @@ namespace DBT.Players
             SaveKi(tag);
             SaveGuardian(tag);
 
+            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerSaving(this, tag));
             ForAllAcquiredTransformations(t => t.Definition.OnPlayerSaving(this, tag));
 
             return tag;
@@ -31,6 +33,7 @@ namespace DBT.Players
             LoadKi(tag);
             LoadGuardian(tag);
 
+            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerLoading(this, tag));
             ForAllAcquiredTransformations(t => t.Definition.OnPlayerLoading(this, tag));
         }
     }

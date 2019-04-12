@@ -2,14 +2,16 @@
 using DBT.Buffs;
 using DBT.Commons.Items;
 using DBT.Players;
+using DBT.Tiles;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace DBT.Items.KiStones
 {
     public class EmptyKiStone : DBTItem, IHasRarity
     {
-        public const int VALUE = (int) 1.5 * Constants.SILVER_VALUE_MULTIPLIER;
+        public const int VALUE = (int) 2 * Constants.SILVER_VALUE_MULTIPLIER;
 
         private static Dictionary<float, KiStoneDefinition> _requiredKiPerStone;
 
@@ -72,6 +74,25 @@ namespace DBT.Items.KiStones
             }
             else if (CurrentTry > 0)
                 item.TurnToAir();
+        }
+
+        public override void AddRecipes()
+        {
+            base.AddRecipes();
+            int[] gemIDs = new int[] { ItemID.Amethyst, ItemID.Diamond, ItemID.Emerald, ItemID.Ruby, ItemID.Sapphire, ItemID.Topaz };
+
+            for (int i = 0; i < gemIDs.Length; i++)
+            {
+                ModRecipe recipe = new ModRecipe(mod);
+
+                recipe.AddIngredient(ItemID.StoneBlock, 25);
+                recipe.AddIngredient(gemIDs[i]);
+                recipe.AddTile(mod, nameof(ZTableTile));
+
+                recipe.SetResult(this);
+
+                recipe.AddRecipe();
+            }
         }
 
         public int Rarity => ItemRarityID.White;

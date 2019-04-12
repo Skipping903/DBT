@@ -39,7 +39,7 @@ namespace DBT.Transformations
             LSSJ = Add(new LSSJTransformation()) as LSSJTransformation;
             SSJC = Add(new SSJCTypeTransformation(LSSJ)) as SSJCTypeTransformation;
 
-            //SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
+            SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
             Tree = new Tree<TransformationDefinition>(byIndex);
 
             base.DefaultInitialize();

@@ -27,7 +27,7 @@ namespace DBT.Transformations.SSJs.SSJ4s.SSJ4
         public SSJ4Appearance() : base(
             new AuraAppearance(new AuraAnimationInformation(typeof(SSJ4Transformation), 4, 3, BlendState.Additive, 1f, true),
                 new LightingAppearance(new float[] { 1.60f, 1.40f, 0f })),
-            new HairAppearance(Color.White))
+            new HairAppearance(Color.White), Color.Red)
         {
         }
     }

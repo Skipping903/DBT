@@ -75,6 +75,10 @@ namespace DBT.Transformations
 
         public virtual void OnPreAcquirePlayerDied(DBTPlayer dbtPlayer, double damage, bool pvp, PlayerDeathReason damageSource) { }
 
+        public virtual void OnPreAcquirePlayerLoading(DBTPlayer dbtPlayer, TagCompound tag) { }
+
+        public virtual void OnPreAcquirePlayerSaving(DBTPlayer dbtPlayer, TagCompound tag) { }
+
         #endregion
 
 

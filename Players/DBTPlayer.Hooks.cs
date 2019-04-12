@@ -62,7 +62,8 @@ namespace DBT.Players
         {
             FirstTransformation = GetTransformation();
 
-            PreUpdateMovementHandleKi();
+            PostUpdateHandleKi();
+            PostUpdateHandleTransformations();
         }
 
         public override void PostUpdateRunSpeeds()

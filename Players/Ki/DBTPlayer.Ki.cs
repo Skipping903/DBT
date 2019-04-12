@@ -45,7 +45,7 @@ namespace DBT.Players
             
         }
 
-        internal void PreUpdateMovementHandleKi()
+        internal void PostUpdateHandleKi()
         {
             if (IsCharging)
             {
