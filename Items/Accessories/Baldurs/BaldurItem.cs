@@ -6,14 +6,10 @@ using Terraria;
 
 namespace DBT.Items.Accessories.Baldurs
 {
-    public abstract class BaldurItem : DBTItem, IIsBaldur, IHasValue, IHasDefense, IHasRarity
+    public abstract class BaldurItem : DBTItem, IIsBaldur
     {
-        protected BaldurItem(string displayName, string tooltip, int value, int defense, int rarity, float defenseMultiplier) : base(displayName, tooltip)
+        protected BaldurItem(string displayName, string tooltip, int value, int defense, int rarity, float defenseMultiplier, int width = 18, int height = 30) : base(displayName, tooltip, value, defense, rarity)
         {
-            Value = value;
-            Defense = defense;
-            Rarity = rarity;
-
             DefenseMultiplier = defenseMultiplier;
         }
 
@@ -40,11 +36,6 @@ namespace DBT.Items.Accessories.Baldurs
 
             return true;
         }
-
-
-        public int Value { get; }
-        public int Defense { get; }
-        public int Rarity { get; }
 
         public float DefenseMultiplier { get; }
     }

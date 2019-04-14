@@ -2,13 +2,15 @@
 using DBT.Players;
 using DBT.Tiles;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories
 {
     public sealed class BattleKit : DBTItem
     {
-        public BattleKit() : base("Battle Kit", "The essence of strong defense.\nCharging grants a protective barrier that grants drastically increased defense.")
+        public BattleKit() : base("Battle Kit", "The essence of strong defense.\nCharging grants a protective barrier that grants drastically increased defense.", 
+            18, 30, value: 40 * Constants.SILVER_VALUE_MULTIPLIER, rarity: ItemRarityID.LightRed)
         {
         }
 
@@ -16,10 +18,6 @@ namespace DBT.Items.Accessories
         {
             base.SetDefaults();
 
-            item.width = 18;
-            item.height = 30;
-            item.value = 40 * Constants.SILVER_VALUE_MULTIPLIER;
-            item.rare = 4;
             item.accessory = true;
         }
 

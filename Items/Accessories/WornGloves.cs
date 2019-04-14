@@ -7,7 +7,8 @@ namespace DBT.Items.Accessories
 {
     public sealed class WornGloves : DBTItem
     {
-        public WornGloves() : base("Worn Gloves", "10% Increased Ki cast speed\n6% Increased Ki damage")
+        public WornGloves() : base("Worn Gloves", "10% Increased Ki cast speed\n6% Increased Ki damage", 
+            22, 16, value: 16 * Constants.SILVER_VALUE_MULTIPLIER, defense: 0, rarity: ItemRarityID.Orange)
         {
         }
 
@@ -15,10 +16,6 @@ namespace DBT.Items.Accessories
         {
             base.SetDefaults();
 
-            item.width = 22;
-            item.height = 16;
-            item.value = 16 * Constants.SILVER_VALUE_MULTIPLIER;
-            item.rare = 3;
             item.accessory = true;
         }
 

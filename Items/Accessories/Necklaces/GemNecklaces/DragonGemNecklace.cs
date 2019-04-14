@@ -8,7 +8,7 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
 {
     public sealed class DragonGemNecklace : DBTItem
     {
-        public DragonGemNecklace() : base("Dragon Gem Necklace", "Infused with the essence of the dragon.\nAll effects of the previous necklaces, some enhanced.")
+        public DragonGemNecklace() : base("Dragon Gem Necklace", "Infused with the essence of the dragon.\nAll effects of the previous necklaces, some enhanced.", 640 * Constants.SILVER_VALUE_MULTIPLIER, 2, ItemRarityID.LightRed)
         {
         }
 
@@ -16,11 +16,7 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
         {
             item.width = 22;
             item.height = 34;
-            item.value = 640 * Constants.SILVER_VALUE_MULTIPLIER;
-
-            item.rare = ItemRarityID.LightRed;
             item.accessory = true;
-            item.defense = 2;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

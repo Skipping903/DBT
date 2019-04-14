@@ -11,11 +11,9 @@ namespace DBT.Items.Accessories.Infusers
     {
         private const int GEM_COUNT = 5;
 
-        protected Infuser(string displayName, string tooltip, int value, int gemID, int rarity = ItemRarityID.Pink) : base(displayName, tooltip)
+        protected Infuser(string displayName, string tooltip, int value, int gemID, int rarity = ItemRarityID.Pink) : base(displayName, tooltip, value, 0, rarity)
         {
-            Value = value;
             GemID = gemID;
-            Rarity = rarity;
         }
 
         public override void SetDefaults()
@@ -24,8 +22,6 @@ namespace DBT.Items.Accessories.Infusers
 
             item.width = 18;
             item.height = 30;
-            item.value = Value;
-            item.rare = Rarity;
             item.accessory = true;
         }
 
@@ -43,10 +39,6 @@ namespace DBT.Items.Accessories.Infusers
             recipe.AddRecipe();
         }
 
-        public int Value { get; }
-
         public int GemID { get; }
-
-        public int Rarity { get; }
     }
 }

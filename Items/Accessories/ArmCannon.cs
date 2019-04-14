@@ -6,7 +6,8 @@ namespace DBT.Items.Accessories
 {
     public sealed class ArmCannon : DBTItem
     {
-        public ArmCannon() : base("Arm Cannon", "An old arm blaster used by many soldiers.\n10% Reduced Ki usage\nIncreased charge speed")
+        public ArmCannon() : base("Arm Cannon", "An old arm blaster used by many soldiers.\n10% Reduced Ki usage\nIncreased charge speed",
+            18, 30, value: 3 * Constants.SILVER_VALUE_MULTIPLIER, rarity: ItemRarityID.LightRed)
         {
         }
 
@@ -14,10 +15,6 @@ namespace DBT.Items.Accessories
         {
             base.SetDefaults();
 
-            item.width = 18;
-            item.height = 30;
-            item.value = 3 * Constants.SILVER_VALUE_MULTIPLIER;
-            item.rare = ItemRarityID.LightRed;
             item.accessory = true;
         }
 

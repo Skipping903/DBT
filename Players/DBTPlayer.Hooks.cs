@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using DBT.Commons;
+using DBT.Extensions;
 using DBT.HairStyles;
 using DBT.Transformations;
 using Terraria;
@@ -77,6 +79,18 @@ namespace DBT.Players
         }
 
         #endregion
+
+
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            List<IUpdateOnPlayerPreHurt> items = player.GetItemsInInventory<IUpdateOnPlayerPreHurt>();
+
+            for (int i = 0; i < items.Count; i++)
+                if (!items[i].OnPlayerPreHurt(this, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
+                    return false;
+
+            return true;
+        }
 
 
         public override void ModifyDrawLayers(List<PlayerLayer> layers)

@@ -18,8 +18,6 @@ namespace DBT.Items.Accessories.Baldurs
         {
             base.SetDefaults();
 
-            item.width = 18;
-            item.height = 30;
             item.accessory = true;
         }
 
