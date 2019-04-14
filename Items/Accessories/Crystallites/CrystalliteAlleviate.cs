@@ -7,25 +7,9 @@ namespace DBT.Items.Accessories.Crystallites
 {
     public sealed class CrystalliteAlleviate : Crystallite
     {
-        public CrystalliteAlleviate() : base("Aspera Crystallite", "'The essence of pure energy lives within the crystal'\nDrastically Increased speed while charging\n+2500 Max ki", 
-            22, 34, 1440 * Constants.SILVER_VALUE_MULTIPLIER, 0, ItemRarityID.Cyan)
+        public CrystalliteAlleviate() : base("Aspera Crystallite", "'The essence of pure energy lives within the crystal.'\nDrastically Increased speed while charging\n+2500 Max ki", 
+            22, 34, 1440 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.Cyan, 2500)
         {
-        }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-
-            item.accessory = true;
-        }
-
-        public override void UpdateAccessory(Player player, bool hideVisual)
-        {
-            base.UpdateAccessory(player, hideVisual);
-            DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
-
-            // TODO Add charging speed buff.
-            dbtPlayer.MaxKiModifier += 2500;
         }
 
         public override void AddRecipes()
