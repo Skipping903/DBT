@@ -9,13 +9,13 @@ using Terraria.ModLoader;
 
 namespace DBT.Items.KiStones
 {
-    public class EmptyKiStone : DBTItem, IHasRarity
+    public class EmptyKiStone : DBTItem
     {
         public const int VALUE = (int) 2 * Constants.SILVER_VALUE_MULTIPLIER;
 
         private static Dictionary<float, KiStoneDefinition> _requiredKiPerStone;
 
-        public EmptyKiStone() : base("Empty Ki Stone", "This ancient stone looks like it can be charged.")
+        public EmptyKiStone() : base("Empty Ki Stone", "This ancient stone looks like it can be charged.", VALUE, 0, ItemRarityID.White)
         {
         }
 
@@ -25,8 +25,6 @@ namespace DBT.Items.KiStones
 
             item.width = 24;
             item.height = 24;
-            item.rare = Rarity;
-            item.value = VALUE;
         }
 
         public override void HoldItem(Player player)
@@ -94,8 +92,6 @@ namespace DBT.Items.KiStones
                 recipe.AddRecipe();
             }
         }
-
-        public int Rarity => ItemRarityID.White;
 
         public int CurrentTry { get; protected set; }
         public bool ChargingInTry { get; protected set; }

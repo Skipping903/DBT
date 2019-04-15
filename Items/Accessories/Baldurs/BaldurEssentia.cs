@@ -7,7 +7,7 @@ namespace DBT.Items.Accessories.Baldurs
 {
     public sealed class BaldurEssentia : BaldurItem
     {
-        public BaldurEssentia() : base("Baldur Essentia", "'The essence of strong defense'\nCharging grants a protective barrier that grants drastically increased defense",
+        public BaldurEssentia() : base("Baldur Essentia", "'The essence of strong defense.'\nCharging grants a protective barrier that grants drastically increased defense",
             3 * Constants.SILVER_VALUE_MULTIPLIER, 6, ItemRarityID.LightRed, 0.3f)
         {
         }
@@ -16,8 +16,6 @@ namespace DBT.Items.Accessories.Baldurs
         {
             base.SetDefaults();
 
-            item.width = 18;
-            item.height = 30;
             item.accessory = true;
         }
     }

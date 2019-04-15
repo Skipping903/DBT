@@ -62,6 +62,7 @@
     <Compile Include="Commons\Items\IHasDefense.cs" />
     <Compile Include="Commons\Items\IHasRarity.cs" />
     <Compile Include="Commons\Items\IHasValue.cs" />
+    <Compile Include="Commons\IUpdateOnPlayerPreHurt.cs" />
     <Compile Include="Commons\IUpdatesOnChargeTick.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DBTMod.cs" />
@@ -92,6 +93,12 @@
     <Compile Include="Items\Accessories\Baldurs\BuldariumSigmite.cs" />
     <Compile Include="Items\Accessories\Baldurs\IIsBaldur.cs" />
     <Compile Include="Items\Accessories\BattleKit.cs" />
+    <Compile Include="Items\Accessories\BlackDiamondShell.cs" />
+    <Compile Include="Items\Accessories\BloodstainedBandana.cs" />
+    <Compile Include="Items\Accessories\Crystallites\Crystallite.cs" />
+    <Compile Include="Items\Accessories\Crystallites\CrystalliteAlleviate.cs" />
+    <Compile Include="Items\Accessories\Crystallites\CrystalliteControl.cs" />
+    <Compile Include="Items\Accessories\Crystallites\CrystalliteFlow.cs" />
     <Compile Include="Items\Accessories\Infusers\CursedFlameInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\IchorInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\AmethystInfuser.cs" />

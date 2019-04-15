@@ -8,7 +8,7 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
         private const int GEM_COUNT = 5;
 
         // TODO Add auto value calculation based on GEN_COUNT and Terraria.Main.item[gemID].value.
-        protected GemNecklace(string displayName, string tooltip, int value, int defense, int gemID) : base(displayName, tooltip, 22, 34, value, ItemRarityID.Orange, defense)
+        protected GemNecklace(string displayName, string tooltip, int value, int defense, int gemID) : base(displayName, tooltip, 22, 34, value, defense, ItemRarityID.Orange)
         {
             GemID = gemID;
         }
