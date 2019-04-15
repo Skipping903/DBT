@@ -167,6 +167,7 @@
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
     <Compile Include="Tiles\ZTableTile.cs" />
+    <Compile Include="Traits\TraitBuff.cs" />
     <Compile Include="Traits\TraitDefinition.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Transformations\Developers\Webmilio\SoulStealerTransformation.cs" />
