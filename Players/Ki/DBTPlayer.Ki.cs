@@ -38,6 +38,9 @@ namespace DBT.Players
 
             KiSpeedAddition = 0;
             KiKnockbackAddition = 0;
+            KiCritAddition = 0;
+
+            KiRegenAddition = 0;
         }
 
         internal void PreUpdateKi()
@@ -95,5 +98,9 @@ namespace DBT.Players
         public float KiSpeedAddition { get; set; }
 
         public float KiKnockbackAddition { get; set; }
+
+        public int KiCritAddition { get; set; }
+
+        public int KiRegenAddition { get; set; }
     }
 }
