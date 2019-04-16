@@ -128,6 +128,8 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitGi.cs" />
+    <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitPants.cs" />
     <Compile Include="Items\DBTGlobalItem.cs" />
     <Compile Include="Items\DBTItem.cs" />
     <Compile Include="Items\Developer\DeveloperItem.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
     <Compile Include="Items\Materials\Metals\RefinedMetal.cs" />
     <Compile Include="Items\Materials\Metals\ScrapMetal.cs" />
+    <Compile Include="Items\Tiles\KaiTableItem.cs" />
     <Compile Include="Items\Tiles\ZTableItem.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
@@ -173,6 +176,7 @@
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
+    <Compile Include="Tiles\KaiTableTile.cs" />
     <Compile Include="Tiles\ZTableTile.cs" />
     <Compile Include="Traits\TraitBuff.cs" />
     <Compile Include="Traits\TraitDefinition.cs" />
@@ -229,12 +233,13 @@
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Terraria">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
     <Content Include="description.txt" />
+    <Content Include="Items\Consumables\YemmaFruit.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\All7Chakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\CrownChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\HeartChakra.png" />
@@ -243,6 +248,13 @@
     <Content Include="Items\Guardian\Accessories\Chakras\SolarPlexusChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\ThirdEyeChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\ThroatChakra.png" />
+    <Content Include="Items\Guardian\BloodStone\EmptyBloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T1BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T2BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T3BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T4BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T5BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T6BloodStone.png" />
     <Content Include="Items\KiStones\EmptyKiStone.png" />
     <Content Include="Items\KiStones\KiStoneT1.png" />
     <Content Include="Items\KiStones\KiStoneT2.png" />
@@ -253,6 +265,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+    <Folder Include="Items\Armor\Individual\" />
+    <Folder Include="Items\Armor\Sets\Black\" />
+    <Folder Include="Items\Armor\Sets\Demon\" />
+    <Folder Include="Items\Armor\Sets\EliteSaiyan\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Dragon\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Kaioshin\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Mechanical\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Metamoran\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Saiyaman\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Whis\" />
+    <Folder Include="Items\Armor\Sets\Radiant\" />
+    <Folder Include="Items\Armor\Sets\SaiyanScout\" />
+    <Folder Include="Items\Armor\Sets\Saiyan\" />
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
