@@ -1,18 +1,17 @@
 ﻿using Terraria.ID;
 using Terraria.ModLoader;
+using DBT.Tiles;
 
 namespace DBT.Items.Tiles
 {
     public sealed class KaiTableItem : DBTItem
     {
-        public KaiTableItem() : base("Kai Table", "It pulses with divine pressure, it seems to entrance you.")
+        public KaiTableItem() : base("Kai Table", "It pulses with divine pressure, it seems to entrance you.", 24, 26)
         {
         }
 
         public override void SetDefaults()
         {
-            item.width = 24;
-            item.height = 26;
             item.maxStack = 99;
 
             item.useTurn = true;

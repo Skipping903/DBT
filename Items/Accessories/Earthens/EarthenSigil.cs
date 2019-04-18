@@ -37,7 +37,7 @@ namespace DBT.Items.Accessories.Earthens
             ModRecipe recipe = new ModRecipe(mod);
 
             recipe.AddIngredient(ItemID.StoneBlock, 50);
-            recipe.AddIngredient(mod, nameof(EarthenShard), 10);
+            //recipe.AddIngredient(mod, nameof(EarthenShard), 10);
             recipe.AddIngredient(mod, nameof(KiStoneT3), 3);
 
             recipe.AddTile(mod, nameof(ZTableTile));

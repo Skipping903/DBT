@@ -18,7 +18,7 @@ namespace DBT.Items.Accessories.Crystallites
 
             ModRecipe recipe = new ModRecipe(mod);
 
-            recipe.AddIngredient(mod, nameof(RadiantFragment));
+            //recipe.AddIngredient(mod, nameof(RadiantFragment));
             recipe.AddIngredient(ItemID.FragmentNebula, 5);
             recipe.AddIngredient(ItemID.FragmentSolar, 5);
             recipe.AddIngredient(ItemID.FragmentStardust, 5);

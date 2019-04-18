@@ -11,7 +11,7 @@ namespace DBT.Items.Guardian
 {
     public abstract class GuardianItem : DBTItem
     {
-        protected GuardianItem(string displayName, string tooltip) : base(displayName, tooltip)
+        protected GuardianItem(string displayName, string tooltip, int width, int height) : base(displayName, tooltip, width, height)
         {
         }
 

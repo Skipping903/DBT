@@ -12,7 +12,7 @@ namespace DBT.Items.Accessories.Scouters
     [AutoloadEquip(EquipType.Head, EquipType.Face)]
     public abstract class Scouter : DBTItem, IHasValue, IHasRarity
     {
-        protected Scouter(string displayName, string tooltip, int value, int rarity, float KiDamageMultiplier) : base(displayName, tooltip)
+        protected Scouter(string displayName, string tooltip, int value, int rarity, float KiDamageMultiplier, int width = 24, int height = 28) : base(displayName, tooltip, width, height)
         {
             Value = value;
             Rarity = rarity;

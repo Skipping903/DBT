@@ -5,14 +5,12 @@ namespace DBT.Items.Tiles
 {
     public sealed class ZTableItem : DBTItem
     {
-        public ZTableItem() : base("Z-Table", "A device capable of bending the essence of Ki itself.")
+        public ZTableItem() : base("Z-Table", "A device capable of bending the essence of Ki itself.", 24, 26)
         {
         }
 
         public override void SetDefaults()
         {
-            item.width = 24;
-            item.height = 26;
             item.maxStack = 99;
 
             item.useTurn = true;

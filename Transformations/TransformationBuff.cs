@@ -9,7 +9,7 @@ namespace DBT.Transformations
 {
     public abstract class TransformationBuff : DBTBuff, IHasUnlocalizedName
     {
-        protected TransformationBuff(TransformationDefinition definition)
+        protected TransformationBuff(TransformationDefinition definition, string displayName = "", string tooltip = "") : base(displayName, tooltip)
         {
             Definition = definition;
         }

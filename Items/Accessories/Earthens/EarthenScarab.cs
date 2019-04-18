@@ -33,7 +33,7 @@ namespace DBT.Items.Accessories.Earthens
             ModRecipe recipe = new ModRecipe(mod);
 
             recipe.AddIngredient(ItemID.StoneBlock, 100);
-            recipe.AddIngredient(mod, nameof(AstralEssentia), 10);
+            //recipe.AddIngredient(mod, nameof(AstralEssentia), 10);
             
             recipe.AddTile(mod, nameof(ZTableTile));
             recipe.SetResult(this);
