@@ -66,7 +66,11 @@ namespace DBT.Players
 
         public float Ki { get; private set; }
 
-        public float KiChargeRate { get; internal set; }
+        public float KiChargeRate { get; set; }
+
+        public float KiChargeRateMultiplierLimit { get; set; }
+
+        public float NaturalKiRegeneration { get; set; }
 
         public bool IsCharging
         {
@@ -82,6 +86,7 @@ namespace DBT.Players
                     NetworkPacketManager.Instance.PlayerChargingPacket.SendPacketToServer(Main.myPlayer, (byte)Main.myPlayer, value);
             }
         }
+
 
         public float BaseMaxKi { get; set; }
 
