@@ -6,7 +6,7 @@ namespace DBT.Items.Accessories.Necklaces
 {
     public sealed class AncientLegendNecklace : Necklace
     {
-        public AncientLegendNecklace() : base("Ancient Legend Necklace", "A ancient necklace that seems to seal energy.\n12% reduced Ki usage\n9% increased Ki damage\n-500 max Ki", 24, 28, 128 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.Pink, 0)
+        public AncientLegendNecklace() : base("Ancient Legend Necklace", "A ancient necklace that seems to seal energy.\n12% reduced Ki usage\n9% increased Ki damage\n-500 max Ki", 24, 28, Item.buyPrice(gold:1, silver: 28), ItemRarityID.Pink, 0)
         {
         }
 

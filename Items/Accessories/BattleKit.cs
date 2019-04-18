@@ -10,7 +10,7 @@ namespace DBT.Items.Accessories
     public sealed class BattleKit : DBTItem
     {
         public BattleKit() : base("Battle Kit", "The essence of strong defense.\nCharging grants a protective barrier that grants drastically increased defense.", 
-            18, 30, value: 40 * Constants.SILVER_VALUE_MULTIPLIER, rarity: ItemRarityID.LightRed)
+            18, 30, value: Item.buyPrice(silver: 40), rarity: ItemRarityID.LightRed)
         {
         }
 

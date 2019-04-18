@@ -7,7 +7,7 @@ namespace DBT.Items.Accessories.Infusers
 {
     public class DragonCrystalInfuser : DBTItem
     {
-        public DragonCrystalInfuser() : base("Dragon Crystal Ki Infuser", "Hitting enemies with Ki attacks inflicts a multitude of debuffs", 1371 * Constants.SILVER_VALUE_MULTIPLIER, 0, ItemRarityID.Yellow)
+        public DragonCrystalInfuser() : base("Dragon Crystal Ki Infuser", "Hitting enemies with Ki attacks inflicts a multitude of debuffs", Item.buyPrice(gold:13, silver: 71), 0, ItemRarityID.Yellow)
         {
         }
 
