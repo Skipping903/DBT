@@ -5,7 +5,7 @@ namespace DBT.Items.Accessories.Infusers
 {
     public class TopazInfuser : Infuser
     {
-        public TopazInfuser() : base("Topaz Ki Infuser", "Hitting enemies with Ki attacks inflicts on fire", 150 * Constants.SILVER_VALUE_MULTIPLIER, ItemID.Topaz)
+        public TopazInfuser() : base("Topaz Ki Infuser", "Hitting enemies with Ki attacks inflicts on fire", Item.buyPrice(gold:1, silver: 50), ItemID.Topaz)
         {
         }
 

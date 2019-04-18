@@ -40,7 +40,9 @@ namespace DBT.Players
             KiKnockbackAddition = 0;
             KiCritAddition = 0;
 
-            KiRegenAddition = 0;
+            NaturalKiRegeneration = 0;
+            KiChargeRate = 0;
+            KiChargeRateMultiplierLimit = 0;
         }
 
         internal void PreUpdateKi()
@@ -105,7 +107,5 @@ namespace DBT.Players
         public float KiKnockbackAddition { get; set; }
 
         public int KiCritAddition { get; set; }
-
-        public int KiRegenAddition { get; set; }
     }
 }

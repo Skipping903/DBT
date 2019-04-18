@@ -1,13 +1,14 @@
 ﻿using DBT.Items.KiStones;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria;
 
 namespace DBT.Items.Accessories.Crystallites
 {
     public sealed class CrystalliteFlow : CrystalliteItem
     {
         public CrystalliteFlow() : base("Influunt Crystallite", "'The essence of a calm flowing spirit lives within the crystal.'\nGreatly Increased speed while charging\n+1000 Max ki",
-            22, 34, 640 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.Pink, 1000)
+            22, 34, Item.buyPrice(gold:6, silver: 40), ItemRarityID.Pink, 1000)
         {
         }
 

@@ -8,7 +8,7 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
 {
     public sealed class DragonGemNecklace : DBTItem
     {
-        public DragonGemNecklace() : base("Dragon Gem Necklace", "Infused with the essence of the dragon.\nAll effects of the previous necklaces, some enhanced.", 640 * Constants.SILVER_VALUE_MULTIPLIER, 2, ItemRarityID.LightRed)
+        public DragonGemNecklace() : base("Dragon Gem Necklace", "Infused with the essence of the dragon.\nAll effects of the previous necklaces, some enhanced.", Item.buyPrice(gold: 6, silver: 40), 2, ItemRarityID.LightRed)
         {
         }
 

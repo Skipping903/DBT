@@ -9,7 +9,7 @@ namespace DBT.Items.Accessories.Crystallites
     public sealed class CrystalliteControl : CrystalliteItem
     {
         public CrystalliteControl() : base("Imperium Crystallite", "'The essence of pure ki control lives within the crystal.'\nIncreased speed while charging\n+500 Max ki", 
-            22, 34, 240 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.LightRed, 500)
+            22, 34, Item.buyPrice(gold:2, silver: 40), ItemRarityID.LightRed, 500)
         {  
         }
 

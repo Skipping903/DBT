@@ -3,13 +3,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBT.Items.Armor.Sets.Turtle
+namespace DBT.Items.Armors.Sets.Turtle
 {
     [AutoloadEquip(EquipType.Legs)]
     public class TurtleHermitPants : DBTItem
     {
         public TurtleHermitPants() : base("Turtle Hermit Pants", "4% Increased Ki Damage\n4% Increased Ki Knockback\n+10% Increased movement speed",
-            28, 18, value: 22 * Constants.SILVER_VALUE_MULTIPLIER, defense: 6, rarity: ItemRarityID.Orange)
+            28, 18, value: Item.buyPrice(silver: 22), defense: 6, rarity: ItemRarityID.Orange)
         {
         }
 

@@ -11,7 +11,7 @@ namespace DBT.Items.Accessories
             "\n5% Increased Ki damage" +
             "\n+200 Max ki" +
             "\nCharging grants a aura of fire around you",
-            18, 30, value: Item.buyPrice(silver: 80), rarity: ItemRarityID.LightRed)
+            18, 30, value: Item.buyPrice(gold:1, silver: 50), rarity: ItemRarityID.LightRed)
         {
         }
 

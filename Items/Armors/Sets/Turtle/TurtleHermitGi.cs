@@ -3,13 +3,13 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBT.Items.Armor.Sets.Turtle
+namespace DBT.Items.Armors.Sets.Turtle
 {
     [AutoloadEquip(EquipType.Body)]
     public class TurtleHermitGi : DBTItem
     {
         public TurtleHermitGi() : base("Turtle Hermit Gi", "5% Increased Ki Damage\n3% Increased Ki Crit Chance\nIncreased ki regen",
-            28, 18, value: 36 * Constants.SILVER_VALUE_MULTIPLIER, defense: 8, rarity: ItemRarityID.Orange)
+            28, 18, value: Item.buyPrice(silver: 36), defense: 8, rarity: ItemRarityID.Orange)
         {
         }
 
@@ -39,7 +39,7 @@ namespace DBT.Items.Armor.Sets.Turtle
 
             dbtPlayer.KiDamageMultiplier += 0.05f;
             dbtPlayer.KiCritAddition += 3;
-            dbtPlayer.KiRegenAddition += 1;
+            dbtPlayer.NaturalKiRegeneration += 1;
 
         }
         /*public override void AddRecipes()

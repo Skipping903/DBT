@@ -1,5 +1,6 @@
 ﻿using DBT.Items.Materials.Metals;
 using DBT.Tiles;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -7,7 +8,7 @@ namespace DBT.Items.Accessories.Scouters
 {
     public sealed class ScouterMK2 : Scouter
     {
-        public ScouterMK2() : base("Blue Scouter", "A Piece of equipment used for scanning power levels\nGives Increased Ki Damage and Hunter effect", 140 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.LightRed, 0.08f)
+        public ScouterMK2() : base("Blue Scouter", "A Piece of equipment used for scanning power levels\n8% Increased Ki Damage and Hunter effect", Item.buyPrice(gold: 1, silver: 40), ItemRarityID.LightRed, 0.08f)
         {
         }
 
