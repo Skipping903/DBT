@@ -95,10 +95,15 @@
     <Compile Include="Items\Accessories\BattleKit.cs" />
     <Compile Include="Items\Accessories\BlackDiamondShell.cs" />
     <Compile Include="Items\Accessories\BloodstainedBandana.cs" />
-    <Compile Include="Items\Accessories\Crystallites\Crystallite.cs" />
+    <Compile Include="Items\Accessories\BurningEnergyAmulet.cs" />
+    <Compile Include="Items\Accessories\Crystallites\CrystalliteItem.cs" />
     <Compile Include="Items\Accessories\Crystallites\CrystalliteAlleviate.cs" />
     <Compile Include="Items\Accessories\Crystallites\CrystalliteControl.cs" />
     <Compile Include="Items\Accessories\Crystallites\CrystalliteFlow.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenArcanium.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenItem.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenScarab.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenSigil.cs" />
     <Compile Include="Items\Accessories\Infusers\CursedFlameInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\IchorInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\AmethystInfuser.cs" />
@@ -160,6 +165,7 @@
     <Compile Include="Players\Auras\DBTPlayer.Auras.cs" />
     <Compile Include="Players\DBTPlayer.Hooks.cs" />
     <Compile Include="Players\DBTPlayer.Visuals.cs" />
+    <Compile Include="Players\Flight\DBTPlayer.Flight.cs" />
     <Compile Include="Players\Guardian\DBTPlayer.Guardian.cs" />
     <Compile Include="Players\Guardian\DBTPlayer.Guardian.Saving.cs" />
     <Compile Include="Players\Hair\DBTPlayer.Hair.cs" />
