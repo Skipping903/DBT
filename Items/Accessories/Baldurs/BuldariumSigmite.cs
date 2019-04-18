@@ -10,7 +10,7 @@ namespace DBT.Items.Accessories.Baldurs
     public sealed class BuldariumSigmite : BaldurItem
     {
         public BuldariumSigmite() : base("Buldarium Sigmite", "'A fragment of the God of Defense's soul.'\nCharging grants a protective barrier that grants massively increased defense\nCharging also grants drastically increased life regen\nIncreased Ki charge rate",
-            Item.buyPrice(silver: 180), 10, ItemRarityID.Yellow, 0.5f)
+            Item.buyPrice(gold: 1, silver: 80), 10, ItemRarityID.Yellow, 0.5f)
         {
         }
 
