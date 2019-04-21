@@ -9,7 +9,7 @@ namespace DBT.Items.Accessories.Earthens
     public sealed class EarthenScarab : EarthenItem
     {
         public EarthenScarab() : base("Earthen Scarab",
-            "'The soul of the land seems to give it life'" +
+            "'The soul of the land seems to give it life.'" +
             "\n4% Increased ki damage" +
             "\nIncreased flight speed" +
             "\nThe longer you charge the more ki you charge, limits at +500%",

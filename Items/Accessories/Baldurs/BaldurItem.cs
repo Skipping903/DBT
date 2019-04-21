@@ -6,7 +6,7 @@ using Terraria;
 
 namespace DBT.Items.Accessories.Baldurs
 {
-    public abstract class BaldurItem : DBTItem, IIsBaldur
+    public abstract class BaldurItem : DBTAccessory, IIsBaldur
     {
         protected BaldurItem(string displayName, string tooltip, int value, int defense, int rarity, float defenseMultiplier, int width = 18, int height = 30) : base(displayName, tooltip, value, defense, rarity)
         {

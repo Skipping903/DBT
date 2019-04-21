@@ -1,6 +1,6 @@
 ﻿namespace DBT.Items.Accessories.Necklaces
 {
-    public abstract class Necklace : DBTItem
+    public abstract class Necklace : DBTAccessory
     {
         protected Necklace(string displayName, string tooltip, int width, int height, int value, int defense, int rare) : base(displayName, tooltip, value, defense, rare)
         {

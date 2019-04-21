@@ -5,9 +5,11 @@ using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories
 {
-    public sealed class WornGloves : DBTItem
+    public sealed class WornGloves : DBTAccessory
     {
-        public WornGloves() : base("Worn Gloves", "10% Increased Ki cast speed\n6% Increased Ki damage", 
+        public WornGloves() : base("Worn Gloves", 
+            "10% Increased Ki cast speed" +
+            "\n6% Increased Ki damage", 
             22, 16, value: Item.buyPrice(silver: 20), defense: 0, rarity: ItemRarityID.Orange)
         {
         }

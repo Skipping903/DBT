@@ -10,25 +10,18 @@ using Terraria.ModLoader;
 namespace DBT.Items.Accessories.Scouters
 {
     [AutoloadEquip(EquipType.Head, EquipType.Face)]
-    public abstract class Scouter : DBTItem, IHasValue, IHasRarity
+    public abstract class Scouter : DBTAccessory
     {
-        protected Scouter(string displayName, string tooltip, int value, int rarity, float KiDamageMultiplier) : base(displayName, tooltip)
+        protected Scouter(string displayName, string tooltip, int value, int rarity, float kiDamageMultiplier) : base(displayName, tooltip, 24, 28, value, 0, rarity)
         {
-            Value = value;
-            Rarity = rarity;
-            KiDamageMultiplier = KiDamageMultiplier;
+            KiDamageMultiplier = kiDamageMultiplier;
         }
 
         public override void SetDefaults()
         {
             base.SetDefaults();
 
-            item.width = 24;
-            item.height = 28;
-            item.value = Value;
-            item.rare = Rarity;
             item.accessory = true;
-            item.defense = 0;
         }
 
         public override void UpdateEquip(Player player)
@@ -58,10 +51,6 @@ namespace DBT.Items.Accessories.Scouters
             dbtPlayer.KiDamageMultiplier += KiDamageMultiplier;
             player.detectCreature = true;
         }
-
-        public int Value { get; }
-
-        public int Rarity { get; }
 
         public float KiDamageMultiplier { get; }
     }

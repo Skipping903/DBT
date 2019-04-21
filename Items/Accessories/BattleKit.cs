@@ -7,9 +7,11 @@ using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories
 {
-    public sealed class BattleKit : DBTItem
+    public sealed class BattleKit : DBTAccessory
     {
-        public BattleKit() : base("Battle Kit", "The essence of strong defense.\nCharging grants a protective barrier that grants drastically increased defense.", 
+        public BattleKit() : base("Battle Kit", 
+            "The essence of strong defense." +
+            "\nCharging grants a protective barrier that grants drastically increased defense.", 
             18, 30, value: Item.buyPrice(silver: 40), rarity: ItemRarityID.LightRed)
         {
         }

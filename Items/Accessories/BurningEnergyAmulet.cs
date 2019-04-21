@@ -4,7 +4,7 @@ using Terraria.ID;
 
 namespace DBT.Items.Accessories
 {
-    public sealed class BurningEnergyAmulet : DBTItem
+    public sealed class BurningEnergyAmulet : DBTAccessory
     {
         public BurningEnergyAmulet() : base("Burning Energy Amulet",
             "'A glowing amulet that radiates with extreme heat'" +

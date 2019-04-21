@@ -4,7 +4,7 @@ using Terraria.ID;
 
 namespace DBT.Items.Accessories
 {
-    public sealed class ArmCannon : DBTItem
+    public sealed class ArmCannon : DBTAccessory
     {
         public ArmCannon() : base("Arm Cannon", "An old arm blaster used by many soldiers.\n10% Reduced Ki usage\nIncreased charge speed",
             18, 30, value: Item.buyPrice(gold:1, silver: 20), rarity: ItemRarityID.LightRed)

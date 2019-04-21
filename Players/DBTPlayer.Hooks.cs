@@ -35,6 +35,8 @@ namespace DBT.Players
         {
             ResetEffectsKi();
             ResetEffectsGuardian();
+
+            HealthDrainMultiplier = 0;
         }
 
 

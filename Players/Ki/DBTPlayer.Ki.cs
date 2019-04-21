@@ -43,6 +43,8 @@ namespace DBT.Players
             NaturalKiRegeneration = 0;
             KiChargeRate = 0;
             KiChargeRateMultiplierLimit = 0;
+
+            KiDrainMultiplier = 1;
         }
 
         internal void PreUpdateKi()
@@ -72,7 +74,6 @@ namespace DBT.Players
         public float Ki { get; private set; }
 
         public float KiChargeRate { get; set; }
-
         public float KiChargeRateMultiplierLimit { get; set; }
 
         public float NaturalKiRegeneration { get; set; }
@@ -96,16 +97,15 @@ namespace DBT.Players
         public float BaseMaxKi { get; set; }
 
         public float MaxKiMultiplier { get; set; } = 1;
-
         public float MaxKiModifier { get; set; }
 
         public int MaxKi => (int)(Math.Round(BaseMaxKi * MaxKiMultiplier) + MaxKiModifier);
 
 
         public float KiSpeedAddition { get; set; }
-
         public float KiKnockbackAddition { get; set; }
-
         public int KiCritAddition { get; set; }
+
+        public float KiDrainMultiplier { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 namespace DBT.Items.Accessories
 {
     [AutoloadEquip(EquipType.Waist)]
-    public sealed class AncientLegendWaistCape : DBTItem
+    public sealed class AncientLegendWaistCape : DBTAccessory
     {
         public AncientLegendWaistCape() : base("Ancient Legend Waistcape", "A ancient garment made of a Ki enhancing material\n14% reduced Ki usage\n10% reduced Ki damage",
             24, 28, value: Item.buyPrice(gold: 3), rarity: ItemRarityID.Pink)

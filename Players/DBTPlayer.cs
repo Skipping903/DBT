@@ -16,5 +16,7 @@ namespace DBT.Players
         }
 
         public bool PlayerInitialized { get; private set; }
+
+        public float HealthDrainMultiplier { get; set; }
     }
 }
