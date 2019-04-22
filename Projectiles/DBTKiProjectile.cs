@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using DBT.Extensions;
+﻿using DBT.Extensions;
 using DBT.Items.Accessories.Infusers;
 using DBT.Players;
 using Terraria;

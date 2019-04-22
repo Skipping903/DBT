@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using DBT.Transformations;
 using Terraria.ModLoader.IO;
 

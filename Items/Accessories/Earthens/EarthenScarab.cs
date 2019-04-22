@@ -1,4 +1,5 @@
-﻿using DBT.Players;
+﻿using DBT.Items.Materials;
+using DBT.Players;
 using DBT.Tiles;
 using Terraria;
 using Terraria.ID;

@@ -1,31 +1,24 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Items.Guardian
 {
     public abstract class GuardianItem : DBTItem
     {
-        protected GuardianItem(string displayName, string tooltip) : base(displayName, tooltip)
+        protected GuardianItem(string displayName, string tooltip, int width, int height, int value = 0, int defense = 0, int rarity = ItemRarityID.White) : base(displayName, tooltip, width, height)
         {
         }
 
-        public override bool CloneNewInstances => true;
-
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
-            TooltipLine indicate = new TooltipLine(mod, "", "");
-            string[] text2 = indicate.text.Split(' ');
-            indicate.text = "-- Guardian --";
-            indicate.overrideColor = new Color(69, 255, 56);
+            TooltipLine indicate = new TooltipLine(mod, "", "- Guardian -") { overrideColor = new Color(69, 255, 56) };
             tooltips.Add(indicate);
 
             base.ModifyTooltips(tooltips);
         }
+
+        public override bool CloneNewInstances => true;
     }
 }

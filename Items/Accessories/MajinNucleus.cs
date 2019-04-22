@@ -21,7 +21,7 @@ namespace DBT.Items.Accessories
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
             player.lifeRegen += 12;
-            dbtPlayer.NaturalKiRegeneration += 6;
+            dbtPlayer.ExtraKiRegeneration += 6;
             dbtPlayer.MaxKiModifier -= 1500;
         }
     }

@@ -1,4 +1,4 @@
-﻿using DBT.Commons;
+﻿using DBT.Commons.Players;
 using DBT.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace DBT.Items.Accessories
 {
-    public sealed class BlackDiamondShell : DBTAccessory, IUpdateOnPlayerPreHurt
+    public sealed class BlackDiamondShell : DBTAccessory, IHandleOnPlayerPreHurt
     {
         public BlackDiamondShell() : base("Black Diamond Shell", 
             "A jeweled turtle shell that gets the attention of many creatures, for some reason it's unbelievably tough" +

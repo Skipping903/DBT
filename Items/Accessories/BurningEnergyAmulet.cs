@@ -15,13 +15,6 @@ namespace DBT.Items.Accessories
         {
         }
 
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-
-            item.accessory = true;
-        }
-
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             base.UpdateAccessory(player, hideVisual);
@@ -29,6 +22,8 @@ namespace DBT.Items.Accessories
 
             dbtPlayer.KiDamageMultiplier += 0.05f;
             dbtPlayer.MaxKiModifier += 200;
+
+            // TODO Add ice aura.
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using DBT.Auras;
 using DBT.Players;
 using DBT.Utilities;

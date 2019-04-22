@@ -1,5 +1,8 @@
-﻿using Terraria.ID;
+﻿using DBT.Items.KiStones;
+using DBT.Tiles;
+using Terraria.ID;
 using Terraria;
+using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories.Scouters
 {
@@ -13,15 +16,14 @@ namespace DBT.Items.Accessories.Scouters
         {
             base.AddRecipes();
 
-            // TODO Rework recipe.
-            /*ModRecipe recipe = new ModRecipe(mod);
+            ModRecipe recipe = new ModRecipe(mod);
 
-            recipe.AddIngredient(mod, nameof(AngerfulKiCrystal), 20);
+            recipe.AddIngredient(mod, nameof(KiStoneT4), 3);
             recipe.AddIngredient(mod, nameof(ScouterMK2));
             recipe.AddTile(mod, nameof(ZTableTile));
 
             recipe.SetResult(this);
-            recipe.AddRecipe();*/
+            recipe.AddRecipe();
         }
     }
 }

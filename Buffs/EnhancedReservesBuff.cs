@@ -3,9 +3,9 @@ using Terraria;
 
 namespace DBT.Buffs
 {
-    public sealed class EnhancedReserves : DBTBuff
+    public sealed class EnhancedReservesBuff : DBTBuff
     {
-        public EnhancedReserves() : base("Enhanced Reserves", "Your Ki reserves have been enhanced")
+        public EnhancedReservesBuff() : base("Enhanced Reserves", "Your Ki reserves have been enhanced.")
         {
         }
 

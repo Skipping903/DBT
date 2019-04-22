@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBT.Items.Armors.Sets.Turtle
+namespace DBT.Items.Armor.Sets.Turtle
 {
     [AutoloadEquip(EquipType.Body)]
     public class TurtleHermitGi : DBTItem
@@ -26,8 +26,7 @@ namespace DBT.Items.Armors.Sets.Turtle
 
         public override void UpdateArmorSet(Player player)
         {
-            player.setBonus = "15% reduced ki usage and +200 Max Ki.";
-
+            player.setBonus = "15% reduced Ki usage and +200 Max Ki";
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
             //dbtPlayer.KiUsageMultiplier -= 0.15f;
@@ -39,7 +38,7 @@ namespace DBT.Items.Armors.Sets.Turtle
 
             dbtPlayer.KiDamageMultiplier += 0.05f;
             dbtPlayer.KiCritAddition += 3;
-            dbtPlayer.NaturalKiRegeneration += 1;
+            dbtPlayer.ExtraKiRegeneration += 1;
 
         }
         /*public override void AddRecipes()

@@ -1,5 +1,4 @@
 ﻿using DBT.Extensions;
-using System;
 using Terraria;
 using Terraria.ModLoader;
 

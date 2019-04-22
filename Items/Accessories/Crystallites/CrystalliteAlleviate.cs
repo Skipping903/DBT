@@ -1,5 +1,4 @@
 ﻿using DBT.Items.Materials;
-using DBT.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

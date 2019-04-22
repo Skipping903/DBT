@@ -1,5 +1,4 @@
 ﻿using DBT.Commons.Buffs;
-using DBT.Extensions;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;

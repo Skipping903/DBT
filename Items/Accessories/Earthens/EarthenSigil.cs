@@ -1,4 +1,5 @@
 ﻿using DBT.Items.KiStones;
+using DBT.Items.Materials;
 using DBT.Players;
 using DBT.Tiles;
 using Terraria;
@@ -25,7 +26,7 @@ namespace DBT.Items.Accessories.Earthens
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
             dbtPlayer.KiDamageMultiplier += 0.06f;
-            dbtPlayer.NaturalKiRegeneration += 1;
+            dbtPlayer.ExtraKiRegeneration += 1;
             dbtPlayer.FlightKiUsageModifier += 1;
             dbtPlayer.KiChargeRateMultiplierLimit += 1;
         }

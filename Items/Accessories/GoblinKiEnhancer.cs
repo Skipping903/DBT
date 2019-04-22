@@ -22,8 +22,8 @@ namespace DBT.Items.Accessories
 
             dbtPlayer.MaxKiModifier += 500;
 
-            if (!player.HasBuff(mod.BuffType(nameof(EnhancedReserves))))
-                player.AddBuff(mod.BuffType(nameof(EnhancedReserves)), 180);
+            if (!player.HasBuff(mod.BuffType(nameof(EnhancedReservesBuff))))
+                player.AddBuff(mod.BuffType(nameof(EnhancedReservesBuff)), 180);
         }
     }
 }

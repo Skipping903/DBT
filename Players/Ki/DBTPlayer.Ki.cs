@@ -41,6 +41,11 @@ namespace DBT.Players
             KiCritAddition = 0;
 
             NaturalKiRegeneration = 0;
+            ExtraKiRegeneration = 0;
+
+            KiOrbRestoreAmount = 100;
+            KiOrbGrabRange = 2;
+
             KiChargeRate = 0;
             KiChargeRateMultiplierLimit = 0;
 
@@ -76,7 +81,12 @@ namespace DBT.Players
         public float KiChargeRate { get; set; }
         public float KiChargeRateMultiplierLimit { get; set; }
 
+
         public float NaturalKiRegeneration { get; set; }
+        public float ExtraKiRegeneration { get; set; }
+
+        public float KiOrbRestoreAmount { get; set; }
+        public float KiOrbGrabRange { get; set; }
 
         public bool IsCharging
         {

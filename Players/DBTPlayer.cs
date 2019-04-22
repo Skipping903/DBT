@@ -1,8 +1,5 @@
-﻿using DBT.Extensions;
-using DBT.Network;
-using DBT.Transformations;
+﻿using DBT.Transformations;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Players

@@ -22,7 +22,7 @@ namespace DBT.Items.Accessories
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
             dbtPlayer.KiDamageMultiplier += 0.07f;
-            dbtPlayer.NaturalKiRegeneration += 2;
+            dbtPlayer.ExtraKiRegeneration += 2;
             
             // TODO Add frost aura.
         }

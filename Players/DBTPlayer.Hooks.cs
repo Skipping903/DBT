@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DBT.Commons;
+using DBT.Commons.Players;
 using DBT.Extensions;
 using DBT.HairStyles;
 using DBT.Transformations;
@@ -33,10 +33,11 @@ namespace DBT.Players
 
         public override void ResetEffects()
         {
+            HealthDrainMultiplier = 0;
+            _aliveBosses = null;
+
             ResetEffectsKi();
             ResetEffectsGuardian();
-
-            HealthDrainMultiplier = 0;
         }
 
 
@@ -51,7 +52,7 @@ namespace DBT.Players
         {
             if (Main.netMode != NetmodeID.Server)
             {
-                
+
                 PreUpdateMovementHandleAura();
                 PreUpdateMovementHandleHair();
             }
@@ -68,6 +69,11 @@ namespace DBT.Players
 
             PostUpdateHandleKi();
             PostUpdateHandleTransformations();
+
+            List<IHandleOnPlayerPostUpdate> items = player.GetItemsInInventory<IHandleOnPlayerPostUpdate>();
+
+            for (int i = 0; i < items.Count; i++)
+                items[i].OnPlayerPostUpdate(this);
         }
 
         public override void PostUpdateRunSpeeds()
@@ -82,10 +88,35 @@ namespace DBT.Players
 
         #endregion
 
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        {
+            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerDied(this, damage, pvp, damageSource));
+
+            ForAllActiveTransformations(p => p.OnActivePlayerDied(this, damage, pvp, damageSource));
+            ClearTransformations();
+
+            IsCharging = false;
+        }
+
+        public override void ModifyDrawLayers(List<PlayerLayer> layers)
+        {
+            HandleAuraDrawLayers(layers);
+            HandleHairDrawLayers(layers);
+        }
+
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
+        {
+            List<IHandleOnPlayerHitNPC> items = player.GetItemsInInventory<IHandleOnPlayerHitNPC>(armor: true, accessories: true);
+
+            for (int i = 0; i < items.Count; i++)
+                items[i].OnPlayerHitNPC(item, target, ref damage, ref knockback, ref crit);
+
+            base.OnHitNPC(item, target, damage, knockback, crit);
+        }
 
         public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-            List<IUpdateOnPlayerPreHurt> items = player.GetItemsInInventory<IUpdateOnPlayerPreHurt>();
+            List<IHandleOnPlayerPreHurt> items = player.GetItemsInInventory<IHandleOnPlayerPreHurt>();
 
             for (int i = 0; i < items.Count; i++)
                 if (!items[i].OnPlayerPreHurt(this, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
@@ -94,24 +125,16 @@ namespace DBT.Players
             return true;
         }
 
-
-        public override void ModifyDrawLayers(List<PlayerLayer> layers)
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-            HandleAuraDrawLayers(layers);
-            HandleHairDrawLayers(layers);
-        }
+            // bool baseResult = base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
+            List<IHandleOnPlayerPreKill> items = new List<IHandleOnPlayerPreKill>();
 
+            for (int i = 0; i < items.Count; i++)
+                if (!items[i].OnPlayerPreKill(this, ref damage, ref hitDirection, ref pvp, ref playSound, ref genGore, ref damageSource))
+                    return false;
 
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
-        {
-            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerDied(this, damage, pvp, damageSource));
-
-            ForAllActiveTransformations(p => p.OnActivePlayerDied(this, damage, pvp, damageSource));
-            ClearTransformations();
-
-            // TODO Check if this is required.
-            //if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
-                IsCharging = false;
+            return true;
         }
     }
 }
