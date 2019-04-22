@@ -6,10 +6,10 @@ using Terraria.ModLoader;
 namespace DBT.Items.Accessories
 {
     [AutoloadEquip(EquipType.Waist)]
-    public sealed class AncientLegendWaistCape : DBTItem
+    public sealed class AncientLegendWaistCape : DBTAccessory
     {
-        public AncientLegendWaistCape() : base("Ancient Legend Waistcape", "A ancient garment made of a Ki enhancing material\n14% reduced Ki usage\n6% increased Ki damage\n-250 max Ki",
-            24, 28, value: 300 * Constants.SILVER_VALUE_MULTIPLIER, rarity: ItemRarityID.Pink)
+        public AncientLegendWaistCape() : base("Ancient Legend Waistcape", "A ancient garment made of a Ki enhancing material\n14% reduced Ki usage\n10% reduced Ki damage",
+            24, 28, value: Item.buyPrice(gold: 3), rarity: ItemRarityID.Pink)
         {
         }
 
@@ -26,8 +26,7 @@ namespace DBT.Items.Accessories
 
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
-            dbtPlayer.KiDamageMultiplier *= 1.06f;
-            dbtPlayer.MaxKiModifier -= 250;
+            dbtPlayer.KiDamageMultiplier *= 0.90f;
         }
 
         // TODO Rework recipe.

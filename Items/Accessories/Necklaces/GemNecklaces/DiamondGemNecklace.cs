@@ -5,7 +5,7 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
 {
     public sealed class DiamondGemNecklace : GemNecklace
     {
-        public DiamondGemNecklace() : base("Diamond Necklace", "5% increased melee damage and speed.", 160 * Constants.SILVER_VALUE_MULTIPLIER, 0, ItemID.Diamond)
+        public DiamondGemNecklace() : base("Diamond Necklace", "5% increased melee damage and speed.", Item.buyPrice(gold: 1, silver: 60), 0, ItemID.Diamond)
         {
         }
 

@@ -1,10 +1,11 @@
 ﻿using Terraria.ID;
+using Terraria;
 
 namespace DBT.Items.Accessories.Scouters
 {
     public class ScouterMK5 : Scouter
     {
-        public ScouterMK5() : base("Yellow Scouter", "A Piece of equipment used for scanning power levels.\nGives Increased Ki Damage and Hunter effect", 480 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.Lime, 0.20f)
+        public ScouterMK5() : base("Yellow Scouter", "A Piece of equipment used for scanning power levels.\n20% Increased Ki Damage and Hunter effect", Item.buyPrice(gold: 4, silver: 80), ItemRarityID.Lime, 0.20f)
         {
         }
 

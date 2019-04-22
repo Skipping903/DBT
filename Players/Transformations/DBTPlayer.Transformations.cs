@@ -164,13 +164,10 @@ namespace DBT.Players
                 SelectedTransformations.Add(transformation);
         }
 
-
         public Dictionary<TransformationDefinition, PlayerTransformation> AcquiredTransformations { get; internal set; }
-
         public List<TransformationDefinition> ActiveTransformations { get; internal set; }
 
         public PlayerTransformation FirstTransformation { get; private set; }
-
         public List<TransformationDefinition> SelectedTransformations { get; internal set; }
     }
 }

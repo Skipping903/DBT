@@ -4,7 +4,7 @@ namespace DBT.Items.Accessories.Necklaces
 {
     public sealed class EmptyNecklace : Necklace
     {
-        public EmptyNecklace() : base("Empty Necklace", "It seems a gem can be attached to it.", 22, 24, 2000, 0, ItemRarityID.White)
+        public EmptyNecklace() : base("Empty Necklace", "It seems a gem can be attached to it.", 22, 24, 0, 0, ItemRarityID.White)
         {
         }
 

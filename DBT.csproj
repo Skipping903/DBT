@@ -56,6 +56,7 @@
     <Compile Include="Auras\AuraDrawPlayer.cs" />
     <Compile Include="Auras\LightingAppearance.cs" />
     <Compile Include="Buffs\DBTBuff.cs" />
+    <Compile Include="Buffs\EnhancedReserves.cs" />
     <Compile Include="Buffs\KiDegenerationBuff.cs" />
     <Compile Include="Buffs\MREBuff.cs" />
     <Compile Include="Commons\Buffs\ICanStopCharging.cs" />
@@ -95,10 +96,18 @@
     <Compile Include="Items\Accessories\BattleKit.cs" />
     <Compile Include="Items\Accessories\BlackDiamondShell.cs" />
     <Compile Include="Items\Accessories\BloodstainedBandana.cs" />
-    <Compile Include="Items\Accessories\Crystallites\Crystallite.cs" />
+    <Compile Include="Items\Accessories\BurningEnergyAmulet.cs" />
+    <Compile Include="Items\Accessories\Crystallites\CrystalliteItem.cs" />
     <Compile Include="Items\Accessories\Crystallites\CrystalliteAlleviate.cs" />
     <Compile Include="Items\Accessories\Crystallites\CrystalliteControl.cs" />
     <Compile Include="Items\Accessories\Crystallites\CrystalliteFlow.cs" />
+    <Compile Include="Items\Accessories\DBTAccessory.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenArcanium.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenItem.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenScarab.cs" />
+    <Compile Include="Items\Accessories\Earthens\EarthenSigil.cs" />
+    <Compile Include="Items\Accessories\GoblinKiEnhancer.cs" />
+    <Compile Include="Items\Accessories\IceTalisman.cs" />
     <Compile Include="Items\Accessories\Infusers\CursedFlameInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\IchorInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\AmethystInfuser.cs" />
@@ -109,6 +118,7 @@
     <Compile Include="Items\Accessories\Infusers\RubyInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\SapphireInfuser.cs" />
     <Compile Include="Items\Accessories\Infusers\TopazInfuser.cs" />
+    <Compile Include="Items\Accessories\KaioCrystal.cs" />
     <Compile Include="Items\Accessories\Necklaces\AncientLegendNecklace.cs" />
     <Compile Include="Items\Accessories\Necklaces\GemNecklaces\AmberGemNecklace.cs" />
     <Compile Include="Items\Accessories\Necklaces\GemNecklaces\AmethystGemNecklace.cs" />
@@ -128,6 +138,8 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitGi.cs" />
+    <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitPants.cs" />
     <Compile Include="Items\DBTGlobalItem.cs" />
     <Compile Include="Items\DBTItem.cs" />
     <Compile Include="Items\Developer\DeveloperItem.cs" />
@@ -145,9 +157,19 @@
     <Compile Include="Items\KiStones\KiStoneDefinition.cs" />
     <Compile Include="Items\KiStones\KiStoneDefinitionManager.cs" />
     <Compile Include="Items\KiStones\KiStones.cs" />
+    <Compile Include="Items\Materials\AstralEssentia.cs" />
+    <Compile Include="Items\Materials\DBTMaterial.cs" />
+    <Compile Include="Items\Materials\DemonicSoul.cs" />
+    <Compile Include="Items\Materials\DivineThread.cs" />
+    <Compile Include="Items\Materials\EarthenShard.cs" />
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
     <Compile Include="Items\Materials\Metals\RefinedMetal.cs" />
     <Compile Include="Items\Materials\Metals\ScrapMetal.cs" />
+    <Compile Include="Items\Materials\RadiantFragment.cs" />
+    <Compile Include="Items\Materials\SatanicCloth.cs" />
+    <Compile Include="Items\Materials\SkeletalEssence.cs" />
+    <Compile Include="Items\Materials\SoulofEntity.cs" />
+    <Compile Include="Items\Tiles\KaiTableItem.cs" />
     <Compile Include="Items\Tiles\ZTableItem.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
@@ -157,6 +179,7 @@
     <Compile Include="Players\Auras\DBTPlayer.Auras.cs" />
     <Compile Include="Players\DBTPlayer.Hooks.cs" />
     <Compile Include="Players\DBTPlayer.Visuals.cs" />
+    <Compile Include="Players\Flight\DBTPlayer.Flight.cs" />
     <Compile Include="Players\Guardian\DBTPlayer.Guardian.cs" />
     <Compile Include="Players\Guardian\DBTPlayer.Guardian.Saving.cs" />
     <Compile Include="Players\Hair\DBTPlayer.Hair.cs" />
@@ -173,6 +196,7 @@
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
+    <Compile Include="Tiles\KaiTableTile.cs" />
     <Compile Include="Tiles\ZTableTile.cs" />
     <Compile Include="Traits\TraitBuff.cs" />
     <Compile Include="Traits\TraitDefinition.cs" />
@@ -224,17 +248,19 @@
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Xact\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Xact.dll</HintPath>
     </Reference>
     <Reference Include="ReLogic">
-      <HintPath>lib\ReLogic.dll</HintPath>
+      <HintPath>libs\ReLogic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Terraria">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
+      <HintPath>libs\Terraria.exe</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
     <Content Include="description.txt" />
+    <Content Include="Items\Consumables\YemmaFruit.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\All7Chakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\CrownChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\HeartChakra.png" />
@@ -243,6 +269,13 @@
     <Content Include="Items\Guardian\Accessories\Chakras\SolarPlexusChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\ThirdEyeChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\ThroatChakra.png" />
+    <Content Include="Items\Guardian\BloodStone\EmptyBloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T1BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T2BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T3BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T4BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T5BloodStone.png" />
+    <Content Include="Items\Guardian\BloodStone\T6BloodStone.png" />
     <Content Include="Items\KiStones\EmptyKiStone.png" />
     <Content Include="Items\KiStones\KiStoneT1.png" />
     <Content Include="Items\KiStones\KiStoneT2.png" />
@@ -253,6 +286,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+    <Folder Include="Items\Armor\Individual\" />
+    <Folder Include="Items\Armor\Sets\Black\" />
+    <Folder Include="Items\Armor\Sets\Demon\" />
+    <Folder Include="Items\Armor\Sets\EliteSaiyan\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Dragon\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Kaioshin\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Mechanical\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Metamoran\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Saiyaman\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Whis\" />
+    <Folder Include="Items\Armor\Sets\Radiant\" />
+    <Folder Include="Items\Armor\Sets\SaiyanScout\" />
+    <Folder Include="Items\Armor\Sets\Saiyan\" />
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />

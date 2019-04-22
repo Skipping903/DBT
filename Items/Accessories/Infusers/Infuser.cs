@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 namespace DBT.Items.Accessories.Infusers
 {
     [AutoloadEquip(EquipType.Neck)]
-    public abstract class Infuser : DBTItem, IHasValue, IHasRarity
+    public abstract class Infuser : DBTAccessory, IHasValue, IHasRarity
     {
         private const int GEM_COUNT = 5;
 

@@ -88,7 +88,6 @@ namespace DBT.Items.KiStones
                 recipe.AddTile(mod, nameof(ZTableTile));
 
                 recipe.SetResult(this);
-
                 recipe.AddRecipe();
             }
         }

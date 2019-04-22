@@ -1,14 +1,19 @@
-﻿using DBT.Players;
+﻿using DBT.Items.Materials;
+using DBT.Players;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories.Crystallites
 {
-    public sealed class CrystalliteAlleviate : Crystallite
+    public sealed class CrystalliteAlleviate : CrystalliteItem
     {
-        public CrystalliteAlleviate() : base("Aspera Crystallite", "'The essence of pure energy lives within the crystal.'\nDrastically Increased speed while charging\n+2500 Max ki", 
-            22, 34, 1440 * Constants.SILVER_VALUE_MULTIPLIER, ItemRarityID.Cyan, 2500)
+        public CrystalliteAlleviate() : base("Aspera Crystallite", 
+            "'The essence of pure energy lives within the crystal.'" +
+            "\nDrastically Increased speed while charging" +
+            "\n+2500 Max ki", 
+            22, 34, Item.buyPrice(gold:14, silver: 40), ItemRarityID.Cyan, 
+            2500)
         {
         }
 

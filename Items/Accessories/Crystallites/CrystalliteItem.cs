@@ -3,18 +3,11 @@ using Terraria;
 
 namespace DBT.Items.Accessories.Crystallites
 {
-    public abstract class Crystallite : DBTItem
+    public abstract class CrystalliteItem : DBTAccessory
     {
-        protected Crystallite(string displayName, string tooltip, int width, int height, int value, int rarity, float extraKi) : base(displayName, tooltip, width, height, value, 0, rarity)
+        protected CrystalliteItem(string displayName, string tooltip, int width, int height, int value, int rarity, float extraKi) : base(displayName, tooltip, width, height, value, 0, rarity)
         {
             ExtraKi = extraKi;
-        }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-
-            item.accessory = true;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

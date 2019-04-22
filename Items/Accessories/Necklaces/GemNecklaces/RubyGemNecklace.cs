@@ -5,14 +5,14 @@ namespace DBT.Items.Accessories.Necklaces.GemNecklaces
 {
     public sealed class RubyGemNecklace : GemNecklace
     {
-        public RubyGemNecklace() : base("Ruby Necklace", "9% increased magic damage and crit chance.", 120 * Constants.SILVER_VALUE_MULTIPLIER, 0, ItemID.Ruby)
+        public RubyGemNecklace() : base("Ruby Necklace", "5% increased magic damage and crit chance.", Item.buyPrice(gold: 1, silver: 20), 0, ItemID.Ruby)
         {
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-            player.magicDamage += 0.09f;
-            player.magicCrit += 9;
+            player.magicDamage += 0.05f;
+            player.magicCrit += 5;
         }
     }
 }

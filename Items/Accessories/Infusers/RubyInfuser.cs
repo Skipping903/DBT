@@ -5,7 +5,7 @@ namespace DBT.Items.Accessories.Infusers
 {
     public class RubyInfuser : Infuser
     {
-        public RubyInfuser() : base("Ruby Ki Infuser", "Hitting enemies with Ki attacks inflicts bleeding", 220 * Constants.SILVER_VALUE_MULTIPLIER, ItemID.Ruby)
+        public RubyInfuser() : base("Ruby Ki Infuser", "Hitting enemies with Ki attacks inflicts bleeding", Item.buyPrice(gold:2, silver: 20), ItemID.Ruby)
         {
         }
 
