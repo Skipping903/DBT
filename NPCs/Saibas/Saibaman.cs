@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
+using DBT.Players;
 
 namespace DBT.NPCs.Saibas
 {
@@ -25,7 +26,7 @@ namespace DBT.NPCs.Saibas
         {
             get
             {
-                return new string[] { "DBT/NPCs/Saibas/SaibaBlue" , "DBT/NPCs/Saibas/SaibaGold" , "DBT/NPCs/Saibas/SaibaPurple" };
+                return new string[] { "DBT/NPCs/Saibas/SaibaBlue", "DBT/NPCs/Saibas/SaibaGold", "DBT/NPCs/Saibas/SaibaPurple" };
             }
         }
 
@@ -50,17 +51,10 @@ namespace DBT.NPCs.Saibas
             aiType = NPCID.Zombie;
         }
 
-        /*public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (NPC.downedAncientCultist)
-            {
-                return SpawnCondition.OverworldNightMonster.Chance * 0.05f;
-            }
-            else
-            {
-                return SpawnCondition.OverworldNightMonster.Chance * 0f;
-            }
-        }*/
+            return spawnInfo.player.GetModPlayer<DBTPlayer>().zoneWasteland ? .1f : 0f;
+        }
 
         public override void AI()
         {

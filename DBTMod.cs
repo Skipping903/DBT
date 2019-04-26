@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DBT.Network;
 using DBT.UserInterfaces.CharacterMenus;
 using DBT.UserInterfaces.KiBar;
 using DBT.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using DBT.Players;
 
 namespace DBT
 {
@@ -90,8 +93,30 @@ namespace DBT
                 characterMenuInterface.Update(gameTime);
 	    }
 
+        public override void UpdateMusic(ref int music)
+        {
+            int[] noOverride =
+                {
+                    MusicID.Boss1, MusicID.Boss2, MusicID.Boss3, MusicID.Boss4, MusicID.Boss5,
+                    MusicID.LunarBoss, MusicID.PumpkinMoon, MusicID.TheTowers, MusicID.FrostMoon, MusicID.GoblinInvasion,
+                    MusicID.Eclipse, MusicID.MartianMadness, MusicID.PirateInvasion,
+                    //GetSoundSlot(SoundType.Music, "Sounds/Music/TheUnexpectedArrival"),
+                };
 
-	    public override void HandlePacket(BinaryReader reader, int whoAmI)
+            int m = music;
+            bool playMusic =
+                !noOverride.Any(song => song == m)
+                || !Main.npc.Any(npc => npc.boss);
+
+            Player player = Main.LocalPlayer;
+
+            if (player.active && player.GetModPlayer<DBTPlayer>(this).zoneWasteland && !Main.gameMenu && playMusic)
+            {
+                music = GetSoundSlot(SoundType.Music, "Sounds/Music/Wastelands");
+            }
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
 	    {
 	        NetworkPacketManager.Instance.HandlePacket(reader, whoAmI);
 	    }

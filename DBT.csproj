@@ -133,8 +133,8 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
-    <Compile Include="Items\Armors\Sets\Turtle\TurtleHermitGi.cs" />
-    <Compile Include="Items\Armors\Sets\Turtle\TurtleHermitPants.cs" />
+    <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitGi.cs" />
+    <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitPants.cs" />
     <Compile Include="Items\DBTGlobalItem.cs" />
     <Compile Include="Items\DBTItem.cs" />
     <Compile Include="Items\Developer\DeveloperItem.cs" />
@@ -216,6 +216,16 @@
     <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
     <Compile Include="UserInterfaces\UIImagePair.cs" />
     <Compile Include="Utilities\SteamHelper.cs" />
+    <Compile Include="Wasteland\Backgrounds\WastelandBG.cs" />
+    <Compile Include="Wasteland\Items\CoarseRockWallItem.cs" />
+    <Compile Include="Wasteland\Items\CoarseRockItem.cs" />
+    <Compile Include="Wasteland\Tiles\CoarseRock.cs" />
+    <Compile Include="Wasteland\Tiles\CoarseRockWall.cs" />
+    <Compile Include="Wasteland\WastelandWorld.cs" />
+    <Compile Include="Wasteland\Water\WastelandWater.cs" />
+    <Compile Include="Wasteland\Water\WastelandWaterDroplet.cs" />
+    <Compile Include="Wasteland\Water\WastelandWaterfall.cs" />
+    <Compile Include="Wasteland\Water\WastelandWaterSplash.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -276,22 +286,30 @@
     <Content Include="Sounds\Saibamen\Saibamen1.wav" />
     <Content Include="Sounds\Saibamen\saibamen2.wav" />
     <Content Include="Sounds\Saibamen\saibamen3.wav" />
+    <Content Include="Wasteland\Backgrounds\WastelandSky.png" />
+    <Content Include="Wasteland\Items\CoarseRockItem.png" />
+    <Content Include="Wasteland\Items\CoarseRockWallItem.png" />
+    <Content Include="Wasteland\Tiles\CoarseRock.png" />
+    <Content Include="Wasteland\Tiles\CoarseRockWall.png" />
+    <Content Include="Wasteland\Water\WastelandWater.png" />
+    <Content Include="Wasteland\Water\WastelandWaterFall.png" />
+    <Content Include="Wasteland\Water\WastelandWater_Block.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
-    <Folder Include="Items\Armors\Individual\" />
-    <Folder Include="Items\Armors\Sets\Black\" />
-    <Folder Include="Items\Armors\Sets\Demon\" />
-    <Folder Include="Items\Armors\Sets\EliteSaiyan\" />
-    <Folder Include="Items\Armors\Sets\Guardian\Dragon\" />
-    <Folder Include="Items\Armors\Sets\Guardian\Kaioshin\" />
-    <Folder Include="Items\Armors\Sets\Guardian\Mechanical\" />
-    <Folder Include="Items\Armors\Sets\Guardian\Metamoran\" />
-    <Folder Include="Items\Armors\Sets\Guardian\Saiyaman\" />
-    <Folder Include="Items\Armors\Sets\Guardian\Whis\" />
-    <Folder Include="Items\Armors\Sets\Radiant\" />
-    <Folder Include="Items\Armors\Sets\SaiyanScout\" />
-    <Folder Include="Items\Armors\Sets\Saiyan\" />
+    <Folder Include="Items\Armor\Individual\" />
+    <Folder Include="Items\Armor\Sets\Black\" />
+    <Folder Include="Items\Armor\Sets\Demon\" />
+    <Folder Include="Items\Armor\Sets\EliteSaiyan\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Dragon\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Kaioshin\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Mechanical\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Metamoran\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Saiyaman\" />
+    <Folder Include="Items\Armor\Sets\Guardian\Whis\" />
+    <Folder Include="Items\Armor\Sets\Radiant\" />
+    <Folder Include="Items\Armor\Sets\SaiyanScout\" />
+    <Folder Include="Items\Armor\Sets\Saiyan\" />
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />

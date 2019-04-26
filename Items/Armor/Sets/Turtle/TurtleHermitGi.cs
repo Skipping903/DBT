@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBT.Items.Armors.Sets.Turtle
+namespace DBT.Items.Armor.Sets.Turtle
 {
     [AutoloadEquip(EquipType.Body)]
     public class TurtleHermitGi : DBTItem
