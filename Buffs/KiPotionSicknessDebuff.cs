@@ -2,9 +2,9 @@
 
 namespace DBT.Buffs
 {
-    public class KiPotionSicknessDebuff : DBTBuff
+    public class KiPotionSicknessBuff : DBTBuff
     {
-        public KiPotionSicknessDebuff() : base("Ki Potion Sickness", "You feel sick at the thought of another Ki potion.")
+        public KiPotionSicknessBuff() : base("Ki Potion Sickness", "You feel sick at the thought of another Ki potion.")
         {
         }
 

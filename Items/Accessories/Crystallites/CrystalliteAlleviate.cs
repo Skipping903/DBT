@@ -11,7 +11,7 @@ namespace DBT.Items.Accessories.Crystallites
             "'The essence of pure energy lives within the crystal.'" +
             "\nDrastically Increased speed while charging" +
             "\n+2500 Max ki", 
-            22, 34, Item.buyPrice(gold:14, silver: 40), ItemRarityID.Cyan, 
+            22, 34, Item.buyPrice(gold: 14, silver: 40), ItemRarityID.Cyan, 
             2500)
         {
         }

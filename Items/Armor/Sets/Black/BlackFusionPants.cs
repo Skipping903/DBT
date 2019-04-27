@@ -16,7 +16,7 @@ namespace DBT.Items.Armor.Sets.Black
             "\n+500 Max Ki" +
             "\nIncreased Ki Regen" +
             "\n18% Increased movement speed",
-            28, 18, Item.buyPrice(silver: 64), 16, ItemRarityID.Cyan)
+            28, 18, value: Item.buyPrice(silver: 64), defense: 16, rarity: ItemRarityID.Cyan)
         {
         }
 

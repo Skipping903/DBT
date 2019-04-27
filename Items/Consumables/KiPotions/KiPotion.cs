@@ -20,7 +20,7 @@ namespace DBT.Items.Consumables.KiPotions
             item.maxStack = 30;
         }
 
-        public override bool CanUseItem(Player player) => base.CanUseItem(player) && !player.HasBuff(mod.BuffType(nameof(KiPotionSicknessDebuff)));
+        public override bool CanUseItem(Player player) => base.CanUseItem(player) && !player.HasBuff(mod.BuffType(nameof(KiPotionSicknessBuff)));
 
         public override bool UseItem(Player player)
         {

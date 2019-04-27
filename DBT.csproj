@@ -176,6 +176,14 @@
     <Compile Include="Items\Armor\Sets\Black\BlackFusionShirt.cs" />
     <Compile Include="Items\Armor\Sets\Demon\DemonLeggings.cs" />
     <Compile Include="Items\Armor\Sets\Demon\DemonShirt.cs" />
+    <Compile Include="Items\Armor\Sets\EliteSaiyan\EliteSaiyanBreastplate.cs" />
+    <Compile Include="Items\Armor\Sets\EliteSaiyan\EliteSaiyanLeggings.cs" />
+    <Compile Include="Items\Armor\Sets\Metamoran\MetamoranPants.cs" />
+    <Compile Include="Items\Armor\Sets\Metamoran\MetamoranVest.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanBattleArmor\SaiyanBattleBreastplate.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanBattleArmor\SaiyanBattleLeggings.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanScout\SaiyanScoutPants.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanScout\SaiyanScoutScalemail.cs" />
     <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitGi.cs" />
     <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitPants.cs" />
     <Compile Include="Items\Consumables\BukuujustuVols\BukuujustuVol.cs" />
@@ -326,17 +334,13 @@
     <Content Include="Items\Guardian\BloodStone\T6BloodStone.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Items\Armor\Sets\EliteSaiyan\" />
     <Folder Include="Items\Armor\Sets\Guardian\Dragon\" />
     <Folder Include="Items\Armor\Sets\Guardian\Kaioshin\" />
     <Folder Include="Items\Armor\Sets\Guardian\Mechanical\" />
     <Folder Include="Items\Armor\Sets\Guardian\Metamoran\" />
     <Folder Include="Items\Armor\Sets\Guardian\Saiyaman\" />
     <Folder Include="Items\Armor\Sets\Guardian\Whis\" />
-    <Folder Include="Items\Armor\Sets\Hermit\" />
     <Folder Include="Items\Armor\Sets\Radiant\" />
-    <Folder Include="Items\Armor\Sets\SaiyanScout\" />
-    <Folder Include="Items\Armor\Sets\Saiyan\" />
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
