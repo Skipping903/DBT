@@ -13,7 +13,7 @@ namespace DBT.Extensions
         
             SOCIAL_ARMOR_START_INDEX = ARMOR_SLOTS_COUNT + ACCESSORY_SLOTS_COUNT + MAX_EXTRA_ACCESSORY_SLOTS;
 
-        public static List<T> GetItemsInInventory<T>(this Player player, bool inventory = false, bool armor = false, bool armorSocial = false, bool accessories = false, bool accessoriesSocial = false) where T : class
+        public static List<T> GetItemsByType<T>(this Player player, bool inventory = false, bool armor = false, bool armorSocial = false, bool accessories = false, bool accessoriesSocial = false) where T : class
         {
             List<T> filteredItems = new List<T>();
 

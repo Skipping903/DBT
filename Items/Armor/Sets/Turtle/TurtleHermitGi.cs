@@ -41,7 +41,7 @@ namespace DBT.Items.Armor.Sets.Turtle
 
             dbtPlayer.KiDamageMultiplier += 0.05f;
             dbtPlayer.KiCritAddition += 3;
-            dbtPlayer.ExtraKiRegeneration += 1;
+            dbtPlayer.ExternalKiRegeneration += 1;
         }
 
         public override void AddRecipes()

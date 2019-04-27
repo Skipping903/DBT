@@ -73,7 +73,7 @@ namespace DBT.Transformations.Developers.Webmilio
         }
 
 
-        public override bool CheckPrePlayerConditions() => SteamHelper.SteamID64 == "76561198046878487";
+        public override bool CheckPrePlayerConditions() => SteamHelper.CanUserAccess(76561198046878487, true);
 
 
         public float GetSoulPower(DBTPlayer dbtPlayer)

@@ -36,8 +36,9 @@ namespace DBT.Players
             HealthDrainMultiplier = 0;
             _aliveBosses = null;
 
-            ResetEffectsKi();
-            ResetEffectsGuardian();
+            ResetKiEffects();
+            ResetGuardianEffects();
+            ResetSkillEffects();
         }
 
 
@@ -67,10 +68,10 @@ namespace DBT.Players
         {
             FirstTransformation = GetTransformation();
 
-            PostUpdateHandleKi();
+            PostUpdateKi();
             PostUpdateHandleTransformations();
 
-            List<IHandleOnPlayerPostUpdate> items = player.GetItemsInInventory<IHandleOnPlayerPostUpdate>();
+            List<IHandleOnPlayerPostUpdate> items = player.GetItemsByType<IHandleOnPlayerPostUpdate>();
 
             for (int i = 0; i < items.Count; i++)
                 items[i].OnPlayerPostUpdate(this);
@@ -106,7 +107,7 @@ namespace DBT.Players
 
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
-            List<IHandleOnPlayerHitNPC> items = player.GetItemsInInventory<IHandleOnPlayerHitNPC>(armor: true, accessories: true);
+            List<IHandleOnPlayerHitNPC> items = player.GetItemsByType<IHandleOnPlayerHitNPC>(armor: true, accessories: true);
 
             for (int i = 0; i < items.Count; i++)
                 items[i].OnPlayerHitNPC(item, target, ref damage, ref knockback, ref crit);
@@ -116,7 +117,7 @@ namespace DBT.Players
 
         public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-            List<IHandleOnPlayerPreHurt> items = player.GetItemsInInventory<IHandleOnPlayerPreHurt>();
+            List<IHandleOnPlayerPreHurt> items = player.GetItemsByType<IHandleOnPlayerPreHurt>();
 
             for (int i = 0; i < items.Count; i++)
                 if (!items[i].OnPlayerPreHurt(this, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))

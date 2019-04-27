@@ -1,5 +1,6 @@
 ﻿using DBT.Players;
 using DBT.Tiles;
+using DBT.Tiles.Stations;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,7 +28,7 @@ namespace DBT.Items.Armor.Sets.EliteSaiyan
             dbtPlayer.KiDamageMultiplier += 0.22f;
             dbtPlayer.KiCritAddition += 18;
             dbtPlayer.MaxKiModifier += 750;
-            dbtPlayer.ExtraKiRegeneration += 2;
+            dbtPlayer.ExternalKiRegeneration += 2;
 
             player.moveSpeed += 0.22f;
         }

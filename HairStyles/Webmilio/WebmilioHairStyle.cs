@@ -8,6 +8,6 @@ namespace DBT.HairStyles.Webmilio
         {
         }
 
-        public override bool CanAccess() => SteamHelper.SteamID64 == "76561198046878487";
+        public override bool CanAccess() => SteamHelper.CanUserAccess(76561198046878487, true);
     }
 }

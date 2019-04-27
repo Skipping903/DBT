@@ -30,7 +30,7 @@ namespace DBT.Items.Consumables
             bool baseResult = base.UseItem(player);
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
-            List<IAffectSenzuBeanCooldown> items = player.GetItemsInInventory<IAffectSenzuBeanCooldown>(armor: true, accessories: true);
+            List<IAffectSenzuBeanCooldown> items = player.GetItemsByType<IAffectSenzuBeanCooldown>(armor: true, accessories: true);
 
             float cooldown = 18000;
 

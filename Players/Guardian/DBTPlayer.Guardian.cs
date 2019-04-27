@@ -6,7 +6,7 @@ namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {
-        internal void ResetEffectsGuardian()
+        internal void ResetGuardianEffects()
         {
             BaseHealingBonus = 0;
         }

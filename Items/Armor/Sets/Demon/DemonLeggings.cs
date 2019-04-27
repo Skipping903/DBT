@@ -27,7 +27,7 @@ namespace DBT.Items.Armor.Sets.Demon
             dbtPlayer.KiDamageMultiplier += 0.13f;
             dbtPlayer.KiCritAddition += 9;
             dbtPlayer.MaxKiModifier += 300;
-            dbtPlayer.ExtraKiRegeneration = 1f;
+            dbtPlayer.ExternalKiRegeneration = 1f;
 
             player.moveSpeed += 0.12f;
         }

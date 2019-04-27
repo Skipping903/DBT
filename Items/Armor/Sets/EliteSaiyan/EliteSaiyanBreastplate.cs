@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 namespace DBT.Items.Armor.Sets.EliteSaiyan
 {
     [AutoloadEquip(EquipType.Body)]
-    public sealed class EliteSaiyanBreastplate : DBTArmorPiece, IHandleOnPlayerPreKill
+    public sealed class EliteSaiyanBreastplate : DBTArmorPiece
     {
         public EliteSaiyanBreastplate() : base("Elite Saiyan Breastplate", 
             "26% Increased Ki Damage" +
@@ -39,19 +39,8 @@ namespace DBT.Items.Armor.Sets.EliteSaiyan
             dbtPlayer.KiDamageMultiplier += 0.26f;
             dbtPlayer.KiCritAddition += 24;
             dbtPlayer.MaxKiModifier += 1000;
-            dbtPlayer.ExtraKiRegeneration += 2;
+            dbtPlayer.ExternalKiRegeneration += 2;
             dbtPlayer.KiChargeRateMultiplierLimit += 3;
-        }
-
-        public bool OnPlayerPreKill(DBTPlayer dbtPlayer, ref double damage, ref int hitDirection, ref bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
-        {
-            int healAmount = dbtPlayer.player.statLifeMax + dbtPlayer.player.statLifeMax2;
-
-            dbtPlayer.player.statLife += healAmount;
-            dbtPlayer.player.HealEffect(healAmount);
-            dbtPlayer.player.AddBuff(mod.BuffType<ZenkaiCharmBuff>(), 10 * Constants.TICKS_PER_SECOND);
-
-            return false;
         }
     }
 }
