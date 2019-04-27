@@ -178,11 +178,6 @@
     <Compile Include="Items\Materials\SkeletalEssence.cs" />
     <Compile Include="Items\Materials\SoulofEntity.cs" />
     <Compile Include="Players\Skills\DBTPlayer.Skills.cs" />
-    <Compile Include="Projectiles\AbstractChargeBall.cs" />
-    <Compile Include="Projectiles\Beams\DBTBaseBeamCharge.cs" />
-    <Compile Include="Skills\Kamehamehas\Kamehameha\KamehamehaCharge.cs" />
-    <Compile Include="Skills\Kamehamehas\Kamehameha\KamehamehaSkillItem.cs" />
-    <Compile Include="Skills\SkillBeamItem.cs" />
     <Compile Include="Items\Tiles\KaiTableItem.cs" />
     <Compile Include="Items\Tiles\ZTableItem.cs" />
     <Compile Include="Items\Tools\DBTTool.cs" />
@@ -214,11 +209,6 @@
     <Compile Include="Players\Traits\DBTPlayer.Traits.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
-    <Compile Include="Projectiles\BeamHitLocation.cs" />
-    <Compile Include="Projectiles\Beams\DBTBaseBeam.cs" />
-    <Compile Include="Projectiles\DBTKiProjectile.cs" />
-    <Compile Include="Projectiles\DBTProjectile.cs" />
-    <Compile Include="Projectiles\ProjectileSize.cs" />
     <Compile Include="Tiles\Stations\KaiTableTile.cs" />
     <Compile Include="Tiles\Stations\ZTableTile.cs" />
     <Compile Include="Traits\TraitBuff.cs" />
@@ -311,7 +301,9 @@
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
+    <Folder Include="Projectiles\" />
     <Folder Include="Races\" />
+    <Folder Include="Skills\" />
     <Folder Include="Sounds\" />
     <Folder Include="Transformations\Developers\Blockaroz\" />
     <Folder Include="Transformations\Developers\DawnishDays\" />
