@@ -53,7 +53,7 @@ namespace DBT.NPCs.Saibas
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            return spawnInfo.player.GetModPlayer<DBTPlayer>().zoneWasteland ? .1f : 0f;
+            return spawnInfo.player.GetModPlayer<DBTPlayer>().zoneWasteland ? .5f : 0f;
         }
 
         public override void AI()

@@ -27,54 +27,59 @@ namespace DBT.Wasteland
             {
                 return;
             }
-            tasks.Insert(shiniesIndex + 4, new PassLegacy("Mod Biomes", WastelandGen));
+            tasks.Insert(shiniesIndex + 4, new PassLegacy("Wasteland", WastelandGen));
         }
 
         private void WastelandGen(GenerationProgress progress)
         {
             progress.Message = "Creating a barren wasteland.";
             progress.Set(0.20f);
-            int startPositionX = WorldGen.genRand.Next(Main.maxTilesX / 2 - 260, Main.spawnTileX);
-            int startPositionY = (int)Main.worldSurface - Main.rand.Next(20, 60);
+            int startPositionX = WorldGen.genRand.Next(Main.spawnTileX + 300, Main.spawnTileX + 1200);
+            int startPositionY = (int)WorldGen.worldSurface;
             int size = 0;
             if (Main.maxTilesX == 4200 && Main.maxTilesY == 1200)
             {
-                size = 40;
+                size = 12;
             }
             if (Main.maxTilesX == 6300 && Main.maxTilesY == 1800)
             {
-                size = 62;
+                size = 24;
             }
             if (Main.maxTilesX == 8400 && Main.maxTilesY == 2400)
             {
-                size = 84;
+                size = 36;
             }
-            startPositionX--;
-            if (Main.tile[startPositionX, startPositionY].type == TileID.Sand)
-            {
-                var startX = startPositionX;
-                var startY = startPositionY;
-                startY++;
-                progress.Set(0.50f);
 
-                for (int x = startX - size; x <= startX + size; x++)
+            var startX = startPositionX;
+            var startY = startPositionY;
+            startY++;
+            progress.Set(0.50f);
+
+            for (int x = startX - size; x <= startX + size; x++)
+            {
+                for (int y = startY - size; y <= startY + size; y++)
                 {
-                    for (int y = startY - size; y <= startY + size; y++)
+                    if (Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y)) <= size)
                     {
-                        if (Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y)) <= size)
+                        if (Main.tile[x, y].type != TileID.Mud && Main.tile[x, y].type != TileID.SnowBlock && Main.tile[x, y].type != TileID.Sand)
                         {
                             WorldGen.TileRunner(x, y, 300, WorldGen.genRand.Next(100, 200), mod.TileType("CoarseRock"), false, 0f, 0f, true, true);
-                            WorldGen.PlaceWall(x, y, mod.WallType("CoarseRockWall"));
+                            Main.tile[x, y].wall = (ushort)mod.WallType("CoarseRockWall");
                             progress.Set(0.70f);
+                        }
+                        else
+                        {
+                            startX++;
                         }
                     }
                 }
-           
-                while (!Main.tile[startX, startY].active() && startY < Main.worldSurface)
-                {
-                    startY++;
-                }
+            }
+
+            while (!Main.tile[startX, startY].active() && startY < Main.worldSurface)
+            {
+                startY++;
             }
         }
     }
 }
+

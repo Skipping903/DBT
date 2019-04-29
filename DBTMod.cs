@@ -30,7 +30,8 @@ namespace DBT
             {
                 Autoload = true,
                 AutoloadGores = true,
-                AutoloadSounds = true
+                AutoloadSounds = true,
+                AutoloadBackgrounds = true
             };
 
 		    Instance = this;

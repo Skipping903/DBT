@@ -16,7 +16,7 @@ namespace DBT.Wasteland.Tiles
             ModTranslation name = CreateMapEntryName();
             name.SetDefault("Coarse Rock");
             //AddMapEntry(new Color(242, 179, 70), name);
-            AddMapEntry(new Color(255, 182, 81), name);
+            AddMapEntry(new Color(252, 163, 108), name);
             dustType = 75;
         }
     }
