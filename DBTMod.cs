@@ -11,6 +11,8 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 using DBT.Players;
+using DBT.Wasteland;
+using System;
 
 namespace DBT
 {

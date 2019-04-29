@@ -34,25 +34,24 @@ namespace DBT.Wasteland
         {
             progress.Message = "Creating a barren wasteland.";
             progress.Set(0.20f);
-            int startPositionX = WorldGen.genRand.Next(Main.spawnTileX + 300, Main.spawnTileX + 1200);
-            int startPositionY = (int)WorldGen.worldSurface;
+            int startPositionX = WorldGen.genRand.Next(Main.maxTilesX / 2 - 1200, Main.maxTilesX / 2 - 400);
+            int startPositionY = (int)Main.worldSurface - Main.rand.Next(20, 60);
             int size = 0;
             if (Main.maxTilesX == 4200 && Main.maxTilesY == 1200)
             {
-                size = 12;
+                size = 202;
             }
             if (Main.maxTilesX == 6300 && Main.maxTilesY == 1800)
             {
-                size = 24;
+                size = 340;
             }
             if (Main.maxTilesX == 8400 && Main.maxTilesY == 2400)
             {
-                size = 36;
+                size = 560;
             }
 
             var startX = startPositionX;
-            var startY = startPositionY;
-            startY++;
+            var startY = RaycastDown(startPositionX, startPositionY);
             progress.Set(0.50f);
 
             for (int x = startX - size; x <= startX + size; x++)
@@ -61,24 +60,26 @@ namespace DBT.Wasteland
                 {
                     if (Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y)) <= size)
                     {
-                        if (Main.tile[x, y].type != TileID.Mud && Main.tile[x, y].type != TileID.SnowBlock && Main.tile[x, y].type != TileID.Sand)
+                        if (Main.tile[x, y].type != TileID.Mud && Main.tile[x, y].type != TileID.SnowBlock && Main.tile[x, y].type != TileID.IceBlock && Main.tile[x, y].type != TileID.Sand)
                         {
-                            WorldGen.TileRunner(x, y, 300, WorldGen.genRand.Next(100, 200), mod.TileType("CoarseRock"), false, 0f, 0f, true, true);
-                            Main.tile[x, y].wall = (ushort)mod.WallType("CoarseRockWall");
+                            WorldGen.TileRunner(x, y, size, WorldGen.genRand.Next(10, 20), mod.TileType("CoarseRock"), false, 0f, 0f, true, true);
+                            if(Main.tile[x, y].active())
+                            {
+                                Main.tile[x, y].wall = (ushort)mod.WallType("CoarseRockWall");
+                            }
                             progress.Set(0.70f);
-                        }
-                        else
-                        {
-                            startX++;
                         }
                     }
                 }
             }
-
-            while (!Main.tile[startX, startY].active() && startY < Main.worldSurface)
+        }
+        public int RaycastDown(int x, int y)
+        {
+            while (!Main.tile[x, y].active())
             {
-                startY++;
+                y++;
             }
+            return y;
         }
     }
 }
