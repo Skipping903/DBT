@@ -10,7 +10,7 @@ namespace DBT.Wasteland.Tiles
 		{
 			Main.wallHouse[Type] = false;
             drop = mod.ItemType("CoarseRockWallItem");
-            AddMapEntry(new Color(186, 128, 48));
+            AddMapEntry(new Color(204, 130, 85));
 		}
 	}
 }

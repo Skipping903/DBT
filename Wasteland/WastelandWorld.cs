@@ -9,6 +9,7 @@ using Terraria.GameContent.Generation;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.World.Generation;
+using DBT.Wasteland.Tiles;
 
 namespace DBT.Wasteland
 {
@@ -18,16 +19,16 @@ namespace DBT.Wasteland
 
         public override void TileCountsAvailable(int[] tileCounts)
         {
-            wastelandTiles = tileCounts[mod.TileType("CoarseRock")];
+            wastelandTiles = tileCounts[mod.TileType(nameof(CoarseRock))];
         }
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
         {
-            int shiniesIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Shinies"));
-            if (shiniesIndex == -1)
+            int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
+            if (genIndex == -1)
             {
                 return;
             }
-            tasks.Insert(shiniesIndex + 4, new PassLegacy("Wasteland", WastelandGen));
+            tasks.Insert(genIndex + 1, new PassLegacy("Wasteland", WastelandGen));
         }
 
         private void WastelandGen(GenerationProgress progress)
@@ -35,41 +36,34 @@ namespace DBT.Wasteland
             progress.Message = "Creating a barren wasteland.";
             progress.Set(0.20f);
             int startPositionX = WorldGen.genRand.Next(Main.maxTilesX / 2 - 1200, Main.maxTilesX / 2 - 400);
-            int startPositionY = (int)Main.worldSurface - Main.rand.Next(20, 60);
-            int size = 0;
+            int startPositionY = (int)Main.worldSurface - 300;
+            Vector2 generationSize = new Vector2(0, 0);
             if (Main.maxTilesX == 4200 && Main.maxTilesY == 1200)
             {
-                size = 202;
+                generationSize = new Vector2(202, 36);
             }
             if (Main.maxTilesX == 6300 && Main.maxTilesY == 1800)
             {
-                size = 340;
+                generationSize = new Vector2(340, 48);
             }
             if (Main.maxTilesX == 8400 && Main.maxTilesY == 2400)
             {
-                size = 560;
+                generationSize = new Vector2(560, 56);
             }
 
-            var startX = startPositionX;
-            var startY = RaycastDown(startPositionX, startPositionY);
+            var generationStartX = startPositionX;
+            var generationStartY = RaycastDown(startPositionX, startPositionY);
             progress.Set(0.50f);
 
-            for (int x = startX - size; x <= startX + size; x++)
+            for (int x = 0; x <= generationSize.X; x++)
             {
-                for (int y = startY - size; y <= startY + size; y++)
+                for (int y = 0; y <= generationSize.Y; y++)
                 {
-                    if (Vector2.Distance(new Vector2(startX, startY), new Vector2(x, y)) <= size)
-                    {
-                        if (Main.tile[x, y].type != TileID.Mud && Main.tile[x, y].type != TileID.SnowBlock && Main.tile[x, y].type != TileID.IceBlock && Main.tile[x, y].type != TileID.Sand)
-                        {
-                            WorldGen.TileRunner(x, y, size, WorldGen.genRand.Next(10, 20), mod.TileType("CoarseRock"), false, 0f, 0f, true, true);
-                            if(Main.tile[x, y].active())
-                            {
-                                Main.tile[x, y].wall = (ushort)mod.WallType("CoarseRockWall");
-                            }
-                            progress.Set(0.70f);
-                        }
-                    }
+                    int generationPositionX = generationStartX + x;
+                    int generationPositionY = generationStartY + y;
+                    WorldGen.TileRunner(generationPositionX, generationPositionY, 5, WorldGen.genRand.Next(10, 20), mod.TileType(nameof(CoarseRock)), false, 0f, 0f, true, true);
+                    WorldGen.PlaceWall(generationPositionX, generationPositionY, mod.WallType(nameof(CoarseRockWall)));
+                    progress.Set(0.70f);
                 }
             }
         }
