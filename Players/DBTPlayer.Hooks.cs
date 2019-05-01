@@ -104,7 +104,7 @@ namespace DBT.Players
 
         public override void UpdateBiomes()
         {
-            zoneWasteland = (WastelandWorld.wastelandTiles > 50);
+            zoneWasteland = (WastelandWorld.wastelandTiles > 100);
         }
 
 

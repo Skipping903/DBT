@@ -8,7 +8,7 @@ namespace DBT.Wasteland.Water
 	{
 		public override bool ChooseWaterStyle()
 		{
-			return Main.bgStyle == mod.GetSurfaceBgStyleSlot("WastelandBG");
+			return Main.bgStyle == mod.GetSurfaceBgStyleSlot("WastelandSurfaceBgStyle");
 		}
 
 		public override int ChooseWaterfallStyle()

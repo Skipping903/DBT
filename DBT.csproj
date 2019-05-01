@@ -55,6 +55,7 @@
     <Compile Include="Auras\AuraAppearance.cs" />
     <Compile Include="Auras\AuraDrawPlayer.cs" />
     <Compile Include="Auras\LightingAppearance.cs" />
+    <Compile Include="Backgrounds\WastelandSurfaceBgStyle.cs" />
     <Compile Include="Buffs\DBTBuff.cs" />
     <Compile Include="Buffs\KiDegenerationBuff.cs" />
     <Compile Include="Buffs\MREBuff.cs" />
@@ -216,7 +217,6 @@
     <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
     <Compile Include="UserInterfaces\UIImagePair.cs" />
     <Compile Include="Utilities\SteamHelper.cs" />
-    <Compile Include="Wasteland\Backgrounds\WastelandBG.cs" />
     <Compile Include="Wasteland\Items\CoarseRockWallItem.cs" />
     <Compile Include="Wasteland\Items\CoarseRockItem.cs" />
     <Compile Include="Wasteland\Tiles\CoarseRock.cs" />
@@ -254,6 +254,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Backgrounds\WastelandSky.png" />
+    <Content Include="Backgrounds\WastelandSurfaceClose.png" />
+    <Content Include="Backgrounds\WastelandSurfaceFar.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid0.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid1.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid2.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid3.png" />
     <Content Include="build.txt" />
     <Content Include="description.txt" />
     <Content Include="Items\Consumables\YemmaFruit.png" />
@@ -286,7 +293,6 @@
     <Content Include="Sounds\Saibamen\Saibamen1.wav" />
     <Content Include="Sounds\Saibamen\saibamen2.wav" />
     <Content Include="Sounds\Saibamen\saibamen3.wav" />
-    <Content Include="Wasteland\Backgrounds\WastelandSky.png" />
     <Content Include="Wasteland\Items\CoarseRockItem.png" />
     <Content Include="Wasteland\Items\CoarseRockWallItem.png" />
     <Content Include="Wasteland\Tiles\CoarseRock.png" />
@@ -335,7 +341,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
-"D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
+"C:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
 exit 0
 )
 if "$(ConfigurationName)"=="Release" (

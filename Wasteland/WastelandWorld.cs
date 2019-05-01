@@ -23,7 +23,7 @@ namespace DBT.Wasteland
         }
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
         {
-            int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
+            int genIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Grass Wall"));
             if (genIndex == -1)
             {
                 return;
@@ -61,8 +61,12 @@ namespace DBT.Wasteland
                 {
                     int generationPositionX = generationStartX + x;
                     int generationPositionY = generationStartY + y;
-                    WorldGen.TileRunner(generationPositionX, generationPositionY, 5, WorldGen.genRand.Next(10, 20), mod.TileType(nameof(CoarseRock)), false, 0f, 0f, true, true);
-                    WorldGen.PlaceWall(generationPositionX, generationPositionY, mod.WallType(nameof(CoarseRockWall)));
+                    WorldGen.TileRunner(generationPositionX, generationPositionY, 5, WorldGen.genRand.Next(10, 20), (ushort)mod.TileType(nameof(CoarseRock)), false, 0f, 0f, true, true);
+                    if(Main.tile[generationPositionX, generationPositionY].active())
+                    {
+                        WorldGen.KillWall(generationPositionX, generationPositionY);
+                        WorldGen.PlaceWall(generationPositionX, generationPositionY, (ushort)mod.WallType(nameof(CoarseRockWall)));
+                    }
                     progress.Set(0.70f);
                 }
             }
