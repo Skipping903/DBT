@@ -40,15 +40,15 @@ namespace DBT.Wasteland
             Vector2 generationSize = new Vector2(0, 0);
             if (Main.maxTilesX == 4200 && Main.maxTilesY == 1200)
             {
-                generationSize = new Vector2(202, 36);
+                generationSize = new Vector2(262, 18);
             }
             if (Main.maxTilesX == 6300 && Main.maxTilesY == 1800)
             {
-                generationSize = new Vector2(340, 48);
+                generationSize = new Vector2(380, 22);
             }
             if (Main.maxTilesX == 8400 && Main.maxTilesY == 2400)
             {
-                generationSize = new Vector2(560, 56);
+                generationSize = new Vector2(608, 26);
             }
 
             var generationStartX = startPositionX;
@@ -61,13 +61,16 @@ namespace DBT.Wasteland
                 {
                     int generationPositionX = generationStartX + x;
                     int generationPositionY = generationStartY + y;
-                    WorldGen.TileRunner(generationPositionX, generationPositionY, 5, WorldGen.genRand.Next(10, 20), (ushort)mod.TileType(nameof(CoarseRock)), false, 0f, 0f, true, true);
-                    if(Main.tile[generationPositionX, generationPositionY].active())
+                    if (Main.tile[generationPositionX, generationPositionY].active())
                     {
-                        WorldGen.KillWall(generationPositionX, generationPositionY);
-                        WorldGen.PlaceWall(generationPositionX, generationPositionY, (ushort)mod.WallType(nameof(CoarseRockWall)));
+                        WorldGen.TileRunner(generationPositionX, generationPositionY, 5, WorldGen.genRand.Next(10, 20), (ushort)mod.TileType(nameof(CoarseRock)), false, 0f, 0f, true, true);
+
+                        if (Main.tile[generationPositionX, generationPositionY].type == mod.TileType(nameof(CoarseRock)))
+                        {
+                            Main.tile[generationPositionX, generationPositionY].wall = (ushort)mod.WallType(nameof(CoarseRockWall));
+                        }
+                        progress.Set(0.70f);
                     }
-                    progress.Set(0.70f);
                 }
             }
         }
