@@ -1,5 +1,4 @@
 ﻿using DBT.Commons.Buffs;
-using DBT.Extensions;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
@@ -33,7 +32,8 @@ namespace DBT.Players
             }
             else
                 IsCharging = false;
-            
+
+            MouseLeftHeld = triggersSet.MouseLeft;
 
             if (player.whoAmI == Main.myPlayer)
             {
@@ -47,5 +47,7 @@ namespace DBT.Players
                     DBTMod.Instance.dbtMenu.Visible = !DBTMod.Instance.dbtMenu.Visible;
             }
         }
+
+        public bool MouseLeftHeld { get; set; }
     }
 }

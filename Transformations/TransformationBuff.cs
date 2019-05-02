@@ -9,14 +9,15 @@ namespace DBT.Transformations
 {
     public abstract class TransformationBuff : DBTBuff, IHasUnlocalizedName
     {
-        protected TransformationBuff(TransformationDefinition definition, string displayName = "", string tooltip = "") : base(displayName, tooltip)
+        protected TransformationBuff(TransformationDefinition definition) : base(definition.DisplayName, "")
         {
             Definition = definition;
         }
 
-
         public override void SetDefaults()
         {
+            base.SetDefaults();
+
             if (Definition == null) return;
 
             DisplayName.SetDefault(Definition.DisplayName);
@@ -40,17 +41,34 @@ namespace DBT.Transformations
 
             TransformationTimer++;
             bool isFormMastered = dbtPlayer.HasMastered(Definition);
-            float KiDrain = -(isFormMastered ? Definition.GetUnmasteredKiDrain(dbtPlayer) : Definition.GetMasteredKiDrain(dbtPlayer));
 
-            if (KiDrain != 0f)
+            float kiDrain = -(isFormMastered ? Definition.GetUnmasteredKiDrain(dbtPlayer) : Definition.GetMasteredKiDrain(dbtPlayer));
+            float healthDrain = -(isFormMastered ? Definition.GetUnmasteredHealthDrain(dbtPlayer) : Definition.GetMasteredHealthDrain(dbtPlayer));
+
+            if (kiDrain != 0f)
             {
                 if (!isFormMastered)
-                    KiDrain *= KiDrainMultiplier;
+                    kiDrain *= KiDrainMultiplier;
 
-                dbtPlayer.ModifyKi(KiDrain);
+                kiDrain *= dbtPlayer.KiDrainMultiplier;
+                dbtPlayer.ModifyKi(kiDrain);
 
-                if (TransformationTimer % Definition.Drain.transformationStepDelay == 0 && KiDrainMultiplier < Definition.Drain.maxTransformationDrainMultiplier)
-                    KiDrainMultiplier += Definition.Drain.multiplierPerStep;
+                if (TransformationTimer % Definition.Drain.transformationStepDelay == 0 && KiDrainMultiplier < Definition.Drain.maxTransformationKiDrainMultiplier)
+                    KiDrainMultiplier += Definition.Drain.kiMultiplierPerStep;
+            }
+
+            if (healthDrain != 0f)
+            {
+                if (!isFormMastered)
+                    healthDrain *= HealthDrainMultiplier;
+
+                healthDrain *= dbtPlayer.HealthDrainMultiplier;
+
+                dbtPlayer.player.statLife -= (int) healthDrain;
+                dbtPlayer.player.lifeRegenTime = 0;
+
+                if (TransformationTimer % Definition.Drain.transformationStepDelay == 0 && HealthDrainMultiplier < Definition.Drain.maxTransformationHealthDrainMultiplier)
+                    HealthDrainMultiplier += Definition.Drain.healthMultiplierPerStep;
             }
 
             float 
@@ -196,6 +214,8 @@ namespace DBT.Transformations
 
         
         public int TransformationTimer { get; private set; }
+
         public float KiDrainMultiplier { get; private set; } = 1;
+        public float HealthDrainMultiplier { get; private set; } = 1;
     }
 }

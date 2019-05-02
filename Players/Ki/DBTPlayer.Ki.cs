@@ -13,11 +13,11 @@ namespace DBT.Players
         private bool _isCharging;
 
 
-        public float ModifyKi(float KiAmount)
+        public float ModifyKi(float kiAmount)
         {
             // TODO Add mastery for being in a form, if need be.
 
-            float projectedKi = Ki + KiAmount;
+            float projectedKi = Ki + kiAmount;
 
             if (projectedKi < 0)
                 projectedKi = 0;
@@ -28,7 +28,7 @@ namespace DBT.Players
             return Ki;
         }
 
-        internal void ResetEffectsKi()
+        internal void ResetKiEffects()
         {
             KiDamageMultiplier = 1;
             KiChargeRate = 1;
@@ -40,9 +40,18 @@ namespace DBT.Players
             KiKnockbackAddition = 0;
             KiCritAddition = 0;
 
-            NaturalKiRegeneration = 0;
+            BaseNaturalKiRegeneration = 0;
+            NaturalKiRegenerationMultiplier = 1;
+
+            ExternalKiRegeneration = 0;
+
+            KiOrbRestoreAmount = 100;
+            KiOrbGrabRange = 2;
+
             KiChargeRate = 0;
             KiChargeRateMultiplierLimit = 0;
+
+            KiDrainMultiplier = 1;
         }
 
         internal void PreUpdateKi()
@@ -50,13 +59,13 @@ namespace DBT.Players
             
         }
 
-        internal void PostUpdateHandleKi()
+        internal void PostUpdateKi()
         {
             if (IsCharging)
             {
                 ModifyKi(KiChargeRate);
 
-                List<IUpdatesOnChargeTick> items = player.GetItemsInInventory<IUpdatesOnChargeTick>(accessories: true, armor: true);
+                List<IUpdatesOnChargeTick> items = player.GetItemsByType<IUpdatesOnChargeTick>(accessories: true, armor: true);
                 float defenseMultiplier = 1;
 
                 for (int i = 0; i < items.Count; i++)
@@ -64,18 +73,26 @@ namespace DBT.Players
 
                 player.statDefense = (int)(defenseMultiplier * player.statDefense);
             }
+
+            if (Ki < MaxKi)
+                ModifyKi(NaturalKiRegeneration);
         }
 
         public float KiDamageMultiplier { get; set; } = 1;
 
-
         public float Ki { get; private set; }
 
         public float KiChargeRate { get; set; }
-
         public float KiChargeRateMultiplierLimit { get; set; }
 
-        public float NaturalKiRegeneration { get; set; }
+        public float BaseNaturalKiRegeneration { get; set; }
+        public float NaturalKiRegenerationMultiplier { get; set; }
+        public float NaturalKiRegeneration => BaseNaturalKiRegeneration * NaturalKiRegenerationMultiplier;
+
+        public float ExternalKiRegeneration { get; set; }
+
+        public float KiOrbRestoreAmount { get; set; }
+        public float KiOrbGrabRange { get; set; }
 
         public bool IsCharging
         {
@@ -96,16 +113,14 @@ namespace DBT.Players
         public float BaseMaxKi { get; set; }
 
         public float MaxKiMultiplier { get; set; } = 1;
-
         public float MaxKiModifier { get; set; }
 
         public int MaxKi => (int)(Math.Round(BaseMaxKi * MaxKiMultiplier) + MaxKiModifier);
 
-
         public float KiSpeedAddition { get; set; }
-
         public float KiKnockbackAddition { get; set; }
-
         public int KiCritAddition { get; set; }
+
+        public float KiDrainMultiplier { get; set; }
     }
 }

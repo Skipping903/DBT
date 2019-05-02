@@ -23,7 +23,14 @@ namespace DBT.Items
             base.SetStaticDefaults();
 
             DisplayName.SetDefault(_displayName);
-            Tooltip.SetDefault(_tooltip);
+
+            string tooltip = _tooltip;
+
+            IIsPatreonItem patreonItem = this as IIsPatreonItem;
+            if (patreonItem != null)
+                tooltip += "\n" + patreonItem.PatreonDonor;
+
+            Tooltip.SetDefault(tooltip);
         }
 
         public override void SetDefaults()

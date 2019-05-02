@@ -1,8 +1,5 @@
-﻿using DBT.Extensions;
-using DBT.Network;
-using DBT.Transformations;
+﻿using DBT.Transformations;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Players
@@ -16,5 +13,7 @@ namespace DBT.Players
         }
 
         public bool PlayerInitialized { get; private set; }
+
+        public float HealthDrainMultiplier { get; set; }
     }
 }

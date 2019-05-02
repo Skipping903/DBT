@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DBT.Commons;
+using DBT.Commons.Players;
 using DBT.Extensions;
 using DBT.HairStyles;
 using DBT.Transformations;
@@ -36,8 +36,12 @@ namespace DBT.Players
 
         public override void ResetEffects()
         {
-            ResetEffectsKi();
-            ResetEffectsGuardian();
+            HealthDrainMultiplier = 0;
+            _aliveBosses = null;
+
+            ResetKiEffects();
+            ResetGuardianEffects();
+            ResetSkillEffects();
         }
 
 
@@ -52,7 +56,7 @@ namespace DBT.Players
         {
             if (Main.netMode != NetmodeID.Server)
             {
-                
+
                 PreUpdateMovementHandleAura();
                 PreUpdateMovementHandleHair();
             }
@@ -67,8 +71,13 @@ namespace DBT.Players
         {
             FirstTransformation = GetTransformation();
 
-            PostUpdateHandleKi();
+            PostUpdateKi();
             PostUpdateHandleTransformations();
+
+            List<IHandleOnPlayerPostUpdate> items = player.GetItemsByType<IHandleOnPlayerPostUpdate>();
+
+            for (int i = 0; i < items.Count; i++)
+                items[i].OnPlayerPostUpdate(this);
         }
 
         public override void PostUpdateRunSpeeds()
@@ -83,18 +92,15 @@ namespace DBT.Players
 
         #endregion
 
-
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
-            List<IUpdateOnPlayerPreHurt> items = player.GetItemsInInventory<IUpdateOnPlayerPreHurt>();
+            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerDied(this, damage, pvp, damageSource));
 
-            for (int i = 0; i < items.Count; i++)
-                if (!items[i].OnPlayerPreHurt(this, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
-                    return false;
+            ForAllActiveTransformations(p => p.OnActivePlayerDied(this, damage, pvp, damageSource));
+            ClearTransformations();
 
-            return true;
+            IsCharging = false;
         }
-
 
         public override void ModifyDrawLayers(List<PlayerLayer> layers)
         {
@@ -107,17 +113,37 @@ namespace DBT.Players
             zoneWasteland = (WastelandWorld.wastelandTiles > 100);
         }
 
-
-        public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
+        public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
         {
-            TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerDied(this, damage, pvp, damageSource));
+            List<IHandleOnPlayerHitNPC> items = player.GetItemsByType<IHandleOnPlayerHitNPC>(armor: true, accessories: true);
 
-            ForAllActiveTransformations(p => p.OnActivePlayerDied(this, damage, pvp, damageSource));
-            ClearTransformations();
+            for (int i = 0; i < items.Count; i++)
+                items[i].OnPlayerHitNPC(item, target, ref damage, ref knockback, ref crit);
 
-            // TODO Check if this is required.
-            //if (Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
-                IsCharging = false;
+            base.OnHitNPC(item, target, damage, knockback, crit);
+        }
+
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            List<IHandleOnPlayerPreHurt> items = player.GetItemsByType<IHandleOnPlayerPreHurt>();
+
+            for (int i = 0; i < items.Count; i++)
+                if (!items[i].OnPlayerPreHurt(this, pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource))
+                    return false;
+
+            return true;
+        }
+
+        public override bool PreKill(double damage, int hitDirection, bool pvp, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        {
+            // bool baseResult = base.PreKill(damage, hitDirection, pvp, ref playSound, ref genGore, ref damageSource);
+            List<IHandleOnPlayerPreKill> items = new List<IHandleOnPlayerPreKill>();
+
+            for (int i = 0; i < items.Count; i++)
+                if (!items[i].OnPlayerPreKill(this, ref damage, ref hitDirection, ref pvp, ref playSound, ref genGore, ref damageSource))
+                    return false;
+
+            return true;
         }
     }
 }

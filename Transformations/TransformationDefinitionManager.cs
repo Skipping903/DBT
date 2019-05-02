@@ -3,6 +3,7 @@ using DBT.Managers;
 using DBT.Transformations.Developers.Webmilio;
 using DBT.Transformations.LSSJs.LSSJ;
 using DBT.Transformations.LSSJs.SSJCType;
+using DBT.Transformations.Patreon.SSJ5;
 using DBT.Transformations.SSJGs.SSJBs.SSJB;
 using DBT.Transformations.SSJGs.SSJBs.SSJBE;
 using DBT.Transformations.SSJGs.SSJG;
@@ -40,6 +41,9 @@ namespace DBT.Transformations
             SSJC = Add(new SSJCTypeTransformation(LSSJ)) as SSJCTypeTransformation;
 
             SoulStealer = Add(new SoulStealerTransformation()) as SoulStealerTransformation;
+
+            SSJ5 = Add(new SSJ5Transformation(SSJ4)) as SSJ5Transformation;
+
             Tree = new Tree<TransformationDefinition>(byIndex);
 
             base.DefaultInitialize();
@@ -64,6 +68,8 @@ namespace DBT.Transformations
         public SSJCTypeTransformation SSJC { get; private set; }
 
         public SoulStealerTransformation SoulStealer { get; private set; }
+
+        public SSJ5Transformation SSJ5 { get; private set; }
 
         public Tree<TransformationDefinition> Tree { get; private set; }
 

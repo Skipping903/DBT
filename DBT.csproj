@@ -43,7 +43,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LaptopDebug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\LaptopDebug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,14 +57,40 @@
     <Compile Include="Auras\LightingAppearance.cs" />
     <Compile Include="Backgrounds\WastelandSurfaceBgStyle.cs" />
     <Compile Include="Buffs\DBTBuff.cs" />
+    <Compile Include="Buffs\EnhancedReservesBuff.cs" />
     <Compile Include="Buffs\KiDegenerationBuff.cs" />
+    <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
+    <Compile Include="Skills\Beams\BeamOffsets.cs" />
+    <Compile Include="Extensions\CoordinateExtensions.cs" />
+    <Compile Include="Extensions\ProjectileExtensions.cs" />
+    <Compile Include="Helpers\ProjectileHelper.cs" />
+    <Compile Include="Items\Consumables\DisgustingGoop.cs" />
+    <Compile Include="Items\Consumables\DisgustingGoops\DisgustingGoop.cs" />
+    <Compile Include="Items\Consumables\DisgustingGoops\DisgustingGoopBuff.cs" />
+    <Compile Include="Items\Consumables\ITTomes\ITTomeVol.cs" />
+    <Compile Include="Items\Consumables\ITTomes\ITTomeVolDissipatiPeribunt.cs" />
+    <Compile Include="Items\Consumables\ITTomes\ITTomeVolIanuaeMagicae.cs" />
+    <Compile Include="Items\Consumables\ITTomes\ITTomeVolPuraFaciliorisTransmissus.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiPotions\OverflowingKiPotion.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiPotions\StandardKiPotion.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiPotions\GreaterKiPotion.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiPotions\KiPotionSicknessDebuff.cs" />
     <Compile Include="Buffs\MREBuff.cs" />
+    <Compile Include="Buffs\SenzuCooldownBuff.cs" />
+    <Compile Include="Buffs\ZenkaiCharmBuff.cs" />
+    <Compile Include="Buffs\ZenkaiCooldownBuff.cs" />
     <Compile Include="Commons\Buffs\ICanStopCharging.cs" />
+    <Compile Include="Commons\Players\IHandleOnPlayerHitNPC.cs" />
+    <Compile Include="Commons\Players\IHandleOnPlayerPostUpdate.cs" />
+    <Compile Include="Commons\Players\IHandleOnPlayerPreKill.cs" />
     <Compile Include="Commons\Items\IHasDefense.cs" />
     <Compile Include="Commons\Items\IHasRarity.cs" />
     <Compile Include="Commons\Items\IHasValue.cs" />
-    <Compile Include="Commons\IUpdateOnPlayerPreHurt.cs" />
+    <Compile Include="Commons\Items\IIsPatreonItem.cs" />
+    <Compile Include="Commons\Items\SenzuBeans\IAffectSenzuBeanCooldown.cs" />
+    <Compile Include="Commons\Players\IHandleOnPlayerPreHurt.cs" />
     <Compile Include="Commons\IUpdatesOnChargeTick.cs" />
+    <Compile Include="Commons\Projectiles\IHandleProjectileOnHitNPC.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DBTMod.cs" />
     <Compile Include="Dynamicity\IHasParents.cs" />
@@ -73,6 +99,7 @@
     <Compile Include="Extensions\BuffCheckExtensions.cs" />
     <Compile Include="Extensions\ItemCheckExtensions.cs" />
     <Compile Include="Extensions\ModPlayerExtensions.cs" />
+    <Compile Include="Extensions\SoundExtensions.cs" />
     <Compile Include="Extensions\SpriteBatchExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="HairStyles\Gine\GineHairStyle.cs" />
@@ -87,55 +114,41 @@
     <Compile Include="HairStyles\Vegeta\VegetaHairStyle.cs" />
     <Compile Include="HairStyles\Webmilio\WebmilioHairStyle.cs" />
     <Compile Include="Commons\IHasUnlocalizedName.cs" />
-    <Compile Include="Items\Accessories\AncientLegendWaistCape.cs" />
-    <Compile Include="Items\Accessories\ArmCannon.cs" />
-    <Compile Include="Items\Accessories\Baldurs\BaldurEssentia.cs" />
-    <Compile Include="Items\Accessories\Baldurs\BaldurItem.cs" />
-    <Compile Include="Items\Accessories\Baldurs\BuldariumSigmite.cs" />
-    <Compile Include="Items\Accessories\Baldurs\IIsBaldur.cs" />
-    <Compile Include="Items\Accessories\BattleKit.cs" />
-    <Compile Include="Items\Accessories\BlackDiamondShell.cs" />
-    <Compile Include="Items\Accessories\BloodstainedBandana.cs" />
-    <Compile Include="Items\Accessories\BurningEnergyAmulet.cs" />
-    <Compile Include="Items\Accessories\Crystallites\CrystalliteItem.cs" />
-    <Compile Include="Items\Accessories\Crystallites\CrystalliteAlleviate.cs" />
-    <Compile Include="Items\Accessories\Crystallites\CrystalliteControl.cs" />
-    <Compile Include="Items\Accessories\Crystallites\CrystalliteFlow.cs" />
-    <Compile Include="Items\Accessories\Earthens\EarthenArcanium.cs" />
-    <Compile Include="Items\Accessories\Earthens\EarthenItem.cs" />
-    <Compile Include="Items\Accessories\Earthens\EarthenScarab.cs" />
-    <Compile Include="Items\Accessories\Earthens\EarthenSigil.cs" />
-    <Compile Include="Items\Accessories\Infusers\CursedFlameInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\IchorInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\AmethystInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\DiamondInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\EmeraldInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\Infuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\DragonCrystalInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\RubyInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\SapphireInfuser.cs" />
-    <Compile Include="Items\Accessories\Infusers\TopazInfuser.cs" />
-    <Compile Include="Items\Accessories\Necklaces\AncientLegendNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\AmberGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\AmethystGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\DiamondGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\DragonGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\EmeraldGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\EmptyNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\GemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\RubyGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\SapphireGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\GemNecklaces\TopazGemNecklace.cs" />
-    <Compile Include="Items\Accessories\Necklaces\Necklace.cs" />
-    <Compile Include="Items\Accessories\Scouters\Scouter.cs" />
-    <Compile Include="Items\Accessories\Scouters\ScouterMK1.cs" />
-    <Compile Include="Items\Accessories\Scouters\ScouterMK2.cs" />
-    <Compile Include="Items\Accessories\Scouters\ScouterMK3.cs" />
-    <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
-    <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
-    <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="Helpers\SoundHelper.cs" />
+    <Compile Include="Items\Armor\DBTArmorPiece.cs" />
+    <Compile Include="Items\Armor\Individual\AdamantiteVisor.cs" />
+    <Compile Include="Items\Armor\Individual\ChlorophyteHeadpiece.cs" />
+    <Compile Include="Items\Armor\Individual\CobaltCrown.cs" />
+    <Compile Include="Items\Armor\Individual\HallowedFedora.cs" />
+    <Compile Include="Items\Armor\Individual\MythrilGlasses.cs" />
+    <Compile Include="Items\Armor\Individual\OrichalcumHat.cs" />
+    <Compile Include="Items\Armor\Individual\PalladiumBlindfoldCrown.cs" />
+    <Compile Include="Items\Armor\Individual\TitaniumCap.cs" />
+    <Compile Include="Items\Armor\Sets\Black\BlackFusionPants.cs" />
+    <Compile Include="Items\Armor\Sets\Black\BlackFusionShirt.cs" />
+    <Compile Include="Items\Armor\Sets\Demon\DemonLeggings.cs" />
+    <Compile Include="Items\Armor\Sets\Demon\DemonShirt.cs" />
+    <Compile Include="Items\Armor\Sets\EliteSaiyan\EliteSaiyanBreastplate.cs" />
+    <Compile Include="Items\Armor\Sets\EliteSaiyan\EliteSaiyanLeggings.cs" />
+    <Compile Include="Items\Armor\Sets\Metamoran\MetamoranPants.cs" />
+    <Compile Include="Items\Armor\Sets\Metamoran\MetamoranVest.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanBattleArmor\SaiyanBattleBreastplate.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanBattleArmor\SaiyanBattleLeggings.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanScout\SaiyanScoutPants.cs" />
+    <Compile Include="Items\Armor\Sets\SaiyanScout\SaiyanScoutScalemail.cs" />
     <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitGi.cs" />
     <Compile Include="Items\Armor\Sets\Turtle\TurtleHermitPants.cs" />
+    <Compile Include="Items\Consumables\BukuujustuVols\BukuujustuVol.cs" />
+    <Compile Include="Items\Consumables\BukuujustuVols\BukuujustuVolChorusAeria.cs" />
+    <Compile Include="Items\Consumables\BukuujustuVols\BukuujustuVolFugamArriperent.cs" />
+    <Compile Include="Items\Consumables\BukuujustuVols\BukuujustuVolLuxRuinam.cs" />
+    <Compile Include="Items\Consumables\DBTConsumable.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiPotions\KiPotion.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiPotions\LesserKiPotion.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiPotions\SuperKiPotion.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiStimulants\KiStimulant.cs" />
+    <Compile Include="Items\Consumables\Potionlike\KiStimulants\KiStimulantBuff.cs" />
+    <Compile Include="Items\Consumables\SenzuBean.cs" />
     <Compile Include="Items\DBTGlobalItem.cs" />
     <Compile Include="Items\DBTItem.cs" />
     <Compile Include="Items\Developer\DeveloperItem.cs" />
@@ -146,18 +159,34 @@
     <Compile Include="Items\Developer\KiRemover.cs" />
     <Compile Include="Items\Developer\TransformationClearer.cs" />
     <Compile Include="Items\Developer\TransformationSetter.cs" />
+    <Compile Include="Items\DragonBalls\DragonBall.cs" />
     <Compile Include="Items\Guardian\Accessories\Chakras\ThroatChakra.cs" />
     <Compile Include="Items\Guardian\GuardianItem.cs" />
+    <Compile Include="Items\KiOrbs\KiOrb.cs" />
     <Compile Include="Items\KiStones\EmptyKiStone.cs" />
     <Compile Include="Items\KiStones\KiStone.cs" />
     <Compile Include="Items\KiStones\KiStoneDefinition.cs" />
     <Compile Include="Items\KiStones\KiStoneDefinitionManager.cs" />
     <Compile Include="Items\KiStones\KiStones.cs" />
+    <Compile Include="Items\Materials\AstralEssentia.cs" />
+    <Compile Include="Items\Materials\DBTMaterial.cs" />
+    <Compile Include="Items\Materials\DemonicSoul.cs" />
+    <Compile Include="Items\Materials\DivineThread.cs" />
+    <Compile Include="Items\Materials\EarthenShard.cs" />
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
     <Compile Include="Items\Materials\Metals\RefinedMetal.cs" />
     <Compile Include="Items\Materials\Metals\ScrapMetal.cs" />
+    <Compile Include="Items\Materials\RadiantFragment.cs" />
+    <Compile Include="Items\Materials\SatanicCloth.cs" />
+    <Compile Include="Items\Materials\SkeletalEssence.cs" />
+    <Compile Include="Items\Materials\SoulofEntity.cs" />
+    <Compile Include="Players\Skills\DBTPlayer.Skills.cs" />
     <Compile Include="Items\Tiles\KaiTableItem.cs" />
     <Compile Include="Items\Tiles\ZTableItem.cs" />
+    <Compile Include="Items\Tools\DBTTool.cs" />
+    <Compile Include="Items\Tools\Radiant\RadiantHamaxe.cs" />
+    <Compile Include="Items\Tools\Radiant\RadiantPickaxe.cs" />
+    <Compile Include="Items\Tools\Radiant\RaditantTool.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
     <Compile Include="Network\PlayerChargingPacket.cs" />
@@ -171,7 +200,9 @@
     <Compile Include="Players\Guardian\DBTPlayer.Guardian.cs" />
     <Compile Include="Players\Guardian\DBTPlayer.Guardian.Saving.cs" />
     <Compile Include="Players\Hair\DBTPlayer.Hair.cs" />
+    <Compile Include="Players\IT\DBTPlayer.IT.cs" />
     <Compile Include="Players\Ki\DBTPlayer.Ki.Saving.cs" />
+    <Compile Include="Players\NPCs\DBTPlayer.NPCs.cs" />
     <Compile Include="Players\Saving\IPlayerSavable.cs" />
     <Compile Include="Managers\Manager.cs" />
     <Compile Include="Players\DBTPlayer.cs" />
@@ -182,16 +213,17 @@
     <Compile Include="Players\Traits\DBTPlayer.Traits.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.cs" />
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
-    <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
-    <Compile Include="Tiles\KaiTableTile.cs" />
-    <Compile Include="Tiles\ZTableTile.cs" />
+    <Compile Include="Skills\BaseBeam.cs" />
+    <Compile Include="Tiles\Stations\KaiTableTile.cs" />
+    <Compile Include="Tiles\Stations\ZTableTile.cs" />
     <Compile Include="Traits\TraitBuff.cs" />
     <Compile Include="Traits\TraitDefinition.cs" />
     <Compile Include="Traits\TraitManager.cs" />
     <Compile Include="Transformations\Developers\Webmilio\SoulStealerTransformation.cs" />
     <Compile Include="Transformations\LSSJs\LSSJ\LSSJTransformation.cs" />
     <Compile Include="Transformations\LSSJs\SSJCType\SSJCTypeTransformation.cs" />
+    <Compile Include="Transformations\Patreon\SSJ5\SSJ5Transformation.cs" />
     <Compile Include="Transformations\PlayerTransformation.cs" />
     <Compile Include="Transformations\SSJGs\SSJBs\SSJBE\SSJBETransformation.cs" />
     <Compile Include="Transformations\SSJGs\SSJBs\SSJB\SSJBTransformation.cs" />
@@ -252,6 +284,7 @@
     <Reference Include="Terraria">
       <HintPath>libs\Terraria.exe</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Backgrounds\WastelandSky.png" />
@@ -263,7 +296,6 @@
     <Content Include="Backgrounds\WastelandSurfaceMid3.png" />
     <Content Include="build.txt" />
     <Content Include="description.txt" />
-    <Content Include="Items\Consumables\YemmaFruit.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\All7Chakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\CrownChakra.png" />
     <Content Include="Items\Guardian\Accessories\Chakras\HeartChakra.png" />
@@ -302,11 +334,6 @@
     <Content Include="Wasteland\Water\WastelandWater_Block.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
-    <Folder Include="Items\Armor\Individual\" />
-    <Folder Include="Items\Armor\Sets\Black\" />
-    <Folder Include="Items\Armor\Sets\Demon\" />
-    <Folder Include="Items\Armor\Sets\EliteSaiyan\" />
     <Folder Include="Items\Armor\Sets\Guardian\Dragon\" />
     <Folder Include="Items\Armor\Sets\Guardian\Kaioshin\" />
     <Folder Include="Items\Armor\Sets\Guardian\Mechanical\" />
@@ -314,13 +341,12 @@
     <Folder Include="Items\Armor\Sets\Guardian\Saiyaman\" />
     <Folder Include="Items\Armor\Sets\Guardian\Whis\" />
     <Folder Include="Items\Armor\Sets\Radiant\" />
-    <Folder Include="Items\Armor\Sets\SaiyanScout\" />
-    <Folder Include="Items\Armor\Sets\Saiyan\" />
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
     <Folder Include="Races\" />
     <Folder Include="Skills\" />
+    <Folder Include="Sounds\" />
     <Folder Include="Transformations\Developers\Blockaroz\" />
     <Folder Include="Transformations\Developers\DawnishDays\" />
     <Folder Include="Transformations\Developers\Mak0Z\" />
@@ -329,6 +355,7 @@
     <Folder Include="Transformations\LSSJs\LSSJW\" />
     <Folder Include="Transformations\Mystic\" />
     <Folder Include="Transformations\SSJs\SSJ4s\SSJ4FP\" />
+    <Folder Include="Transformations\STR\" />
     <Folder Include="Transformations\UIs\UIOmen\" />
     <Folder Include="Transformations\UIs\UI\" />
   </ItemGroup>

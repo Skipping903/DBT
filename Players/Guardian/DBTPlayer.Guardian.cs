@@ -1,5 +1,4 @@
 ﻿using DBT.Extensions;
-using System;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -7,7 +6,7 @@ namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {
-        internal void ResetEffectsGuardian()
+        internal void ResetGuardianEffects()
         {
             BaseHealingBonus = 0;
         }

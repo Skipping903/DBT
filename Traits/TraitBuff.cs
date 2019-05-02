@@ -4,8 +4,7 @@ namespace DBT.Traits
 {
     public abstract class TraitBuff : DBTBuff
     {
-
-        public TraitBuff() : base("", "")
+        protected TraitBuff(string displayName, string tooltip) : base(displayName, tooltip)
         {
         }
     }

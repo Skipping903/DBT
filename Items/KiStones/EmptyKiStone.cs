@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using DBT.Buffs;
-using DBT.Commons.Items;
 using DBT.Players;
-using DBT.Tiles;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -85,10 +83,9 @@ namespace DBT.Items.KiStones
 
                 recipe.AddIngredient(ItemID.StoneBlock, 25);
                 recipe.AddIngredient(gemIDs[i]);
-                recipe.AddTile(mod, nameof(ZTableTile));
+                recipe.AddTile(TileID.Anvils);
 
                 recipe.SetResult(this);
-
                 recipe.AddRecipe();
             }
         }
