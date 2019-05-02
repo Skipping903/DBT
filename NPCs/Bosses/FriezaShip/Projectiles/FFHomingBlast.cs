@@ -7,6 +7,7 @@ using DBT.Utilities;
 using DBT.Extensions;
 using DBT.Players;
 using System;
+using DBT.Helpers;
 
 namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
 {
