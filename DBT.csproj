@@ -106,6 +106,10 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.cs" />
     <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
     <Compile Include="Skills\Beams\BeamOffsets.cs" />
     <Compile Include="Extensions\CoordinateExtensions.cs" />
@@ -365,10 +369,11 @@
     <Content Include="Items\KiStones\KiStoneT4.png" />
     <Content Include="Items\KiStones\KiStoneT5.png" />
     <Content Include="Items\KiStones\KiStoneT6.png" />
-    <Content Include="NPCs\Saibas\SaibaBlue.png" />
-    <Content Include="NPCs\Saibas\SaibaGold.png" />
-    <Content Include="NPCs\Saibas\SaibaGreen.png" />
-    <Content Include="NPCs\Saibas\SaibaPurple.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\FriezaShip.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.png" />
+    <Content Include="Sounds\Music\TheUnexpectedArrival.mp3" />
+    <Content Include="Sounds\Music\Wastelands.mp3" />
     <Content Include="Sounds\Saibamen\Saibamen1.wav" />
     <Content Include="Sounds\Saibamen\saibamen2.wav" />
     <Content Include="Sounds\Saibamen\saibamen3.wav" />
@@ -392,8 +397,6 @@
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
     <Folder Include="Races\" />
-    <Folder Include="Skills\" />
-    <Folder Include="Sounds\" />
     <Folder Include="Transformations\Developers\Blockaroz\" />
     <Folder Include="Transformations\Developers\DawnishDays\" />
     <Folder Include="Transformations\Developers\Mak0Z\" />

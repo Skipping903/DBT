@@ -5,48 +5,42 @@ using Microsoft.Xna.Framework;
 using DBT.Players;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DBT.NPCs.Saibas
+namespace DBT.NPCs.Bosses.FriezaShip.Minions
 {
-    public class Saibaman : ModNPC
+    public class FriezaForceMinion : ModNPC
     {
-        private bool hasDoneSaibaCheck = false;
         private int jumpTimer = 0;
         private int explodeTimer = 0;
         private int soundTimer = 0;
         private bool grabbed = false;
+        private int YHoverTimer = 0;
 
         public override string Texture
         {
             get
             {
-                return "DBT/NPCs/Saibas/Saibaman_0";
+                return "DBT/NPCs/Bosses/FriezaShip/Minions/FriezaForceMinion_0";
             }
         }
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Saibaman");
-            Main.npcFrameCount[npc.type] = 4;
+            DisplayName.SetDefault("Frieza Force Henchman");
+            Main.npcFrameCount[npc.type] = 3;
         }
 
         public override void SetDefaults()
         {
-            npc.width = 26;
-            npc.height = 36;
-            npc.damage = 12;
-            npc.defense = 4;
-            npc.lifeMax = 50;
+            npc.width = 52;
+            npc.height = 71;
+            npc.damage = 26;
+            npc.defense = 2;
+            npc.lifeMax = 120;
             npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath1;
+            npc.DeathSound = SoundID.NPCDeath3;
             npc.value = 60f;
-            npc.knockBackResist = 0.3f;
+            npc.knockBackResist = 0.1f;
             npc.aiStyle = 3;
-            aiType = NPCID.Zombie;
-        }
-
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
-        {
-            return spawnInfo.player.GetModPlayer<DBTPlayer>().zoneWasteland ? 1f : 0f;
         }
 
         public override void AI()
@@ -66,17 +60,30 @@ namespace DBT.NPCs.Saibas
 
             if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) <= 60)
             {
-                npc.velocity.Y = 0.4f;
-                npc.velocity.X = 0.9f * npc.direction;
-                jumpTimer++;
-                if (jumpTimer > 10)
+
+                if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) > hoverDistance.Y)
+                {
+                    //float hoverSpeedY = (2f + Main.rand.NextFloat(3, 8));
+                    //Add a little bit of delay before moving, this lets melee players possibly get a hit in
+                    YHoverTimer++;
+                    if (YHoverTimer > 15)
+                    {
+                        npc.velocity.Y = 2f;
+                    }
+                }
+                else if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) < hoverDistance.Y)
+                {
+                    //float hoverSpeedY = (-2f + Main.rand.NextFloat(-3, -8));
+                    YHoverTimer++;
+                    if (YHoverTimer > 15)
+                    {
+                        npc.velocity.Y = -2f;
+                    }
+                }
+                else
                 {
                     npc.velocity.Y = 0;
-                    if (jumpTimer > 20)
-                    {
-                        npc.velocity.X = 0;
-                        jumpTimer = 0;
-                    }
+                    YHoverTimer = 0;
                 }
             }
             if (grabbed)

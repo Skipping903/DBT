@@ -15,8 +15,10 @@ namespace DBT.NPCs.Bosses.FriezaShip
 	{
         private Vector2 hoverDistance = new Vector2(240, 180);
         private float hoverCooldown = 500;
+        private int slamDelay = 10;
         private int slamTimer = 0;
         private int slamCoolDownTimer = 0;
+        private int minionAmount = 2;
         private bool locationSelected = false;
         private bool hasDoneExplodeEffect = false;
         private float speedAdd = 0f;
@@ -57,8 +59,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public override void SetDefaults()
         {
-            npc.width = 110;
-            npc.height = 60;
+            npc.width = 220;
+            npc.height = 120;
             npc.damage = 26;
             npc.defense = 28;
             npc.lifeMax = 3600;
@@ -112,15 +114,19 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 hoverCooldown = 400;
                 speedAdd = 1f;
+                slamDelay = 8;
                 if (npc.life < npc.lifeMax * 0.50f)
                 {
                     hoverCooldown = 250;
                     speedAdd = 2f;
+                    slamDelay = 6;
                 }
                 if (npc.life < npc.lifeMax * 0.2f)
                 {
                     hoverCooldown = 100;
                     speedAdd = 4f;
+                    slamDelay = 4;
+                    minionAmount = 4;
                 }
             }
             //If the ship is really far away, nullify its movement and set it back to hover
@@ -134,27 +140,22 @@ namespace DBT.NPCs.Bosses.FriezaShip
             if (AIStage == Stage_Hover)
             {
                 //Y Hovering
-                if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) != hoverDistance.Y)
-                {
 
-                    if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) > hoverDistance.Y)
+
+                if (Main.player[npc.target].position.Y < npc.position.Y + hoverDistance.Y)
+                {
+                    YHoverTimer++;
+                    if (YHoverTimer > 15)
                     {
-                        //float hoverSpeedY = (2f + Main.rand.NextFloat(3, 8));
-                        //Add a little bit of delay before moving, this lets melee players possibly get a hit in
-                        YHoverTimer++;
-                        if(YHoverTimer > 15)
-                        {
-                            npc.velocity.Y = 2f;
-                        }
+                        npc.velocity.Y -= 2f;
                     }
-                    else if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) < hoverDistance.Y)
+                }
+                if (Main.player[npc.target].position.Y > npc.position.Y + hoverDistance.Y)
+                {
+                    YHoverTimer++;
+                    if (YHoverTimer > 15)
                     {
-                        //float hoverSpeedY = (-2f + Main.rand.NextFloat(-3, -8));
-                        YHoverTimer++;
-                        if (YHoverTimer > 15)
-                        {
-                            npc.velocity.Y = -2f;
-                        }
+                        npc.velocity.Y += 2f;
                     }
                 }
                 else
@@ -199,7 +200,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
 
             //Slam attack (stage 1) - Quickly moves to directly above the player, then waits a second before slamming straight down.
-            //To-Do: Make slam do increased contact damage. Fix bug where the ship flies down into the ground. Fix afterimage on slam not working.
+            //To-Do: Fix bug where the ship flies down into the ground. Fix afterimage on slam not working.
 
             if (AIStage == Stage_Slam)
             {
@@ -207,9 +208,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
                 locationSelected = true;
                 AITimer++;
-                if (AITimer > 10)
+                if (AITimer > slamDelay)
                 {
-                    if (AITimer == 11)
+                    if (AITimer == slamDelay + 1)
                     {
                         npc.noTileCollide = false;
                         if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
@@ -324,9 +325,17 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 if (AITimer == 0)
                 {
-                    int saiba = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("SaibaGreen"));
-                    Main.npc[saiba].netUpdate = true;
-                    npc.netUpdate = true;
+                    for(int amount = 0; amount < minionAmount; amount++)
+                    {
+                        int saiba = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("Saibaman"));
+                        Main.npc[saiba].netUpdate = true;
+                        
+                        int ff = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("FriezaForceMinion"));
+                        Main.npc[ff].netUpdate = true;
+
+                        npc.netUpdate = true;
+                    }
+                    
                 }
                 AITimer++;
                 if (AITimer > 60)
