@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
+using DBT.Helpers;
 
 namespace DBT.NPCs.Bosses.FriezaShip
 {
@@ -258,44 +259,16 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 npc.velocity.Y = 0;
                 npc.velocity.X = 0;
 
-                if (AITimer == 10)
+                if (AITimer >= 10)
                 {
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-
-
-                    if (npc.life < npc.lifeMax * 0.50f) //Fire 16 extra projectiles if below 50% health
+                    for (int i = 0; i < 15; i++) //fire 16 of this projectile, 0 counts as a number so that's why its 15.
                     {
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
+                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);;
+
+                        if (npc.life < npc.lifeMax * 0.50f) //Fire 16 extra projectiles if below 50% health
+                        {
+                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
+                        }
                     }
                 }
 
