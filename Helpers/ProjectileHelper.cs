@@ -126,7 +126,7 @@ namespace DBT.Helpers
             return new Tuple<float, Rectangle>(0f, Rectangle.Empty);
         }
 
-        public static Tuple<bool, float, BeamHitLocation> GetCollisionData(Vector2 tailStart, Vector2 beamStart, Vector2 headStart, Vector2 headEnd, float tailWidth, float beamWidth, float headWidth, float maxDistance, Rectangle targetHitbox)
+        /*public static Tuple<bool, float, BeamHitLocation> GetCollisionData(Vector2 tailStart, Vector2 beamStart, Vector2 headStart, Vector2 headEnd, float tailWidth, float beamWidth, float headWidth, float maxDistance, Rectangle targetHitbox)
         {
             float tailPoint = Vector2.Distance(tailStart, beamStart);
             float beamPoint = maxDistance;
@@ -151,6 +151,6 @@ namespace DBT.Helpers
                 return new Tuple<bool, float, BeamHitLocation>(true, maxDistance + headPoint, BeamHitLocation.Head);
 
             return new Tuple<bool, float, BeamHitLocation>(false, maxDistance, BeamHitLocation.Unspecified);
-        }
+        }*/
     }
 }

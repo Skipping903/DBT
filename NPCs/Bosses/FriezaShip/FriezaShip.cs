@@ -7,13 +7,17 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using DBT.Helpers;
+using DBT.NPCs.Bosses.FriezaShip.Projectiles;
+using DBT.NPCs.Bosses.FriezaShip.Minions;
+using DBT.NPCs.Saibas;
+
 
 namespace DBT.NPCs.Bosses.FriezaShip
 {
     //Thanks a bit to examplemod's flutterslime for helping with organization
 	public class FriezaShip : ModNPC
 	{
-        private Vector2 hoverDistance = new Vector2(240, 180);
+        private Vector2 hoverDistance = new Vector2(600, 180);
         private float hoverCooldown = 500;
         private int slamDelay = 10;
         private int slamTimer = 0;
@@ -53,14 +57,14 @@ namespace DBT.NPCs.Bosses.FriezaShip
 		{
 			DisplayName.SetDefault("A Frieza Force Ship");
 			Main.npcFrameCount[npc.type] = 8;
-            NPCID.Sets.TrailingMode[npc.type] = 0;
-            NPCID.Sets.TrailCacheLength[npc.type] = 2;
+            NPCID.Sets.TrailingMode[npc.type] = 2;
+            NPCID.Sets.TrailCacheLength[npc.type] = 6;
         }
 
         public override void SetDefaults()
         {
             npc.width = 220;
-            npc.height = 120;
+            npc.height = 60;
             npc.damage = 26;
             npc.defense = 28;
             npc.lifeMax = 3600;
@@ -150,7 +154,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                         npc.velocity.Y -= 2f;
                     }
                 }
-                if (Main.player[npc.target].position.Y > npc.position.Y + hoverDistance.Y)
+                else if (Main.player[npc.target].position.Y > npc.position.Y + hoverDistance.Y)
                 {
                     YHoverTimer++;
                     if (YHoverTimer > 15)
@@ -260,17 +264,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 npc.velocity.Y = 0;
                 npc.velocity.X = 0;
 
-                if (AITimer >= 10)
+                if (AITimer == 10)
                 {
-                    for (int i = 0; i < 15; i++) //fire 16 of this projectile, 0 counts as a number so that's why its 15.
-                    {
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);;
-
-                        if (npc.life < npc.lifeMax * 0.50f) //Fire 16 extra projectiles if below 50% health
-                        {
-                            Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType("FFBarrageBlast"), npc.damage / 4, 3f, Main.myPlayer);
-                        }
-                    }
+                    BarrageAttack();
                 }
 
                 if (AITimer > 60)
@@ -297,12 +293,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
                 if (AITimer == 0)
                 {
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 2.5f, -1f, mod.ProjectileType("FFHomingBlast"), npc.damage / 3, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, -2.5f, -1f, mod.ProjectileType("FFHomingBlast"), npc.damage / 3, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 2.5f, -1f, mod.ProjectileType<FFHomingBlast>(), npc.damage / 3, 3f, Main.myPlayer);
+                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, -2.5f, -1f, mod.ProjectileType<FFHomingBlast>(), npc.damage / 3, 3f, Main.myPlayer);
 
                     if (npc.life < npc.lifeMax * 0.50f) //Fire an extra stronger projectile upwards if below 50% health
                     {
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -1f, mod.ProjectileType("FFHomingBlast"), npc.damage / 2, 3f, Main.myPlayer);
+                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -1f, mod.ProjectileType<FFHomingBlast>(), npc.damage / 2, 3f, Main.myPlayer);
                     }
                 }
                 AITimer++;
@@ -327,10 +323,10 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 {
                     for(int amount = 0; amount < minionAmount; amount++)
                     {
-                        int saiba = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("Saibaman"));
+                        int saiba = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman>());
                         Main.npc[saiba].netUpdate = true;
                         
-                        int ff = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType("FriezaForceMinion"));
+                        int ff = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion>());
                         Main.npc[ff].netUpdate = true;
 
                         npc.netUpdate = true;
@@ -346,6 +342,19 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
 
             //Main.NewText(AIStage);
+        }
+
+        public void BarrageAttack()
+        {
+            for (int i = 0; i < 15; i++) //fire 16 of this projectile, 0 counts as a number so that's why its 15.
+            {
+                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType<FFBarrageBlast>(), npc.damage / 4, 3f, Main.myPlayer); ;
+
+                if (npc.life < npc.lifeMax * 0.50f) //Fire 16 extra projectiles if below 50% health
+                {
+                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType<FFBarrageBlast>(), npc.damage / 4, 3f, Main.myPlayer);
+                }
+            }
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
@@ -395,15 +404,21 @@ namespace DBT.NPCs.Bosses.FriezaShip
             npc.frame.Y = frameHeight * frame;
         }
 
-        /*public override void NPCLoot()
+        public override void NPCLoot()
         {
-            if (Main.rand.Next(20) == 0)
+            /*if (Main.rand.Next(20) == 0)
             {
                 {
                     Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("MajinNucleus"));
                 }
+            }*/
+            if (!DBTWorld.downedFriezaShip)
+            {
+                DBTWorld.downedFriezaShip = true;
+                if (Main.netMode == NetmodeID.Server)
+                    NetMessage.SendData(MessageID.WorldData);
             }
-        }*/
+        }
 
         public void ExplodeEffect()
         {

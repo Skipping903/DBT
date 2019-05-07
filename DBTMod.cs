@@ -124,7 +124,17 @@ namespace DBT
 	        NetworkPacketManager.Instance.HandlePacket(reader, whoAmI);
 	    }
 
-	    public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        public override void PostSetupContent()
+        {
+            // Boss checklist support
+            Mod bossChecklist = ModLoader.GetMod("BossChecklist");
+            if (bossChecklist != null)
+            {
+                bossChecklist.Call("AddBossWithInfo", "A Frieza Force Ship", 3.8f, (Func<bool>)(() => DBTWorld.downedFriezaShip), "Alert and let a frieza force scout escape in the wasteland biome after queen bee has been killed.");
+            }
+        }
+
+        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 	    {
 	        int
 	            resourcesLayerIndex = layers.FindIndex(l => l.Name.Contains("Resource Bars")),

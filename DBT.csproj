@@ -59,6 +59,7 @@
     <Compile Include="Buffs\DBTBuff.cs" />
     <Compile Include="Buffs\EnhancedReservesBuff.cs" />
     <Compile Include="Buffs\KiDegenerationBuff.cs" />
+    <Compile Include="DBTWorld.cs" />
     <Compile Include="Items\Accessories\AncientLegendWaistCape.cs" />
     <Compile Include="Items\Accessories\ArmCannon.cs" />
     <Compile Include="Items\Accessories\Baldurs\BaldurEssentia.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Items\Accessories\WornGloves.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFMinionBlast.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.cs" />
     <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
