@@ -17,7 +17,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
     //Thanks a bit to examplemod's flutterslime for helping with organization
 	public class FriezaShip : ModNPC
 	{
-        private Vector2 hoverDistance = new Vector2(600, 180);
+        private Vector2 hoverDistance = new Vector2(0, 150);
         private float hoverCooldown = 500;
         private int slamDelay = 10;
         private int slamTimer = 0;
@@ -64,8 +64,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public override void SetDefaults()
         {
             npc.width = 220;
-            npc.height = 60;
-            npc.damage = 26;
+            npc.height = 32;
+            npc.damage = 36;
             npc.defense = 28;
             npc.lifeMax = 3600;
             npc.HitSound = SoundID.NPCHit1;
@@ -145,21 +145,19 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 //Y Hovering
 
-
-                if (Main.player[npc.target].position.Y < npc.position.Y + hoverDistance.Y)
+                if (Main.player[npc.target].position.Y != npc.position.Y + hoverDistance.Y)
                 {
                     YHoverTimer++;
-                    if (YHoverTimer > 15)
+                    if (YHoverTimer > 10)
                     {
-                        npc.velocity.Y -= 2f;
-                    }
-                }
-                else if (Main.player[npc.target].position.Y > npc.position.Y + hoverDistance.Y)
-                {
-                    YHoverTimer++;
-                    if (YHoverTimer > 15)
-                    {
-                        npc.velocity.Y += 2f;
+                        if (Main.player[npc.target].position.Y < npc.position.Y + hoverDistance.Y)
+                        {
+                            npc.velocity.Y -= npc.velocity.Y > 0f ? 1f : 0.15f;
+                        }
+                        if (Main.player[npc.target].position.Y > npc.position.Y + hoverDistance.Y)
+                        {
+                            npc.velocity.Y += npc.velocity.Y < 0f ? 1f : 0.15f;
+                        }
                     }
                 }
                 else
@@ -168,7 +166,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     YHoverTimer = 0;
                 }
                 //X Hovering, To-Do: Make the ship not just center itself on the player, have some left and right alternating movement?
-                if (Vector2.Distance(new Vector2(0, player.position.X), new Vector2(0, npc.position.X)) > hoverDistance.X)
+                if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) != hoverDistance.X)
                 {
                     //float hoverSpeedY = (-2f + Main.rand.NextFloat(-3, -8));
                     XHoverTimer++;
@@ -223,7 +221,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                         }
                         npc.velocity.Y = 25f;
                     }
-                    if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || AITimer > 20)//If the bottom of the ship touches a tile, nullify speed and do dust particles
+                    if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || AITimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
                     {
                         npc.velocity.Y = -8f;
                         if (!hasDoneExplodeEffect)
