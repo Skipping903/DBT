@@ -14,8 +14,6 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
     public class FFHomingBlast : ModProjectile
     {
         private int moveTimer = 0;
-        private bool directionChosen = false;
-        private bool speedChosen = false;
 
         public override void SetDefaults()
         {
@@ -52,7 +50,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
 				Dust dust = Main.dust[Terraria.Dust.NewDust(projectile.position, 26, 26, 222, projectile.velocity.X, projectile.velocity.Y, 0, new Color(255,255,255), 1f)];
 				dust.noGravity = true;
 			}
-            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, mod.ProjectileType("BigBangAttackProjectile2"), 1, 30, projectile.owner, 0f, 1f);
+            //Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, mod.ProjectileType("BigBangAttackProjectile2"), 1, 30, projectile.owner, 0f, 1f);
 
             ExplodeEffect();
         }

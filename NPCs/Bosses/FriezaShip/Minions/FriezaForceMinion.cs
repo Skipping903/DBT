@@ -11,6 +11,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
     {
         private int shootTimer = 0;
         private int YHoverTimer = 0;
+        private bool assignedTexture = false;
 
         public override string Texture
         {
@@ -45,28 +46,17 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
             Player player = Main.player[npc.target];
             npc.TargetClosest(true);
 
-            if (Main.player[npc.target].position.Y < npc.position.Y + 240)
+
+            if (Main.player[npc.target].position.Y < npc.position.Y + 200)
             {
-                YHoverTimer++;
-                if (YHoverTimer > 15)
-                {
-                    npc.velocity.Y -= 1f;
-                }
+                npc.velocity.Y -= npc.velocity.Y > 0f ? 1.2f : 0.20f;
             }
-            if (Main.player[npc.target].position.Y > npc.position.Y + 240)
+            if (Main.player[npc.target].position.Y > npc.position.Y + 200)
             {
-                YHoverTimer++;
-                if (YHoverTimer > 15)
-                {
-                    npc.velocity.Y += 1f;
-                }
+                npc.velocity.Y += npc.velocity.Y < 0f ? 1.2f : 0.20f;
             }
-            else
-            {
-                npc.velocity.Y = 0;
-                YHoverTimer = 0;
-            }
-            if (Vector2.Distance(new Vector2(0, player.position.X), new Vector2(0, npc.position.X)) > 200)
+
+            if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) > 200)
             {
                 npc.velocity.X = 1.5f * npc.direction;
             }
@@ -96,10 +86,13 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
         {
             if (AiTexture == 0 && npc.localAI[0] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                AiTexture = Main.rand.Next(2);
-
-                npc.localAI[0] = 1;
-                npc.netUpdate = true;
+                if (!assignedTexture)
+                {
+                    AiTexture = Main.rand.Next(2);
+                    npc.localAI[0] = 1;
+                    npc.netUpdate = true;
+                    assignedTexture = true;
+                }
             }
 
             return true;
@@ -121,7 +114,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
         {
 
             npc.frameCounter += 1;
-            if (npc.frameCounter > 3)
+            if (npc.frameCounter > 2)
             {
                 frame++;
                 npc.frameCounter = 0;

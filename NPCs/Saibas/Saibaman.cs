@@ -9,7 +9,7 @@ namespace DBT.NPCs.Saibas
 {
     public class Saibaman : ModNPC
     {
-        private bool hasDoneSaibaCheck = false;
+        private bool assignedTexture = false;
         private int jumpTimer = 0;
         private int explodeTimer = 0;
         private int soundTimer = 0;
@@ -112,10 +112,13 @@ namespace DBT.NPCs.Saibas
         {
             if (AiTexture == 0 && npc.localAI[0] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
             {
-                AiTexture = Main.rand.Next(3);
-
-                npc.localAI[0] = 1;
-                npc.netUpdate = true;
+                if(!assignedTexture)
+                {
+                    AiTexture = Main.rand.Next(3);
+                    npc.localAI[0] = 1;
+                    npc.netUpdate = true;
+                    assignedTexture = true;
+                }
             }
 
             return true;
