@@ -4,74 +4,48 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using DBT.Players;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.Audio;
 
 namespace DBT.NPCs.Saibas
 {
-    public class Saibaman : ModNPC
+    public abstract class Saibaman : DBTNPC
     {
-        private bool assignedTexture = false;
-        private int jumpTimer = 0;
-        private int explodeTimer = 0;
-        private int soundTimer = 0;
-        private bool grabbed = false;
-
-        public override string Texture
+        protected Saibaman(string displayName, int width, int height, int health, LegacySoundStyle hitSound, LegacySoundStyle deathSound, int aistyle, int aitype = 0, int defense = 0, int damage = 0, float value = 0f, float knockbackResist = 0f, int frameCount = 0) : base(displayName, width, height, health, hitSound, deathSound, aistyle)
         {
-            get
-            {
-                return "DBT/NPCs/Saibas/Saibaman_0";
-            }
-        }
-
-        public override void SetStaticDefaults()
-        {
-            DisplayName.SetDefault("Saibaman");
-            Main.npcFrameCount[npc.type] = 4;
-        }
-
-        public override void SetDefaults()
-        {
-            npc.width = 26;
-            npc.height = 36;
-            npc.damage = 12;
-            npc.defense = 4;
-            npc.lifeMax = 50;
-            npc.HitSound = SoundID.NPCHit1;
-            npc.DeathSound = SoundID.NPCDeath1;
-            npc.value = 60f;
-            npc.knockBackResist = 0.3f;
-            npc.aiStyle = 3;
-            aiType = NPCID.Zombie;
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
+            base.SpawnChance(spawnInfo);
             return spawnInfo.player.GetModPlayer<DBTPlayer>().zoneWasteland ? 1f : 0f;
         }
 
         public override void AI()
         {
+            base.AI();
             Player player = Main.player[npc.target];
             npc.TargetClosest(true);
 
-            if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) <= 120)
+            if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) <= 120)
             {
                 soundTimer++;
                 if (soundTimer > (180 + Main.rand.Next(60, 120)))
                 {
-                    Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Custom, GeGeGe()).WithVolume(0.6f));
+                    Main.PlaySound(mod.GetLegacySoundSlot(Terraria.ModLoader.SoundType.Custom, GeGeGe()).WithVolume(0.6f));
                     soundTimer = 0;
                 }
             }
 
-            if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) <= 60)
+            if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) <= 60)
             {
-                npc.velocity.Y = 0.4f;
-                npc.velocity.X = 0.9f * npc.direction;
                 jumpTimer++;
+                if(jumpTimer == 1 && npc.velocity.Y == 0)
+                {
+                    npc.velocity = new Vector2(3f * npc.direction, -8f);
+                }
                 if (jumpTimer > 10)
                 {
-                    npc.velocity.Y = 0;
+                    //npc.velocity.Y = 0;
                     if (jumpTimer > 20)
                     {
                         npc.velocity.X = 0;
@@ -92,47 +66,9 @@ namespace DBT.NPCs.Saibas
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
+            base.OnHitPlayer(target, damage, crit);
             npc.position = target.position;
             grabbed = true;
-        }
-        //Thanks putan for helping with this
-        public float AiTexture
-        {
-            get
-            {
-                return npc.ai[3];
-            }
-            set
-            {
-                npc.ai[3] = value;
-            }
-        }
-
-        public override bool PreAI()
-        {
-            if (AiTexture == 0 && npc.localAI[0] == 0 && Main.netMode != NetmodeID.MultiplayerClient)
-            {
-                if(!assignedTexture)
-                {
-                    AiTexture = Main.rand.Next(3);
-                    npc.localAI[0] = 1;
-                    npc.netUpdate = true;
-                    assignedTexture = true;
-                }
-            }
-
-            return true;
-        }
-
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
-        {
-            Texture2D texture = mod.GetTexture("NPCs/Saibas/Saibaman_" + AiTexture);
-            Vector2 Offset = new Vector2(0f, npc.gfxOffY);
-            SpriteEffects effect = npc.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            Vector2 drawOrigin = new Vector2(npc.width * 0.5f, npc.height * 0.5f);
-            Vector2 drawPos = npc.position - Main.screenPosition + drawOrigin + Offset;
-            spriteBatch.Draw(texture, drawPos, npc.frame, drawColor, npc.rotation, npc.frame.Size() / 2, npc.scale, effect, 0f);
-            return false;
         }
 
         int frame = 0;
@@ -217,5 +153,11 @@ namespace DBT.NPCs.Saibas
 
             }
         }
+
+        private bool assignedTexture = false;
+        private int jumpTimer = 0;
+        private int explodeTimer = 0;
+        private int soundTimer = 0;
+        private bool grabbed = false;
     }
 }

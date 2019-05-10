@@ -24,7 +24,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
             projectile.aiStyle = 101;
             projectile.light = 1f;
             projectile.stepSpeed = 13;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 14;
+            ProjectileID.Sets.TrailCacheLength[projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[projectile.type] = 2;
             projectile.netUpdate = true;
         }

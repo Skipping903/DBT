@@ -9,11 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 using DBT.Helpers;
 using DBT.NPCs.Bosses.FriezaShip.Projectiles;
 using DBT.NPCs.Bosses.FriezaShip.Minions;
+using DBT.NPCs.Bosses.FriezaShip.Items;
 using DBT.NPCs.Saibas;
 
 
 namespace DBT.NPCs.Bosses.FriezaShip
 {
+    [AutoloadBossHead]
     //Thanks a bit to examplemod's flutterslime for helping with organization
 	public class FriezaShip : ModNPC
 	{
@@ -78,6 +80,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             npc.noGravity = true;
             npc.noTileCollide = true;
             music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/TheUnexpectedArrival");
+            bossBag = mod.ItemType<FFShipBag>();
         }
 
         //To-Do: Add the rest of the stages to the AI. Make green saibaman code.
@@ -150,6 +153,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     YHoverTimer++;
                     if (YHoverTimer > 10)
                     {
+                        //Thanks UncleDanny for this <3
                         if (Main.player[npc.target].position.Y < npc.position.Y + hoverDistance.Y)
                         {
                             npc.velocity.Y -= npc.velocity.Y > 0f ? 1f : 0.15f;
@@ -319,17 +323,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 if (AITimer == 0)
                 {
-                    for(int amount = 0; amount < minionAmount; amount++)
-                    {
-                        int saiba = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman>());
-                        Main.npc[saiba].netUpdate = true;
-                        
-                        int ff = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion>());
-                        Main.npc[ff].netUpdate = true;
-
-                        npc.netUpdate = true;
-                    }
-                    
+                    SummonMinions();
                 }
                 AITimer++;
                 if (AITimer > 60)
@@ -347,11 +341,25 @@ namespace DBT.NPCs.Bosses.FriezaShip
             for (int i = 0; i < 15; i++) //fire 16 of this projectile, 0 counts as a number so that's why its 15.
             {
                 Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType<FFBarrageBlast>(), npc.damage / 4, 3f, Main.myPlayer); ;
-
-                if (npc.life < npc.lifeMax * 0.50f) //Fire 16 extra projectiles if below 50% health
-                {
+            }
+            if (npc.life < npc.lifeMax * 0.50f) //Fire 8 extra projectiles if below 50% health
+            {
+                for (int i = 0; i < 8; i++)
                     Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType<FFBarrageBlast>(), npc.damage / 4, 3f, Main.myPlayer);
-                }
+            }
+        }
+
+        public void SummonMinions()
+        {
+            for (int amount = 0; amount < minionAmount; amount++)
+            {
+                int saiba = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman>());
+                Main.npc[saiba].netUpdate = true;
+
+                int ff = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion1>());
+                Main.npc[ff].netUpdate = true;
+
+                npc.netUpdate = true;
             }
         }
 
@@ -404,12 +412,27 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public override void NPCLoot()
         {
-            /*if (Main.rand.Next(20) == 0)
+
+            if (Main.expertMode)
             {
+                npc.DropBossBags();
+            }
+            else
+            {
+                int choice = Main.rand.Next(1);
+
+                if (choice == 0)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, mod.ItemType("MajinNucleus"));
+                    //Item.NewItem(npc.getRect(), mod.ItemType<BeamRifle>());
                 }
-            }*/
+                if (choice == 1)
+                {
+                    //Item.NewItem(npc.getRect(), mod.ItemType<HenchBlast>());
+                }
+                //Item.NewItem(npc.getRect(), mod.ItemType<CyberneticParts>(), Main.rand.Next(7, 18));
+                Item.NewItem(npc.getRect(), mod.ItemType<ArmCannonMK2>());
+            }
+
             if (!DBTWorld.downedFriezaShip)
             {
                 DBTWorld.downedFriezaShip = true;
