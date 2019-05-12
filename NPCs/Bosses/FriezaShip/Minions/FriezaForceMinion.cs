@@ -16,7 +16,6 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
 
         public override void AI()
         {
-            base.AI();
             Player player = Main.player[npc.target];
             npc.TargetClosest(true);
 
@@ -46,7 +45,6 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
         int frame = 0;
         public override void FindFrame(int frameHeight)
         {
-            base.FindFrame(frameHeight);
             npc.frameCounter += 1;
             if (npc.frameCounter > 4)
             {

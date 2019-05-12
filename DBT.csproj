@@ -109,6 +109,7 @@
     <Compile Include="Items\Accessories\WornGloves.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\ArmCannonMK2.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Items\BeamRifle.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\FFShipBag.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion3.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="NPCs\Saibas\Saibaman3.cs" />
     <Compile Include="NPCs\Saibas\Saibaman2.cs" />
     <Compile Include="NPCs\Saibas\Saibaman1.cs" />
+    <Compile Include="Projectiles\FFBeamProjectile.cs" />
     <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
     <Compile Include="Skills\Beams\BeamOffsets.cs" />
     <Compile Include="Extensions\CoordinateExtensions.cs" />

@@ -16,13 +16,11 @@ namespace DBT.NPCs.Saibas
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            base.SpawnChance(spawnInfo);
             return spawnInfo.player.GetModPlayer<DBTPlayer>().zoneWasteland ? 1f : 0f;
         }
 
         public override void AI()
         {
-            base.AI();
             Player player = Main.player[npc.target];
             npc.TargetClosest(true);
 
@@ -66,7 +64,6 @@ namespace DBT.NPCs.Saibas
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            base.OnHitPlayer(target, damage, crit);
             npc.position = target.position;
             grabbed = true;
         }

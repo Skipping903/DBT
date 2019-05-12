@@ -433,12 +433,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 Item.NewItem(npc.getRect(), mod.ItemType<ArmCannonMK2>());
             }
 
-            if (!DBTWorld.downedFriezaShip)
+            /*if (!DBTWorld.downedFriezaShip)
             {
                 DBTWorld.downedFriezaShip = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData);
-            }
+            }*/
         }
 
         public void ExplodeEffect()

@@ -29,16 +29,12 @@ namespace DBT.NPCs
 
         public override void SetStaticDefaults()
         {
-            base.SetStaticDefaults();
-
             DisplayName.SetDefault(_displayName);
             Main.npcFrameCount[npc.type] = FrameCount;
         }
 
         public override void SetDefaults()
         {
-            base.SetDefaults();
-
             npc.defense = Defense;
             npc.lifeMax = Health;
             npc.damage = Damage;

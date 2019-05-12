@@ -31,7 +31,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Items
 
             if (choice == 0)
             {
-                //player.QuickSpawnItem(mod.ItemType<BeamRifle>());
+                player.QuickSpawnItem(mod.ItemType<BeamRifle>());
             }
             if (choice == 1)
             {

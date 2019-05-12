@@ -6,7 +6,7 @@ using DBT.Players;
 using Microsoft.Xna.Framework.Graphics;
 using DBT.NPCs.Saibas;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Minions
+namespace DBT.NPCs.Saibas
 {
     public class Saibaman2 : Saibaman
     {

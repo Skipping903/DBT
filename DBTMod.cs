@@ -103,7 +103,7 @@ namespace DBT
                     MusicID.Boss1, MusicID.Boss2, MusicID.Boss3, MusicID.Boss4, MusicID.Boss5,
                     MusicID.LunarBoss, MusicID.PumpkinMoon, MusicID.TheTowers, MusicID.FrostMoon, MusicID.GoblinInvasion,
                     MusicID.Eclipse, MusicID.MartianMadness, MusicID.PirateInvasion,
-                    //GetSoundSlot(SoundType.Music, "Sounds/Music/TheUnexpectedArrival"),
+                    GetSoundSlot(SoundType.Music, "Sounds/Music/TheUnexpectedArrival"),
                 };
 
             int m = music;
@@ -130,7 +130,7 @@ namespace DBT
             Mod bossChecklist = ModLoader.GetMod("BossChecklist");
             if (bossChecklist != null)
             {
-                bossChecklist.Call("AddBossWithInfo", "A Frieza Force Ship", 3.8f, (Func<bool>)(() => DBTWorld.downedFriezaShip), "Alert and let a frieza force scout escape in the wasteland biome after queen bee has been killed.");
+                //bossChecklist.Call("AddBossWithInfo", "A Frieza Force Ship", 3.8f, (Func<bool>)(() => DBTWorld.downedFriezaShip), "Alert and let a frieza force scout escape in the wasteland biome after queen bee has been killed.");
             }
         }
 
