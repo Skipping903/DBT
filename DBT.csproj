@@ -105,6 +105,7 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
     <Compile Include="Skills\Beams\BeamOffsets.cs" />
     <Compile Include="Extensions\CoordinateExtensions.cs" />

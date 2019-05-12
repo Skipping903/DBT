@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DBT.Extensions;
-using DBT.Projectiles;
 using Microsoft.Xna.Framework;
 using Terraria;
 
@@ -14,6 +13,7 @@ namespace DBT.Helpers
         {
             if (massiveBlastProjectileTypes.Contains(projectileType))
                 return;
+
             massiveBlastProjectileTypes.Add(projectileType);
         }
 
