@@ -16,7 +16,10 @@ namespace DBT.Players
         {
             if (Flying)
             {
-                float chargeMoveSpeedBonus = ChargeMove
+                float chargeMoveSpeedBonus = SkillChargeMoveSpeedModifier / 10f;
+                float yVelocity = player.gravity + 0.001f;
+
+                if ()
             }
         }
 

@@ -35,6 +35,11 @@ namespace DBT.Players
 
             MouseLeftHeld = triggersSet.MouseLeft;
 
+            UpHeld = triggersSet.Up;
+            DownHeld = triggersSet.Down;
+            LeftHeld = triggersSet.Left;
+            RightHeld = triggersSet.Right;
+
             if (player.whoAmI == Main.myPlayer)
             {
                 if (DBTMod.Instance.transformUpKey.JustPressed && SelectedTransformations != null)
@@ -49,5 +54,10 @@ namespace DBT.Players
         }
 
         public bool MouseLeftHeld { get; set; }
+
+        public bool UpHeld { get; set; }
+        public bool DownHeld { get; set; }
+        public bool LeftHeld { get; set; }
+        public bool RightHeld { get; set; }
     }
 }
