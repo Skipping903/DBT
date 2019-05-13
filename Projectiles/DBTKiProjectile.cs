@@ -15,6 +15,38 @@ namespace DBT.Projectiles
 
             if (!ChargeBall)
                 projectile.scale = projectile.scale + ChargeLevel;
+
+            if (BeamTrail && projectile.scale > 0 && SizeTimer > 0)
+            {
+                SizeTimer = 120 - 1;
+                projectile.scale = projectile.scale * SizeTimer / 120f;
+            }
+
+            if (ChargeBall)
+            {
+                if (Owner.Ki <= 0f)
+                    Owner.player.channel = false;
+
+                projectile.hide = true;
+
+                if (projectile.timeLeft < 4)
+                    projectile.timeLeft = 10;
+
+                projectile.position.X = Owner.player.Center.X + Owner.player.direction * 20 - 5;
+                projectile.position.Y = Owner.player.Center.Y - 3;
+
+                projectile.netUpdate2 = true;
+
+                if (!Owner.player.channel && ChargeLevel < 1)
+                    projectile.Kill();
+
+                // If the player is channeling, increment the timer and apply some slowdown
+                if (Owner.player.channel && projectile.active)
+                {
+                    ChargeTimer++;
+                    Owner.ApplySkillChargeSlowdown();
+                }
+            }
         }
 
         public int GetChargeLevelLimit(DBTPlayer dbtPlayer) => ChargeLevelMax + dbtPlayer.SkillChargeLevelLimitModifier;
