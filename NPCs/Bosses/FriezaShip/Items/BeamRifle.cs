@@ -24,16 +24,16 @@ namespace DBT.NPCs.Bosses.FriezaShip.Items
             item.ranged = true;
             item.autoReuse = true;
             item.shoot = mod.ProjectileType<FFBeamProjectile>();
-            item.shootSpeed = 16f;
+            item.shootSpeed = 20f;
             item.useTime = 9;
-            item.damage = 16;
-            item.useAnimation = 18;
+            item.damage = 15;
+            item.useAnimation = 12;
             item.useStyle = 5;
             item.noMelee = true;
             item.knockBack = 8f;
             if (!Main.dedServ)
             {
-                item.UseSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/FFRiflefire").WithVolume(0.5f);
+                item.UseSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/FFRiflefire").WithVolume(0.5f).WithPitchVariance(0.1f);
             }
         }
     }

@@ -11,7 +11,7 @@ namespace DBT.Projectiles
     {
     	public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Beam Rifle Shot");
+			DisplayName.SetDefault("Beam Laser");
 		}
     	
         public override void SetDefaults()
@@ -32,6 +32,11 @@ namespace DBT.Projectiles
 			projectile.tileCollide = false;
 			ProjectileID.Sets.TrailCacheLength[projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[projectile.type] = 0;
+        }
+
+        public override void AI()
+        {
+            projectile.rotation = projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)

@@ -26,7 +26,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
             projectile.friendly = false;
             projectile.magic = true;
             projectile.hostile = true;
-            projectile.aiStyle = 101;
+            projectile.aiStyle = 0;
             projectile.light = 1f;
             projectile.stepSpeed = 13;
             ProjectileID.Sets.TrailCacheLength[projectile.type] = 8;
@@ -99,11 +99,6 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
             }
 			
 		}
-
-        public override void OnHitPlayer(Player target, int damage, bool crit)
-        {
-            projectile.Kill();
-        }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
 		{

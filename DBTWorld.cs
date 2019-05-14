@@ -13,7 +13,7 @@ namespace DBT
 {
     public class DBTWorld : ModWorld
     {
-        /*public static bool downedFriezaShip = false;
+        public static bool downedFriezaShip = false;
 
         public override void Initialize()
         {
@@ -57,6 +57,6 @@ namespace DBT
         {
             BitsByte flags = reader.ReadByte();
             downedFriezaShip = flags[0];
-        }*/
+        }
     }
 }

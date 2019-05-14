@@ -257,7 +257,6 @@
     <Compile Include="Network\PlayerChargingPacket.cs" />
     <Compile Include="Network\Transformations\PlayerTransformedPacket.cs" />
     <Compile Include="NPCs\DBTGlobalNPC.cs" />
-    <Compile Include="NPCs\Saibas\Saibaman.cs" />
     <Compile Include="Players\Auras\DBTPlayer.Auras.cs" />
     <Compile Include="Players\DBTPlayer.Hooks.cs" />
     <Compile Include="Players\DBTPlayer.Visuals.cs" />

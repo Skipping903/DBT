@@ -66,7 +66,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public override void SetDefaults()
         {
             npc.width = 220;
-            npc.height = 32;
+            npc.height = 120;
             npc.damage = 36;
             npc.defense = 28;
             npc.lifeMax = 3600;
@@ -111,7 +111,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
 
             //Make sure the stages loop back around
-            if(AIStage == 5)
+            if(AIStage > 4)
             {
                 AIStage = Stage_Hover;
             }
@@ -323,7 +323,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 if (AITimer == 0)
                 {
-                    SummonMinions();
+                    SummonSaiba();
+                    SummonFFMinions();
                 }
                 AITimer++;
                 if (AITimer > 60)
@@ -349,18 +350,46 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
         }
 
-        public void SummonMinions()
+        public int SummonSaiba()
         {
             for (int amount = 0; amount < minionAmount; amount++)
             {
-                int saiba = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman>());
-                Main.npc[saiba].netUpdate = true;
-
-                int ff = NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion1>());
-                Main.npc[ff].netUpdate = true;
-
                 npc.netUpdate = true;
+                switch (Main.rand.Next(0, 3))
+                {
+                    case 0:
+                        return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman1>());
+                    case 1:
+                        return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman2>());
+                    case 2:
+                        return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman3>());
+                    case 3:
+                        return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman4>());
+                    default:
+                        return 0;
+                }
             }
+            return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman1>());
+        }
+
+        public int SummonFFMinions()
+        {
+            for (int amount = 0; amount < minionAmount; amount++)
+            {
+                npc.netUpdate = true;
+                switch (Main.rand.Next(0, 2))
+                {
+                    case 0:
+                        return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion1>());
+                    case 1:
+                        return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion2>());
+                    case 2:
+                        return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion3>());
+                    default:
+                        return 0;
+                }
+            }
+            return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion1>());
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
@@ -419,11 +448,11 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
             else
             {
-                int choice = Main.rand.Next(1);
+                int choice = Main.rand.Next(0, 1);
 
                 if (choice == 0)
                 {
-                    //Item.NewItem(npc.getRect(), mod.ItemType<BeamRifle>());
+                    Item.NewItem(npc.getRect(), mod.ItemType<BeamRifle>());
                 }
                 if (choice == 1)
                 {
@@ -433,12 +462,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 Item.NewItem(npc.getRect(), mod.ItemType<ArmCannonMK2>());
             }
 
-            /*if (!DBTWorld.downedFriezaShip)
+            if (!DBTWorld.downedFriezaShip)
             {
                 DBTWorld.downedFriezaShip = true;
                 if (Main.netMode == NetmodeID.Server)
                     NetMessage.SendData(MessageID.WorldData);
-            }*/
+            }
         }
 
         public void ExplodeEffect()
