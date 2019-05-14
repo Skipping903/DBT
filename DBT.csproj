@@ -111,14 +111,12 @@
     <Compile Include="NPCs\Bosses\FriezaShip\Items\ArmCannonMK2.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\BeamRifle.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\FFShipBag.cs" />
-    <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion3.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion2.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion1.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFMinionBlast.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.cs" />
-    <Compile Include="NPCs\DBTNPC.cs" />
     <Compile Include="NPCs\Saibas\Saibaman4.cs" />
     <Compile Include="NPCs\Saibas\Saibaman3.cs" />
     <Compile Include="NPCs\Saibas\Saibaman2.cs" />
