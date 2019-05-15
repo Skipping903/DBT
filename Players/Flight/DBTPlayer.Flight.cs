@@ -2,6 +2,11 @@
 {
     public sealed partial class DBTPlayer
     {
+        internal void PostUpdateFlight()
+        {
+            if (!Flying) return;
+        }
+
         public bool Flying { get; internal set; }
 
         public bool FlightUnlocked { get; set; }

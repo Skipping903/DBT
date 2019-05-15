@@ -34,6 +34,7 @@ namespace DBT.Players
                 IsCharging = false;
 
             MouseLeftHeld = triggersSet.MouseLeft;
+            MouseRightHeld = triggersSet.MouseRight;
 
             UpHeld = triggersSet.Up;
             DownHeld = triggersSet.Down;
@@ -54,6 +55,7 @@ namespace DBT.Players
         }
 
         public bool MouseLeftHeld { get; set; }
+        public bool MouseRightHeld { get; set; }
 
         public bool UpHeld { get; set; }
         public bool DownHeld { get; set; }
