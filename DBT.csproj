@@ -123,6 +123,7 @@
     <Compile Include="NPCs\Saibas\Saibaman2.cs" />
     <Compile Include="NPCs\Saibas\Saibaman1.cs" />
     <Compile Include="Projectiles\FFBeamProjectile.cs" />
+    <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
     <Compile Include="Skills\Beams\BeamOffsets.cs" />
     <Compile Include="Extensions\CoordinateExtensions.cs" />

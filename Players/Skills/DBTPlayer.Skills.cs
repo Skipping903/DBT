@@ -4,9 +4,10 @@
     {
         internal void ResetSkillEffects()
         {
-            SkillChargeLimitModifier = 0;
+            SkillChargeLevelLimitModifier = 0;
         }
 
-        public int SkillChargeLimitModifier { get; set; }
+        public int SkillChargeLevelLimitModifier { get; set; }
+        public int SkillChargeLevelLimitMultiplier { get; set; }
     }
 }
