@@ -118,6 +118,7 @@
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFMinionBlast.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.cs" />
+    <Compile Include="NPCs\FriezaForceScout.cs" />
     <Compile Include="NPCs\Saibas\Saibaman4.cs" />
     <Compile Include="NPCs\Saibas\Saibaman3.cs" />
     <Compile Include="NPCs\Saibas\Saibaman2.cs" />

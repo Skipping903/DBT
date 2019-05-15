@@ -28,7 +28,7 @@ namespace DBT.NPCs.Saibas
             npc.value = 60f;
             npc.knockBackResist = 0.3f;
             npc.aiStyle = 3;
-            aiType = NPCID.Zombie;
+            aiType = NPCID.VortexSoldier;
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
