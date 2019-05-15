@@ -15,7 +15,7 @@ namespace DBT.Items.Consumables.Potionlike.KiPotions
             ModRecipe recipe = new ModRecipe(mod);
 
             recipe.AddIngredient(mod, nameof(KiStoneT2));
-            recipe.AddIngredient(null, "KiPotion1", 4);
+            recipe.AddIngredient(mod, nameof(LesserKiPotion), 4);
             recipe.AddTile(TileID.Bottles);
 
             recipe.SetResult(this);

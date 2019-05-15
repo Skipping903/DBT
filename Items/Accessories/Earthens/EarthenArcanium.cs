@@ -1,6 +1,6 @@
 ﻿using DBT.Items.KiStones;
 using DBT.Players;
-using DBT.Tiles;
+using DBT.Tiles.Stations;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,7 +28,7 @@ namespace DBT.Items.Accessories.Earthens
 
             dbtPlayer.KiDamageMultiplier += 0.10f;
             dbtPlayer.FlightSpeedModifier += 0.1f;
-            dbtPlayer.NaturalKiRegeneration += 1;
+            dbtPlayer.ExternalKiRegeneration += 1;
             dbtPlayer.FlightKiUsageModifier += 1;
             dbtPlayer.KiChargeRateMultiplierLimit += 1;
         }

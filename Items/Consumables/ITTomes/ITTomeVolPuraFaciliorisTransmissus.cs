@@ -36,7 +36,7 @@ namespace DBT.Items.Consumables.ITTomes
             ModRecipe recipe = new ModRecipe(mod);
 
             recipe.AddIngredient(mod, nameof(KiStoneT5), 20);
-            recipe.AddIngredient(mod, nameof(RadiantFragment));
+            recipe.AddIngredient(mod, nameof(GammaFragment));
             recipe.AddIngredient(ItemID.FragmentNebula);
             recipe.AddIngredient(ItemID.FragmentSolar);
             recipe.AddIngredient(ItemID.FragmentStardust);

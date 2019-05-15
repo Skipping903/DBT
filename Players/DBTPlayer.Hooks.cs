@@ -7,12 +7,15 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
+using DBT.Wasteland;
 
 namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {
         private const float CHARGING_MOVE_SPEED_MULTIPLIER = 0.5f;
+
+        public bool zoneWasteland = false;
 
         public override void Initialize()
         {
@@ -103,6 +106,11 @@ namespace DBT.Players
         {
             HandleAuraDrawLayers(layers);
             HandleHairDrawLayers(layers);
+        }
+
+        public override void UpdateBiomes()
+        {
+            zoneWasteland = (WastelandWorld.wastelandTiles > 100);
         }
 
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
