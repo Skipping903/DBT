@@ -109,6 +109,7 @@
     <Compile Include="Items\Accessories\WornGloves.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\ArmCannonMK2.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Items\CyberneticParts.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\BeamRifle.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\FFShipBag.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion3.cs" />
@@ -239,7 +240,7 @@
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
     <Compile Include="Items\Materials\Metals\RefinedMetal.cs" />
     <Compile Include="Items\Materials\Metals\ScrapMetal.cs" />
-    <Compile Include="Items\Materials\RadiantFragment.cs" />
+    <Compile Include="Items\Materials\GammaFragment.cs" />
     <Compile Include="Items\Materials\SatanicCloth.cs" />
     <Compile Include="Items\Materials\SkeletalEssence.cs" />
     <Compile Include="Items\Materials\SoulofEntity.cs" />
@@ -247,9 +248,9 @@
     <Compile Include="Items\Tiles\KaiTableItem.cs" />
     <Compile Include="Items\Tiles\ZTableItem.cs" />
     <Compile Include="Items\Tools\DBTTool.cs" />
-    <Compile Include="Items\Tools\Radiant\RadiantHamaxe.cs" />
-    <Compile Include="Items\Tools\Radiant\RadiantPickaxe.cs" />
-    <Compile Include="Items\Tools\Radiant\RaditantTool.cs" />
+    <Compile Include="Items\Tools\Gamma\GammaHamaxe.cs" />
+    <Compile Include="Items\Tools\Gamma\GammaPickaxe.cs" />
+    <Compile Include="Items\Tools\Gamma\GammaTool.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
     <Compile Include="Network\PlayerChargingPacket.cs" />
