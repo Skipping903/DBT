@@ -1,5 +1,5 @@
 ﻿using DBT.Items.KiStones;
-using DBT.Tiles;
+using DBT.Tiles.Stations;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

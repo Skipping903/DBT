@@ -55,9 +55,11 @@
     <Compile Include="Auras\AuraAppearance.cs" />
     <Compile Include="Auras\AuraDrawPlayer.cs" />
     <Compile Include="Auras\LightingAppearance.cs" />
+    <Compile Include="Backgrounds\WastelandSurfaceBgStyle.cs" />
     <Compile Include="Buffs\DBTBuff.cs" />
     <Compile Include="Buffs\EnhancedReservesBuff.cs" />
     <Compile Include="Buffs\KiDegenerationBuff.cs" />
+    <Compile Include="DBTWorld.cs" />
     <Compile Include="Items\Accessories\AncientLegendWaistCape.cs" />
     <Compile Include="Items\Accessories\ArmCannon.cs" />
     <Compile Include="Items\Accessories\Baldurs\BaldurEssentia.cs" />
@@ -105,6 +107,23 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Items\ArmCannonMK2.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Items\CyberneticParts.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Items\BeamRifle.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Items\FFShipBag.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion3.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion2.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion1.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFMinionBlast.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.cs" />
+    <Compile Include="NPCs\FriezaForceScout.cs" />
+    <Compile Include="NPCs\Saibas\Saibaman4.cs" />
+    <Compile Include="NPCs\Saibas\Saibaman3.cs" />
+    <Compile Include="NPCs\Saibas\Saibaman2.cs" />
+    <Compile Include="NPCs\Saibas\Saibaman1.cs" />
+    <Compile Include="Projectiles\FFBeamProjectile.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
     <Compile Include="Skills\Beams\BeamOffsets.cs" />
@@ -223,7 +242,7 @@
     <Compile Include="Items\Materials\Metals\ReclaimedMetal.cs" />
     <Compile Include="Items\Materials\Metals\RefinedMetal.cs" />
     <Compile Include="Items\Materials\Metals\ScrapMetal.cs" />
-    <Compile Include="Items\Materials\RadiantFragment.cs" />
+    <Compile Include="Items\Materials\GammaFragment.cs" />
     <Compile Include="Items\Materials\SatanicCloth.cs" />
     <Compile Include="Items\Materials\SkeletalEssence.cs" />
     <Compile Include="Items\Materials\SoulofEntity.cs" />
@@ -231,9 +250,9 @@
     <Compile Include="Items\Tiles\KaiTableItem.cs" />
     <Compile Include="Items\Tiles\ZTableItem.cs" />
     <Compile Include="Items\Tools\DBTTool.cs" />
-    <Compile Include="Items\Tools\Radiant\RadiantHamaxe.cs" />
-    <Compile Include="Items\Tools\Radiant\RadiantPickaxe.cs" />
-    <Compile Include="Items\Tools\Radiant\RaditantTool.cs" />
+    <Compile Include="Items\Tools\Gamma\GammaHamaxe.cs" />
+    <Compile Include="Items\Tools\Gamma\GammaPickaxe.cs" />
+    <Compile Include="Items\Tools\Gamma\GammaTool.cs" />
     <Compile Include="Network\NetworkPacket.cs" />
     <Compile Include="Network\NetworkPacketManager.cs" />
     <Compile Include="Network\PlayerChargingPacket.cs" />
@@ -295,6 +314,15 @@
     <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
     <Compile Include="UserInterfaces\UIImagePair.cs" />
     <Compile Include="Utilities\SteamHelper.cs" />
+    <Compile Include="Wasteland\Items\CoarseRockWallItem.cs" />
+    <Compile Include="Wasteland\Items\CoarseRockItem.cs" />
+    <Compile Include="Wasteland\Tiles\CoarseRock.cs" />
+    <Compile Include="Wasteland\Tiles\CoarseRockWall.cs" />
+    <Compile Include="Wasteland\WastelandWorld.cs" />
+    <Compile Include="Wasteland\Water\WastelandWater.cs" />
+    <Compile Include="Wasteland\Water\WastelandWaterDroplet.cs" />
+    <Compile Include="Wasteland\Water\WastelandWaterfall.cs" />
+    <Compile Include="Wasteland\Water\WastelandWaterSplash.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -324,6 +352,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Backgrounds\WastelandSky.png" />
+    <Content Include="Backgrounds\WastelandSurfaceClose.png" />
+    <Content Include="Backgrounds\WastelandSurfaceFar.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid0.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid1.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid2.png" />
+    <Content Include="Backgrounds\WastelandSurfaceMid3.png" />
     <Content Include="build.txt" />
     <Content Include="description.txt" />
     <Content Include="Items\Guardian\Accessories\Chakras\All7Chakra.png" />
@@ -341,6 +376,30 @@
     <Content Include="Items\Guardian\BloodStone\T4BloodStone.png" />
     <Content Include="Items\Guardian\BloodStone\T5BloodStone.png" />
     <Content Include="Items\Guardian\BloodStone\T6BloodStone.png" />
+    <Content Include="Items\KiStones\EmptyKiStone.png" />
+    <Content Include="Items\KiStones\KiStoneT1.png" />
+    <Content Include="Items\KiStones\KiStoneT2.png" />
+    <Content Include="Items\KiStones\KiStoneT3.png" />
+    <Content Include="Items\KiStones\KiStoneT4.png" />
+    <Content Include="Items\KiStones\KiStoneT5.png" />
+    <Content Include="Items\KiStones\KiStoneT6.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\FriezaShip.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\Items\ArmCannonMK2.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\Items\FFShipBag.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.png" />
+    <Content Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.png" />
+    <Content Include="Sounds\Music\TheUnexpectedArrival.mp3" />
+    <Content Include="Sounds\Music\Wastelands.mp3" />
+    <Content Include="Sounds\Saibamen\Saibamen1.wav" />
+    <Content Include="Sounds\Saibamen\saibamen2.wav" />
+    <Content Include="Sounds\Saibamen\saibamen3.wav" />
+    <Content Include="Wasteland\Items\CoarseRockItem.png" />
+    <Content Include="Wasteland\Items\CoarseRockWallItem.png" />
+    <Content Include="Wasteland\Tiles\CoarseRock.png" />
+    <Content Include="Wasteland\Tiles\CoarseRockWall.png" />
+    <Content Include="Wasteland\Water\WastelandWater.png" />
+    <Content Include="Wasteland\Water\WastelandWaterFall.png" />
+    <Content Include="Wasteland\Water\WastelandWater_Block.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Items\Armor\Sets\Guardian\Dragon\" />
@@ -354,7 +413,6 @@
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
     <Folder Include="Races\" />
-    <Folder Include="Sounds\" />
     <Folder Include="Transformations\Developers\Blockaroz\" />
     <Folder Include="Transformations\Developers\DawnishDays\" />
     <Folder Include="Transformations\Developers\Mak0Z\" />
@@ -376,7 +434,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
-"D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
+"C:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
 exit 0
 )
 if "$(ConfigurationName)"=="Release" (
