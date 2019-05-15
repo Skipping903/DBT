@@ -458,7 +458,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 {
                     //Item.NewItem(npc.getRect(), mod.ItemType<HenchBlast>());
                 }
-                //Item.NewItem(npc.getRect(), mod.ItemType<CyberneticParts>(), Main.rand.Next(7, 18));
+                Item.NewItem(npc.getRect(), mod.ItemType<CyberneticParts>(), Main.rand.Next(7, 18));
                 Item.NewItem(npc.getRect(), mod.ItemType<ArmCannonMK2>());
             }
 

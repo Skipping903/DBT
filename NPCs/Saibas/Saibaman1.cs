@@ -70,6 +70,7 @@ namespace DBT.NPCs.Saibas
             }
             if (grabbed)
             {
+                npc.position = Main.player[npc.target].position;
                 explodeTimer++;
                 if (explodeTimer > 20)
                 {
@@ -81,7 +82,6 @@ namespace DBT.NPCs.Saibas
 
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            npc.position = target.position;
             grabbed = true;
         }
 

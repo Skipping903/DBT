@@ -1,13 +1,13 @@
 ﻿using Terraria.ID;
 
-namespace DBT.Items.Tools.Radiant
+namespace DBT.Items.Tools.Gamma
 {
-    public abstract class RaditantTool : DBTTool
+    public abstract class GammaTool : DBTTool
     {
         private readonly int _pickPower, _axePower, _hammerPower, _tileBoost, _damage;
         private readonly float _knockBack;
 
-        protected RaditantTool(string displayName, int width, int height, int value, int useAnimation, int useTime, int pickPower, int axePower, int hammerPower, int tileBoost, int damage, float knockBack) : base(displayName, width, height, value, ItemRarityID.Red, ItemUseStyleID.SwingThrow, SoundID.Item1, useAnimation, useTime)
+        protected GammaTool(string displayName, int width, int height, int value, int useAnimation, int useTime, int pickPower, int axePower, int hammerPower, int tileBoost, int damage, float knockBack) : base(displayName, width, height, value, ItemRarityID.Red, ItemUseStyleID.SwingThrow, SoundID.Item1, useAnimation, useTime)
         {
             _pickPower = pickPower;
             _axePower = axePower;
