@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Terraria;
-using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using System.IO;
@@ -23,23 +18,23 @@ namespace DBT
 
         public override TagCompound Save()
         {
-            var downed = new List<string>();
+            List<string> downed = new List<string>();
+
             if (downedFriezaShip) downed.Add("friezaShip");
 
-            return new TagCompound {
-                {"downed", downed}
-            };
+            return new TagCompound { { "downed", downed } };
         }
 
         public override void Load(TagCompound tag)
         {
-            var downed = tag.GetList<string>("downed");
+            IList<string> downed = tag.GetList<string>("downed");
             downedFriezaShip = downed.Contains("friezaShip");
         }
 
         public override void LoadLegacy(BinaryReader reader)
         {
             int loadVersion = reader.ReadInt32();
+
             if (loadVersion == 0)
             {
                 BitsByte flags = reader.ReadByte();
@@ -51,6 +46,7 @@ namespace DBT
         {
             BitsByte flags = new BitsByte();
             flags[0] = downedFriezaShip;
+
             writer.Write(flags);
         }
 

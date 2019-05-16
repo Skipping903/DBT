@@ -48,6 +48,8 @@ namespace DBT.Players
             KiOrbRestoreAmount = 100;
             KiOrbGrabRange = 2;
 
+            KiOrbDropChance = 3;
+
             KiChargeRate = 0;
             KiChargeRateMultiplierLimit = 0;
 
@@ -78,6 +80,9 @@ namespace DBT.Players
                 ModifyKi(NaturalKiRegeneration);
         }
 
+        public float GetChargeLevelLimit(float skillChargeLevelLimit) => skillChargeLevelLimit * SkillChargeLevelLimitModifier * SkillChargeLevelLimitMultiplier;
+
+
         public float KiDamageMultiplier { get; set; } = 1;
 
         public float Ki { get; private set; }
@@ -93,6 +98,8 @@ namespace DBT.Players
 
         public float KiOrbRestoreAmount { get; set; }
         public float KiOrbGrabRange { get; set; }
+
+        public int KiOrbDropChance { get; set; }
 
         public bool IsCharging
         {

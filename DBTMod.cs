@@ -147,6 +147,10 @@ namespace DBT
                 layers.Insert(characterMenuIndex, new DBTMenuLayer(dbtMenu, characterMenuInterface));
         }
 
+        public static uint GetTicks() => Main.GameUpdateCount;
+
+        public static bool IsTickRateElapsed(int rateModulo) => GetTicks() > 0 && GetTicks() % rateModulo == 0;
+
 
         internal static DBTMod Instance { get; private set; }
     }

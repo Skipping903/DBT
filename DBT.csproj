@@ -125,7 +125,11 @@
     <Compile Include="NPCs\Saibas\Saibaman1.cs" />
     <Compile Include="Projectiles\FFBeamProjectile.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
+    <Compile Include="Skills\Beams\Kamehamehas\KamehamehaBeam.cs" />
+    <Compile Include="Skills\AbstractChargeBall.cs" />
+    <Compile Include="Skills\BaseSkillItem.cs" />
     <Compile Include="Skills\Beams\BaseBeamCharge.cs" />
+    <Compile Include="Skills\Beams\BaseBeamItem.cs" />
     <Compile Include="Skills\Beams\BeamOffsets.cs" />
     <Compile Include="Extensions\CoordinateExtensions.cs" />
     <Compile Include="Extensions\ProjectileExtensions.cs" />
@@ -280,6 +284,8 @@
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
     <Compile Include="Skills\BaseBeam.cs" />
+    <Compile Include="Skills\Beams\Kamehamehas\KamehamehaCharge.cs" />
+    <Compile Include="Skills\Beams\Kamehamehas\KamehamehaSkillItem.cs" />
     <Compile Include="Tiles\Stations\KaiTableTile.cs" />
     <Compile Include="Tiles\Stations\ZTableTile.cs" />
     <Compile Include="Traits\TraitBuff.cs" />
