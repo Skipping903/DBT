@@ -12,6 +12,14 @@ namespace DBT.Players
             ForAllActiveTransformations(t => t.OnActivePlayerKilledNPC(this, npc));
         }
 
+        public void ApplySkillChargeSlowdown()
+        {
+            if (Flying)
+            {
+                float chargeMoveSpeedBonus = ChargeMove
+            }
+        }
+
         public bool PlayerInitialized { get; private set; }
 
         public float HealthDrainMultiplier { get; set; }
