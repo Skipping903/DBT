@@ -4,9 +4,9 @@ using DBT.Skills.Beams;
 
 namespace DBT.Skills
 {
-    public abstract class BaseBeam : DBTProjectile
+    public abstract class Beam : DBTProjectile
     {
-        protected BaseBeam(BeamOffsets sizeAndOffsets)
+        protected Beam(BeamOffsets sizeAndOffsets)
         {
             SizeAndOffsets = sizeAndOffsets;
         }

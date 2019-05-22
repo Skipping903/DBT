@@ -54,6 +54,7 @@ namespace DBT.Players
             KiChargeRateMultiplierLimit = 0;
 
             KiDrainMultiplier = 1;
+            KiDrainModifier = 0;
         }
 
         internal void PreUpdateKi()
@@ -80,7 +81,10 @@ namespace DBT.Players
                 ModifyKi(NaturalKiRegeneration);
         }
 
+
         public float GetChargeLevelLimit(float skillChargeLevelLimit) => skillChargeLevelLimit * SkillChargeLevelLimitModifier * SkillChargeLevelLimitMultiplier;
+
+        public float GetKiDrain(float kiDrain) => (kiDrain + KiDrainMultiplier) + KiDrainModifier;
 
 
         public float KiDamageMultiplier { get; set; } = 1;
@@ -129,5 +133,6 @@ namespace DBT.Players
         public int KiCritAddition { get; set; }
 
         public float KiDrainMultiplier { get; set; }
+        public float KiDrainModifier { get; set; }
     }
 }

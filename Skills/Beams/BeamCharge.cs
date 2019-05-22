@@ -7,9 +7,9 @@ using Terraria.ID;
 
 namespace DBT.Skills.Beams
 {
-    public abstract class BaseBeamCharge<T> : AbstractChargeBall
+    public abstract class BeamCharge<T> : AbstractChargeBall
     {
-        protected BaseBeamCharge(float baseChargeKiDrain, float chargeLimit, float minimumChargeLevel, float chargeRatePerSecond)
+        protected BeamCharge(float baseChargeKiDrain, float chargeLimit, float minimumChargeLevel, float chargeRatePerSecond)
         {
             BaseChargeKiDrain = baseChargeKiDrain;
 
@@ -46,11 +46,11 @@ namespace DBT.Skills.Beams
                 {
                     ChargeLevel = Math.Max(0f, ChargeLevel - GetFireDecayRate());
                 }
-                else if (!dbtPlayer.Ki == 0)
+                else if (dbtPlayer.Ki != 0)
                 {
-                    if (DBZMOD.IsTickRateElapsed(FIRE_KI_DRAIN_WINDOW))
+                    if (DBTMod.IsTickRateElapsed(FIRE_KI_DRAIN_WINDOW))
                     {
-                        modPlayer.AddKi(-FireKiDrainRate(), true, false);
+                        dbtPlayer.ModifyKi(-FireKiDrainRate(), true, false);
                     }
                 }
                 else
