@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DBT.Network;
 using DBT.UserInterfaces.CharacterMenus;
 using DBT.UserInterfaces.KiBar;
 using DBT.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
+using DBT.Players;
+using DBT.Wasteland;
+using System;
 
 namespace DBT
 {
@@ -27,7 +32,8 @@ namespace DBT
             {
                 Autoload = true,
                 AutoloadGores = true,
-                AutoloadSounds = true
+                AutoloadSounds = true,
+                AutoloadBackgrounds = true
             };
 
 		    Instance = this;
@@ -90,13 +96,45 @@ namespace DBT
                 characterMenuInterface.Update(gameTime);
 	    }
 
+        public override void UpdateMusic(ref int music)
+        {
+            int[] noOverride =
+                {
+                    MusicID.Boss1, MusicID.Boss2, MusicID.Boss3, MusicID.Boss4, MusicID.Boss5,
+                    MusicID.LunarBoss, MusicID.PumpkinMoon, MusicID.TheTowers, MusicID.FrostMoon, MusicID.GoblinInvasion,
+                    MusicID.Eclipse, MusicID.MartianMadness, MusicID.PirateInvasion,
+                    GetSoundSlot(SoundType.Music, "Sounds/Music/TheUnexpectedArrival"),
+                };
 
-	    public override void HandlePacket(BinaryReader reader, int whoAmI)
+            int m = music;
+            bool playMusic =
+                !noOverride.Any(song => song == m)
+                || !Main.npc.Any(npc => npc.boss);
+
+            Player player = Main.LocalPlayer;
+
+            if (player.active && player.GetModPlayer<DBTPlayer>(this).zoneWasteland && !Main.gameMenu && playMusic)
+            {
+                music = GetSoundSlot(SoundType.Music, "Sounds/Music/Wastelands");
+            }
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
 	    {
 	        NetworkPacketManager.Instance.HandlePacket(reader, whoAmI);
 	    }
 
-	    public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        public override void PostSetupContent()
+        {
+            // Boss checklist support
+            Mod bossChecklist = ModLoader.GetMod("BossChecklist");
+            if (bossChecklist != null)
+            {
+                bossChecklist.Call("AddBossWithInfo", "A Frieza Force Ship", 3.8f, (Func<bool>)(() => DBTWorld.downedFriezaShip), "Alert and let a frieza force scout escape in the wasteland biome after the world evil has been killed.");
+            }
+        }
+
+        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 	    {
 	        int
 	            resourcesLayerIndex = layers.FindIndex(l => l.Name.Contains("Resource Bars")),
@@ -108,6 +146,10 @@ namespace DBT
             if (characterMenuIndex != -1)
                 layers.Insert(characterMenuIndex, new DBTMenuLayer(dbtMenu, characterMenuInterface));
         }
+
+        public static uint GetTicks() => Main.GameUpdateCount;
+
+        public static bool IsTickRateElapsed(int rateModulo) => GetTicks() > 0 && GetTicks() % rateModulo == 0;
 
 
         internal static DBTMod Instance { get; private set; }

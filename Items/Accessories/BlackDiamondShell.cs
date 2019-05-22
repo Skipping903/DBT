@@ -1,4 +1,4 @@
-﻿using DBT.Commons;
+﻿using DBT.Commons.Players;
 using DBT.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace DBT.Items.Accessories
 {
-    public sealed class BlackDiamondShell : DBTItem, IUpdateOnPlayerPreHurt
+    public sealed class BlackDiamondShell : DBTItem, IHandleOnPlayerPreHurt
     {
         public BlackDiamondShell() : base("Black Diamond Shell", "A jeweled turtle shell that gets the attention of many creatures, for some reason it's unbelievably tough\n12% increased ki damage, 14% increased ki knockback\n+200 Max Ki\nGetting hit restores a small amount of Ki", 
             20, 30, value: Item.buyPrice(gold: 2, silver: 40), defense: 14, rarity: ItemRarityID.Lime)

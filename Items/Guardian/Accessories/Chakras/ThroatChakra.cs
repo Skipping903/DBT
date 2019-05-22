@@ -16,8 +16,9 @@ namespace DBT.Items.Guardian.Accessories.Chakras
 
         public override void SetDefaults()
         {
+            item.value = 74500;
+            item.rare = ItemRarityID.LightRed;
             base.SetDefaults();
-
             item.accessory = true;
         }
     }

@@ -9,7 +9,6 @@ namespace DBT.Buffs
         public KiDegenerationBuff() : base("Ki Degeneration", "You can't regenerate Ki!")
         {
         }
-
         public override void SetDefaults()
         {
             base.SetDefaults();

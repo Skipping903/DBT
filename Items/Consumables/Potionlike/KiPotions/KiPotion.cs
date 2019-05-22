@@ -1,5 +1,5 @@
 ﻿using DBT.Buffs;
-using DBT.Items.Consumables.KiPotions;
+using DBT.Items.Consumables.Potionlike.KiPotions;
 using DBT.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -21,13 +21,13 @@ namespace DBT.Items.Consumables.Potionlike.KiPotions
             item.maxStack = 30;
         }
 
-        public override bool CanUseItem(Player player) => base.CanUseItem(player) && !player.HasBuff(mod.BuffType(nameof(KiPotionSicknessBuff)));
+        public override bool CanUseItem(Player player) => base.CanUseItem(player) && !player.HasBuff(mod.BuffType(nameof(KiPotionSicknessDebuff)));
 
         public override bool UseItem(Player player)
         {
             player.GetModPlayer<DBTPlayer>().ModifyKi(RestoredKi);
 
-            player.AddBuff(mod.BuffType<KiPotionSicknessBuff>(), 60 * Constants.TICKS_PER_SECOND);
+            player.AddBuff(mod.BuffType<KiPotionSicknessDebuff>(), 60 * Constants.TICKS_PER_SECOND);
             CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), new Color(51, 204, 255), RestoredKi, false, false);
             return true;
         }

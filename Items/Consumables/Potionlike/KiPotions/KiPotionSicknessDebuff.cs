@@ -1,11 +1,11 @@
 ﻿using DBT.Buffs;
 using Terraria;
 
-namespace DBT.Items.Consumables.KiPotions
+namespace DBT.Items.Consumables.Potionlike.KiPotions
 {
-    public class KiPotionSicknessBuff : DBTBuff
+    public class KiPotionSicknessDebuff : DBTBuff
     {
-        public KiPotionSicknessBuff() : base("Ki Potion Sickness", "You feel sick at the thought of another Ki potion.")
+        public KiPotionSicknessDebuff() : base("Ki Potion Sickness", "You feel sick at the thought of another Ki potion.")
         {
         }
 

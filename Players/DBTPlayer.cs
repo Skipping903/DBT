@@ -1,4 +1,6 @@
-﻿using DBT.Transformations;
+﻿using System;
+using DBT.Transformations;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -14,9 +16,23 @@ namespace DBT.Players
 
         public void ApplySkillChargeSlowdown()
         {
+            float chargeMoveSpeedBonus = 0;
+
             if (Flying)
             {
-                float chargeMoveSpeedBonus = ChargeMove
+                chargeMoveSpeedBonus = SkillChargeMoveSpeedModifier / 10f;
+                float yVelocity = player.gravity + 0.001f;
+
+                if (DownHeld || UpHeld)
+                    yVelocity = player.velocity.Y / (1.2f - chargeMoveSpeedBonus);
+                else
+                    yVelocity = Math.Min(-0.4f, player.velocity.Y / (1.2f - chargeMoveSpeedBonus));
+            }
+            else
+            {
+                chargeMoveSpeedBonus = SkillChargeMoveSpeedModifier / 10f;
+
+                player.velocity = new Vector2(player.velocity.X / (1.2f - chargeMoveSpeedBonus), Math.Max(player.velocity.Y, player.velocity.Y / (1.2f - chargeMoveSpeedBonus)));
             }
         }
 
