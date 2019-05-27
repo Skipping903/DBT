@@ -14,5 +14,7 @@
         public int MaxChargeLevel { get; }
 
         public int Damage { get; }
+
+
     }
 }
