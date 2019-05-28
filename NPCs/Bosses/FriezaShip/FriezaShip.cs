@@ -11,7 +11,7 @@ using DBT.NPCs.Bosses.FriezaShip.Projectiles;
 using DBT.NPCs.Bosses.FriezaShip.Minions;
 using DBT.NPCs.Bosses.FriezaShip.Items;
 using DBT.NPCs.Saibas;
-
+using DBT.Projectiles;
 
 namespace DBT.NPCs.Bosses.FriezaShip
 {
@@ -22,9 +22,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public const int
             STAGE_HOVER = 0,
             STAGE_SLAM = 1,
-            STAGE_BARRAGE = 2,
-            STAGE_HOMING = 3,
-            STAGE_SAIBAMEN = 4,
+            STAGE_SLAMBARRAGE = 2,
+            STAGE_MINION = 3,
+            STAGE_HYPER = 4,
 
             AI_STAGE_SLOT = 0,
             AI_TIMER_SLOT = 1;
@@ -36,6 +36,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             SlamDelay = 10;
             MinionAmount = 2;
             HasDoneExplodeEffect = false;
+            IsChargingSlam = false;
 
         }
 
@@ -86,19 +87,17 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 if (!player.active || player.dead)
                 {
                     npc.velocity = new Vector2(0f, -10f);
+
                     if (npc.timeLeft > 10)
-                    {
                         npc.timeLeft = 10;
-                    }
+
                     return;
                 }
             }
 
             //Make sure the stages loop back around
             if (AIStage > 4)
-            {
                 AIStage = STAGE_HOVER;
-            }
 
             //Speed between stages and general movement speed drastically increased with health lost
             if (npc.life < npc.lifeMax * 0.80f)
@@ -120,12 +119,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     MinionAmount = 4;
                 }
             }
-            //If the ship is really far away, nullify its movement and set it back to hover
-            if (Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y)) > HoverDistance.Y * 3)
-            {
-                npc.velocity = new Vector2(0, -10f);
-            }
-
 
             //General movement (stage 0)
             if (AIStage == STAGE_HOVER)
@@ -183,124 +176,66 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
             }
 
-
-            //Main.NewText("Speed Addition is: " + speedAdd);
-
-
-
             //Slam attack (stage 1) - Quickly moves to directly above the player, then waits a second before slamming straight down.
-            //To-Do: Fix bug where the ship flies down into the ground. Fix afterimage on slam not working.
+            //To-Do: Fix afterimage on slam not working.
 
             if (AIStage == STAGE_SLAM)
             {
                 npc.velocity.X = 0;
-
+                IsChargingSlam = true;
                 AITimer++;
-                if (AITimer > SlamDelay)
+
+                if(AITimer > 180 && IsChargingSlam)
                 {
-                    if (AITimer == SlamDelay + 1)
+                    IsChargingSlam = false;
+
+                    TeleportAbove();
+
+                    if (AITimer > SlamDelay)
                     {
-                        npc.noTileCollide = false;
-                        if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
+                        if (AITimer == 180 + SlamDelay)
                         {
-                            npc.damage = npc.damage * 2;
-                        }
-                        npc.velocity.Y = 25f;
-                    }
-                    if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || AITimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
-                    {
-                        npc.velocity.Y = -8f;
-                        if (!HasDoneExplodeEffect)
-                        {
-                            ExplodeEffect();
-                            SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
+                            if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
+                                npc.damage = npc.damage * 2;
+
+                            npc.noTileCollide = false;
+                            npc.velocity.Y = 25f;
                         }
 
-                    }
-
-                    if (npc.velocity.Y == -8f)
-                    {
-                        SlamCoolDownTimer++;
-                    }
-                    if (SlamCoolDownTimer > 20)
-                    {
-                        StageAdvance();
-                        AITimer = 0;
-                        SlamCoolDownTimer = 0;
-                        npc.noTileCollide = true;
-                        HasDoneExplodeEffect = false;
-
-                        if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
+                        if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || AITimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
                         {
-                            npc.damage = npc.damage / 2;
+                            npc.velocity.Y = -8f;
+                            if (!HasDoneExplodeEffect)
+                            {
+                                ExplodeEffect();
+                                SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
+                            }
+
                         }
                     }
                 }
 
-            }
-            //float ydistance = Vector2.Distance(new Vector2(0, player.position.Y), new Vector2(0, npc.position.Y));
-            //Main.NewText("Y Distance is: " + ydistance);
-            //Vertical projectile barrage (stage 2) - Fires a barrage of projectiles upwards that randomly spread out and fall downwards which explode on ground contact
+                
 
-            if (AIStage == STAGE_BARRAGE)
-            {
-                AITimer++;
-                npc.velocity.Y = 0;
-                npc.velocity.X = 0;
+                if (npc.velocity.Y == -8f)
+                    SlamCoolDownTimer++;
 
-                if (AITimer == 10)
+                if (SlamCoolDownTimer > 30)
                 {
-                    BarrageAttack();
-                }
-
-                if (AITimer > 60)
-                {
-                    if (npc.life < npc.lifeMax * 0.70f)
-                    {
-                        StageAdvance();
-                    }
-                    else
-                    {
-                        AIStage = STAGE_HOVER;
-                    }
+                    StageAdvance();
                     AITimer = 0;
-                }
-            }
+                    SlamCoolDownTimer = 0;
+                    npc.noTileCollide = true;
+                    HasDoneExplodeEffect = false;
 
-            //Vertical projectile barrage + homing (stage 3) - Fires 2 projectiles in opposite arcs diagonally from the ship, after 3 seconds they stop, after 1 second both will fly towards the player.
-            // These projectiles are stronger than the barrage ones, but also slower.
-
-            if (AIStage == STAGE_HOMING)
-            {
-                npc.velocity.Y = 0;
-                npc.velocity.X = 0;
-
-                if (AITimer == 0)
-                {
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 2.5f, -1f, mod.ProjectileType<FFHomingBlast>(), npc.damage / 3, 3f, Main.myPlayer);
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, -2.5f, -1f, mod.ProjectileType<FFHomingBlast>(), npc.damage / 3, 3f, Main.myPlayer);
-
-                    if (npc.life < npc.lifeMax * 0.50f) //Fire an extra stronger projectile upwards if below 50% health
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -1f, mod.ProjectileType<FFHomingBlast>(), npc.damage / 2, 3f, Main.myPlayer);
-
+                    if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
+                        npc.damage = npc.damage / 2;
                 }
 
-                AITimer++;
-
-                if (AITimer > 60)
-                {
-
-                    if (npc.life < npc.lifeMax * 0.40f)
-                        StageAdvance();
-                    else
-                        AIStage = STAGE_HOVER;
-
-                    AITimer = 0;
-                }
             }
 
             //To-Do: Summon saibamen (stage 4) - Summons a green saiba from the ship, green dust when this happens to make it look smoother (Perhaps make this something after 40% HP)
-            if (Main.netMode != 1 && AIStage == STAGE_SAIBAMEN)
+            if (Main.netMode != 1 && AIStage == STAGE_MINION)
             {
                 if (AITimer == 0)
                 {
@@ -320,17 +255,13 @@ namespace DBT.NPCs.Bosses.FriezaShip
             //Main.NewText(AIStage);
         }
 
-        public void BarrageAttack()
+        public void TeleportAbove()
         {
-            for (int i = 0; i < 15; i++) //fire 16 of this projectile, 0 counts as a number so that's why its 15.
-            {
-                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType<FFBarrageBlast>(), npc.damage / 4, 3f, Main.myPlayer); ;
-            }
-            if (npc.life < npc.lifeMax * 0.50f) //Fire 8 extra projectiles if below 50% health
-            {
-                for (int i = 0; i < 8; i++)
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, -6f, mod.ProjectileType<FFBarrageBlast>(), npc.damage / 4, 3f, Main.myPlayer);
-            }
+            npc.alpha = 255;
+            npc.position = Main.player[npc.target].position + new Vector2(-20, -80);
+            Projectile.NewProjectile(npc.Center, Vector2.Zero, mod.ProjectileType<TransmissionLinesProj>(), 0, 0);
+            SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
+            npc.alpha = 0;
         }
 
         public int SummonSaiba()
@@ -401,12 +332,34 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         //Animations
         int _frame = 0;
+        int _frameTimer = 0;
+        int _frameRate = 1;
         public override void FindFrame(int frameHeight)
         {
-            if (AIStage == STAGE_BARRAGE || AIStage == STAGE_HOMING)
-                npc.frameCounter += 2;
+            if(IsChargingSlam)
+            {
+                npc.frameCounter += _frameRate;
+                _frameTimer++;
+                if(_frameTimer > 30)
+                {
+                    _frameRate = 2;
+                    if(_frameTimer > 50)
+                    {
+                        _frameRate = 3;
+                        if(_frameTimer > 80)
+                        {
+                            _frameRate = 4;
+                        }
+                    }
+                }
+            }
             else
+            {
                 npc.frameCounter++;
+                _frameRate = 1;
+                _frameTimer = 0;
+            }
+                
 
             if (npc.frameCounter > 4)
             {
@@ -497,17 +450,18 @@ namespace DBT.NPCs.Bosses.FriezaShip
             HasDoneExplodeEffect = true;
         }
 
-        public Vector2 HoverDistance { get; private set; }
+        public Vector2 HoverDistance { get; set; }
 
-        public float HoverCooldown { get; private set; }
-        public int SlamDelay { get; private set; }
-        public int SlamCoolDownTimer { get; private set; }
-        public int MinionAmount { get; private set; }
-        public bool HasDoneExplodeEffect { get; private set; }
-        public float SpeedAdd { get; private set; }
+        public float HoverCooldown { get; set; }
+        public int SlamDelay { get; set; }
+        public int SlamCoolDownTimer { get; set; }
+        public int MinionAmount { get; set; }
+        public bool HasDoneExplodeEffect { get; set; }
+        public bool IsChargingSlam { get; set; }
+        public float SpeedAdd { get; set; }
 
-        public int YHoverTimer { get; private set; }
-        public int XHoverTimer { get; private set; }
+        public int YHoverTimer { get; set; }
+        public int XHoverTimer { get; set; }
 
         public float AIStage
         {
