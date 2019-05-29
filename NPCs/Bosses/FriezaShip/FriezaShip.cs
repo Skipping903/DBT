@@ -1,7 +1,6 @@
 using Microsoft.Xna.Framework;
 using System;
 using DBT.Extensions;
-using DBT.Utilities;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;

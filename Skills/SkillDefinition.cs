@@ -5,9 +5,10 @@ namespace DBT.Skills
 {
     public class SkillDefinition : IHasUnlocalizedName, IHasParents<SkillDefinition>
     {
-        protected SkillDefinition(string unlocalizedName, SkillCharacteristics characteristics, params SkillDefinition[] parents)
+        protected SkillDefinition(string unlocalizedName, string displayName, SkillCharacteristics characteristics, params SkillDefinition[] parents)
         {
             UnlocalizedName = unlocalizedName;
+            DisplayName = displayName;
 
             Characteristics = characteristics;
 
@@ -15,6 +16,7 @@ namespace DBT.Skills
         }
 
         public string UnlocalizedName { get; }
+        public string DisplayName { get; }
 
         public SkillCharacteristics Characteristics { get; }
 

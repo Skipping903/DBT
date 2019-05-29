@@ -39,7 +39,7 @@ namespace DBT.Items.Armor.Sets.EliteSaiyan
             dbtPlayer.KiDamageMultiplier += 0.26f;
             dbtPlayer.KiCritAddition += 24;
             dbtPlayer.MaxKiModifier += 1000;
-            dbtPlayer.ExternalKiRegeneration += 2;
+            dbtPlayer.ExternalKiRegenerationModifier += 2;
             dbtPlayer.KiChargeRateMultiplierLimit += 3;
         }
     }

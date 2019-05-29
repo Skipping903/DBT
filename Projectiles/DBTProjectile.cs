@@ -6,6 +6,19 @@ namespace DBT.Projectiles
 {
     public abstract class DBTProjectile : ModProjectile
     {
+        private readonly int _damage;
+
+        protected DBTProjectile(int damage)
+        {
+        }
+
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+
+            projectile.damage = _damage;
+        }
+
         public override bool PreAI()
         {
             if (Owner == null)

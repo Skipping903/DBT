@@ -1,6 +1,6 @@
 ﻿namespace DBT.Extensions
 {
-    public class SoundExtensions
+    public static class SoundExtensions
     {
         
     }

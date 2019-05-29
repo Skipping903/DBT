@@ -1,7 +1,9 @@
 ﻿namespace DBT.Skills.Kamehameha
 {
-    public class KamehamehaDefinition
+    public sealed class KamehamehaDefinition
     {
-        
+        public KamehamehaDefinition()
+        {
+        }
     }
 }
