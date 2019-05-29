@@ -12,6 +12,7 @@ using DBT.NPCs.Bosses.FriezaShip.Minions;
 using DBT.NPCs.Bosses.FriezaShip.Items;
 using DBT.NPCs.Saibas;
 using DBT.Projectiles;
+using Terraria.Localization;
 
 namespace DBT.NPCs.Bosses.FriezaShip
 {
@@ -31,9 +32,10 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public FriezaShip()
         {
-            HoverDistance = new Vector2(0, 150);
+            HoverDistance = new Vector2(0, 250);
             HoverCooldown = 500;
-            SlamDelay = 10;
+            SlamDelay = 20;
+            SlamTimer = 0;
             MinionAmount = 2;
             HasDoneExplodeEffect = false;
             IsChargingSlam = false;
@@ -104,18 +106,18 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 HoverCooldown = 400;
                 SpeedAdd = 1f;
-                SlamDelay = 8;
+                SlamDelay = 18;
                 if (npc.life < npc.lifeMax * 0.50f)
                 {
                     HoverCooldown = 250;
                     SpeedAdd = 2f;
-                    SlamDelay = 6;
+                    SlamDelay = 15;
                 }
                 if (npc.life < npc.lifeMax * 0.2f)
                 {
                     HoverCooldown = 100;
                     SpeedAdd = 4f;
-                    SlamDelay = 4;
+                    SlamDelay = 10;
                     MinionAmount = 4;
                 }
             }
@@ -181,50 +183,58 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
             if (AIStage == STAGE_SLAM)
             {
-                npc.velocity.X = 0;
                 IsChargingSlam = true;
                 AITimer++;
 
-                if(AITimer > 180 && IsChargingSlam)
+                if(IsChargingSlam)
+                {
+                    npc.velocity = Vector2.Zero;
+                    DoTeleportDust();
+                }
+                    
+
+                if (AITimer > 180)
                 {
                     IsChargingSlam = false;
 
-                    TeleportAbove();
+                    if(AITimer == 181)
+                        TeleportAbove();
 
-                    if (AITimer > SlamDelay)
+                    SlamTimer++;
+                    if (SlamTimer >= SlamDelay)
                     {
-                        if (AITimer == 180 + SlamDelay)
+                        if (SlamTimer == SlamDelay)
                         {
                             if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
                                 npc.damage = npc.damage * 2;
-
-                            npc.noTileCollide = false;
-                            npc.velocity.Y = 25f;
                         }
-
-                        if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || AITimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
-                        {
-                            npc.velocity.Y = -8f;
-                            if (!HasDoneExplodeEffect)
-                            {
-                                ExplodeEffect();
-                                SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
-                            }
-
-                        }
+                        npc.noTileCollide = false;
+                        npc.velocity.Y = 25f;
                     }
+
+                    if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || SlamTimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
+                    {
+                        npc.velocity.Y = -8f;
+                        if (!HasDoneExplodeEffect)
+                        {
+                            ExplodeEffect();
+                            SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
+                        }
+
+                    }
+
                 }
-
-                
-
                 if (npc.velocity.Y == -8f)
                     SlamCoolDownTimer++;
 
-                if (SlamCoolDownTimer > 30)
+                if (SlamCoolDownTimer == 30)
                 {
-                    StageAdvance();
+                    AIStage = STAGE_HOVER;
+                    //StageAdvance();
                     AITimer = 0;
+                    SlamTimer = 0;
                     SlamCoolDownTimer = 0;
+                    npc.velocity.Y = 0;
                     npc.noTileCollide = true;
                     HasDoneExplodeEffect = false;
 
@@ -255,11 +265,23 @@ namespace DBT.NPCs.Bosses.FriezaShip
             //Main.NewText(AIStage);
         }
 
+        public void DoTeleportDust()
+        {
+            if (Main.rand.NextFloat() < 2f)
+            {
+                Dust dust;
+                Vector2 position = Main.player[npc.target].position + new Vector2(-50f, -220);
+                dust = Main.dust[Dust.NewDust(position, 100, 57, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f)];
+                dust.noGravity = true;
+            }
+
+        }
+
         public void TeleportAbove()
         {
             npc.alpha = 255;
-            npc.position = Main.player[npc.target].position + new Vector2(-20, -80);
-            Projectile.NewProjectile(npc.Center, Vector2.Zero, mod.ProjectileType<TransmissionLinesProj>(), 0, 0);
+            npc.position = Main.player[npc.target].position + new Vector2(-50f + (Main.player[npc.target].velocity.X * 10), -220);
+            Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<TransmissionLinesProj>(), 0, 0);
             SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
             npc.alpha = 0;
         }
@@ -324,7 +346,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
             return true;
         }
-
+        
         private void StageAdvance()
         {
             AIStage++;
@@ -454,6 +476,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public float HoverCooldown { get; set; }
         public int SlamDelay { get; set; }
+        public int SlamTimer { get; set; }
         public int SlamCoolDownTimer { get; set; }
         public int MinionAmount { get; set; }
         public bool HasDoneExplodeEffect { get; set; }

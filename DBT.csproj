@@ -126,6 +126,7 @@
     <Compile Include="NPCs\Saibas\Saibaman1.cs" />
     <Compile Include="Projectiles\FFBeamProjectile.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
+    <Compile Include="Projectiles\TransmissionLinesProj.cs" />
     <Compile Include="Skills\Kamehameha\KamehamehaDefinition.cs" />
     <Compile Include="Skills\SkillCharacteristics.cs" />
     <Compile Include="Skills\SkillDefinition.cs" />
@@ -391,6 +392,7 @@
     <Content Include="NPCs\Bosses\FriezaShip\Items\FFShipBag.png" />
     <Content Include="NPCs\Bosses\FriezaShip\Projectiles\FFBarrageBlast.png" />
     <Content Include="NPCs\Bosses\FriezaShip\Projectiles\FFHomingBlast.png" />
+    <Content Include="Projectiles\TransmissionLinesProj.png" />
     <Content Include="Sounds\Music\TheUnexpectedArrival.mp3" />
     <Content Include="Sounds\Music\Wastelands.mp3" />
     <Content Include="Sounds\Saibamen\Saibamen1.wav" />

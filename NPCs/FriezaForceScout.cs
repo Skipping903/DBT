@@ -49,7 +49,7 @@ namespace DBT.NPCs
         {
             Player player = Main.player[npc.target];
             npc.TargetClosest(true);
-            if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) < 200)
+            if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) < 200 && npc.life < npc.lifeMax * 0.50)
             {
                 alerted = true;
             }

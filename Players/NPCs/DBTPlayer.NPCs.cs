@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using DBT.NPCs.Bosses.FriezaShip;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.ID;
+using Terraria.Localization;
 
 namespace DBT.Players
 {
@@ -19,6 +23,29 @@ namespace DBT.Players
                 }
 
                 return _aliveBosses;
+            }
+        }
+
+        private void CheckFriezaShipSpawn()
+        {
+            if (DBTWorld.friezaShipTriggered)
+            {
+                if (Main.rand.Next(100) == 0)
+                {
+                    NPC.SpawnOnPlayer(player.whoAmI, mod.NPCType<FriezaShip>());
+                    Main.PlaySound(SoundID.Roar, player.position, 0);
+                    Main.NewText("The Frieza Force has arrived!", Color.OrangeRed);
+                    if (Main.netMode != 2)
+                    {
+                        Main.NewText("The Frieza Force has arrived!", Color.OrangeRed);
+                    }
+                    else
+                    {
+                        NetworkText text3 = NetworkText.FromLiteral("The Frieza Force has arrived!");
+                        NetMessage.BroadcastChatMessage(text3, Color.OrangeRed);
+                    }
+                    DBTWorld.friezaShipTriggered = false;
+                }
             }
         }
     }
