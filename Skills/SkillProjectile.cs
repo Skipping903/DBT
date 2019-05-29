@@ -5,17 +5,10 @@ namespace DBT.Skills
 {
     public abstract class SkillProjectile : KiProjectile
     {
-        protected SkillProjectile(SkillDefinition definition) : base(0)
+        protected SkillProjectile(SkillDefinition definition, int width, int height) : 
+            base(definition.Characteristics.BaseDamage, definition.Characteristics.BaseKnockback, width, height)
         {
             Definition = definition;
-        }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-
-            // TODO Add actual charges.
-            projectile.damage = (int) Definition.Characteristics.GetDamage(Owner, 1);
         }
 
         public SkillDefinition Definition { get; }

@@ -464,11 +464,6 @@ exit 0
 if "$(ConfigurationName)"=="LaptopDebug" (
 "D:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
 exit 0
-)
-
-if "PostBackup" == "x" (
-//xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\enabled.json" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\enabled.json" /z /v /y
-//xcopy "%25userprofile%25\Documents\My Games\Terraria\ModLoader\Mods\$(TargetName).tmod" "\\GAMESERVERS\My Games\Terraria\ModLoader\Mods\" /z /v /y
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>

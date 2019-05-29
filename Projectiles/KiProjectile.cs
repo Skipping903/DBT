@@ -21,7 +21,7 @@ namespace DBT.Projectiles
                 _damageHalvedAgainst.Add(npcIDs[i]);
         }
 
-        protected KiProjectile(int damage) : base(damage)
+        protected KiProjectile(int damage, float knockback, int width, int height) : base(damage, knockback, width, height)
         {
         }
 

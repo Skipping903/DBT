@@ -9,7 +9,7 @@
 
     public sealed class DebugKiBlastCharacteristics : SkillCharacteristics
     {
-        public DebugKiBlastCharacteristics() : base(new DebugKiBlastChargeCharacteristics(), 0, 100, 15f)
+        public DebugKiBlastCharacteristics() : base(new DebugKiBlastChargeCharacteristics(), 1, 100, 15f, 1, 5f)
         {
         }
     }
