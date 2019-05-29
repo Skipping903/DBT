@@ -40,10 +40,12 @@ namespace DBT.Players
             KiKnockbackAddition = 0;
             KiCritAddition = 0;
 
-            BaseNaturalKiRegeneration = 0;
+            BaseNaturalKiRegenerationPercentage = 0.01f;
+            BaseNaturalKiRegenerationModifier = 0f;
             NaturalKiRegenerationMultiplier = 1;
 
-            ExternalKiRegeneration = 0;
+            ExternalKiRegenerationPercentage = 0f;
+            ExternalKiRegenerationModifier = 0;
 
             KiOrbRestoreAmount = 100;
             KiOrbGrabRange = 2;
@@ -94,11 +96,15 @@ namespace DBT.Players
         public float KiChargeRate { get; set; }
         public float KiChargeRateMultiplierLimit { get; set; }
 
-        public float BaseNaturalKiRegeneration { get; set; }
-        public float NaturalKiRegenerationMultiplier { get; set; }
-        public float NaturalKiRegeneration => BaseNaturalKiRegeneration * NaturalKiRegenerationMultiplier;
+        /// <summary>Percentage of maximum Ki restored per second.</summary>
+        public float BaseNaturalKiRegenerationPercentage { get; set; }
+        public float BaseNaturalKiRegenerationModifier { get; set; }
 
-        public float ExternalKiRegeneration { get; set; }
+        public float NaturalKiRegenerationMultiplier { get; set; }
+        public float NaturalKiRegeneration => (BaseNaturalKiRegenerationPercentage * MaxKi + BaseNaturalKiRegenerationModifier) * NaturalKiRegenerationMultiplier;
+
+        public float ExternalKiRegenerationPercentage { get; set; }
+        public float ExternalKiRegenerationModifier { get; set; }
 
         public float KiOrbRestoreAmount { get; set; }
         public float KiOrbGrabRange { get; set; }

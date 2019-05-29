@@ -4,7 +4,6 @@ using System.Linq;
 using DBT.Network;
 using DBT.UserInterfaces.CharacterMenus;
 using DBT.UserInterfaces.KiBar;
-using DBT.Utilities;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -13,6 +12,7 @@ using Terraria.UI;
 using DBT.Players;
 using DBT.Wasteland;
 using System;
+using DBT.Helpers;
 
 namespace DBT
 {

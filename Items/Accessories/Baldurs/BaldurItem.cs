@@ -8,7 +8,7 @@ namespace DBT.Items.Accessories.Baldurs
 {
     public abstract class BaldurItem : DBTItem, IIsBaldur
     {
-        protected BaldurItem(string displayName, string tooltip, int value, int defense, int rarity, float defenseMultiplier, int width = 18, int height = 30) : base(displayName, tooltip, value, defense, rarity)
+        protected BaldurItem(string displayName, string tooltip, int value, int defense, int rarity, float defenseMultiplier, int width = 18, int height = 30) : base(displayName, tooltip, width, height, value, defense, rarity)
         {
             DefenseMultiplier = defenseMultiplier;
         }

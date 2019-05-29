@@ -59,6 +59,11 @@
     <Compile Include="Buffs\DBTBuff.cs" />
     <Compile Include="Buffs\EnhancedReservesBuff.cs" />
     <Compile Include="Buffs\KiDegenerationBuff.cs" />
+    <Compile Include="Commons\Donator.cs" />
+    <Compile Include="Extensions\CommonsExtensions.cs" />
+    <Compile Include="Commons\IndexedObject.cs" />
+    <Compile Include="Commons\Items\IHasBottomTooltipLines.cs" />
+    <Compile Include="Commons\Items\IIsGuardianItem.cs" />
     <Compile Include="DBTWorld.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Items\Accessories\AncientLegendWaistCape.cs" />
@@ -108,6 +113,7 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK4.cs" />
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
+    <Compile Include="Items\Consumables\MRE.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\ArmCannonMK2.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\CyberneticParts.cs" />
@@ -127,6 +133,7 @@
     <Compile Include="Projectiles\FFBeamProjectile.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
     <Compile Include="Skills\Kamehameha\KamehamehaDefinition.cs" />
+    <Compile Include="Skills\KiBlast\DebugKiBlastDefinition.cs" />
     <Compile Include="Skills\SkillCharacteristics.cs" />
     <Compile Include="Skills\SkillDefinition.cs" />
     <Compile Include="Skills\SkillDefinitionManager.cs" />
@@ -155,7 +162,7 @@
     <Compile Include="Commons\Items\IHasDefense.cs" />
     <Compile Include="Commons\Items\IHasRarity.cs" />
     <Compile Include="Commons\Items\IHasValue.cs" />
-    <Compile Include="Commons\Items\IIsPatreonItem.cs" />
+    <Compile Include="Commons\Items\IIsPatreonLocked.cs" />
     <Compile Include="Commons\Items\SenzuBeans\IAffectSenzuBeanCooldown.cs" />
     <Compile Include="Commons\Players\IHandleOnPlayerPreHurt.cs" />
     <Compile Include="Commons\IUpdatesOnChargeTick.cs" />
@@ -283,6 +290,7 @@
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Saving.cs" />
     <Compile Include="Projectiles\DBTProjectile.cs" />
     <Compile Include="Skills\SkillItem.cs" />
+    <Compile Include="Skills\SkillProjectile.cs" />
     <Compile Include="Tiles\Stations\KaiTableTile.cs" />
     <Compile Include="Tiles\Stations\ZTableTile.cs" />
     <Compile Include="Traits\TraitBuff.cs" />
@@ -316,7 +324,7 @@
     <Compile Include="UserInterfaces\EnergyResourceBar.cs" />
     <Compile Include="UserInterfaces\KiBar\KiBarLayer.cs" />
     <Compile Include="UserInterfaces\UIImagePair.cs" />
-    <Compile Include="Utilities\SteamHelper.cs" />
+    <Compile Include="Helpers\SteamHelper.cs" />
     <Compile Include="Wasteland\Items\CoarseRockWallItem.cs" />
     <Compile Include="Wasteland\Items\CoarseRockItem.cs" />
     <Compile Include="Wasteland\Tiles\CoarseRock.cs" />
@@ -405,6 +413,7 @@
     <Content Include="Wasteland\Water\WastelandWater_Block.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Commons\Tooltips\" />
     <Folder Include="Items\Armor\Sets\Guardian\Dragon\" />
     <Folder Include="Items\Armor\Sets\Guardian\Kaioshin\" />
     <Folder Include="Items\Armor\Sets\Guardian\Mechanical\" />
@@ -427,6 +436,7 @@
     <Folder Include="Transformations\STR\" />
     <Folder Include="Transformations\UIs\UIOmen\" />
     <Folder Include="Transformations\UIs\UI\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Players\Transformations\DBTPlayer.Transformations.Visuals.cs" />
@@ -437,7 +447,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
-"C:\Program Files (x86)\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
+"D:\Steam\steamapps\common\Terraria\tModLoaderServer.exe" -build "$(ProjectDir)\" -eac "$(TargetPath)"
 exit 0
 )
 if "$(ConfigurationName)"=="Release" (

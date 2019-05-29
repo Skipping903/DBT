@@ -29,7 +29,7 @@ namespace DBT.Items.Armor.Sets.Black
             dbtPlayer.KiDamageMultiplier += 0.20f;
             dbtPlayer.KiCritAddition += 16;
             dbtPlayer.MaxKiModifier += 500;
-            dbtPlayer.ExternalKiRegeneration += 2;
+            dbtPlayer.ExternalKiRegenerationModifier += 2;
 
             player.moveSpeed += 0.18f;
         }

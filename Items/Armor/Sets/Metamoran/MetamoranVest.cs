@@ -42,7 +42,7 @@ namespace DBT.Items.Armor.Sets.Metamoran
             DBTPlayer dbtPlayer = player.GetModPlayer<DBTPlayer>();
 
             dbtPlayer.KiDamageMultiplier += 0.15f;
-            dbtPlayer.ExternalKiRegeneration += 1f;
+            dbtPlayer.ExternalKiRegenerationModifier += 1f;
         }
     }
 }

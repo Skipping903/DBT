@@ -28,7 +28,7 @@ namespace DBT.Items.Accessories.Earthens
 
             dbtPlayer.KiDamageMultiplier += 0.10f;
             dbtPlayer.FlightSpeedModifier += 0.1f;
-            dbtPlayer.ExternalKiRegeneration += 1;
+            dbtPlayer.ExternalKiRegenerationModifier += 1;
             dbtPlayer.FlightKiUsageModifier += 1;
             dbtPlayer.KiChargeRateMultiplierLimit += 1;
         }
