@@ -131,10 +131,13 @@
     <Compile Include="NPCs\Saibas\Saibaman2.cs" />
     <Compile Include="NPCs\Saibas\Saibaman1.cs" />
     <Compile Include="Projectiles\FFBeamProjectile.cs" />
-    <Compile Include="Projectiles\DBTKiProjectile.cs" />
+    <Compile Include="Projectiles\KiProjectile.cs" />
     <Compile Include="Skills\Kamehameha\KamehamehaDefinition.cs" />
     <Compile Include="Skills\KiBlast\DebugKiBlastDefinition.cs" />
+    <Compile Include="Skills\KiBlast\DebugKiBlastProjectile.cs" />
+    <Compile Include="Skills\KiBlast\DebugKiBlastItem.cs" />
     <Compile Include="Skills\SkillCharacteristics.cs" />
+    <Compile Include="Skills\SkillChargeCharacteristics.cs" />
     <Compile Include="Skills\SkillDefinition.cs" />
     <Compile Include="Skills\SkillDefinitionManager.cs" />
     <Compile Include="Extensions\CoordinateExtensions.cs" />

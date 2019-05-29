@@ -6,6 +6,6 @@ namespace DBT.Extensions
     public static class CommonsExtensions
     {
 
-        public static bool IsPatreonDonator(this IIsPatreonLocked patreonLocked) => SteamHelper.Donator && SteamHelper.SteamId64 == patreonLocked.Donator.steamId64;
+        public static bool IsPatreonDonator(this IIsPatreonLocked patreonLocked) => SteamHelper.IsDonator && SteamHelper.SteamId64 == patreonLocked.Donator.steamId64;
     }
 }

@@ -6,17 +6,17 @@ namespace DBT.Projectiles
 {
     public abstract class DBTProjectile : ModProjectile
     {
-        private readonly int _damage;
-
         protected DBTProjectile(int damage)
         {
+            Damage = damage;
         }
+
 
         public override void SetDefaults()
         {
             base.SetDefaults();
 
-            projectile.damage = _damage;
+            projectile.damage = Damage;
         }
 
         public override bool PreAI()
@@ -29,8 +29,11 @@ namespace DBT.Projectiles
             return base.PreAI();
         }
 
+
         public DBTPlayer Owner { get; protected set; }
 
         public override bool CloneNewInstances => true;
+
+        public int Damage { get; }
     }
 }

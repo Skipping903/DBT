@@ -18,7 +18,17 @@ namespace DBT.Helpers
 
         private static readonly List<Donator> _activeDonatorSteamIds = new List<Donator>()
         {
-            BrushBoy, CanadianMRE, FreeRaisinBread, HelloMyFriend, Luna, Mak0, Megawarrior101, NyoonBooetteEnthusiast, PapaTingle, Pheonix, Skipping, Vector, William
+            BrushBoy,
+            CanadianMRE,
+            FreeRaisinBread,
+            Hamster, HelloMyFriend,
+            Luna,
+            Mak0, Megawarrior101,
+            NyoonBooetteEnthusiast,
+            PapaTingle, Pheonix,
+            Skipping, SnorLaxatives, SoulCarnagee,
+            Vector,
+            William
         };
 
         public static void Initialize()
@@ -57,6 +67,8 @@ namespace DBT.Helpers
             return false;
         }
 
+        public static bool CanUserAccess(Donator donator, bool includeDevs = false) => CanUserAccess(donator.steamId64, includeDevs);
+
         public static bool CanUserAccess(bool includeDevs, params long[] steamId64s)
         {
             for (int i = 0; i < steamId64s.Length; i++)
@@ -66,10 +78,19 @@ namespace DBT.Helpers
             return false;
         }
 
+        public static bool CanUserAccess(bool includeDevs, params Donator[] donators)
+        {
+            for (int i = 0; i < donators.Length; i++)
+                if (CanUserAccess(donators[i].steamId64, includeDevs))
+                    return true;
+
+            return false;
+        }
+
         public static bool HasSteamId64 { get; private set; }
         public static long SteamId64 { get; private set; }
 
-        public static bool Donator
+        public static bool IsDonator
         {
             get
             {
@@ -105,21 +126,22 @@ namespace DBT.Helpers
 
         #region Donators
 
-        public static Donator BrushBoy => new Donator(76561197960287930, "Brush Boy"); // Brush Boy#9064 - 200413799746895873
-        public static Donator CanadianMRE => new Donator(76561198147284656, "CanadianMRE"); // CanadianMRE#6288 - 219196190271471616
-        public static Donator FreeRaisinBread => new Donator(368799789942308874, "FreeRasinBread"); // Freerasinbread#3516 - 368799789942308874
-        public static Donator Hamster => new Donator(76561198055274667, "Hamster"); // Hamster#2477 - 224323430651133952
-        public static Donator HelloMyFriend => new Donator(76561198062878746, "Hello My Friend"); // hello my friend#2456 - 251408085313126401
-        public static Donator Luna => new Donator(76561198085728391, "Luna");
-        public static Donator Mak0 => new Donator(76561198161525177, "Michael"); // Mak0-Z#6790 - 307618173073489920
-        public static Donator Megawarrior101 => new Donator(76561193783431419, "Megawarrior_101"); // Megawarrior_101#0616 - 405844470584836117
-        public static Donator NyoonBooetteEnthusiast => new Donator(76561198301260251, "Nyoon Booette Enthusiast"); // Nyoon Booette enthusiast#4130 - 228294779815985152;
-        public static Donator PapaTingle => new Donator(76561198236967076, "Papa Tingle"); // PapaTingle#5281 - 159089770763517953
-        public static Donator Pheonix => new Donator(76561198059019480, "Pheonix"); // pheonix#7035 - 175445960946745344
-        public static Donator Skipping => new Donator(76561193979609866, "Luke"); // Skipping#7613 - 450018452103757835
-        public static Donator SoulCarnagee => new Donator(76561198059100989, "SoulCarnagee"); // SoulCarnagee#6993 - 313358705854775296
-        public static Donator Vector => new Donator(300040297256058881, "Vector"); // Mr.Bombastic#1706 - 300040297256058881
-        public static Donator William => new Donator(76561198090096918, "William"); // william#0117 - 141746262490873857
+        public static Donator BrushBoy => new Donator(76561197960287930, "Brush Boy", 200413799746895873); // Brush Boy#9064
+        public static Donator CanadianMRE => new Donator(76561198147284656, "CanadianMRE", 219196190271471616); // CanadianMRE#6288
+        public static Donator FreeRaisinBread => new Donator(368799789942308874, "FreeRasinBread", 368799789942308874); // Freerasinbread#3516
+        public static Donator Hamster => new Donator(76561198055274667, "Hamster", 224323430651133952); // Hamster#2477
+        public static Donator HelloMyFriend => new Donator(76561198062878746, "Hello My Friend", 251408085313126401); // hello my friend#2456
+        public static Donator Luna => new Donator(76561198085728391, "Luna", 216853147837005824);
+        public static Donator Mak0 => new Donator(76561198161525177, "Michael", 307618173073489920); // Mak0-Z#6790
+        public static Donator Megawarrior101 => new Donator(76561193783431419, "Megawarrior_101", 405844470584836117); // Megawarrior_101#0616
+        public static Donator NyoonBooetteEnthusiast => new Donator(76561198301260251, "Nyoon Booette Enthusiast", 228294779815985152); // Nyoon Booette enthusiast#4130;
+        public static Donator PapaTingle => new Donator(76561198236967076, "Papa Tingle", 159089770763517953); // PapaTingle#5281
+        public static Donator Pheonix => new Donator(76561198059019480, "Pheonix", 175445960946745344); // pheonix#7035
+        public static Donator Skipping => new Donator(76561193979609866, "Luke", 450018452103757835); // Skipping#7613
+        public static Donator SnorLaxatives => new Donator(76561198108193073, "SnorLaxatives", 189983407168684042);
+        public static Donator SoulCarnagee => new Donator(76561198059100989, "SoulCarnagee", 313358705854775296); // SoulCarnagee#6993
+        public static Donator Vector => new Donator(76561198248632856, "Vector", 300040297256058881); // Mr.Bombastic#1706
+        public static Donator William => new Donator(76561198090096918, "William", 141746262490873857); // william#0117
 
         #endregion
     }

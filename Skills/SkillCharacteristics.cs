@@ -1,45 +1,36 @@
-﻿using DBT.Players;
+﻿using System;
+using DBT.Players;
 
 namespace DBT.Skills
 {
     public class SkillCharacteristics
     {
         /// <summary></summary>
-        /// <param name="baseChargeTimer"></param>
-        /// <param name="baseMaxChargeLevel"></param>
-        /// <param name="baseCastKiDrain"></param>
-        /// <param name="baseChargeKiDrain">The Ki drain for a charge level. Will be applied as a drain every tick (<see cref="GetChargeTimer")/>/<see cref="GetChargeKiDrainForChargeLevel"/>)</param>
-        /// <param name="baseDamage"></param>
-        public SkillCharacteristics(int baseChargeTimer, int baseMaxChargeLevel, int baseCastKiDrain, int baseChargeKiDrain, int baseDamage)
+        /// /// <param name="skillChargeCharacteristics"></param>
+        /// <param name="baseDamageMultiplierPerCharge">The number by which to multiply the damage.</param>
+        /// <param name="baseDamage">The base damage done by the skill per damage tick.</param>
+        public SkillCharacteristics(SkillChargeCharacteristics skillChargeCharacteristics, float baseDamageMultiplierPerCharge, int baseDamage, float baseShootSpeed)
         {
-            BaseChargeTimer = baseChargeTimer;
-            BaseMaxChargeLevel = baseMaxChargeLevel;
+            ChargeCharacteristics = skillChargeCharacteristics;
 
-            BaseCastKiDrain = baseCastKiDrain;
-            BaseChargeKiDrain = baseChargeKiDrain;
-
+            BaseBaseDamageMultiplierPerCharge = baseDamageMultiplierPerCharge;
             BaseDamage = baseDamage;
+
+            BaseShootSpeed = baseShootSpeed;
         }
 
-        public virtual int GetChargeTimer(DBTPlayer dbtPlayer) => BaseChargeTimer;
 
-        public virtual int GetMaxChargeLevel(DBTPlayer dbtPlayer) => BaseMaxChargeLevel;
+        public virtual float GetDamageMultiplierPerCharge(DBTPlayer dbtPlayer) => BaseBaseDamageMultiplierPerCharge;
 
-        /// <summary>Returns the amount of Ki drained upon using the item. Returns <see cref="DBTPlayer.GetKiDrain"/> by default.</summary>
-        /// <param name="dbtPlayer"></param>
-        /// <returns></returns>
-        public virtual float GetCastKiDrain(DBTPlayer dbtPlayer) => dbtPlayer.GetKiDrain(BaseCastKiDrain);
+        public virtual float GetDamage(DBTPlayer dbtPlayer, int chargeLevel) => BaseDamage * GetDamageMultiplierPerCharge(dbtPlayer) * chargeLevel;
 
-        public virtual float GetChargeKiDrain(DBTPlayer dbtPlayer) => GetChargeTimer(dbtPlayer) / GetChargeKiDrainForChargeLevel(dbtPlayer);
+        public virtual float GetShootSpeed(DBTPlayer dbtPlayer) => BaseShootSpeed;
 
-        public virtual float GetChargeKiDrainForChargeLevel(DBTPlayer dbtPlayer) => BaseChargeKiDrain;
+        public SkillChargeCharacteristics ChargeCharacteristics { get; }
 
-        public int BaseChargeTimer { get; }
-        public int BaseMaxChargeLevel { get; }
-
-        public float BaseCastKiDrain { get; }
-        public float BaseChargeKiDrain { get; }
-
+        public float BaseBaseDamageMultiplierPerCharge { get; }
         public float BaseDamage { get; }
+
+        public float BaseShootSpeed { get; }
     }
 }
