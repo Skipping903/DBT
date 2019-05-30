@@ -1,7 +1,7 @@
 ﻿using System;
 using DBT.Auras;
+using DBT.Helpers;
 using DBT.Players;
-using DBT.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -73,7 +73,7 @@ namespace DBT.Transformations.Developers.Webmilio
         }
 
 
-        public override bool CheckPrePlayerConditions() => SteamHelper.CanUserAccess(76561198046878487, true);
+        public override bool CheckPrePlayerConditions() => SteamHelper.CanUserAccess(SteamHelper.Webmilio, true);
 
 
         public float GetSoulPower(DBTPlayer dbtPlayer)

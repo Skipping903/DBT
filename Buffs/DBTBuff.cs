@@ -19,7 +19,5 @@ namespace DBT.Buffs
             DisplayName.SetDefault(_displayName);
             Description.SetDefault(_tooltip);
         }
-
-        
     }
 }

@@ -1,5 +1,5 @@
 ﻿using DBT.Auras;
-using DBT.Utilities;
+using DBT.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,9 +15,7 @@ namespace DBT.Transformations.Patreon.SSJ5
         {
         }
 
-        public override bool CheckPrePlayerConditions() => SteamHelper.CanUserAccess(true, 
-            76561193979609866, // Skipping#7613 - 450018452103757835
-            76561193783431419); // Megawarrior_101#0616 - 405844470584836117
+        public override bool CheckPrePlayerConditions() => SteamHelper.CanUserAccess(true, SteamHelper.Skipping, SteamHelper.Megawarrior101);
     }
 
     public sealed class SSJ5TransformationBuff : TransformationBuff

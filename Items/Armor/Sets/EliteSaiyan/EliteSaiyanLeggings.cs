@@ -28,7 +28,7 @@ namespace DBT.Items.Armor.Sets.EliteSaiyan
             dbtPlayer.KiDamageMultiplier += 0.22f;
             dbtPlayer.KiCritAddition += 18;
             dbtPlayer.MaxKiModifier += 750;
-            dbtPlayer.ExternalKiRegeneration += 2;
+            dbtPlayer.ExternalKiRegenerationModifier += 2;
 
             player.moveSpeed += 0.22f;
         }
