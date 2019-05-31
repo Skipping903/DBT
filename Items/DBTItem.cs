@@ -71,7 +71,7 @@ namespace DBT.Items
 
             if (patreonLocked != null)
             {
-                if (patreonLocked.IsPatreonDonator())
+                if (patreonLocked.IsDonator())
                 {
                     tooltips.Add(new TooltipLine(mod, TOOLTIP_PATREON_LINE_NAME, "You donated for this item!")
                     {
@@ -80,9 +80,9 @@ namespace DBT.Items
                 }
                 else
                 {
-                    bool endsWithS = patreonLocked.Donator.displayName.ToLower()[patreonLocked.Donator.displayName.Length - 1] == 's';
+                    bool endsWithS = patreonLocked.Donator.DisplayName.ToLower()[patreonLocked.Donator.DisplayName.Length - 1] == 's';
 
-                    tooltips.Add(new TooltipLine(mod, TOOLTIP_PATREON_LINE_NAME, patreonLocked.Donator.displayName + (endsWithS ? " " : "'s ") + "Patreon item")
+                    tooltips.Add(new TooltipLine(mod, TOOLTIP_PATREON_LINE_NAME, patreonLocked.Donator.DisplayName + (endsWithS ? " " : "'s ") + "Patreon item")
                     {
                         overrideColor = Color.Orange
                     });

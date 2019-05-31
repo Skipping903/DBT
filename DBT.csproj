@@ -59,7 +59,9 @@
     <Compile Include="Buffs\DBTBuff.cs" />
     <Compile Include="Buffs\EnhancedReservesBuff.cs" />
     <Compile Include="Buffs\KiDegenerationBuff.cs" />
-    <Compile Include="Commons\Donator.cs" />
+    <Compile Include="Commons\Users\Developer.cs" />
+    <Compile Include="Commons\Users\Donator.cs" />
+    <Compile Include="Commons\Users\User.cs" />
     <Compile Include="Extensions\CommonsExtensions.cs" />
     <Compile Include="Commons\IndexedObject.cs" />
     <Compile Include="Commons\Items\IHasBottomTooltipLines.cs" />

@@ -73,7 +73,7 @@ namespace DBT.Transformations.Developers.Webmilio
         }
 
 
-        public override bool CheckPrePlayerConditions() => SteamHelper.CanUserAccess(SteamHelper.Webmilio, true);
+        public override bool CheckPrePlayerConditions() => SteamHelper.Webmilio;
 
 
         public float GetSoulPower(DBTPlayer dbtPlayer)
