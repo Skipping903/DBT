@@ -1,6 +1,7 @@
 ﻿using DBT.Buffs;
 using DBT.Commons;
 using DBT.Commons.Items;
+using DBT.Commons.Users;
 using DBT.Extensions;
 using DBT.Helpers;
 using Terraria;
@@ -17,7 +18,7 @@ namespace DBT.Items.Consumables
 
         public override bool UseItem(Player player)
         {
-            int durationMultiplier = this.IsPatreonDonator() ? 2 : 1;
+            int durationMultiplier = this.IsDonator() ? 2 : 1;
 
             player.AddBuff(mod.BuffType<MREBuff>(), 360 * Constants.TICKS_PER_SECOND * durationMultiplier);
             player.AddBuff(BuffID.WellFed, 3600 * Constants.TICKS_PER_SECOND * durationMultiplier);

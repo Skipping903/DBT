@@ -1,4 +1,6 @@
-﻿namespace DBT.Commons.Items
+﻿using DBT.Commons.Users;
+
+namespace DBT.Commons.Items
 {
     public interface IIsPatreonLocked
     {
