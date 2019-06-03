@@ -132,6 +132,7 @@
     <Compile Include="NPCs\Saibas\Saibaman1.cs" />
     <Compile Include="Projectiles\FFBeamProjectile.cs" />
     <Compile Include="Projectiles\DBTKiProjectile.cs" />
+    <Compile Include="Projectiles\ShipTeleportLinesProj.cs" />
     <Compile Include="Projectiles\TransmissionLinesProj.cs" />
     <Compile Include="Skills\Kamehameha\KamehamehaDefinition.cs" />
     <Compile Include="Skills\KiBlast\DebugKiBlastDefinition.cs" />

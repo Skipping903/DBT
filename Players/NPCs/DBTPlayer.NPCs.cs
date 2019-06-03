@@ -28,24 +28,23 @@ namespace DBT.Players
 
         private void CheckFriezaShipSpawn()
         {
-            if (DBTWorld.friezaShipTriggered)
+            int spawnTimer = 0;
+            spawnTimer++;
+            if (spawnTimer == 5400)
             {
-                if (Main.rand.Next(100) == 0)
+                NPC.SpawnOnPlayer(player.whoAmI, mod.NPCType<FriezaShip>());
+                Main.PlaySound(SoundID.Roar, player.position, 0);
+                Main.NewText("The Frieza Force has arrived!", Color.OrangeRed);
+                if (Main.netMode != 2)
                 {
-                    NPC.SpawnOnPlayer(player.whoAmI, mod.NPCType<FriezaShip>());
-                    Main.PlaySound(SoundID.Roar, player.position, 0);
                     Main.NewText("The Frieza Force has arrived!", Color.OrangeRed);
-                    if (Main.netMode != 2)
-                    {
-                        Main.NewText("The Frieza Force has arrived!", Color.OrangeRed);
-                    }
-                    else
-                    {
-                        NetworkText text3 = NetworkText.FromLiteral("The Frieza Force has arrived!");
-                        NetMessage.BroadcastChatMessage(text3, Color.OrangeRed);
-                    }
-                    DBTWorld.friezaShipTriggered = false;
                 }
+                else
+                {
+                    NetworkText text3 = NetworkText.FromLiteral("The Frieza Force has arrived!");
+                    NetMessage.BroadcastChatMessage(text3, Color.OrangeRed);
+                }
+                DBTWorld.friezaShipTriggered = false;
             }
         }
     }

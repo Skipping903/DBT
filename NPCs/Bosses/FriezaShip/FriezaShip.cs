@@ -12,6 +12,7 @@ using DBT.NPCs.Bosses.FriezaShip.Items;
 using DBT.NPCs.Saibas;
 using DBT.Projectiles;
 using Terraria.Localization;
+using System.Collections.Generic;
 
 namespace DBT.NPCs.Bosses.FriezaShip
 {
@@ -35,9 +36,10 @@ namespace DBT.NPCs.Bosses.FriezaShip
             HoverCooldown = 500;
             SlamDelay = 20;
             SlamTimer = 0;
+            SlamBarrageCount = 0;
             MinionAmount = 2;
             HasDoneExplodeEffect = false;
-            IsChargingSlam = false;
+            SlamsDone = 0;
 
         }
 
@@ -99,6 +101,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
             //Make sure the stages loop back around
             if (AIStage > 4)
                 AIStage = STAGE_HOVER;
+
+            if (SlamsDone > 5)
+                SlamsDone = 0;
 
             //Speed between stages and general movement speed drastically increased with health lost
             if (npc.life < npc.lifeMax * 0.80f)
@@ -177,26 +182,22 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
             }
 
-            //Slam attack (stage 1) - Quickly moves to directly above the player, then waits a second before slamming straight down.
+            //Slam attack (stage 1) - Spins up in place for a few seconds then teleports above the player and slams down.
             //To-Do: Fix afterimage on slam not working.
 
             if (AIStage == STAGE_SLAM)
             {
-                IsChargingSlam = true;
                 AITimer++;
 
-                if(IsChargingSlam)
+                if(AITimer < 180)
                 {
                     npc.velocity = Vector2.Zero;
                     DoTeleportDust();
                 }
                     
-
                 if (AITimer > 180)
                 {
-                    IsChargingSlam = false;
-
-                    if(AITimer == 181)
+                    if(AITimer == 190)
                         TeleportAbove();
 
                     SlamTimer++;
@@ -228,8 +229,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
                 if (SlamCoolDownTimer == 30)
                 {
-                    AIStage = STAGE_HOVER;
-                    //StageAdvance();
+                    SlamsDone++;
+                    StageAdvance();
                     AITimer = 0;
                     SlamTimer = 0;
                     SlamCoolDownTimer = 0;
@@ -241,6 +242,115 @@ namespace DBT.NPCs.Bosses.FriezaShip
                         npc.damage = npc.damage / 2;
                 }
 
+            }
+
+            if (AIStage == STAGE_SLAMBARRAGE)
+            {
+                AITimer++;
+
+                if (AITimer < 120)
+                {
+                    npc.velocity = Vector2.Zero;
+                }
+
+                if(Main.netMode != NetmodeID.Server) //Slam barrage for singleplayer, it'll slam 3 times on the same player in a row with a bit of delay.
+                {
+                    if (SlamBarrageCount < 3)
+                    {
+                        if (AITimer > 120)
+                        {
+                            if (AITimer == 130)
+                                TeleportAbove();
+
+                            SlamTimer++;
+                            if (SlamTimer >= SlamDelay)
+                            {
+                                if (SlamTimer == SlamDelay)
+                                {
+                                    if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
+                                        npc.damage = npc.damage * 2;
+
+                                    SlamBarrageCount++;
+                                }
+                                npc.noTileCollide = false;
+                                npc.velocity.Y = 25f;
+                            }
+
+                            if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || SlamTimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
+                            {
+                                npc.velocity.Y = -8f;
+                                if (!HasDoneExplodeEffect)
+                                {
+                                    ExplodeEffect();
+                                    SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
+                                }
+
+                                if (SlamTimer > 50)
+                                {
+                                    AITimer = 90;
+                                    SlamTimer = 0;
+                                }
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        StageAdvance();
+                        AITimer = 0;
+                        SlamTimer = 0;
+                        SlamCoolDownTimer = 0;
+                        SlamBarrageCount = 0;
+                        npc.velocity.Y = 0;
+                        npc.noTileCollide = true;
+                        HasDoneExplodeEffect = false;
+
+                        if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
+                            npc.damage = npc.damage / 2;
+                    }
+                }
+                else //Slam barrage for multiplayer, it'll teleport above each player in the server and slam down 1 by 1.
+                {
+                    if (AITimer > 120)
+                    {
+                        if (SlamBarrageCount < Main.player.Length)
+                        {
+                            if (AITimer == 130)
+                                TeleportAboveAll();
+
+                            SlamTimer++;
+                            if (SlamTimer >= SlamDelay)
+                            {
+                                if (SlamTimer == SlamDelay)
+                                {
+                                    if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
+                                        npc.damage = npc.damage * 2;
+
+                                    SlamBarrageCount++;
+                                }
+                                npc.noTileCollide = false;
+                                npc.velocity.Y = 25f;
+                            }
+
+                            if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || SlamTimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
+                            {
+                                npc.velocity.Y = -8f;
+                                if (!HasDoneExplodeEffect)
+                                {
+                                    ExplodeEffect();
+                                    SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
+                                }
+
+                                if (SlamTimer > 50)
+                                {
+                                    AITimer = 0;
+                                    SlamTimer = 0;
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
 
             //To-Do: Summon saibamen (stage 4) - Summons a green saiba from the ship, green dust when this happens to make it look smoother (Perhaps make this something after 40% HP)
@@ -276,11 +386,21 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         }
 
-        public void TeleportAbove()
+        public void TeleportAbove()//This is the singleplayerver
         {
+			
             npc.alpha = 255;
-            npc.position = Main.player[npc.target].position + new Vector2(-50f + (Main.player[npc.target].velocity.X * 10), -220);
-            Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<TransmissionLinesProj>(), 0, 0);
+            npc.position = Main.player[npc.target].position + new Vector2(-70f + (Main.player[npc.target].velocity.X * 10), -220);
+            Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
+            SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
+            npc.alpha = 0;
+        }
+
+        public void TeleportAboveAll() //This is the multiplayer one| epic or no?
+        {
+			npc.alpha = 255;
+            npc.position = new Vector2(Main.player[npc.target].position.X, -220);
+            Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
             SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
             npc.alpha = 0;
         }
@@ -348,7 +468,25 @@ namespace DBT.NPCs.Bosses.FriezaShip
         
         private void StageAdvance()
         {
-            AIStage++;
+            if (AIStage == STAGE_SLAM && (SlamsDone == 2 || SlamsDone == 4 || SlamsDone == 6) && npc.life <= npc.lifeMax * 0.70)
+                AIStage++;
+            else
+                ResetStage();
+
+            if (AIStage == STAGE_SLAMBARRAGE && SlamsDone == 5 && npc.life <= npc.lifeMax * 0.50)
+                AIStage++;
+            else
+                ResetStage();
+
+            if (AIStage == STAGE_SLAMBARRAGE && SlamsDone == 4 && npc.life <= npc.lifeMax * 0.30)
+                AIStage++;
+            else
+                ResetStage();
+        }
+
+        private void ResetStage()
+        {
+            AIStage = STAGE_HOVER;
         }
 
         //Animations
@@ -357,7 +495,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
         int _frameRate = 1;
         public override void FindFrame(int frameHeight)
         {
-            if(IsChargingSlam)
+            if(AIStage == STAGE_SLAM && AITimer < 180 || AIStage == STAGE_SLAMBARRAGE && AITimer < 120)
             {
                 npc.frameCounter += _frameRate;
                 _frameTimer++;
@@ -475,11 +613,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public float HoverCooldown { get; set; }
         public int SlamDelay { get; set; }
+        public int SlamBarrageCount { get; set; }
+        public int SlamsDone { get; set; }
         public int SlamTimer { get; set; }
         public int SlamCoolDownTimer { get; set; }
         public int MinionAmount { get; set; }
         public bool HasDoneExplodeEffect { get; set; }
-        public bool IsChargingSlam { get; set; }
         public float SpeedAdd { get; set; }
 
         public int YHoverTimer { get; set; }
