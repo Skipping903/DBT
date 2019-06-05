@@ -28,7 +28,7 @@ namespace DBT.Projectiles
                 _damageHalvedAgainst.Add(npcIDs[i]);
         }
 
-        protected KiProjectile(float kiDrain)
+        protected KiProjectile(float kiDrain, int damage) : base(damage)
         {
             KiDrain = kiDrain;
         }

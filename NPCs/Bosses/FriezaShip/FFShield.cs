@@ -44,10 +44,11 @@ namespace DBT.NPCs.Bosses.FriezaShip
 				}
             }
 
-            npc.position = friezaNPC.position;
+            if (friezaNPC != null)
+                npc.position = friezaNPC.position;
 
 
-			if (!NPC.AnyNPCs(mod.NPCType<FriezaShip>()))
+            if (!NPC.AnyNPCs(mod.NPCType<FriezaShip>()))
                 npc.life = 0; 
         }
 

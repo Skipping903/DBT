@@ -19,14 +19,14 @@ namespace DBT.NPCs.Bosses.FriezaShip
     [AutoloadBossHead]
     public class FriezaShip : ModNPC
     {
-        public const int
-            STAGE_HOVER = 0,
-            STAGE_SLAM = 1,
-            STAGE_SLAMBARRAGE = 2,
-            STAGE_MINION = 3,
-            STAGE_HYPER = 4,
+		public const int
+			STAGE_HOVER = 0,
+			STAGE_SLAM = 1,
+			STAGE_SLAMBARRAGE = 2,
+			STAGE_MINION = 3,
+			STAGE_HYPER = 4,
 
-            AI_STAGE_SLOT = 0,
+			AI_STAGE_SLOT = 0,
             AI_TIMER_SLOT = 1;
 
         public FriezaShip()
@@ -75,9 +75,14 @@ namespace DBT.NPCs.Bosses.FriezaShip
         //Boss loot: Drops Undecided material that's used to create a guardian class armor set (frieza cyborg set). Alternates drops between a weapon and accessory, accessory is arm cannon mk2, weapon is a frieza force beam rifle. Expert item is the mechanical amplifier.
         //Spawn condition: Near the ocean you can find a frieza henchmen, if he runs away then you'll get an indicator saying the ship will be coming the next morning.
 
+        
+            //AI Rundown: Hovers for 400 ticks then stops in place, spinning up for 190 ticks, then teleports above the player and slams down then flies back up. After every other normal slam and below 70% health it swaps to a barrage of slams, which does 3 slams against 1 player in singleplayer, and 1 for each player in multiplayer.
+            //After every 6 basic slams and when below 50% health the ship summons a handful of saibamen and frieza force henchmen as well as a deflector shield that has 800 health, while the shield is up the ship is immune, immobile and will heal over time.
+            //After every 5 basic slams and when below 30% health the ship stops, becomes invulnurable and starts emitting yellow dust, after 180 ticks the ship creates lines of dust from right to left indicating the path it will take to attack you, then after 20 ticks it will teleport to the right and move to the left quickly, following the dust line. It does this attack 4 times.
 
         public override void AI()
         {
+			AITimer++;
             #region Base targetting
             Player player = Main.player[npc.target];
             npc.TargetClosest(true);
@@ -192,13 +197,83 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 }
 
             }
-            #endregion
+			#endregion
 
-            #region Basic Slam
-            if (AIStage == STAGE_SLAM)
+			#region Slam Barrage
+			if (AIStage == STAGE_SLAMBARRAGE)
+			{
+				if (AITimer < 130)
+				{
+					npc.velocity = Vector2.Zero;
+				}
+
+				if (Main.netMode != NetmodeID.Server) //Slam barrage for singleplayer, it'll slam 3 times on the same player in a row with a bit of delay.
+				{
+					if (SlamBarrageCount <= 3)
+					{
+						if (AITimer >= 120)
+						{
+							if (AITimer == 130)
+								TeleportAbove();
+
+							if (AITimer > 130)
+							{
+								SlamTimer++;
+								if (SlamTimer >= SlamDelay) //Delay is 20;
+								{
+									DoSlam(SlamDelay);
+									CheckCollision(SlamTimer);
+									SlamTimer = 0;
+								}
+							}
+
+						}
+					}
+					else
+					{
+						StageAdvance();
+						AITimer = 0;
+						SlamTimer = 0;
+						SlamCoolDownTimer = 0;
+						SlamBarrageCount = 0;
+						npc.velocity.Y = 0;
+						npc.noTileCollide = true;
+						HasDoneExplodeEffect = false;
+
+						if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
+							npc.damage = npc.damage / 2;
+					}
+				}
+				else //Slam barrage for multiplayer, it'll teleport above each player in the server and slam down 1 by 1.
+				{
+					if (AITimer > 120)
+					{
+						if (AITimer >= 130)
+						{
+							if (SlamDone && IterationSlamAmount <= PlayerMPAmount)
+							{
+								TeleportAboveAll();
+								IterationSlamAmount++;
+								SlamDone = false;
+							}
+
+							SlamTimer++;
+
+							if (SlamTimer >= SlamDelayMP && !SlamDone)
+							{
+								DoSlam(SlamDelayMP);
+							}
+
+							CheckCollision(SlamTimer);
+						}
+					}
+				}
+			}
+			#endregion
+
+			#region Basic Slam
+			if (AIStage == STAGE_SLAM)
             {
-                AITimer++;
-
                 if(AITimer < 180)
                 {
                     npc.velocity = Vector2.Zero;
@@ -255,76 +330,11 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
             #endregion
 
-            #region Slam Barrage
-            if (AIStage == STAGE_SLAMBARRAGE)
-            {
-                AITimer++;
 
-                if (AITimer < 120)
-                {
-                    npc.velocity = Vector2.Zero;
-                }
+            Main.NewText("Slam Timer is: " + SlamTimer);
+            Main.NewText("AI Timer is: " + AITimer);
+            Main.NewText("Slam barrages done: " + SlamBarrageCount);
 
-                if(Main.netMode != NetmodeID.Server) //Slam barrage for singleplayer, it'll slam 3 times on the same player in a row with a bit of delay.
-                {
-                    if (SlamBarrageCount < 3)
-                    {
-                        if (AITimer > 120)
-                        {
-                            if (AITimer == 130)
-                                TeleportAbove();
-
-                            SlamTimer++;
-                            if (SlamTimer >= SlamDelay)
-                            {
-								DoSlam(SlamDelay);
-							}
-
-							CheckCollision(SlamTimer);
-
-                        }
-                    }
-                    else
-                    {
-                        StageAdvance();
-                        AITimer = 0;
-                        SlamTimer = 0;
-                        SlamCoolDownTimer = 0;
-                        SlamBarrageCount = 0;
-                        npc.velocity.Y = 0;
-                        npc.noTileCollide = true;
-                        HasDoneExplodeEffect = false;
-
-                        if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
-                            npc.damage = npc.damage / 2;
-                    }
-                }
-                else //Slam barrage for multiplayer, it'll teleport above each player in the server and slam down 1 by 1.
-                {
-                    if (AITimer > 120)
-                    {
-						if (AITimer >= 130)
-						{
-							if (SlamDone && IterationSlamAmount <= PlayerMPAmount)
-							{
-								TeleportAboveAll();
-								IterationSlamAmount++;
-								SlamDone = false;
-							}
-
-							SlamTimer++;
-
-							if (SlamTimer >= SlamDelayMP && !SlamDone)
-							{
-								DoSlam(SlamDelayMP);
-							}
-
-							CheckCollision(SlamTimer);
-						}
-					}
-                }
-            }
-            #endregion
 
             #region Minion Spawning
             if (Main.netMode != 1 && AIStage == STAGE_MINION)
@@ -335,8 +345,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     SummonFfMinions();
                     SummonShield();
                 }
-
-                AITimer++;
 
                 if (AITimer > 60)
                 {
@@ -403,7 +411,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 		public bool SlamDone = true;
 		public int IterationSlamAmount = 0;
 
-		public void DoTeleportDust()
+        public void DoTeleportDust()
         {
             if (Main.rand.NextFloat() < 2f)
             {
@@ -415,17 +423,18 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         }
 
-        public void TeleportAbove()//This is the singleplayerver
+
+        public void TeleportAbove()//For singleplayer
         {
 			
             npc.alpha = 255;
-            npc.position = Main.player[npc.target].position + new Vector2(-70f + (Main.player[npc.target].velocity.X * 10), -220);
+            npc.position = Main.player[npc.target].position + new Vector2(-80f + (Main.player[npc.target].velocity.X * 10), -220);
             Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
             SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
             npc.alpha = 0;
         }
 
-		public void TeleportAboveAll() //This is the multiplayer one
+		public void TeleportAboveAll() //For multiplayer
 		{
 			int callArray = -1;
 			callArray++;
@@ -440,29 +449,30 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
 		public void DoSlam(int sDelay)
 		{
-			if (SlamTimer == sDelay)
+			if (SlamTimer == sDelay) //As soon as the timer hits 20;
 			{
 				if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
 					npc.damage = npc.damage * 2;
 
 				SlamBarrageCount++;
+				npc.noTileCollide = false;
+				npc.velocity.Y = 25f;
 			}
-			npc.noTileCollide = false;
-			npc.velocity.Y = 25f;
 		}
 
-		public void CheckCollision(int SlamTimer)
+		public void CheckCollision(int SlamTimer) //Gives the slamTimer 10 ticks before going back up, but shouldn't be considered since most of it is wasted on slam movement.
 		{
-			if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || SlamTimer > 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
-			{
-				npc.velocity.Y = -8f;
+            if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || SlamTimer >= 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
+            {
+                npc.velocity.Y = -8f;
+
 				if (!HasDoneExplodeEffect)
 				{
 					ExplodeEffect();
 					SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
 				}
 
-				if (SlamTimer > 50)
+				if (SlamTimer >= 50)
 				{
 					AITimer = 90;
 					SlamTimer = 0;
@@ -493,18 +503,33 @@ namespace DBT.NPCs.Bosses.FriezaShip
         
         private void StageAdvance()
         {
-            if (AIStage == STAGE_SLAM && (SlamsDone == 2 || SlamsDone == 4 || SlamsDone == 6) && npc.life <= npc.lifeMax * 0.70)
+            if (AIStage == STAGE_HOVER)
+            {
                 AIStage++;
+                return;
+            }
+                
+            if (AIStage == STAGE_SLAM && (SlamsDone == 1 || SlamsDone == 3 || SlamsDone == 5) && npc.life <= npc.lifeMax * 0.70)
+            {
+                AIStage++;
+                return;
+            }
             else
                 ResetStage();
 
-            if (AIStage == STAGE_SLAMBARRAGE && SlamsDone == 5 && npc.life <= npc.lifeMax * 0.50)
+            if (AIStage == STAGE_SLAMBARRAGE && SlamBarrageCount == 3 && SlamsDone == 5 && npc.life <= npc.lifeMax * 0.50)
+            {
                 AIStage++;
+                return;
+            }
             else
                 ResetStage();
 
-            if (AIStage == STAGE_SLAMBARRAGE && SlamsDone == 4 && npc.life <= npc.lifeMax * 0.30)
+            if (AIStage == STAGE_SLAM && SlamsDone == 4 && npc.life <= npc.lifeMax * 0.30)
+            {
                 AIStage++;
+                return;
+            }
             else
                 ResetStage();
         }

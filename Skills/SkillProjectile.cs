@@ -5,7 +5,7 @@ namespace DBT.Skills
 {
     public abstract class SkillProjectile : DBTProjectile
     {
-        protected SkillProjectile(SkillDefinition definition)
+        protected SkillProjectile(SkillDefinition definition, int damage) : base(damage)
         {
             Definition = definition;
         }
