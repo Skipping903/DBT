@@ -29,22 +29,22 @@ namespace DBT.NPCs.Bosses.FriezaShip
             npc.lifeMax = 800;
             npc.HitSound = SoundID.NPCHit1;
             npc.value = 0f;
-            npc.knockBackResist = 1f;
+            npc.knockBackResist = 0f;
+            npc.noGravity = true;
         }
 
         public override void AI()
         {
-
-            for (int i = 0; i < Main.maxNPCs; i++)
-            {
-				if (i.Equals(mod.NPCType<FriezaShip>()))
+			for (int i = 0; i < Main.maxNPCs; i++)
+			{
+				if (i == mod.NPCType<FriezaShip>())
 				{
-					friezaNPC = Main.npc[i];
+					NPC friezaShip = Main.npc[i];
 					break;
 				}
-            }
+			}
 
-            if (friezaNPC != null)
+			if (friezaNPC != null)
                 npc.position = friezaNPC.position;
 
 
@@ -52,7 +52,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 npc.life = 0; 
         }
 
-        public override void PostDraw(SpriteBatch spriteBatch, Color drawColor) //Totally not slightly yoinked from tremor
+        public override void PostDraw(SpriteBatch spriteBatch, Color drawColor)
         {
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
