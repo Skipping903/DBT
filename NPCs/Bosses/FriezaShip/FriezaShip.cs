@@ -39,8 +39,10 @@ namespace DBT.NPCs.Bosses.FriezaShip
             SlamBarrageCount = 0;
             MinionAmount = 2;
             HasDoneExplodeEffect = false;
-            SlamsDone = 0;
-
+			ActivateShield = false;
+			SlamsDone = 0;
+            HyperSlamsDone = 0;
+            DustScaleTimer = 0;
         }
 
         public override void SetStaticDefaults()
@@ -84,6 +86,11 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public override void AI()
         {
 			AITimer++;
+
+			if (ActivateShield)
+			{
+				DeflectorShieldOn(80f);
+			}
             #region Base targetting
             Player player = Main.player[npc.target];
             npc.TargetClosest(true);
@@ -105,14 +112,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
             #endregion
 
-            #region Random Checks
-            if (NPC.AnyNPCs(mod.NPCType<FFShield>()))
-            {
-                npc.dontTakeDamage = true;
-                npc.velocity = Vector2.Zero;
-            }
-            else
-                npc.dontTakeDamage = false;
+            #region Random Checks           
 
             //Make sure the stages loop back around
             if (AIStage > 4)
@@ -203,6 +203,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			#region Slam Barrage
 			if (AIStage == STAGE_SLAMBARRAGE)
 			{
+				ActivateShield = false;
 				if (AITimer < 130)
 				{
 					npc.velocity = Vector2.Zero;
@@ -225,7 +226,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                                 SlamTimer++;
                                 if (SlamTimer >= SlamDelay) //Delay is 20;
                                 {
-                                    DoSlam(SlamDelay);
+                                    DoSlam();
                                     CheckCollision(SlamTimer);
                                 }
                             }
@@ -250,7 +251,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
                                 if (SlamTimer >= SlamDelayMP && !SlamDone)
                                 {
-                                    DoSlam(SlamDelayMP);
+                                    DoSlam();
                                     CheckCollision(SlamTimer);
                                 }
                             }
@@ -270,8 +271,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     npc.velocity.Y = 0;
                     npc.noTileCollide = true;
                     HasDoneExplodeEffect = false;
+					ActivateShield = true;
 
-                    if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
+					if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
                         npc.damage = 36;
                 }
             }
@@ -281,7 +283,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
             #region Basic Slam
             if (AIStage == STAGE_SLAM)
             {
-                if(AITimer < 180)
+
+				if (AITimer < 180)
                 {
                     npc.velocity = Vector2.Zero;
                     DoTeleportDust();
@@ -324,83 +327,87 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     SlamsDone++;
                     StageAdvance();
                     AITimer = 0;
+                    DustScaleTimer = 0;
                     SlamTimer = 0;
                     SlamCoolDownTimer = 0;
                     npc.velocity.Y = 0;
                     npc.noTileCollide = true;
                     HasDoneExplodeEffect = false;
+					ActivateShield = true;
 
-                    if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
+					if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
                         npc.damage = npc.damage / 2;
                 }
 
             }
-            #endregion
+			#endregion
+			// Hyper visuals rundown: When it is spinning up it slowly rises up and emits dust from the center of the ship outwards, then becomes invisible until it teleports.
+			//A line of dust goes horizontally in the direction the ship is going to teleport and move through, the ship then teleports to the beginning of that line with a puff of dust where it lands.
+			//While the ship is moving horizontally it is emitting yellow dust that has no gravity, to simulate movement. Once it reaches the end of the movement it dissapears again with a puff of dust.
+			#region Hyper
 
-            // Hyper visuals rundown: When it is spinning up it slowly rises up and emits dust from the center of the ship outwards, then becomes invisible until it teleports.
-            //A line of dust goes horizontally in the direction the ship is going to teleport and move through, the ship then teleports to the beginning of that line with a puff of dust where it lands.
-            //While the ship is moving horizontally it is emitting yellow dust that has no gravity, to simulate movement. Once it reaches the end of the movement it dissapears again with a puff of dust.
-            #region Hyper
-            int HyperSlamsDone = 0;
             if (AIStage == STAGE_HYPER)
             {
-                if (HyperSlamsDone <= 4)
+				ActivateShield = false;
+				if (HyperSlamsDone <= 4)
                 {
+                    npc.dontTakeDamage = true;
                     if (AITimer < 300)
                     {
                         DoChargeDust();
-                        npc.velocity = new Vector2(0, -0.10f);
+                        npc.velocity = new Vector2(0, -0.3f);
                     }
                     if (AITimer > 300 && HyperPosition == Vector2.Zero)
                     {
                         npc.alpha = 255;
+                        CircularDust(30, npc, 133, 10f, 1);
                         npc.velocity = Vector2.Zero;
                         if (AITimer == 301)
                             ChooseHyperPosition();
                     }
                     if (AITimer > 320 && HyperPosition != Vector2.Zero && npc.velocity == Vector2.Zero)
                         DoLineDust();
-                    if (AITimer == 380 && HyperPosition != Vector2.Zero)
+                    if (AITimer == 340 && HyperPosition != Vector2.Zero)
                     {
                         TeleportRight();
                         HyperSlamsDone++;
                     }
-                    if (AITimer >= 390 && HyperPosition != Vector2.Zero)
+                    if (AITimer >= 350 && HyperPosition != Vector2.Zero)
                         HorizontalSlam();
                 }
                 else
                 {
                     HorizontalSlamTimer = 0;
+                    npc.dontTakeDamage = false;
                     HyperSlamsDone = 0;
                     AITimer = 0;
-                    ResetStage();
+					ActivateShield = true;
+					ResetStage();
                 }
             }
 
-            #endregion
+			#endregion
 
-
-            Main.NewText("Slams done: " + SlamsDone);
+			Main.NewText("Slams done: " + SlamsDone);
             Main.NewText("AI Timer is: " + AITimer);
             Main.NewText("Slam barrages done: " + SlamBarrageCount);
             Main.NewText("Ai Stage is:" + AIStage);
+			Main.NewText("Shield is up: " + ShieldUp);
 
-
-            #region Minion Spawning
-            if (Main.netMode != 1 && AIStage == STAGE_MINION)
+			#region Minion Spawning
+			if (Main.netMode != 1 && AIStage == STAGE_MINION)
             {
                 if (AITimer == 0)
                 {
                     SummonSaiba();
                     SummonFfMinions();
-                    SummonShield();
                 }
 
                 if (AITimer > 60)
                 {
-                    ResetStage();
+					AIStage++;
                     AITimer = 0;
-                }
+				}
             }
 
             //Main.NewText(AIStage);
@@ -429,12 +436,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
             return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman1>());
         }
 
-        public int SummonShield()
-        {
-            SoundHelper.PlayCustomSound("Sounds/ShipShield");
-            return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FFShield>());
-        }
-
         public int SummonFfMinions()
         {
             for (int amount = 0; amount < MinionAmount; amount++)
@@ -454,68 +455,142 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
             return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion1>());
         }
-        #endregion
+		#endregion
 
-        #region Hyper Methods
-        public void DoChargeDust()
+		#region Shield 
+		private bool ShieldUp;
+		private bool JustHitShield = false; //For Predraw;
+
+		public void DeflectorShieldOn(float maxDist)
+		{
+			ShieldUp = true;
+			for (int k = 0; k < Main.maxProjectiles; k++)
+			{
+				Projectile projectile = Main.projectile[k];
+
+				float distanceBpaFX = npc.position.X - projectile.position.X - projectile.width * .5f;
+				float distanceBpaFY = npc.position.Y - projectile.position.Y;
+				float distanceV = (float)Math.Sqrt(Math.Pow(distanceBpaFX, 2) + Math.Pow(distanceBpaFY, 2));
+
+				if (distanceV <= maxDist)
+				{
+					projectile.hostile = true;
+					projectile.friendly = false;
+					DustManager(projectile);
+					JustHitShield = true;
+
+					if (Main.projectile[k] is KiProjectile)
+					{
+						projectile.Kill();
+					}
+					else
+					{
+						projectile.velocity *= -1f;
+
+						if (projectile.Center.X > npc.Center.X * .5f) //Thanks sir Faro for sprite rotation.
+						{
+							projectile.direction = 1;
+							projectile.spriteDirection = 1;
+						}
+						else
+						{
+							projectile.direction = -1;
+							projectile.spriteDirection = -1;
+						}
+					}
+				}
+			}
+		}
+
+		public void DustManager(Projectile p)
+		{
+			for (int i = 0; i < 100; i++)
+			{
+				Player player = Main.player[npc.target];
+				float velocityX = npc.position.X - player.position.X;
+
+				if (velocityX < 0f)
+				{
+					Dust.NewDust(p.position, p.width, p.height, 59, -2f, 0f, 255, default(Color), 1.5f);
+				}
+				else
+				{
+					Dust.NewDust(p.position, p.width, p.height, 59, 2f, 0f, 255, default(Color), 1.5f);
+				}
+			}
+		}
+		#endregion
+
+		#region Hyper Methods
+		public void DoChargeDust()
         {
-            if (Main.rand.NextFloat() < 3f)
+            if (Main.rand.NextFloat() < 5f)
             {
                 Dust dust;
-                Vector2 position = npc.position + new Vector2(-50f, -220);
-                dust = Main.dust[Dust.NewDust(position, 100, 57, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f)];
-                dust.noGravity = true;
+                Vector2 position = npc.position + new Vector2(10, 5);
+
+                for (int i = 0; i < 10; i++)
+                {
+                    dust = Main.dust[Dust.NewDust(position, 220, 120, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.9236842f)];
+                    dust.noGravity = true;
+                }
             }
         }
         public void ChooseHyperPosition()
         {
             Player targetPlayer = Main.player[npc.target];
-            HyperPosition = new Vector2(targetPlayer.position.X + 200, targetPlayer.position.Y + Main.rand.Next(-10, 10));
+            HyperPosition = new Vector2(targetPlayer.position.X + 200, targetPlayer.position.Y + Main.rand.Next(10, 20));
         }
         public void DoLineDust()
         {
             if (Main.rand.NextFloat() < 1.2f)
             {
                 Dust dust;
-                dust = Dust.NewDustPerfect(HyperPosition, 133, new Vector2(-50f, 0f), 0, new Color(255, 255, 255), 1.052632f);
+                dust = Dust.NewDustPerfect(HyperPosition, 133, new Vector2(-70f, 0f), 0, new Color(255, 255, 255), 1.052632f);
                 dust.noGravity = true;
             }
 
         }
         public void TeleportRight()
         {
-            npc.position = HyperPosition;
+            npc.position = HyperPosition + new Vector2(0, -10);
             npc.alpha = 0;
-            DoChargeDust();
+            CircularDust(30, npc, 133, 10f, 1);
         }
-        int HorizontalSlamTimer = 0;
+        private int HorizontalSlamTimer = 0;
 		public void HorizontalSlam()
 		{
+            DoChargeDust();
             HorizontalSlamTimer++;
-            npc.velocity = new Vector2(-20f, 0f);
+            npc.velocity = new Vector2(-40f, 0f);
 
             if (HorizontalSlamTimer == 60)
-            {
+			{
                 npc.velocity = Vector2.Zero;
                 npc.alpha = 255;
-                DoChargeDust();
-                AITimer = 0;
+                AITimer = 300;
+                CircularDust(30, npc, 133, 10f, 1);
+                HorizontalSlamTimer = 0;
+                HyperPosition = Vector2.Zero;
             }
 		}
-        #endregion
+		#endregion
 
-        #region Slam + Teleporting
-        public bool SlamDone = true;
+		#region Slam + Teleporting
+		public bool SlamDone = true;
 		public int IterationSlamAmount = 0;
 		public int callArray = -1;
 
+        
 		public void DoTeleportDust()
         {
             if (Main.rand.NextFloat() < 2f)
             {
+                DustScaleTimer++;
+				DustScaleTimer /= 25;
                 Dust dust;
                 Vector2 position = Main.player[npc.target].position + new Vector2(-50f, -220);
-                dust = Main.dust[Dust.NewDust(position, 100, 57, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f)];
+                dust = Main.dust[Dust.NewDust(position, 100, 57, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f - DustScaleTimer)];
                 dust.noGravity = true;
             }
 
@@ -543,7 +618,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			npc.alpha = 0;
 		}
 
-		public void DoSlam(int sDelay)
+		public void DoSlam()
 		{
 			if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
 				npc.damage *= 2;
@@ -626,6 +701,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
         private void ResetStage()
         {
             AIStage = STAGE_HOVER;
+			ActivateShield = true;
         }
 
         
@@ -709,6 +785,17 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
             HasDoneExplodeEffect = true;
         }
+
+		public void CircularDust(int quantity, NPC target, short DustID, float radius, float scale)
+		{
+			for (int i = 0; i < quantity; i++)
+			{
+				Vector2 pos = new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1)) + target.Center;
+				float angle = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
+				Dust dust = Dust.NewDustPerfect(pos, DustID, new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * radius, 255, default(Color), scale);
+				dust.noGravity = true;
+			}
+		}
         #endregion
 
         #region Animations
@@ -755,68 +842,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
         }
 		#endregion
 
-		#region Deflector Shield
-		public bool JustHitShield = false;
-
-		public void DeflectorShield(float maxDist)
-		{
-			for (int k = 0; k < Main.maxProjectiles; k++)
-			{
-				Projectile projectile = Main.projectile[k];
-
-				float distanceBpaFX = npc.position.X - projectile.position.X - projectile.width * .5f;
-				float distanceBpaFY = npc.position.Y - projectile.position.Y;
-				float distanceV = (float)Math.Sqrt(Math.Pow(distanceBpaFX, 2) + Math.Pow(distanceBpaFY, 2));
-
-				if (distanceV <= maxDist)
-				{
-					projectile.hostile = true;
-					projectile.friendly = false;
-					DustManager(projectile);
-					JustHitShield = true;
-
-					if (Main.projectile[k] is KiProjectile)
-					{
-						projectile.Kill();
-					}
-					else
-					{
-						projectile.velocity *= -1f;
-
-						if (projectile.Center.X > npc.Center.X * .5f) //Thanks sir Faro for sprite rotation.
-						{
-							projectile.direction = 1;
-							projectile.spriteDirection = 1;
-						}
-						else
-						{
-							projectile.direction = -1;
-							projectile.spriteDirection = -1;
-						}
-					}
-				}
-			}
-		}
-
-		public void DustManager(Projectile p)
-		{
-			for (int i = 0; i < 100; i++)
-			{
-				Player player = Main.player[npc.target];
-				float velocityX = npc.position.X - player.position.X;
-
-				if (velocityX < 0f)
-				{
-					Dust.NewDust(p.position, p.width, p.height, 59, -2f, 0f, 255, default(Color), 1.5f);
-				}
-				else
-				{
-					Dust.NewDust(p.position, p.width, p.height, 59, 2f, 0f, 255, default(Color), 1.5f);
-				}
-			}
-		}
-		#endregion
-
 		#region Variables
 
 		public Vector2 HoverDistance { get; set; }
@@ -824,6 +849,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
 		private int pMPamount;
 		private int sDelayMP;
+
+		public bool ActivateShield { get; set; }
 		public float HoverCooldown { get; set; }
         public int SlamDelay { get; set; }
         public int SlamBarrageCount { get; set; }
@@ -833,9 +860,10 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public int MinionAmount { get; set; }
         public bool HasDoneExplodeEffect { get; set; }
         public float SpeedAdd { get; set; }
-
+        public int HyperSlamsDone { get; set; }
         public int YHoverTimer { get; set; }
         public int XHoverTimer { get; set; }
+        public float DustScaleTimer { get; set; }
 
         public float AIStage
         {
@@ -860,11 +888,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
 					{
 						value++;
 						pMPamount = value;
-					}
-					else
-					{
-						value = 0;
-						break;
 					}
 				}
 			}
