@@ -224,11 +224,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
                             if (AITimer > 130)
                             {
                                 SlamTimer++;
-                                if (SlamTimer >= SlamDelay) //Delay is 20;
-                                {
+                                if (SlamTimer == SlamDelay) //Delay is 20;
                                     DoSlam();
+
+                                if (SlamTimer > SlamDelay)
                                     CheckCollision(SlamTimer);
-                                }
+
                             }
                         }
                     }
@@ -360,10 +361,13 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     if (AITimer > 300 && HyperPosition == Vector2.Zero)
                     {
                         npc.alpha = 255;
-                        CircularDust(30, npc, 133, 10f, 1);
                         npc.velocity = Vector2.Zero;
                         if (AITimer == 301)
+                        {
+                            CircularDust(30, npc, 133, 10f, 1);
                             ChooseHyperPosition();
+                        }
+                            
                     }
                     if (AITimer > 320 && HyperPosition != Vector2.Zero && npc.velocity == Vector2.Zero)
                         DoLineDust();
@@ -388,11 +392,11 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
 			#endregion
 
-			Main.NewText("Slams done: " + SlamsDone);
-            Main.NewText("AI Timer is: " + AITimer);
+			//Main.NewText("Slams done: " + SlamsDone);
+            //Main.NewText("AI Timer is: " + AITimer);
             Main.NewText("Slam barrages done: " + SlamBarrageCount);
             Main.NewText("Ai Stage is:" + AIStage);
-			Main.NewText("Shield is up: " + ShieldUp);
+			//Main.NewText("Shield is up: " + ShieldUp);
 
 			#region Minion Spawning
 			if (Main.netMode != 1 && AIStage == STAGE_MINION)
@@ -539,7 +543,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public void ChooseHyperPosition()
         {
             Player targetPlayer = Main.player[npc.target];
-            HyperPosition = new Vector2(targetPlayer.position.X + 200, targetPlayer.position.Y + Main.rand.Next(10, 20));
+            HyperPosition = new Vector2(targetPlayer.position.X + 500, targetPlayer.position.Y + Main.rand.Next(10, 20));
         }
         public void DoLineDust()
         {
@@ -564,7 +568,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             HorizontalSlamTimer++;
             npc.velocity = new Vector2(-40f, 0f);
 
-            if (HorizontalSlamTimer == 60)
+            if (HorizontalSlamTimer == 30)
 			{
                 npc.velocity = Vector2.Zero;
                 npc.alpha = 255;
@@ -590,7 +594,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 				DustScaleTimer /= 25;
                 Dust dust;
                 Vector2 position = Main.player[npc.target].position + new Vector2(-50f, -220);
-                dust = Main.dust[Dust.NewDust(position, 100, 57, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f - DustScaleTimer)];
+                dust = Main.dust[Dust.NewDust(position, 100, 57, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f + DustScaleTimer)];
                 dust.noGravity = true;
             }
 
@@ -600,7 +604,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public void TeleportAbove()//For singleplayer
         {
             npc.alpha = 255;
-            npc.position = Main.player[npc.target].position + new Vector2(-100f + (Main.player[npc.target].velocity.X * 10), -250);
+            npc.position = Main.player[npc.target].position + new Vector2(-100f + (Main.player[npc.target].velocity.X * 10), -255);
             Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
             SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
             npc.alpha = 0;
@@ -612,7 +616,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
 			npc.alpha = 255;
 			Vector2 pos = Main.player[callArray].position + new Vector2(-100f + (Main.player[npc.target].velocity.X * 10));
-			npc.position = new Vector2(pos.X, -250);
+			npc.position = new Vector2(pos.X, -255);
 			Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
 			SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
 			npc.alpha = 0;
