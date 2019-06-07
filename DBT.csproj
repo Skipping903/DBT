@@ -119,6 +119,7 @@
     <Compile Include="NPCs\Bosses\FriezaShip\Items\CyberneticParts.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\BeamRifle.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\FFShipBag.cs" />
+    <Compile Include="NPCs\Bosses\FriezaShip\Items\HenchmanScouter.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion3.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion2.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Minions\FriezaForceMinion1.cs" />
