@@ -31,7 +31,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public FriezaShip()
         {
-            HoverDistance = new Vector2(0, 250);
+            HoverDistance = new Vector2(0, 320);
             HyperPosition = new Vector2(0, 0);
             HoverCooldown = 500;
             SlamDelay = 50;
@@ -79,7 +79,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         
             //AI Rundown: Hovers for 400 ticks then stops in place, spinning up for 190 ticks, then teleports above the player and slams down then flies back up. After every other normal slam and below 70% health it swaps to a barrage of slams, which does 3 slams against 1 player in singleplayer, and 1 for each player in multiplayer.
-            //After every 6 basic slams and when below 50% health the ship summons a handful of saibamen and frieza force henchmen as well as a deflector shield that has 800 health, while the shield is up the ship is immune, immobile and will heal over time.
+            //After every 6 basic slams and when below 50% health the ship summons a handful of saibamen and frieza force henchmen.
             //After every 5 basic slams and when below 30% health the ship stops, becomes invulnurable and starts emitting yellow dust, after 180 ticks the ship creates lines of dust from right to left indicating the path it will take to attack you, then after 20 ticks it will teleport to the right and move to the left quickly, following the dust line. It does this attack 4 times.
 
         public override void AI()
@@ -121,18 +121,18 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 HoverCooldown = 400;
                 SpeedAdd = 1f;
-                SlamDelay = 18;
+                SlamDelay = 45;
                 if (npc.life < npc.lifeMax * 0.50f)
                 {
-                    HoverCooldown = 250;
+                    HoverCooldown = 320;
                     SpeedAdd = 2f;
-                    SlamDelay = 15;
+                    SlamDelay = 38;
                 }
                 if (npc.life < npc.lifeMax * 0.2f)
                 {
-                    HoverCooldown = 100;
+                    HoverCooldown = 240;
                     SpeedAdd = 4f;
-                    SlamDelay = 10;
+                    SlamDelay = 32;
                     MinionAmount = 4;
                 }
             }
@@ -198,55 +198,62 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			#region Slam Barrage
 			if (AIStage == STAGE_SLAMBARRAGE)
 			{
-				if (Main.netMode == NetmodeID.SinglePlayer)
-				{
-					if (AITimer < 130)
-					{
-						npc.velocity = Vector2.Zero;
-					}
+                if (SlamBarrageCount <= 3)
+                {
+                    if (AITimer < 130)
+                    {
+                        if (SlamBarrageCount >= 1)
+                            DustScaleTimer += 8;
+                        else
+                            DustScaleTimer++;
+                        npc.velocity = Vector2.Zero;
+                        CircularDust(10, npc, 134, 8f - DustScaleTimer / 18, 1);
+                    }
 
-					if (SlamBarrageCount <= 3)
-					{
-						if (Main.netMode != NetmodeID.Server) //Slam barrage for singleplayer, it'll slam 3 times on the same player in a row with a bit of delay.
-						{
-							if (AITimer == 130)
+                    if (Main.netMode == NetmodeID.SinglePlayer)
+                    {
+                        if (AITimer == 130)
+                            TeleportAbove();
+
+
+                        if (AITimer > 130)
+                        {
+                            SlamTimer++;
+                            if (SlamTimer == SlamDelay)
+                            {
+                                DustScaleTimer = 0;
+                                DoSlam();
+                            }
+                                
+                            if (SlamTimer > SlamDelay)
+                                CheckCollision(SlamTimer);
+                        }
+                    }
+                    else if (Main.netMode == NetmodeID.Server)
+                    {
+                        if (AITimer == 130 && IterationSlamAmount <= PlayerAmountMP().Count)
+                            TeleportAboveAll();
+
+
+                        if (AITimer > 130)
+                        {
+                            SlamTimer++;
+                            if (SlamTimer == SlamDelay)
 							{
-								TeleportAbove();
-								if (npc.life <= npc.lifeMax * .5)
-									npc.damage = 36;
+								DoSlam();
+								IterationSlamAmount++;
 							}
+                        }
 
-							if (AITimer > 130)
-							{
-								SlamTimer++;
-								if (SlamTimer == SlamDelay) //Delay is 20;
-									DoSlam();
-
-								if (SlamTimer > SlamDelay)
-									CheckCollision(SlamTimer);
-
-							}
-						}
+						if (SlamTimer > SlamDelayMP)
+							CheckCollision(SlamTimer);
 					}
-				}
-				else if (Main.netMode == NetmodeID.Server)
-				{
-					if (AITimer == 130)
-					{
-						TeleportAboveAll();
-						if (npc.life <= npc.lifeMax * .5)
-							npc.damage = 36;
-					}
-
-					if (AITimer > 130)
-					{
-						Slamtimer++;
-						if (SlamTimer == SlamDelayMP)
-						{
-
-						}
-					}
-				}
+                }
+                else
+                {
+                    ResetStage();
+                    ResetAllVariables();
+                }
             }
             #endregion
 
@@ -254,28 +261,29 @@ namespace DBT.NPCs.Bosses.FriezaShip
             #region Basic Slam
             if (AIStage == STAGE_SLAM)
             {
-
 				if (AITimer < 180)
                 {
+                    DustScaleTimer++;
                     npc.velocity = Vector2.Zero;
-                    DoTeleportDust();
+                    CircularDust(10, npc, 133, 10f - DustScaleTimer / 20, 1);
                 }
                     
                 if (AITimer > 180)
                 {
                     if(AITimer == 190)
-                        TeleportAbove();
+					{
+						TeleportAbove();
+					}
 
                     SlamTimer++;
-                    if (SlamTimer >= SlamDelay)
-                    {
-                        DoSlam();
-                    }
+                    if (SlamTimer == SlamDelay)
+						DoSlam();
 
-                    if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || SlamTimer > 80)//If the bottom of the ship touches a tile, nullify speed and do dust particles
+                    if (SlamTimer >= SlamDelay + 15)//If the bottom of the ship touches a tile, nullify speed and do dust particles
                     {
                         npc.velocity.Y = -8f;
-                        if (!HasDoneExplodeEffect)
+
+						if (!HasDoneExplodeEffect)
                         {
                             ExplodeEffect();
                             SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
@@ -284,24 +292,11 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     }
 
                 }
-                if (npc.velocity.Y == -8f)
-                    SlamCoolDownTimer++;
 
-                if (SlamCoolDownTimer == 30)
+				if (SlamTimer >= 100)
                 {
-                    SlamsDone++;
                     StageAdvance();
-                    AITimer = 0;
-                    DustScaleTimer = 0;
-                    SlamBarrageCount = 0;
-                    SlamTimer = 0;
-                    SlamCoolDownTimer = 0;
-                    npc.velocity.Y = 0;
-                    npc.noTileCollide = true;
-                    HasDoneExplodeEffect = false;
-
-					if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
-                        npc.damage = npc.damage / 2;
+                    ResetAllVariables();
                 }
 
             }
@@ -356,13 +351,14 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			#endregion
 
 			//Main.NewText("Slams done: " + SlamsDone);
-            //Main.NewText("AI Timer is: " + AITimer);
             Main.NewText("Slam barrages done: " + SlamBarrageCount);
             Main.NewText("Ai Stage is:" + AIStage);
-			//Main.NewText("Shield is up: " + ShieldUp);
+			Main.NewText("Amount of players:" + PlayerAmountMP().Count);
+            Main.NewText("Slam Timer is:" + SlamTimer);
+            Main.NewText("Ai Timer is:" + AITimer);
 
-			#region Minion Spawning
-			if (Main.netMode != 1 && AIStage == STAGE_MINION)
+            #region Minion Spawning
+            if (Main.netMode != 1 && AIStage == STAGE_MINION)
             {
                 if (AITimer == 0)
                 {
@@ -403,11 +399,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
             }
             return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman1>());
         }
-		
-		public int PlayerMPAmount()
-		{
-			for (int i = 0; i < Main.player)
-		}
 
         public int SummonFfMinions()
         {
@@ -488,21 +479,24 @@ namespace DBT.NPCs.Bosses.FriezaShip
 		#endregion
 
 		#region Slam + Teleporting
+		public int IterationSlamAmount { get; set; }
 		public bool SlamDone = true;
-		public int IterationSlamAmount = 0;
 		public int callArray = -1;
 
         
-		public void DoTeleportDust()
+		public void DoTeleportDust(int dustType, int dustRate)
         {
             if (Main.rand.NextFloat() < 2f)
             {
-                DustScaleTimer++;
-				DustScaleTimer /= 25;
-                Dust dust;
-                Vector2 position = Main.player[npc.target].position + new Vector2(-50f, -220);
-                dust = Main.dust[Dust.NewDust(position, 100, 57, 133, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f + DustScaleTimer)];
-                dust.noGravity = true;
+                for (int i = 0; i < dustRate; i++)
+                {
+                    DustScaleTimer++;
+                    DustScaleTimer /= 10;
+                    Dust dust;
+                    Vector2 position = Main.player[npc.target].position + new Vector2(-50f, -220);
+                    dust = Main.dust[Dust.NewDust(position, 100, 57, dustType, 0f, 0f, 0, new Color(255, 255, 255), 0.7236842f + DustScaleTimer)];
+                    dust.noGravity = true;
+                }
             }
 
         }
@@ -512,7 +506,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
         {
 			npc.alpha = 255;
 
-			Vector2 pos = Main.player[npc.target].position + new Vector2(-100f + (Main.player[npc.target].velocity.X * 10), -255);
+			Vector2 pos = Main.player[npc.target].position + new Vector2(-100f + (Main.player[npc.target].velocity.X * 10), -HoverDistance.Y);
 
 			int tileX = (int)(pos.X / 16); //because every tile in Terraria is 16;
 			int tileY = (int)(pos.Y / 16);
@@ -526,8 +520,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
 				npc.noTileCollide = false;
 			}
 
-			npc.position = new Vector2(pos.X, -255);
-			npc.position = new Vector2(pos.X, -255);
+			npc.position = new Vector2(pos.X, -HoverDistance.Y);
+			npc.position = new Vector2(pos.X, -HoverDistance.Y);
 			npc.position = pos;
             npc.netUpdate = true;
             Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
@@ -539,26 +533,29 @@ namespace DBT.NPCs.Bosses.FriezaShip
 		{
 			callArray++;
 
-			npc.alpha = 255;
-			Vector2 pos = Main.player[callArray].position + new Vector2(-100f + (Main.player[npc.target].velocity.X * 10));
-
-			int tileX = (int)(pos.X / 16); //because every tile in Terraria is 16;
-			int tileY = (int)(pos.Y / 16);
-
-			if ((Main.tile[tileX, tileY] != null && Main.tile[tileX, tileY].wall != 87) || (double)tileY <= Main.worldSurface && !Collision.SolidCollision(pos, Main.player[callArray].width, Main.player[callArray].height))
+			if (callArray < PlayerAmountMP().Count)
 			{
-				npc.noTileCollide = true;
-			}
-			else
-			{
-				npc.noTileCollide = false;
-			}
+				npc.alpha = 255;
+				Vector2 pos = Main.player[callArray].position + new Vector2(-100f + (Main.player[npc.target].velocity.X * 10));
 
-			npc.position = new Vector2(pos.X, -255);
-            npc.netUpdate = true;
-            Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
-			SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
-			npc.alpha = 0;
+				int tileX = (int)(pos.X / 16); //because every tile in Terraria is 16;
+				int tileY = (int)(pos.Y / 16);
+
+				if ((Main.tile[tileX, tileY] != null && Main.tile[tileX, tileY].wall != 87) || (double)tileY <= Main.worldSurface && !Collision.SolidCollision(pos, Main.player[callArray].width, Main.player[callArray].height))
+				{
+					npc.noTileCollide = true;
+				}
+				else
+				{
+					npc.noTileCollide = false;
+				}
+
+				npc.position = new Vector2(pos.X, -255);
+				npc.netUpdate = true;
+				Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
+				SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
+				npc.alpha = 0;
+			}
 		}
 
 		public void DoSlam()
@@ -566,16 +563,20 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			if (npc.life <= npc.lifeMax * 0.50)//Double the contact damage if below 50% health
 				npc.damage *= 2;
 
-			SlamBarrageCount++;
-
 			npc.noTileCollide = false;
 			npc.velocity.Y = 25f;
             npc.netUpdate = true;
-        }
+
+			if (AIStage == STAGE_SLAM)
+				SlamsDone++;
+
+			if (AIStage == STAGE_SLAMBARRAGE)
+				SlamBarrageCount++;
+		}
 
 		public void CheckCollision(int SlamTimerV) //Gives the slamTimer 10 ticks before going back up, but shouldn't be considered since most of it is wasted on slam movement.
 		{
-            if (CoordinateExtensions.IsPositionInTile(npc.getRect().Bottom()) || SlamTimerV >= 30)//If the bottom of the ship touches a tile, nullify speed and do dust particles
+            if (SlamTimerV >= SlamDelay + 15)//If the bottom of the ship touches a tile, nullify speed and do dust particles
             {
                 npc.velocity.Y = -8f;
 
@@ -595,10 +596,34 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			}
 		}
 
-        #endregion
+		#endregion
 
-        #region Misc Methods
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		#region Misc Methods
+
+		public List<Player> array = new List<Player>();
+
+		public List<Player> PlayerAmountMP()
+		{
+			for (int i = 0; i < Main.player.Length; i++)
+			{
+				if (Main.player[i].active)
+				{
+					if (array.Contains(Main.player[i]))
+					{
+						break;
+					}
+
+					array.Add(Main.player[i]);
+				}
+				else if (!Main.player[i].active)
+				{
+					break;
+				}
+			}
+			return array;
+		}
+
+		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
         {
             if (AIStage == STAGE_SLAM)
             {
@@ -649,6 +674,19 @@ namespace DBT.NPCs.Bosses.FriezaShip
             npc.netUpdate = true;
         }
 
+        private void ResetAllVariables()
+        {
+            AITimer = 0;
+            DustScaleTimer = 0;
+            SlamBarrageCount = 0;
+            SlamTimer = 0;
+            npc.velocity.Y = 0;
+            npc.noTileCollide = true;
+            HasDoneExplodeEffect = false;
+
+            if (npc.life <= npc.lifeMax * 0.50)//Reset the damage back to its normal amount
+                npc.damage /= 2;
+        }
         
         public override void NPCLoot()
         {
@@ -731,16 +769,19 @@ namespace DBT.NPCs.Bosses.FriezaShip
             HasDoneExplodeEffect = true;
         }
 
-		public void CircularDust(int quantity, NPC target, short DustID, float radius, float scale)
-		{
-			for (int i = 0; i < quantity; i++)
-			{
-				Vector2 pos = new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1)) + target.Center;
-				float angle = Main.rand.NextFloat(-(float)Math.PI, (float)Math.PI);
-				Dust dust = Dust.NewDustPerfect(pos, DustID, new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * radius, 255, default(Color), scale);
-				dust.noGravity = true;
-			}
-		}
+        public void CircularDust(int quantity, NPC target, short DustID, float radius, float scale)
+        {
+            for (int i = 0; i < quantity; i++)
+            {
+                Vector2 pos = new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1)) + target.Center;
+                float angle = Main.rand.NextFloat(-(float) Math.PI, (float) Math.PI);
+                Dust dust = Dust.NewDustPerfect(pos, DustID,
+                    new Vector2((float) Math.Cos(angle), (float) Math.Sin(angle)) * radius, 255, default(Color),
+                    scale);
+                dust.noGravity = true;
+            }
+        }
+
         #endregion
 
         #region Animations
@@ -828,12 +869,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			{
 				if (npc.life <= npc.lifeMax * .5)
 				{
-					value = (int)(SlamDelay * 1.2 / PlayerMPAmount);
+					value = (int)(SlamDelay * 1.2 / PlayerAmountMP().Count);
 					sDelayMP = value;
 				}
 				else
 				{
-					value = (int)(SlamDelay * 1.5 / PlayerMPAmount);
+					value = (int)(SlamDelay * 1.5 / PlayerAmountMP().Count);
 					sDelayMP = value;
 				} 
 			}
