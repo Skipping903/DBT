@@ -45,7 +45,7 @@ namespace DBT.Items.Armor.Sets.Black
             dbtPlayer.KiDamageMultiplier += 0.24f;
             dbtPlayer.KiCritAddition += 20;
             dbtPlayer.MaxKiModifier += 1000;
-            dbtPlayer.KiChargeRate += 2;
+            dbtPlayer.KiChargeRateModifier += 2;
             dbtPlayer.KiChargeRateMultiplierLimit += 2;
         }
 

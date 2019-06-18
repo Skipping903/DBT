@@ -13,7 +13,8 @@ namespace DBT.Items
     {
         public const string 
             TOOLTIP_PATREON_LINE_NAME = "DBT_ToolTip_Patreon",
-            TOOLTIP_GUARDIAN_LINE_NAME = "DBT_ToolTip_Guardian";
+            TOOLTIP_GUARDIAN_LINE_NAME = "DBT_ToolTip_Guardian",
+            TERRARIA_DESCRIPTION_TOOLTIP = "Tooltip0";
 
         private readonly string _displayName, _tooltip;
         private readonly int _width, _height;
@@ -22,6 +23,9 @@ namespace DBT.Items
         {
             _displayName = displayName;
             _tooltip = tooltip;
+
+            _width = width;
+            _height = height;
 
             Value = value;
             Defense = defense;

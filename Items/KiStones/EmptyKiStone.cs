@@ -52,7 +52,7 @@ namespace DBT.Items.KiStones
 
                 float kiPerTick = NextTier.RequiredKi / 60;
 
-                dbtPlayer.KiChargeRate = -kiPerTick;
+                dbtPlayer.KiChargeRateModifier = -kiPerTick;
                 CurrentKiForTier += kiPerTick;
 
                 if (CurrentKiForTier >= NextTier.RequiredKi)

@@ -116,6 +116,7 @@
     <Compile Include="Items\Accessories\Scouters\ScouterMK5.cs" />
     <Compile Include="Items\Accessories\WornGloves.cs" />
     <Compile Include="Items\Consumables\MRE.cs" />
+    <Compile Include="Items\Developer\KiTools.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\ArmCannonMK2.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\Items\CyberneticParts.cs" />
@@ -235,9 +236,6 @@
     <Compile Include="Items\Developer\DeveloperItem.cs" />
     <Compile Include="Items\Developer\HairSetter.cs" />
     <Compile Include="Items\Developer\InfuserChecker.cs" />
-    <Compile Include="Items\Developer\KiAdder.cs" />
-    <Compile Include="Items\Developer\KiFiller.cs" />
-    <Compile Include="Items\Developer\KiRemover.cs" />
     <Compile Include="Items\Developer\TransformationClearer.cs" />
     <Compile Include="Items\Developer\TransformationSetter.cs" />
     <Compile Include="Items\DragonBalls\DragonBall.cs" />

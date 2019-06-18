@@ -22,7 +22,7 @@ namespace DBT.Items.Accessories
         {
             base.UpdateAccessory(player, hideVisual);
 
-            player.GetModPlayer<DBTPlayer>().KiChargeRate += 1;
+            player.GetModPlayer<DBTPlayer>().KiChargeRateModifier += 1;
         }
     }
 }
