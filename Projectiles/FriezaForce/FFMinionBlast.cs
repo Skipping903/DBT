@@ -1,12 +1,12 @@
-using Terraria;
-using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
-using DBT.Helpers;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
+namespace DBT.Projectiles.FriezaForce
 {
+    // TODO Redo this garbage.
     public class FFMinionBlast : ModProjectile
     {
         public override void SetDefaults()

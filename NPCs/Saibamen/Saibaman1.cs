@@ -1,10 +1,9 @@
-﻿using Terraria;
+﻿using DBT.Players;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using DBT.Players;
-using Microsoft.Xna.Framework.Graphics;
-using DBT.NPCs.Saibas;
+
 
 namespace DBT.NPCs.Saibas
 {

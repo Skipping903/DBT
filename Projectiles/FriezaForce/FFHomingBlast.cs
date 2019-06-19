@@ -1,15 +1,14 @@
-using Terraria;
-using Terraria.ID;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria.ModLoader;
-using DBT.Extensions;
-using DBT.Players;
 using System;
 using DBT.Helpers;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
+namespace DBT.Projectiles.FriezaForce
 {
+    // TODO Redo this garbage
     public class FFHomingBlast : ModProjectile
     {
         private int moveTimer = 0;
@@ -130,7 +129,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
             int num = projectile.timeLeft;
             projectile.timeLeft = 0;
 
-            SoundHelper.PlayCustomSound("Sounds/Kiplosion", projectile.position, 1.0f);
+            SoundHelper.PlayCustomSound("Sounds/KiExplosion", projectile.position, 1.0f);
 
             projectile.position.X = projectile.position.X + (float)(projectile.width / 2);
             projectile.position.Y = projectile.position.Y + (float)(projectile.height / 2);

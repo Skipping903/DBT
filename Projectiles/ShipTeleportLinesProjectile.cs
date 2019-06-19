@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace DBT.Projectiles
 {
-    public class ShipTeleportLinesProj : ModProjectile
+    public class ShipTeleportLinesProjectile : ModProjectile
     {
         public bool isInitialized = false;
         private const int MAX_FRAMES = 9;

@@ -2,7 +2,6 @@
 using DBT.Items;
 using DBT.Players;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Skills

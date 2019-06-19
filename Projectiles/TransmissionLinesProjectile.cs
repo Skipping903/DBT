@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace DBT.Projectiles
 {
-    public class TransmissionLinesProj : ModProjectile
+    public class TransmissionLinesProjectile : ModProjectile
     {
         public bool isInitialized = false;
         private const int MAX_FRAMES = 18;

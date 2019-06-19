@@ -1,12 +1,10 @@
-﻿using Terraria;
+﻿using DBT.Projectiles.FriezaForce;
+using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using DBT.Players;
-using Microsoft.Xna.Framework.Graphics;
-using DBT.NPCs.Bosses.FriezaShip.Projectiles;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Minions
+namespace DBT.NPCs.FriezaForce.Minions
 {
     public class FriezaForceMinion2 : ModNPC
     {

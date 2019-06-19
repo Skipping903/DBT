@@ -1,9 +1,7 @@
-﻿using System;
+﻿using DBT.Commons.Users;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Windows.Forms.VisualStyles;
-using DBT.Commons;
-using DBT.Commons.Users;
 using Terraria.ModLoader;
 
 namespace DBT.Helpers

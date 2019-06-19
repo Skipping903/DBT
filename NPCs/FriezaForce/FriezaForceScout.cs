@@ -1,13 +1,11 @@
-﻿using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
+﻿using DBT.Players;
 using Microsoft.Xna.Framework;
-using DBT.Players;
-using Microsoft.Xna.Framework.Graphics;
-using DBT.NPCs.Bosses.FriezaShip.Projectiles;
+using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 
-namespace DBT.NPCs
+namespace DBT.NPCs.FriezaForce
 {
     public class FriezaForceScout : ModNPC
     {

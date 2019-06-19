@@ -1,9 +1,9 @@
-﻿using Terraria;
-using Terraria.ModLoader;
-using DBT.Items;
-using DBT.NPCs.Bosses.FriezaShip.Items;
+﻿using DBT.Items.Accessories.ArmCannons;
+using DBT.Items.Materials;
+using DBT.Items.Weapons;
+using Terraria;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Items
+namespace DBT.Items.Bags
 {
     public class FFShipBag : DBTItem
     {

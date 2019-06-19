@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 
-namespace DBT.Items.Accessories
+namespace DBT.Items.Accessories.ArmCannons
 {
     public sealed class ArmCannon : DBTItem
     {

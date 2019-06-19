@@ -1,18 +1,19 @@
 using Microsoft.Xna.Framework;
 using System;
-using DBT.Extensions;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
-using DBT.Helpers;
-using DBT.NPCs.Bosses.FriezaShip.Projectiles;
-using DBT.NPCs.Bosses.FriezaShip.Minions;
-using DBT.NPCs.Bosses.FriezaShip.Items;
-using DBT.NPCs.Saibas;
-using DBT.Projectiles;
-using Terraria.Localization;
 using System.Collections.Generic;
+using DBT.NPCs.Saibas;
+using DBT.Helpers;
+using DBT.Items.Accessories.ArmCannons;
+using DBT.Items.Bags;
+using DBT.Items.Materials;
+using DBT.Items.Weapons;
+using DBT.NPCs.FriezaForce.Minions;
+using DBT.NPCs.Saibamen;
+using DBT.Projectiles;
 
 namespace DBT.NPCs.Bosses.FriezaShip
 {
@@ -286,7 +287,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 						if (!HasDoneExplodeEffect)
                         {
                             ExplodeEffect();
-                            SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
+                            SoundHelper.PlayCustomSound("Sounds/KiExplosion", npc.position, 1.0f);
                         }
                         npc.netUpdate = true;
                     }
@@ -362,7 +363,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             {
                 if (AITimer == 0)
                 {
-                    SummonSaiba();
+                    SummonSaibaman();
                     SummonFfMinions();
                     npc.netUpdate = true;
                 }
@@ -377,9 +378,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
             //Main.NewText(AIStage);
         }
 
-        public int SummonSaiba()
+        public int SummonSaibaman()
         {
-            for (int amount = 0; amount < MinionAmount; amount++)
+            for (int i = 0; i < MinionAmount; i++)
             {
                 npc.netUpdate = true;
 
@@ -402,7 +403,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public int SummonFfMinions()
         {
-            for (int amount = 0; amount < MinionAmount; amount++)
+            for (int i = 0; i < MinionAmount; i++)
             {
                 npc.netUpdate = true;
                 switch (Main.rand.Next(0, 2))
@@ -524,7 +525,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			npc.position = new Vector2(pos.X, -HoverDistance.Y);
 			npc.position = pos;
             npc.netUpdate = true;
-            Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
+            Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProjectile>(), 0, 0);
             SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
             npc.alpha = 0;
         }
@@ -552,7 +553,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
 				npc.position = new Vector2(pos.X, -255);
 				npc.netUpdate = true;
-				Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProj>(), 0, 0);
+				Projectile.NewProjectile(npc.oldPosition, Vector2.Zero, mod.ProjectileType<ShipTeleportLinesProjectile>(), 0, 0);
 				SoundHelper.PlayCustomSound("Sounds/ShipTeleport");
 				npc.alpha = 0;
 			}
@@ -583,7 +584,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 				if (!HasDoneExplodeEffect)
 				{
 					ExplodeEffect();
-					SoundHelper.PlayCustomSound("Sounds/Kiplosion", npc.position, 1.0f);
+					SoundHelper.PlayCustomSound("Sounds/KiExplosion", npc.position, 1.0f);
 				}
 
 				if (SlamTimerV >= 50)

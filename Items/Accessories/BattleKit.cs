@@ -1,4 +1,5 @@
-﻿using DBT.Items.Accessories.Scouters;
+﻿using DBT.Items.Accessories.ArmCannons;
+using DBT.Items.Accessories.Scouters;
 using DBT.Players;
 using DBT.Tiles.Stations;
 using Terraria;

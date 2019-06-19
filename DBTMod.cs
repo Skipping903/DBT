@@ -1,27 +1,27 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using DBT.Network;
-using DBT.UserInterfaces.CharacterMenus;
-using DBT.UserInterfaces.KiBar;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
-using DBT.Players;
-using DBT.Wasteland;
 using System;
 using DBT.Helpers;
+using DBT.Network;
+using DBT.Players;
+using DBT.UserInterfaces.CharacterMenus;
+using DBT.UserInterfaces.KiBar;
 
 namespace DBT
 {
 	public sealed class DBTMod : Mod
 	{
+        // TODO Go through this class and make it less shit.
 	    internal ModHotKey characterMenuKey, energyChargeKey, transformDownKey, speedToggleKey, transformUpKey;
 
-	    internal KiBar KiBar;
-	    internal UserInterface KiBarInterface;
+	    internal KiBar kiBar;
+	    internal UserInterface kiBarInterface;
 
 	    internal DBTMenu dbtMenu;
 	    internal UserInterface characterMenuInterface;
@@ -59,13 +59,13 @@ namespace DBT
 
 	            #region Ki Bar
 
-	            KiBar = new KiBar();
-	            KiBar.Activate();
+	            kiBar = new KiBar();
+	            kiBar.Activate();
 
-	            KiBarInterface = new UserInterface();
-	            KiBarInterface.SetState(KiBar);
+	            kiBarInterface = new UserInterface();
+	            kiBarInterface.SetState(kiBar);
 
-	            KiBar.Visible = true;
+	            kiBar.Visible = true;
 
                 #endregion
 
@@ -80,7 +80,7 @@ namespace DBT
 	    {
 	        if (!Main.dedServ)
 	        {
-	            KiBar.Visible = false;
+	            kiBar.Visible = false;
 
 	            dbtMenu.Visible = false;
 	        }
@@ -107,9 +107,7 @@ namespace DBT
                 };
 
             int m = music;
-            bool playMusic =
-                !noOverride.Any(song => song == m)
-                || !Main.npc.Any(npc => npc.boss);
+            bool playMusic = !noOverride.Any(song => song == m) || !Main.npc.Any(npc => npc.boss);
 
             Player player = Main.LocalPlayer;
 

@@ -1,8 +1,7 @@
-﻿using DBT.Items.Materials;
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Items
+namespace DBT.Items.Materials
 {
     public sealed class CyberneticParts : DBTMaterial
     {

@@ -1,17 +1,17 @@
-using Terraria;
-using Terraria.ID;
+using DBT.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
-using DBT.Helpers;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
+namespace DBT.Projectiles.FriezaForce
 {
+    // TODO Redo this garbage.
     public class FFBarrageBlast : ModProjectile
     {
-        private int moveTimer = 0;
-        private bool directionChosen = false;
-        private bool speedChosen = false;
+        private int _moveTimer = 0;
+        private bool _directionChosen, _speedChosen;
 
         public override void SetDefaults()
         {
@@ -54,15 +54,15 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
         }
 		public override void AI()
 		{
-            moveTimer++;
+            _moveTimer++;
 
-            if(moveTimer > 30 && !directionChosen)
+            if(_moveTimer > 30 && !_directionChosen)
             {
                 ChooseDirection();
                 projectile.velocity.Y = 6f;
             }
 
-            if(directionChosen && !speedChosen)
+            if(_directionChosen && !_speedChosen)
             {
                 if(projectile.direction == 1)
                 {
@@ -72,7 +72,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
                 {
                     projectile.velocity.X = Main.rand.NextFloat(-0.3f, -18f);
                 }
-                speedChosen = true;
+                _speedChosen = true;
             }
 			
 		}
@@ -88,7 +88,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
             {
                 projectile.direction = 0;
             }
-            directionChosen = true;
+            _directionChosen = true;
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
@@ -122,7 +122,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Projectiles
             int num = projectile.timeLeft;
             projectile.timeLeft = 0;
 
-            SoundHelper.PlayCustomSound("Sounds/Kiplosion", projectile.position, 1.0f);
+            SoundHelper.PlayCustomSound("Sounds/KiExplosion", projectile.position, 1.0f);
 
             projectile.position.X = projectile.position.X + (float)(projectile.width / 2);
             projectile.position.Y = projectile.position.Y + (float)(projectile.height / 2);

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DBT.Items;
+﻿using DBT.Projectiles;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
-using DBT.Projectiles;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Items
+namespace DBT.Items.Weapons
 {
     public class BeamRifle : DBTItem
     {
@@ -31,10 +24,9 @@ namespace DBT.NPCs.Bosses.FriezaShip.Items
             item.useStyle = 5;
             item.noMelee = true;
             item.knockBack = 8f;
+
             if (!Main.dedServ)
-            {
                 item.UseSound = mod.GetLegacySoundSlot(SoundType.Custom, "Sounds/FFRiflefire").WithVolume(0.5f).WithPitchVariance(0.1f);
-            }
         }
     }
 }

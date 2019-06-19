@@ -1,4 +1,4 @@
-﻿namespace DBT.Skills.KiBlast
+﻿namespace DBT.Skills.KiBlast.DebugKiBlast
 {
     public sealed class DebugKiBlastDefinition : SkillDefinition
     {

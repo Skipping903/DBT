@@ -1,5 +1,5 @@
 ﻿using DBT.Managers;
-using DBT.Skills.KiBlast;
+using DBT.Skills.KiBlast.DebugKiBlast;
 
 namespace DBT.Skills
 {

@@ -1,9 +1,8 @@
-﻿using DBT.Items;
-using DBT.Players;
+﻿using DBT.Players;
 using Terraria;
 using Terraria.ID;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Items
+namespace DBT.Items.Accessories.ArmCannons
 {
     public sealed class ArmCannonMK2 : DBTItem
     {
@@ -15,6 +14,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Items
         public override void SetDefaults()
         {
             base.SetDefaults();
+
             item.expert = true;
             item.accessory = true;
         }

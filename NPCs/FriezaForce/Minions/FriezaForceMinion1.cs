@@ -1,14 +1,12 @@
-﻿using Terraria;
+﻿using DBT.Projectiles.FriezaForce;
+using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-using DBT.Players;
-using Microsoft.Xna.Framework.Graphics;
-using DBT.NPCs.Bosses.FriezaShip.Projectiles;
 
-namespace DBT.NPCs.Bosses.FriezaShip.Minions
+namespace DBT.NPCs.FriezaForce.Minions
 {
-    public class FriezaForceMinion3 : ModNPC
+    public class FriezaForceMinion1 : ModNPC
     {
         public override void SetStaticDefaults()
         {
@@ -29,6 +27,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
             npc.knockBackResist = 0f;
             npc.aiStyle = 3;
         }
+
         public override void AI()
         {
             Player player = Main.player[npc.target];
@@ -73,6 +72,7 @@ namespace DBT.NPCs.Bosses.FriezaShip.Minions
             npc.spriteDirection = npc.direction;
             npc.frame.Y = frameHeight * frame;
         }
+
         public int shootTimer = 0;
         public int YHoverTimer = 0;
         public bool assignedTexture = false;

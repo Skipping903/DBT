@@ -1,10 +1,6 @@
-﻿using System;
-using DBT.Commons.Items;
-using DBT.Items.Materials.Metals;
+﻿using DBT.Commons.Items;
 using DBT.Players;
-using DBT.Tiles;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace DBT.Items.Accessories.Scouters

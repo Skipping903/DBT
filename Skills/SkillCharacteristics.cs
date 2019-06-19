@@ -1,5 +1,4 @@
-﻿using System;
-using DBT.Players;
+﻿using DBT.Players;
 
 namespace DBT.Skills
 {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 
-namespace DBT.Skills.KiBlast
+namespace DBT.Skills.KiBlast.DebugKiBlast
 {
     public class DebugKiBlastProjectile : SkillProjectile
     {

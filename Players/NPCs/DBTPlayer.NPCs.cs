@@ -1,6 +1,6 @@
-﻿using DBT.NPCs.Bosses.FriezaShip;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using DBT.NPCs.Bosses.FriezaShip;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;

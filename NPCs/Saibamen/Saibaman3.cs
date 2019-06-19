@@ -1,18 +1,16 @@
-﻿using Terraria;
+﻿using DBT.Players;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-using DBT.Players;
-using Microsoft.Xna.Framework.Graphics;
-using DBT.NPCs.Saibas;
 
 namespace DBT.NPCs.Saibas
 {
-    public class Saibaman2 : ModNPC
+    public class Saibaman3 : ModNPC
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Blue Saibaman");
+            DisplayName.SetDefault("Yellow Saibaman");
             Main.npcFrameCount[npc.type] = 4;
         }
 
@@ -28,7 +26,7 @@ namespace DBT.NPCs.Saibas
             npc.value = 60f;
             npc.knockBackResist = 0.3f;
             npc.aiStyle = 3;
-            aiType = NPCID.VortexSoldier;
+            aiType = NPCID.GoblinScout;
         }
 
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -111,7 +109,6 @@ namespace DBT.NPCs.Saibas
             npc.spriteDirection = npc.direction;
             npc.frame.Y = frameHeight * frame;
         }
-
         public void Explode()
         {
             for (int num619 = 0; num619 < 3; num619++)

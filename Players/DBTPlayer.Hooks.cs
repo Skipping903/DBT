@@ -3,11 +3,11 @@ using DBT.Commons.Players;
 using DBT.Extensions;
 using DBT.HairStyles;
 using DBT.Transformations;
+using DBT.Wasteland;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
-using DBT.Wasteland;
 
 namespace DBT.Players
 {
