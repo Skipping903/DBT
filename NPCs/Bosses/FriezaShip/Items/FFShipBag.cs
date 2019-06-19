@@ -39,6 +39,8 @@ namespace DBT.NPCs.Bosses.FriezaShip.Items
             }
             player.QuickSpawnItem(mod.ItemType<CyberneticParts>(), Main.rand.Next(7, 18));
             player.QuickSpawnItem(mod.ItemType<ArmCannonMK2>());
+            //if (Main.rand.Next(10) == 0)
+                //player.QuickSpawnItem(mod.ItemType<FFTrophy>());
         }
     }
 }
