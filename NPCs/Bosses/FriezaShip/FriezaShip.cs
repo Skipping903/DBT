@@ -38,7 +38,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
             SlamDelay = 50;
             SlamTimer = 0;
             SlamBarrageCount = 0;
-            MinionAmount = 2;
+            MinionCount = 2;
             HasDoneExplodeEffect = false;
 			SlamsDone = 0;
             HyperSlamsDone = 0;
@@ -134,7 +134,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                     HoverCooldown = 240;
                     SpeedAdd = 4f;
                     SlamDelay = 32;
-                    MinionAmount = 4;
+                    MinionCount = 4;
                 }
             }
             #endregion
@@ -364,7 +364,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
                 if (AITimer == 0)
                 {
                     SummonSaibaman();
-                    SummonFfMinions();
+                    SummonFFMinions();
                     npc.netUpdate = true;
                 }
 
@@ -380,7 +380,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
         public int SummonSaibaman()
         {
-            for (int i = 0; i < MinionAmount; i++)
+            for (int i = 0; i < MinionCount; i++)
             {
                 npc.netUpdate = true;
 
@@ -401,9 +401,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
             return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman1>());
         }
 
-        public int SummonFfMinions()
+        public int SummonFFMinions()
         {
-            for (int i = 0; i < MinionAmount; i++)
+            for (int i = 0; i < MinionCount; i++)
             {
                 npc.netUpdate = true;
                 switch (Main.rand.Next(0, 2))
@@ -843,7 +843,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
         public int SlamsDone { get; set; }
         public int SlamTimer { get; set; }
         public int SlamCoolDownTimer { get; set; }
-        public int MinionAmount { get; set; }
+        public int MinionCount { get; set; }
         public bool HasDoneExplodeEffect { get; set; }
         public float SpeedAdd { get; set; }
         public int HyperSlamsDone { get; set; }

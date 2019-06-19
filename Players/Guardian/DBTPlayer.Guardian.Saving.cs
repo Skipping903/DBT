@@ -1,6 +1,6 @@
 ﻿using Terraria.ModLoader.IO;
 
-namespace DBT.Players.Guardian
+namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {

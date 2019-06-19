@@ -1,5 +1,6 @@
 ﻿using DBT.Managers;
-using DBT.Skills.KiBlast.DebugKiBlast;
+using DBT.Skills.DebugKiBlast;
+using DBT.Skills.KiBlast;
 
 namespace DBT.Skills
 {
@@ -10,11 +11,13 @@ namespace DBT.Skills
         internal override void DefaultInitialize()
         {
             DebugKiBlast = Add(new DebugKiBlastDefinition()) as DebugKiBlastDefinition;
+            KiBlast = Add(new KiBlastDefinition()) as KiBlastDefinition;
 
             base.DefaultInitialize();
         }
 
         public DebugKiBlastDefinition DebugKiBlast { get; private set; }
+        public KiBlastDefinition KiBlast { get; private set; }
 
         public static SkillDefinitionManager Instance
         {

@@ -1,15 +1,15 @@
-﻿namespace DBT.Skills.KiBlast.DebugKiBlast
+﻿namespace DBT.Skills.DebugKiBlast
 {
     public sealed class DebugKiBlastDefinition : SkillDefinition
     {
-        public DebugKiBlastDefinition() : base("KiBlast", "Ki Blast", "A small Ki blast that damages enemies.", new DebugKiBlastCharacteristics())
+        public DebugKiBlastDefinition() : base("DebugKiBlast", "Debug Ki Blast", "A small debugging Ki blast that damages enemies when it really shouldn't.", new DebugKiBlastCharacteristics())
         {
         }
     }
 
     public sealed class DebugKiBlastCharacteristics : SkillCharacteristics
     {
-        public DebugKiBlastCharacteristics() : base(new DebugKiBlastChargeCharacteristics(), 1, 100, 15f, 1, 5f)
+        public DebugKiBlastCharacteristics() : base(new DebugKiBlastChargeCharacteristics(), 100, 1, 15f, 5f, 1)
         {
         }
     }

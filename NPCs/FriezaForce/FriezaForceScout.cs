@@ -49,9 +49,9 @@ namespace DBT.NPCs.FriezaForce
             npc.TargetClosest(true);
             if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) < 200 && npc.life < npc.lifeMax * 0.50)
             {
-                alerted = true;
+                Alerted = true;
             }
-            if (alerted)
+            if (Alerted)
             {
                 //Thanks UncleDanny for this <3
                 if (Main.player[npc.target].position.Y < npc.position.Y + 320)
@@ -73,7 +73,7 @@ namespace DBT.NPCs.FriezaForce
         }
         public override void PostAI()
         {
-            if(npc.timeLeft == 1 && alerted)
+            if(npc.timeLeft == 1 && Alerted)
             {
                 DBTWorld.friezaShipTriggered = true;
                 if (Main.netMode == NetmodeID.Server)
@@ -93,10 +93,12 @@ namespace DBT.NPCs.FriezaForce
                 }
             }
         }
+
         int frame = 0;
+
         public override void FindFrame(int frameHeight)
         {
-            if(!alerted)
+            if(!Alerted)
             {
                 frame = 0;
                 npc.spriteDirection = npc.direction * -1;
@@ -119,7 +121,8 @@ namespace DBT.NPCs.FriezaForce
             npc.frame.Y = frameHeight * frame;
         }
 
-        private int YHoverTimer = 0;
-        private bool alerted = false;
+        public int YHoverTimer { get; private set; }
+
+        public bool Alerted { get; private set; }
     }
 }

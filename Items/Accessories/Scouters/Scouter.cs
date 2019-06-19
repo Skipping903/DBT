@@ -10,8 +10,6 @@ namespace DBT.Items.Accessories.Scouters
     {
         protected Scouter(string displayName, string tooltip, int value, int rarity, float kiDamageMultiplier, int width = 24, int height = 28) : base(displayName, tooltip, width, height, value, 0, rarity)
         {
-            Value = value;
-            Rarity = rarity;
             KiDamageMultiplier = kiDamageMultiplier;
         }
 
@@ -49,10 +47,6 @@ namespace DBT.Items.Accessories.Scouters
             dbtPlayer.KiDamageMultiplier += KiDamageMultiplier;
             player.detectCreature = true;
         }
-
-        public int Value { get; }
-
-        public int Rarity { get; }
 
         public float KiDamageMultiplier { get; }
     }

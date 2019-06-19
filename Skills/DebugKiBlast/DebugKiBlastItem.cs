@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 
-namespace DBT.Skills.KiBlast.DebugKiBlast
+namespace DBT.Skills.DebugKiBlast
 {
     public sealed class DebugKiBlastItem : SkillItem<DebugKiBlastProjectile>
     {

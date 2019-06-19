@@ -140,9 +140,12 @@
     <Compile Include="Projectiles\ShipTeleportLinesProjectile.cs" />
     <Compile Include="Projectiles\TransmissionLinesProjectile.cs" />
     <Compile Include="Skills\Kamehameha\KamehamehaDefinition.cs" />
-    <Compile Include="Skills\KiBlast\DebugKiBlast\DebugKiBlastDefinition.cs" />
-    <Compile Include="Skills\KiBlast\DebugKiBlast\DebugKiBlastProjectile.cs" />
-    <Compile Include="Skills\KiBlast\DebugKiBlast\DebugKiBlastItem.cs" />
+    <Compile Include="Skills\DebugKiBlast\DebugKiBlastDefinition.cs" />
+    <Compile Include="Skills\DebugKiBlast\DebugKiBlastProjectile.cs" />
+    <Compile Include="Skills\DebugKiBlast\DebugKiBlastItem.cs" />
+    <Compile Include="Skills\KiBlast\KiBlastDefinition.cs" />
+    <Compile Include="Skills\KiBlast\KiBlastItem.cs" />
+    <Compile Include="Skills\KiBlast\KiBlastProjectile.cs" />
     <Compile Include="Skills\SkillCharacteristics.cs" />
     <Compile Include="Skills\SkillChargeCharacteristics.cs" />
     <Compile Include="Skills\SkillDefinition.cs" />
