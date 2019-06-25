@@ -4,7 +4,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace DBT.NPCs.Saibas
+namespace DBT.NPCs.Saibamen
 {
     public class Saibaman3 : ModNPC
     {
