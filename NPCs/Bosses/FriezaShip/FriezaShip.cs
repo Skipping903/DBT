@@ -389,12 +389,14 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			#region Minions
 			if (AIStage == STAGE_MINION)
 			{
-				npc.velocity = Vector2.Zero;
-				if (AITimer > 0 && AITimer <= MinionCount / 2)
+				npc.velocity = new Vector2(0, -2f);
+				if (AITimer == 0)
+				{
+					TileX = (int)(npc.position.X + Main.rand.NextFloat(-7f * 16, 6f * 16));
+					TileY = (int)(npc.position.Y + Main.rand.NextFloat(-7f * 16, 6f * 16));
 					SummonFFMinions();
-
-				if (AITimer > 0 && AITimer <= 1)
 					SummonSaibamen();
+				}
 
 				npc.netUpdate = true;
 
@@ -589,32 +591,37 @@ namespace DBT.NPCs.Bosses.FriezaShip
 
 		public int SummonSaibamen()
 		{
-			npc.netUpdate = true;
-
-			switch (Main.rand.Next(0, 4))
+			for (int i = 0; i <= MinionCount / 2; i++)
 			{
-				case 0:
-					return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman1>());
-				case 1:
-					return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman2>());
-				case 2:
-					return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman3>());
-				case 3:
-					return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman4>());
-				default:
-					return 0;
+				npc.netUpdate = true;
+
+				switch (Main.rand.Next(0, 3))
+				{
+					case 0:
+						return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman1>());
+					case 1:
+						return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman2>());
+					case 2:
+						return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman3>());
+					case 3:
+						return NPC.NewNPC(TileX, TileY, mod.NPCType<Saibaman4>());
+					default:
+						return 0;
+				}
 			}
+			return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<Saibaman1>());
 		}
 
 		public int SummonFFMinions()
 		{
-			npc.netUpdate = true;
-
 			/*if (Collision.SolidCollision(new Vector2(TileX, TileY), 26, 36) && Main.tile[TileX, TileY].wall == 87)
-			{
-				TileVariablesDefinition();
-			}*/
+				{
+					TileVariablesDefinition();
+				}*/
 
+			for (int i = 0; i <= MinionCount / 2; i++)
+			{
+				npc.netUpdate = true;
 				switch (Main.rand.Next(0, 2))
 				{
 					case 0:
@@ -626,6 +633,8 @@ namespace DBT.NPCs.Bosses.FriezaShip
 					default:
 						return 0;
 				}
+			}
+			return NPC.NewNPC((int)npc.position.X, (int)npc.position.Y, mod.NPCType<FriezaForceMinion1>());
 		}
 
 		private void RandomShieldLines()
@@ -695,12 +704,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			}
 
 			npc.netUpdate = true;
-		}
-
-		public void TileVariablesDefinition()
-		{
-			TileX = (int)(npc.position.X + Main.rand.NextFloat(-7f * 16, 6f * 16));
-			TileY = (int)(npc.position.Y + Main.rand.NextFloat(-7f * 16, 6f * 16));
 		}
 
 		#endregion
