@@ -1,5 +1,6 @@
 ﻿using DBT.Auras;
 using DBT.Players;
+using DBT.Races;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,7 +12,7 @@ namespace DBT.Transformations.SSJs.SSJ1s.SSJ1
             "SSJ1", "Super Saiyan", typeof(SSJ1TransformationBuff),
             1.5f, 1.5f, 2, 
             new TransformationDrain(1f, 0.5f), 
-            new SSJ1Appearance(), parents: parents)
+            new SSJ1Appearance(), limitedToRaces: new RaceDefinition[] { RaceDefinitionManager.Instance.Saiyan }, parents: parents)
         {
         }
 

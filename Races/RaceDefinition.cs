@@ -11,7 +11,7 @@ namespace DBT.Races
 
             AssociatedColor = associatedColor;
         }
-
+        
         public string UnlocalizedName { get; }
 
         public Color AssociatedColor { get; }

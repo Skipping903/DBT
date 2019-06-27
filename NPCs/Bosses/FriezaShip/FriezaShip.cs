@@ -5,7 +5,6 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using DBT.NPCs.Saibas;
 using DBT.Helpers;
 using DBT.Items.Accessories.ArmCannons;
 using DBT.Items.Bags;

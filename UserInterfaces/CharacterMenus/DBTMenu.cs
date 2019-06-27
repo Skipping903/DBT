@@ -135,23 +135,30 @@ namespace DBT.UserInterfaces.CharacterMenus
         {
             base.Update(gameTime);
 
-            DBTPlayer player = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
+            DBTPlayer dbtPlayer = Main.LocalPlayer.GetModPlayer<DBTPlayer>();
 
             foreach (KeyValuePair<TransformationDefinition, UIImagePair> kvp in _transformationImagePairs)
             {
-                bool unlockable = kvp.Key.CanUnlock(player);
-                bool visible = kvp.Key.DoesDisplayInCharacterMenu(player);
+                TransformationDefinition definition = kvp.Key;
 
-                if (!visible)
+                bool canAcquire = definition.CheckPrePlayerConditions() && definition.BaseConditions(dbtPlayer);
+                bool currentlyUnlockable = kvp.Key.CanUnlock(dbtPlayer);
+                bool visible = kvp.Key.DoesDisplayInCharacterMenu(dbtPlayer);
+                bool unlocked = dbtPlayer.HasAcquiredTransformation(kvp.Key);
+
+                if (!canAcquire || !visible)
                 {
                     kvp.Value.button.Width = StyleDimension.Empty;
                     kvp.Value.button.Height = StyleDimension.Empty;
                     kvp.Value.button.SetVisibility(0f, 0f);
                 }
 
-                kvp.Value.unknownImage.ImageScale = visible && unlockable ? 0f : 1f;
-                kvp.Value.unknownImageGray.ImageScale = visible && unlockable && player.HasAcquiredTransformation(kvp.Key) ? 0f : 1f;
-                kvp.Value.lockedImage.ImageScale = visible && unlockable ? 0f : 1f;
+                if (canAcquire)
+                {
+                    kvp.Value.unknownImage.ImageScale = !visible ? 0f : (!currentlyUnlockable ? 0f : (unlocked ? 0f : 1f));
+                    kvp.Value.unknownImageGray.ImageScale = !visible ? 0f : currentlyUnlockable && dbtPlayer.HasAcquiredTransformation(kvp.Key) ? 0f : 1f;
+                    kvp.Value.lockedImage.ImageScale = !visible ? 0f : unlocked || currentlyUnlockable ? 0f : 1f;
+                }
             }
 
             // Disabled as it crashes with SpriteBatch.
