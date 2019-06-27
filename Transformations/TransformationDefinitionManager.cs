@@ -17,10 +17,8 @@ using DBT.Transformations.SSJs.SSJ4s.SSJ4;
 
 namespace DBT.Transformations
 {
-    public sealed class TransformationDefinitionManager : Manager<TransformationDefinition>
+    public sealed class TransformationDefinitionManager : SingletonManager<TransformationDefinitionManager, TransformationDefinition>
     {
-        private static TransformationDefinitionManager _instance;
-
         internal override void DefaultInitialize()
         {
             SSJ1 = Add(new SSJ1Transformation()) as SSJ1Transformation;
@@ -72,19 +70,5 @@ namespace DBT.Transformations
         public SSJ5Transformation SSJ5 { get; private set; }
 
         public Tree<TransformationDefinition> Tree { get; private set; }
-
-        public static TransformationDefinitionManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new TransformationDefinitionManager();
-
-                if (!_instance.Initialized)
-                    _instance.DefaultInitialize();
-
-                return _instance;
-            }
-        }
     }
 }

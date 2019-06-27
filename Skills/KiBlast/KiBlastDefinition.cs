@@ -9,7 +9,8 @@
 
     public sealed class KiBlastCharacteristics : SkillCharacteristics
     {
-        public KiBlastCharacteristics() : base(new KiBlastChargeCharacteristics(), 19, 1f, 15f, 5f, 1f)
+        public KiBlastCharacteristics() : base(new KiBlastChargeCharacteristics(), 19, 1f, 15f, 5f, 1f,
+            0.15f, 1, 2, 1)
         {
         }
     }
