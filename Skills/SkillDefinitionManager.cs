@@ -4,7 +4,7 @@ using DBT.Skills.KiBlast;
 
 namespace DBT.Skills
 {
-    public sealed class SkillDefinitionManager : Manager<SkillDefinition>
+    public sealed class SkillDefinitionManager : SingletonManager<SkillDefinitionManager, SkillDefinition>
     {
         private static SkillDefinitionManager _instance;
 

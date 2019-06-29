@@ -1,9 +1,8 @@
 ﻿using DBT.Players;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Microsoft.Xna.Framework;
-
 
 namespace DBT.NPCs.Saibamen
 {
@@ -34,6 +33,7 @@ namespace DBT.NPCs.Saibamen
         {
             return spawnInfo.player.GetModPlayer<DBTPlayer>().zoneWasteland ? 1f : 0f;
         }
+
         public override void AI()
         {
             Player player = Main.player[npc.target];
@@ -66,15 +66,18 @@ namespace DBT.NPCs.Saibamen
                     }
                 }
             }
+
             if (grabbed)
             {
                 npc.position = Main.player[npc.target].position;
                 explodeTimer++;
+
                 if (explodeTimer > 20)
                 {
                     Explode();
                 }
             }
+
             base.AI();
         }
 

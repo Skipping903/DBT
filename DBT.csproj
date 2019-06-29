@@ -117,6 +117,7 @@
     <Compile Include="Items\Accessories\WornGloves.cs" />
     <Compile Include="Items\Consumables\MRE.cs" />
     <Compile Include="Items\Developer\KiTools.cs" />
+    <Compile Include="Managers\SingletonManager.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\FFShield.cs" />
     <Compile Include="NPCs\Bosses\FriezaShip\FriezaShip.cs" />
     <Compile Include="Items\Accessories\ArmCannons\ArmCannonMK2.cs" />
@@ -127,6 +128,8 @@
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion3.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion2.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion1.cs" />
+    <Compile Include="Players\Races\DBTPlayer.Races.cs" />
+    <Compile Include="Players\Races\DBTPlayer.Races.Saving.cs" />
     <Compile Include="Projectiles\FriezaForce\FFMinionBlast.cs" />
     <Compile Include="Projectiles\FriezaForce\FFBarrageBlast.cs" />
     <Compile Include="Projectiles\FriezaForce\FFHomingBlast.cs" />
@@ -139,6 +142,10 @@
     <Compile Include="Projectiles\KiProjectile.cs" />
     <Compile Include="Projectiles\ShipTeleportLinesProjectile.cs" />
     <Compile Include="Projectiles\TransmissionLinesProjectile.cs" />
+    <Compile Include="Races\RaceDefinition.cs" />
+    <Compile Include="Races\RaceDefinitionManager.cs" />
+    <Compile Include="Races\SaiyanRace.cs" />
+    <Compile Include="Races\TerrarianRace.cs" />
     <Compile Include="Skills\Kamehameha\KamehamehaDefinition.cs" />
     <Compile Include="Skills\DebugKiBlast\DebugKiBlastDefinition.cs" />
     <Compile Include="Skills\DebugKiBlast\DebugKiBlastProjectile.cs" />
@@ -429,7 +436,6 @@
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
-    <Folder Include="Races\" />
     <Folder Include="Transformations\Developers\Blockaroz\" />
     <Folder Include="Transformations\Developers\DawnishDays\" />
     <Folder Include="Transformations\Developers\Mak0Z\" />

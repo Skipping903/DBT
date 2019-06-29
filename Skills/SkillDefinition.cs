@@ -5,6 +5,8 @@ namespace DBT.Skills
 {
     public class SkillDefinition : IHasUnlocalizedName, IHasParents<SkillDefinition>
     {
+        public const string DEFAULT_BEAM_INSTRUCTIONS = "Hold Right-Click to Charge\nLeft-Click to Fire";
+
         protected SkillDefinition(string unlocalizedName, string displayName, string description, SkillCharacteristics characteristics, params SkillDefinition[] parents)
         {
             UnlocalizedName = unlocalizedName;
