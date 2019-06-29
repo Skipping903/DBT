@@ -24,12 +24,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
 		{
 			HoverDistance = new Vector2(0, 320);
 			HyperPosition = new Vector2(0, 0);
-			HoverCooldown = 500;
+			HoverCooldown = 400;
 			XHoverTimer = 0;
 			YHoverTimer = 0;
 			SSDone = 0;
 			DustScaleTimer = 0;
-			SSDelay = 30;
+			SSDelay = 20;
 			SlamCounter = 0;
 			SlamBarrageSpin = 120;
 			Random = 0;
@@ -37,7 +37,7 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			IterationCount = 0;
 			MinionCount = 2;
 			HyperSlamsDone = 0;
-			ShieldDuration = 340;
+			ShieldDuration = 200;
 		}
 
 		#region Stages Numbers.
@@ -65,10 +65,10 @@ namespace DBT.NPCs.Bosses.FriezaShip
 		{
 			npc.width = 220;
 			npc.height = 120;
-			npc.damage = 20;
-			npc.defense = 10;
-			npc.lifeMax = 3600;
-			npc.HitSound = SoundID.NPCHit1;
+			npc.damage = 50;
+			npc.defense = 8;
+			npc.lifeMax = 3000;
+			npc.HitSound = SoundID.NPCHit4;
 			npc.DeathSound = SoundID.NPCDeath2;
 			npc.value = Item.buyPrice(0, 3, 25, 80);
 			npc.knockBackResist = 0f;
@@ -158,37 +158,44 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			if (UnderEightyHealth)
 			{
 				SpeedAdd = 1f;
-				npc.damage = 30;
-				SSDelay = 25;
-				ShieldDuration = 360;
-			}
+				npc.damage = 60;
+				SSDelay = 15;
+				ShieldDuration = 220;
+                HoverCooldown = 350;
+
+            }
 
 			if (UnderFiftyHealth)
 			{
-				SpeedAdd = 2f;
-				npc.damage = 35;
-				SSDelay = 20;
-				ShieldDuration = 370;
-			}
+                MinionCount = 3;
+                SpeedAdd = 2f;
+				npc.damage = 65;
+				ShieldDuration = 230;
+                HoverCooldown = 300;
+
+            }
 
 			if (UnderThirtyHealth)
 			{
 				MinionCount = 4;
 				SpeedAdd = 4f;
-				npc.damage = 40;
-				SSDelay = 15;
-				ShieldDuration = 380;
+				npc.damage = 70;
+				SSDelay = 10;
+				ShieldDuration = 240;
 				ShieldLife = 2;
-			}
+                HoverCooldown = 200;
+
+            }
 
 			if (Main.expertMode && UnderThirtyHealth)
 			{
 				MinionCount = 6;
-				npc.damage = 50;
-				SSDelay = 10;
-				ShieldDuration = 390;
+				npc.damage = 80;
+				SSDelay = 8;
+				ShieldDuration = 250;
 				ShieldLife = 3;
-			}
+                HoverCooldown = 120;
+            }
 
 			#endregion
 
@@ -294,7 +301,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			{
 				if (AITimer > 0)
 				{
-					if (AITimer % 20 == 0)
+                    if (AITimer == 1)
+                        SoundHelper.PlayCustomSound("Sounds/ShipShield", npc.Center, 2.5f);
+                    if (AITimer % 20 == 0)
 						RandomShieldLines();
 
 					npc.velocity.Y = -1f;
@@ -343,7 +352,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
 						if (Vector2.Distance(projectile.Center, npc.Center) <= ShieldDistance && projectile.active)
 						{
 							projectile.velocity *= -1f;
-							SoundHelper.PlayCustomSound("Sounds/ShipShield", npc.Center, 2.5f);
 
 							for (int j = 0; j < 20; j++)
 							{
@@ -375,8 +383,9 @@ namespace DBT.NPCs.Bosses.FriezaShip
 						}
 					}
 				}
-				npc.life += ShieldLife;
-				npc.netUpdate = true;
+                if (npc.life <= npc.lifeMax)
+                    npc.life += ShieldLife;
+                npc.netUpdate = true;
 
 				if (AITimer >= ShieldDuration)
 				{
@@ -731,7 +740,12 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			return array;
 		}
 
-		public static double AngleBetweenVectors(Vector2 v1, Vector2 v2)
+        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        {
+            npc.lifeMax = (int)(npc.lifeMax * 1.2f * numPlayers);
+        }
+
+        public static double AngleBetweenVectors(Vector2 v1, Vector2 v2)
 		{
 			return Math.Atan2((v1.X * v2.Y + v1.Y * v2.X), (v1.X * v2.X + v1.Y * v2.Y)) * (180 / MathHelper.Pi);
 		}

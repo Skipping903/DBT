@@ -26,7 +26,6 @@ namespace DBT.Items.Bags
 
         public override void OpenBossBag(Player player)
         {
-            player.TryGettingDevArmor();
             int choice = Main.rand.Next(1);
 
             if (choice == 0)
