@@ -1,5 +1,4 @@
-﻿using DBT.Items.Consumables;
-using DBT.Items.KiStones;
+﻿using DBT.Items.KiStones;
 using DBT.Items.Materials;
 using DBT.Items.Materials.Metals;
 using DBT.NPCs.Bosses.FriezaShip;
@@ -7,7 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace DBT.Items.Accessories.Scouters
+namespace DBT.Items.Consumables.Spawners
 {
     public sealed class HenchmanScouter : DBTConsumable
     {
