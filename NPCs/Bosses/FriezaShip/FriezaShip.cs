@@ -740,11 +740,6 @@ namespace DBT.NPCs.Bosses.FriezaShip
 			return array;
 		}
 
-        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
-        {
-            npc.lifeMax = (int)(npc.lifeMax * 1.2f * numPlayers);
-        }
-
         public static double AngleBetweenVectors(Vector2 v1, Vector2 v2)
 		{
 			return Math.Atan2((v1.X * v2.Y + v1.Y * v2.X), (v1.X * v2.X + v1.Y * v2.Y)) * (180 / MathHelper.Pi);
