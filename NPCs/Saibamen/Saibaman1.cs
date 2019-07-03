@@ -1,6 +1,7 @@
 ﻿using DBT.Players;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -18,7 +19,7 @@ namespace DBT.NPCs.Saibamen
         {
             npc.width = 26;
             npc.height = 36;
-            npc.damage = 12;
+            npc.damage = 54;
             npc.defense = 4;
             npc.lifeMax = 50;
             npc.HitSound = SoundID.NPCHit1;
@@ -81,6 +82,11 @@ namespace DBT.NPCs.Saibamen
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             grabbed = true;
+            if (target.statLife == 0)
+            {
+                Player player = Main.player[npc.target];
+                player.Hurt(PlayerDeathReason.ByCustomReason(player.name + "has been yamcha'd."), 54, npc.spriteDirection);
+            }
         }
 
         int frame = 0;
@@ -107,7 +113,7 @@ namespace DBT.NPCs.Saibamen
             {
                 frame = 3;
             }
-            npc.spriteDirection = npc.direction;
+            npc.spriteDirection = -npc.direction;
             npc.frame.Y = frameHeight * frame;
         }
 

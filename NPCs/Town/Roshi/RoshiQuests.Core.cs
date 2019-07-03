@@ -76,8 +76,8 @@ namespace DBT.NPCs.Town.Roshi
                     QuestKills = 0;
                 }
             }
-            Main.NewText("Current quest is:" + CurrentQuest);
-            Main.NewText("Quests completed:" + QuestsCompleted);
+            //Main.NewText("Current quest is:" + CurrentQuest);
+            //Main.NewText("Quests completed:" + QuestsCompleted);
         }
 
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)
