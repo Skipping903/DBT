@@ -32,17 +32,17 @@ namespace DBT.NPCs.FriezaForce.Minions
 			Player player = Main.player[npc.target];
 			npc.TargetClosest(true);
 
-			//Thanks UncleDanny for this <3
-			if (Main.player[npc.target].position.Y < npc.position.Y + 260)
-			{
-				npc.velocity.Y -= npc.velocity.Y > 0f ? 1.7f : .7f;
-			}
-			if (Main.player[npc.target].position.Y > npc.position.Y + 260)
-			{
-				npc.velocity.Y += npc.velocity.Y < 0f ? 1.7f : .7f;
-			}
+            //Thanks UncleDanny for this <3
+            if (Main.player[npc.target].position.Y < npc.position.Y + 260)
+            {
+                npc.velocity.Y -= npc.velocity.Y > 0f ? 2f : .5f;
+            }
+            if (Main.player[npc.target].position.Y > npc.position.Y + 260)
+            {
+                npc.velocity.Y += npc.velocity.Y < 0f ? 2f : .5f;
+            }
 
-			if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) > 100)
+            if (Vector2.Distance(new Vector2(player.position.X, 0), new Vector2(npc.position.X, 0)) > 100)
 			{
 				npc.velocity.X = 2f * npc.direction;
 			}
