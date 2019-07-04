@@ -124,10 +124,11 @@
     <Compile Include="Items\Materials\CyberneticParts.cs" />
     <Compile Include="Items\Weapons\BeamRifle.cs" />
     <Compile Include="Items\Bags\FFShipBag.cs" />
-    <Compile Include="Items\Accessories\Scouters\HenchmanScouter.cs" />
+    <Compile Include="Items\Consumables\Spawners\HenchmanScouter.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion3.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion2.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion1.cs" />
+    <Compile Include="Players\Races\DBTPlayer.Races.cs" />
     <Compile Include="Players\Races\DBTPlayer.Races.Saving.cs" />
     <Compile Include="Projectiles\FriezaForce\FFMinionBlast.cs" />
     <Compile Include="Projectiles\FriezaForce\FFBarrageBlast.cs" />

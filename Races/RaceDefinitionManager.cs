@@ -2,7 +2,7 @@
 
 namespace DBT.Races
 {
-    public sealed class RaceDefinitionManager : Manager<RaceDefinition>
+    public sealed class RaceDefinitionManager : SingletonManager<RaceDefinitionManager, RaceDefinition>
     {
         internal override void DefaultInitialize()
         {

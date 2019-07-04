@@ -33,6 +33,15 @@ namespace DBT.Projectiles.FriezaForce
             DisplayName.SetDefault("Frieza Force Minion Blast");
         }
 
+        public override void Kill(int timeLeft)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Dust dust = Main.dust[Dust.NewDust(projectile.position, 26, 26, 62, projectile.velocity.X, projectile.velocity.Y, 0, new Color(255, 255, 255), 1f)];
+                dust.noGravity = true;
+            }
+        }
+
         public override Color? GetAlpha(Color lightColor)
         {
 			return new Color(255, 255, 255, 110);
