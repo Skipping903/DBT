@@ -5,14 +5,13 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using DBT.NPCs.Saibas;
+using DBT.NPCs.Saibamen;
 using DBT.Helpers;
 using DBT.Items.Accessories.ArmCannons;
 using DBT.Items.Bags;
 using DBT.Items.Materials;
 using DBT.Items.Weapons;
 using DBT.NPCs.FriezaForce.Minions;
-using DBT.NPCs.Saibamen;
 using DBT.Projectiles;
 
 namespace DBT.NPCs.Bosses.FriezaShip
