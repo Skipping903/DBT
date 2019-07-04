@@ -5,6 +5,12 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
+
+
+
+
+
+
 namespace DBT.NPCs.Saibamen
 {
     public class Saibaman4 : ModNPC
