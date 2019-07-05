@@ -9,8 +9,6 @@ namespace DBT.Skills
 {
     public sealed class SkillDefinitionManager : SingletonManager<SkillDefinitionManager, SkillDefinition>
     {
-        private static SkillDefinitionManager _instance;
-
         internal override void DefaultInitialize()
         {
             DebugKiBlast = Add(new DebugKiBlastDefinition()) as DebugKiBlastDefinition;
@@ -29,19 +27,5 @@ namespace DBT.Skills
         public KiBeamDefinition KiBeam { get; private set; }
         public DestructoDiskDefinition DestructoDisk { get; private set; }
         public CelestialRaptureDefinition CelestialRapture { get; private set; }
-
-        public static SkillDefinitionManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new SkillDefinitionManager();
-
-                if (!_instance.Initialized)
-                    _instance.DefaultInitialize();
-
-                return _instance;
-            }
-        }
     }
 }

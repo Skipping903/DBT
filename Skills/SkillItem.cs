@@ -63,12 +63,11 @@ namespace DBT.Skills
             item.shootSpeed = Definition.Characteristics.GetShootSpeed(dbtPlayer, 1);
         }
 
-        public override void GetWeaponDamage(Player player, ref int damage)
+        public override void ModifyWeaponDamage(Player player, ref float add, ref float mult)
         {
-            // TODO Add charges.
-            Definition.Characteristics.GetDamage(player.GetModPlayer<DBTPlayer>(), ref damage, 1);
+            add = Definition.Characteristics.BaseDamage - Definition.Characteristics.GetDamage(player.GetModPlayer<DBTPlayer>(), 0);
 
-            base.GetWeaponDamage(player, ref damage);
+            base.ModifyWeaponDamage(player, ref add, ref mult);
         }
 
         public override void GetWeaponKnockback(Player player, ref float knockback)
