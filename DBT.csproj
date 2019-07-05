@@ -124,10 +124,13 @@
     <Compile Include="Items\Materials\CyberneticParts.cs" />
     <Compile Include="Items\Weapons\BeamRifle.cs" />
     <Compile Include="Items\Bags\FFShipBag.cs" />
-    <Compile Include="Items\Accessories\Scouters\HenchmanScouter.cs" />
+    <Compile Include="Items\Consumables\Spawners\HenchmanScouter.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion3.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion2.cs" />
     <Compile Include="NPCs\FriezaForce\Minions\FriezaForceMinion1.cs" />
+    <Compile Include="NPCs\Town\Roshi\MasterRoshi.cs" />
+    <Compile Include="NPCs\Town\Roshi\RoshiQuests.Core.cs" />
+    <Compile Include="NPCs\Town\Roshi\RoshiQuests.Quests.cs" />
     <Compile Include="Players\Races\DBTPlayer.Races.cs" />
     <Compile Include="Players\Races\DBTPlayer.Races.Saving.cs" />
     <Compile Include="Projectiles\FriezaForce\FFMinionBlast.cs" />
@@ -146,13 +149,52 @@
     <Compile Include="Races\RaceDefinitionManager.cs" />
     <Compile Include="Races\SaiyanRace.cs" />
     <Compile Include="Races\TerrarianRace.cs" />
+    <Compile Include="Skills\AbsoluteLightning\AbsoluteLightningDefinition.cs" />
+    <Compile Include="Skills\BigBangAttack\BigBangAttackDefinition.cs" />
+    <Compile Include="Skills\BigBangKamehameha\BigBangKamehamehaDefinition.cs" />
+    <Compile Include="Skills\BlackBlitz\BlackBlitzDefinition.cs" />
+    <Compile Include="Skills\BlackKamehameha\BlackKamehamehaDefinition.cs" />
+    <Compile Include="Skills\BloodThief\BloodThiefDefinition.cs" />
+    <Compile Include="Skills\CandyLaser\CandyLaserDefinition.cs" />
+    <Compile Include="Skills\CelestialRapture\CelestialRaptureDefinition.cs" />
+    <Compile Include="Skills\CelestialRapture\CelestialRaptureItem.cs" />
+    <Compile Include="Skills\CelestialRapture\CelestialRaptureProjectile.cs" />
+    <Compile Include="Skills\DeathSaucer\DeathSaucerDefinition.cs" />
+    <Compile Include="Skills\DestructoDiskAssault\DestructoDiskAssaultDefinition.cs" />
+    <Compile Include="Skills\DestructoDisk\DestructoDiskDefinition.cs" />
+    <Compile Include="Skills\DestructoDisk\DestructoDiskItem.cs" />
+    <Compile Include="Skills\DestructoDisk\DestructoDiskProjectile.cs" />
+    <Compile Include="Skills\DirtyFireworks\DirtyFireworksDefinition.cs" />
+    <Compile Include="Skills\DivineLasso\DivineLassoDefinition.cs" />
+    <Compile Include="Skills\DoubleSunday\DoubleSundayDefinition.cs" />
+    <Compile Include="Skills\EnergyBlastBarrage\EnergyBlastBarrageDefinition.cs" />
+    <Compile Include="Skills\EnergyShot\EnergyShotDefinition.cs" />
+    <Compile Include="Skills\EnergyWave\EnergyWaveDefinition.cs" />
+    <Compile Include="Skills\FinalFlash\FinalFlashDefinition.cs" />
+    <Compile Include="Skills\FinalShine\FinalShineDefinition.cs" />
+    <Compile Include="Skills\GalickGun\GalickGunDefinition.cs" />
+    <Compile Include="Skills\GammaBurstBarrage\GammaBurstBarrageDefinition.cs" />
+    <Compile Include="Skills\GammaBurstFlash\GammaBurstFlashDefinition.cs" />
+    <Compile Include="Skills\GammaRay\GammaRayDefinition.cs" />
+    <Compile Include="Skills\GiganticRoar\GiganticRoarDefinition.cs" />
+    <Compile Include="Skills\GodKamehameha\GodKamehamehaDefinition.cs" />
+    <Compile Include="Skills\HellzoneGrenade\HellzoneGrenadeDefinition.cs" />
+    <Compile Include="Skills\HolyWrath\HolyWrathDefinition.cs" />
+    <Compile Include="Skills\Kamehamehax10\Kamehamehax10Definition.cs" />
     <Compile Include="Skills\Kamehameha\KamehamehaDefinition.cs" />
     <Compile Include="Skills\DebugKiBlast\DebugKiBlastDefinition.cs" />
     <Compile Include="Skills\DebugKiBlast\DebugKiBlastProjectile.cs" />
     <Compile Include="Skills\DebugKiBlast\DebugKiBlastItem.cs" />
+    <Compile Include="Skills\KiBeam\KiBeamDefinition.cs" />
+    <Compile Include="Skills\KiBeam\KiBeamItem.cs" />
+    <Compile Include="Skills\KiBeam\KiBeamProjectile.cs" />
     <Compile Include="Skills\KiBlast\KiBlastDefinition.cs" />
     <Compile Include="Skills\KiBlast\KiBlastItem.cs" />
     <Compile Include="Skills\KiBlast\KiBlastProjectile.cs" />
+    <Compile Include="Skills\LightGrenade\LightGrenadeDefinition.cs" />
+    <Compile Include="Skills\MajinExtinctionAttack\MajinExtinctionAttackDefinition.cs" />
+    <Compile Include="Skills\Masenko\MasenkoDefinition.cs" />
+    <Compile Include="Skills\Scattershot\ScattershotDefinition.cs" />
     <Compile Include="Skills\SkillCharacteristics.cs" />
     <Compile Include="Skills\SkillChargeCharacteristics.cs" />
     <Compile Include="Skills\SkillDefinition.cs" />
@@ -308,6 +350,17 @@
     <Compile Include="Projectiles\DBTProjectile.cs" />
     <Compile Include="Skills\SkillItem.cs" />
     <Compile Include="Skills\SkillProjectile.cs" />
+    <Compile Include="Skills\SpecialBeamCannon\SpecialBeamCannonDefinition.cs" />
+    <Compile Include="Skills\SpiritBall\SpiritBallDefinition.cs" />
+    <Compile Include="Skills\SpiritBomb\SpiritBombDefinition.cs" />
+    <Compile Include="Skills\SuperEnergyBarrage\SuperEnergyBarrageDefintion.cs" />
+    <Compile Include="Skills\SuperKamehameha\SuperKamehamehaDefinition.cs" />
+    <Compile Include="Skills\Supernova\SupernovaDefinition.cs" />
+    <Compile Include="Skills\SuperRoseKamehameha\SuperRoseKamehamehaDefinition.cs" />
+    <Compile Include="Skills\SuperSpiritBomb\SuperSpiritBombDefinition.cs" />
+    <Compile Include="Skills\TrapShooter\TrapShooterDefinition.cs" />
+    <Compile Include="Skills\TriBeam\TriBeamDefinition.cs" />
+    <Compile Include="Skills\TrueKamehameha\TrueKamehamehaDefinition.cs" />
     <Compile Include="Tiles\Stations\KaiTableTile.cs" />
     <Compile Include="Tiles\Stations\ZTableTile.cs" />
     <Compile Include="Traits\TraitBuff.cs" />
@@ -370,12 +423,12 @@
       <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Xact\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Xact.dll</HintPath>
     </Reference>
     <Reference Include="ReLogic">
-      <HintPath>libs\ReLogic.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\ReLogic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Terraria">
-      <HintPath>libs\Terraria.exe</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -411,6 +464,8 @@
     <Content Include="Items\KiStones\KiStoneT4.png" />
     <Content Include="Items\KiStones\KiStoneT5.png" />
     <Content Include="Items\KiStones\KiStoneT6.png" />
+    <Content Include="NPCs\Town\Roshi\MasterRoshi.png" />
+    <Content Include="NPCs\Town\Roshi\MasterRoshi_Head.png" />
     <Content Include="Sounds\Music\TheUnexpectedArrival.mp3" />
     <Content Include="Sounds\Music\Wastelands.mp3" />
     <Content Include="Sounds\Saibamen\Saibamen1.wav" />
@@ -436,6 +491,29 @@
     <Folder Include="Items\Guardian\Support\" />
     <Folder Include="Items\Guardian\Weapons\" />
     <Folder Include="Items\Materials\KiCrystals\" />
+    <Folder Include="Skills\GuardianSkills\BurningStrike\" />
+    <Folder Include="Skills\GuardianSkills\DemonicSpit\" />
+    <Folder Include="Skills\GuardianSkills\DimensionalHole\" />
+    <Folder Include="Skills\GuardianSkills\EnergyBurst\" />
+    <Folder Include="Skills\GuardianSkills\EnergyPunch\" />
+    <Folder Include="Skills\GuardianSkills\ExplosiveWave\" />
+    <Folder Include="Skills\GuardianSkills\FingerBeam\" />
+    <Folder Include="Skills\GuardianSkills\Flurry\" />
+    <Folder Include="Skills\GuardianSkills\GuardianMending\" />
+    <Folder Include="Skills\GuardianSkills\JusticeKick\" />
+    <Folder Include="Skills\GuardianSkills\JusticePunch\" />
+    <Folder Include="Skills\GuardianSkills\KiOvercharge\" />
+    <Folder Include="Skills\GuardianSkills\KiReservationalAura\" />
+    <Folder Include="Skills\GuardianSkills\KiStabilizationAura\" />
+    <Folder Include="Skills\GuardianSkills\MajinBarrier\" />
+    <Folder Include="Skills\GuardianSkills\Masendan\" />
+    <Folder Include="Skills\GuardianSkills\RootOfAllEvil\" />
+    <Folder Include="Skills\GuardianSkills\ShiningLight\" />
+    <Folder Include="Skills\GuardianSkills\SuperExplosiveWave\" />
+    <Folder Include="Skills\GuardianSkills\SupremeKaiMending\" />
+    <Folder Include="Skills\GuardianSkills\Taiyoken\" />
+    <Folder Include="Skills\GuardianSkills\TelekineticEnhancement\" />
+    <Folder Include="Skills\GuardianSkills\ThunderShockSurprise\" />
     <Folder Include="Transformations\Developers\Blockaroz\" />
     <Folder Include="Transformations\Developers\DawnishDays\" />
     <Folder Include="Transformations\Developers\Mak0Z\" />

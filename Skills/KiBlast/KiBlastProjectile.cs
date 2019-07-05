@@ -7,7 +7,7 @@ namespace DBT.Skills.KiBlast
 {
     public sealed class KiBlastProjectile : SkillProjectile
     {
-        public KiBlastProjectile() : base(SkillDefinitionManager.Instance.KiBlast, 18, 30)
+        public KiBlastProjectile() : base(SkillDefinitionManager.Instance.KiBlast, 12, 12)
         {
         }
 
@@ -20,7 +20,7 @@ namespace DBT.Skills.KiBlast
             projectile.friendly = true;
             projectile.ignoreWater = true;
             projectile.netUpdate = true;
-            projectile.tileCollide = false;
+            projectile.tileCollide = true;
             projectile.penetrate = 1;
 
             aiType = 14;
