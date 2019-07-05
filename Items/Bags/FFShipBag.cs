@@ -1,6 +1,7 @@
 ﻿using DBT.Items.Accessories.ArmCannons;
 using DBT.Items.Materials;
 using DBT.Items.Weapons;
+using DBT.NPCs.Bosses.FriezaShip;
 using Terraria;
 
 namespace DBT.Items.Bags
@@ -16,7 +17,6 @@ namespace DBT.Items.Bags
             item.maxStack = 999;
             item.consumable = true;
             item.expert = true;
-            bossBagNPC = mod.NPCType("FriezaShip");
         }
 
         public override bool CanRightClick()
@@ -41,5 +41,7 @@ namespace DBT.Items.Bags
             //if (Main.rand.Next(10) == 0)
                 //player.QuickSpawnItem(mod.ItemType<FFTrophy>());
         }
+
+        public override int BossBagNPC => mod.NPCType<FriezaShip>();
     }
 }
