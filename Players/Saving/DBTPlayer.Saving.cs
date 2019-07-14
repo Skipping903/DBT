@@ -17,6 +17,7 @@ namespace DBT.Players
             SaveMastery(tag);
             SaveTransformations(tag);
             SaveKi(tag);
+            SaveOverload(tag);
             SaveGuardian(tag);
 
             TransformationDefinitionManager.Instance.ForAllItems(t => t.OnPreAcquirePlayerSaving(this, tag));
@@ -32,6 +33,7 @@ namespace DBT.Players
             LoadRace(tag);
             LoadMastery(tag);
             LoadTransformations(tag);
+            LoadKi(tag);
             LoadKi(tag);
             LoadGuardian(tag);
 

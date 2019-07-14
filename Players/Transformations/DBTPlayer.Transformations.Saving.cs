@@ -6,14 +6,14 @@ namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {
-        internal void InitializeTransformations()
+        private void InitializeTransformations()
         {
             AcquiredTransformations = new Dictionary<TransformationDefinition, PlayerTransformation>();
             ActiveTransformations = new List<TransformationDefinition>();
             SelectedTransformations = new List<TransformationDefinition>();
         }
 
-        internal void SaveTransformations(TagCompound tag)
+        private void SaveTransformations(TagCompound tag)
         {
             string[] transformationNames = new string[SelectedTransformations.Count];
 
@@ -23,7 +23,7 @@ namespace DBT.Players
             tag.Add(nameof(SelectedTransformations), string.Join(",", transformationNames));
         }
 
-        internal void LoadTransformations(TagCompound tag)
+        private void LoadTransformations(TagCompound tag)
         {
             string[] transformationNames = tag.GetString(nameof(SelectedTransformations)).Split(',');
 

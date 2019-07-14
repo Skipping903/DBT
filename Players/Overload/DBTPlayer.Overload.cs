@@ -2,7 +2,7 @@
 {
     public sealed partial class DBTPlayer
     {
-        private float _overload = 0;
+        private float _overload;
 
         private void ResetOverloadEffects()
         {
