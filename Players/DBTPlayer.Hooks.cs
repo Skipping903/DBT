@@ -42,6 +42,7 @@ namespace DBT.Players
             ResetKiEffects();
             ResetGuardianEffects();
             ResetSkillEffects();
+            ResetOverloadEffects();
         }
 
 
@@ -50,13 +51,13 @@ namespace DBT.Players
         public override void PreUpdate()
         {
             PreUpdateKi();
+            PreUpdateOverload();
         }
 
         public override void PreUpdateMovement()
         {
             if (Main.netMode != NetmodeID.Server)
             {
-
                 PreUpdateMovementHandleAura();
                 PreUpdateMovementHandleHair();
             }
@@ -72,6 +73,7 @@ namespace DBT.Players
             FirstTransformation = GetTransformation();
 
             PostUpdateKi();
+            PostUpdateOverload();
             PostUpdateHandleTransformations();
 
             List<IHandleOnPlayerPostUpdate> items = player.GetItemsByType<IHandleOnPlayerPostUpdate>();
@@ -94,6 +96,7 @@ namespace DBT.Players
         }
 
         #endregion
+
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {

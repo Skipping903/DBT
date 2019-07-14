@@ -10,4 +10,12 @@
   <Target Name="BuildMod" AfterTargets="Build">
     <Exec Command="&quot;$(tMLBuildServerPath)&quot; -build $(ProjectDir) -eac $(TargetPath) -define $(DefineConstants) -unsafe $(AllowUnsafeBlocks)" />
   </Target>
+  <ItemGroup>
+    <None Remove="Transformations\Developers\Webmilio\SoulStealerTransformationAura.png" />
+    <None Remove="Transformations\Developers\Webmilio\SoulStealerTransformationBuff.png" />
+    <None Remove="Transformations\LSSJs\LSSJ\LSSJTransformationAura.png" />
+    <None Remove="Transformations\LSSJs\LSSJ\LSSJTransformationBuff.png" />
+    <None Remove="Transformations\LSSJs\SSJCType\SSJCTypeTransformationAura.png" />
+    <None Remove="Transformations\LSSJs\SSJCType\SSJCTypeTransformationBuff.png" />
+  </ItemGroup>
 </Project>

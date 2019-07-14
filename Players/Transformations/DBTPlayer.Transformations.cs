@@ -134,19 +134,6 @@ namespace DBT.Players
             return AcquiredTransformations[ActiveTransformations[0]];
         }
 
-        public void ForAllActiveTransformations(Action<TransformationDefinition> action)
-        {
-            for (int i = 0; i < ActiveTransformations.Count; i++)
-                action(ActiveTransformations[i]);
-        }
-
-        public void ForAllAcquiredTransformations(Action<PlayerTransformation> action)
-        {
-            foreach (PlayerTransformation playerTransformation in AcquiredTransformations.Values)
-                action(playerTransformation);
-        }
-
-
         public bool TryCombiningTransformations(params TransformationDefinition[] transformations)
         {
             // TODO Add code for SSBKK and similar transformations.

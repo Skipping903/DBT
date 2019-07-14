@@ -1,45 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using DBT.Commons;
-using DBT.Extensions;
-using DBT.Network;
-using DBT.Transformations;
-using Terraria;
-using Terraria.ID;
-
-namespace DBT.Players
+﻿namespace DBT.Players
 {
     public sealed partial class DBTPlayer
     {
-        public void ResetOverloadEffects()
+        private float _overload = 0;
+
+        private void ResetOverloadEffects()
         {
-            MaxOverload = 100;
+            MaxOverload = 100 * Constants.TICKS_PER_SECOND;
             OverloadDecayRate = 20;
-            OverloadGrowthRate = 1;
         }
 
-        public void PreUpdateOverload()
+        private void PreUpdateOverload()
         {
 
         }
 
-        public void PostUpdateOverload()
+        private void PostUpdateOverload()
         {
-            if (Overload <= MaxOverload)
+            if (IsTransformed())
             {
-                if (IsTransformed(TransformationDefinitionManager.Instance.LSSJ))
-                {
+                float overloadGain = 0f;
 
-                }
+                ForAllActiveTransformations(t => t.DoesTransformationOverload(this), t => overloadGain += t.Overload.GetOverloadGrowthRate(this));
+
+                if (Overload + overloadGain > MaxOverload)
+                    Overload = MaxOverload;
+                else
+                    Overload += overloadGain;
             }
         }
 
 
+        public float OverloadDecayRate { get; set; }
 
+        public float Overload
+        {
+            get => _overload;
+            set
+            {
+                _overload = value;
+                ForAllActiveTransformations(t => t.DoesTransformationOverload(this), t => t.Overload.OnPlayerOverloadUpdated(this, Overload, MaxOverload));
+            }
+        }
 
-        public int OverloadGrowthRate { get; set; }
-        public int OverloadDecayRate { get; set; }
-        public int MaxOverload { get; set; }
-        public int Overload { get; set; }
+        public float MaxOverload { get; set; }
     }
 }

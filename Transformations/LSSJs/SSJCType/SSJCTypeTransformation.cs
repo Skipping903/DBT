@@ -14,22 +14,29 @@ namespace DBT.Transformations.LSSJs.SSJCType
             new LSSJTransformationAppearance(), parents: parents)
         {
         }
-    }
 
-    public sealed class SSJCTypeTransformationBuff : TransformationBuff
-    {
-        public SSJCTypeTransformationBuff() : base(TransformationDefinitionManager.Instance.LSSJ)
+        public sealed class SSJCTypeTransformationBuff : TransformationBuff
         {
+            public SSJCTypeTransformationBuff() : base(TransformationDefinitionManager.Instance.LSSJ)
+            {
+            }
         }
-    }
 
-    public sealed class SSJCTypeTransformationAppearance : TransformationAppearance
-    {
-        public SSJCTypeTransformationAppearance() : base(
-            new AuraAppearance(new AuraAnimationInformation(typeof(SSJCTypeTransformation), 4, 3, BlendState.Additive, 1f, true),
-                new LightingAppearance(new float[] {  })), 
-            new HairAppearance(Color.White), Color.Lime)
+        public sealed class SSJCTypeTransformationAppearance : TransformationAppearance
         {
+            public SSJCTypeTransformationAppearance() : base(
+                new AuraAppearance(new AuraAnimationInformation(typeof(SSJCTypeTransformation), 4, 3, BlendState.Additive, 1f, true),
+                    new LightingAppearance(new float[] { })),
+                new HairAppearance(Color.White), Color.Lime)
+            {
+            }
+        }
+
+        public sealed class SSJCTypeTransformationOverload : TransformationOverload
+        {
+            public SSJCTypeTransformationOverload() : base(10f / Constants.TICKS_PER_SECOND)
+            {
+            }
         }
     }
 }
