@@ -18,8 +18,8 @@ namespace DBT.Transformations
 
         // Still trying to figure out a way to reduce the parameter count.
         protected TransformationDefinition(string unlocalizedName, string displayName, Type buffType,
-            float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, TransformationDrain drain,
-            TransformationAppearance appearance,
+            float baseDamageMultiplier, float baseSpeedMultiplier, int baseDefenseAdditive, 
+            TransformationDrain drain, TransformationAppearance appearance, TransformationOverload overload = null,
             bool mastereable = true, float maxMastery = 1f,
             int duration = TRANSFORMATION_LONG_DURATION, bool displaysInMenu = true, RaceDefinition[] limitedToRaces = null,
             bool anyParents = false, params TransformationDefinition[] parents)
@@ -34,6 +34,7 @@ namespace DBT.Transformations
             BaseDefenseAdditive = baseDefenseAdditive;
 
             Appearance = appearance;
+            Overload = overload;
 
             Mastereable = mastereable;
             BaseMaxMastery = maxMastery;
@@ -166,6 +167,8 @@ namespace DBT.Transformations
 
         #endregion
 
+        public virtual bool DoesTransformationOverload(DBTPlayer dbtPlayer) => Overload != null;
+
         #endregion
 
 
@@ -207,7 +210,9 @@ namespace DBT.Transformations
         #endregion
 
 
-        public virtual TransformationAppearance Appearance { get; }
+        public TransformationAppearance Appearance { get; }
+
+        public TransformationOverload Overload { get; }
 
 
         public int Duration { get; }
